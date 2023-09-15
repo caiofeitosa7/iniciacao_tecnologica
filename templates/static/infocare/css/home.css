@@ -58,7 +58,25 @@
     color: #245B10;
 }
 
+@media screen and (max-width:480px) {
+    .row-cards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0;
+    }
 
+    .card-home {
+        margin-top: 5vh;
+        width: -webkit-fill-available;
+    }
+}
+
+@media screen and (min-width:1281px) {
+    .card-home {
+        height: 25vh;
+    }
+}
 
 
 
