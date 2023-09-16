@@ -1,3 +1,8 @@
+.row-cards {
+    justify-content: center;
+    margin-top: 4.5vh;
+}
+
 .card-home {
     border-radius: 5px;
     display: flex;
@@ -9,11 +14,6 @@
     position: relative;
     max-width: 300px;
     margin: 0 15px;
-}
-
-.row-cards {
-    justify-content: center;
-    margin-top: 4.5vh;
 }
 
 .label-card-home {
@@ -77,19 +77,3 @@
         height: 25vh;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
