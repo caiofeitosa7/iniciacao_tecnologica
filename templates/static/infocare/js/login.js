@@ -32,3 +32,9 @@ function logarUsuario(urlLogarUsuario, urlHome) {
         )
         .catch(err => console.log(err));
 }
+
+function checkEnter(event) {
+    if (event.keyCode === 13) { // Se o código da tecla for 13 (Enter)
+        document.querySelector('.login-form-btn').click();
+    }
+}

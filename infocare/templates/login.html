@@ -36,12 +36,12 @@
 			<form class="login-form">
 				<div class="wrap-input">
 					<span class="label-input">Usuário</span>
-					<input id="usuario" class="input" type="text" name="usuario" placeholder="Digite seu usuário">
+					<input id="usuario" class="input" type="text" name="usuario" placeholder="Digite seu usuário" onkeydown="checkEnter(event)">
 					<span class="focus-input"></span>
 				</div>
 				<div class="wrap-input" data-validate="Password is required">
 					<span class="label-input">Senha</span>
-					<input id="senha" class="input" type="password" name="senha" placeholder="Digite sua senha">
+					<input id="senha" class="input" type="password" name="senha" placeholder="Digite sua senha" onkeydown="checkEnter(event)">
 					<span class="focus-input"></span>
 				</div>
 			</form>
