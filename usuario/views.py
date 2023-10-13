@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
-
-
-def teste(request):
-    return HttpResponse('Hello World')
+import json
 
 
 def listar_usuarios(request):
@@ -14,6 +11,17 @@ def listar_usuarios(request):
 
         return JsonResponse({'html': [html]})
 
+
+def logar_usuario(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        usuario = body['usuario']
+        senha = body['senha']
+
+        if usuario == 'Caio' and senha == '123':
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error'})
 
 
 

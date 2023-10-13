@@ -1,11 +1,9 @@
 import os
 
 from django.http import FileResponse
-from django.templatetags.static import static
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
-from . import settings
 
 
 def login(request):
