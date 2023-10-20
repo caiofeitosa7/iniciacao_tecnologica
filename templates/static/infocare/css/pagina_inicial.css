@@ -14,6 +14,7 @@
     position: relative;
     max-width: 300px;
     margin: 0 15px;
+    cursor: pointer;
 }
 
 .label-card-home {

@@ -16,7 +16,12 @@ def home(request):
 
 
 def pagina_inicial(request):
-    return JsonResponse({'html': [render_to_string('pagina_inicial.html')]})
+    fichas = [{"id": 1, "nome": "Ficha 1"}, {"id": 2, "nome": "Ficha 2"}, {"id": 3, "nome": "Ficha 3"}]
+    return JsonResponse({'html': [render_to_string(
+                'pagina_inicial.html',
+                {'fichas': fichas, 'quantidade':  len(fichas)}
+                )]
+            })
 
 
 def imagem_local(request, cod_img):
@@ -26,13 +31,12 @@ def imagem_local(request, cod_img):
     return FileResponse(open(imagem_url, 'rb'))
 
 
-
-
-
-
-
-
-
+def abrir_ficha(request):
+    return JsonResponse({'html': [render_to_string(
+            'fichaAcidenteTrabalho.html',
+            # {'fichas': fichas, 'quantidade':  len(fichas)}
+            )]
+        })
 
 
 

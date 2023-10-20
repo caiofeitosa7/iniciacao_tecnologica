@@ -7,7 +7,6 @@ function logarUsuario(urlLogarUsuario, urlHome) {
     urlLogarUsuario = escaparCaracteresEspeciaisHTML(urlLogarUsuario);
 
     fetch(urlLogarUsuario, {
-    // fetch("home/usuarios/logar_usuario/", {
         method: "POST",
         headers: {
             "Content-type": "application/json;charset=UTF-8",

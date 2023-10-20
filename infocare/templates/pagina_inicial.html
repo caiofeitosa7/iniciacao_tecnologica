@@ -1,5 +1,27 @@
+<div class="modal fade" id="modalTiposFicha" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select id="selectTipoFicha" class="form-select" size="{{ quantidade }}">
+                    {% for ficha in fichas %}
+                        <option value="{{ ficha.id }}">{{ ficha.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">Pronto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row row-cards">
-    <div id="card-home-novaNotificacao" class="col-5 card-home">
+    <div id="card-home-novaNotificacao" class="col-5 card-home" onclick="abrirMenuTiposDeFicha()">
         <span class="label-card-home">NOVA NOTIFICAÇÃO</span>
     </div>
     <div id="card-home-preliminares" class="col-5 card-home">

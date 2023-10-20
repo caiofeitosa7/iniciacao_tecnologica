@@ -58,7 +58,7 @@ function abrirOpcaoUsuarios() {
     .then(response => response.json())
     .then(data => {
         localStorage.setItem('opcaoSelecionada', 2)
-        document.getElementById('conteudo').innerHTML = data.html[0];
+        $('#conteudo')[0].innerHTML = data.html[0];
     })
     .catch(error => {
         console.error('Erro na requisição:', error);
