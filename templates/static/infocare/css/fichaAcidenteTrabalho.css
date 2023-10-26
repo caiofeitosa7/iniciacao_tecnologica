@@ -1,0 +1,13 @@
+.container-cabecalho {
+    display: flex;
+    align-items: center;
+}
+
+.container-cabecalho:first-child {
+    font-size: small;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
