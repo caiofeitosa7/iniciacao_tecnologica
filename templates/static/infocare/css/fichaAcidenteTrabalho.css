@@ -1,12 +1,26 @@
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    --bs-gutter-x: 0;
+}
+
 .negrito {
     font-weight: 600;
+}
+
+.letra-miuda {
+    font-size: x-small;
 }
 
 #fichaAcidenteTrabalho {
     line-height: 1.2;
 }
 
-#fichaAcidenteTrabalho input, #fichaAcidenteTrabalho label {
+#fichaAcidenteTrabalho, #fichaAcidenteTrabalho input, #fichaAcidenteTrabalho label {
     font-size: small;
 }
 
@@ -31,12 +45,134 @@
     line-height: 1.5;
 }
 
-.descricao label {
-    font-size: x-small !important;
+.bloco-dados {
+    display: flex;
 }
 
+.bloco-dados .titulo-bloco {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    margin-right: 1vh;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border: 1px solid #000;
+    font-size: small;
+    font-weight: bold;
+}
 
+.bloco-dados .conteudo-bloco {
+    width: -webkit-fill-available;
+}
 
+.bloco-dados {
+    margin-top: 2vh;
+}
+
+.linha-dados {
+    margin-top: 1.7vh;
+    display: flex;
+}
+
+.div-input {
+    border-radius: 0 0 7px 7px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.info-elevada, .info-elevada-sem-numeracao, .info-elevada-com-input {
+    position: relative;
+    margin-bottom: 3px;
+    left: -1px;
+    top: -3px;
+}
+
+.info-elevada-sem-numeracao {
+    padding-left: 4px;
+}
+
+.info-elevada-com-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-input .info-predefinida {
+    display: block;
+    text-align: center;
+    width: -webkit-fill-available;
+}
+
+.div-input .numeracao {
+    border: 1px solid #000;
+    font-weight: bold;
+    padding: 0 6px;
+}
+
+.container-input-dado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-dado {
+    width: 95%;
+    padding: 2px 7px;
+    margin-bottom: 3px;
+}
+
+.info-elevada-com-input .input-dado {
+    margin-right: 3px;
+    padding: 0 3px;
+    height: 30px;
+    width: 30px;
+}
+
+.input-dado-quadrado {
+    margin-right: 3px;
+    padding: 0 3px;
+    height: 30px;
+    width: 30px;
+}
+
+.container-input-dado .container-tipo-idade {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 22px;
+}
+
+.descricao-tipos {
+    position: relative;
+    top: -20px;
+}
+
+.campo-escolaridade {
+    height: 75px;
+}
+
+.campo-zona-residencia {
+    height: 48px;
+}
+
+.campo-escolaridade .descricao-tipos {
+    padding: 0 45px 0 10px;
+}
+
+.campo-sexo .descricao-tipos {
+    justify-content: flex-start;
+    position: relative;
+    margin-left: 5px;
+    padding: 0;
+}
+
+.campo-raca .descricao-tipos, .campo-gestante .descricao-tipos {
+    padding: 3px 5px 0;
+    justify-content: flex-start;
+}
 
 
 
