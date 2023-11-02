@@ -171,7 +171,8 @@
                                 <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3">
                             </div>
                             <div class="col-7 container-tipo-idade">
-                                <input type="number" id="campo-tipo-idade" class="input-dado-quadrado form-control" min="1" max="4">
+                                <input type="number" id="campo-tipo-idade" class="input-dado-quadrado form-control"
+                                       min="1" max="4">
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
                                     <li>2 - Dia</li>
@@ -446,41 +447,280 @@
                 </div>
             </div>
         </div>
-
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
     </section>
-    <!--    <div class="container-dadosComplementares"></div>-->
+    <section class="mt-3 container-dadosComplementares">
+        <span class="titulo-section negrito">Dados Complementares do Caso</span>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Antecedentes Epidemiológicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
+                            <label for="campo-ocupacao">Ocupação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ocupacao" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-situacao-mercado-trabalho">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">32</span>
+                                <label for="campo-situacao-mercado-trabalho">Situação no Mercado de Trabalho</label>
+                            </div>
+                            <input id="campo-situacao-mercado-trabalho" type="number" class="input-dado form-control"
+                                   min="1" max="99">
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            <ul>
+                                <li>01 - Empregado registrado com carteira assinada</li>
+                                <li>02 - Empregado não registrado</li>
+                                <li>03 - Autônomo / conta própria</li>
+                                <li>04 - Servidor público estatutário</li>
+                            </ul>
+                            <ul>
+                                <li>05 - Servidor público celetista</li>
+                                <li>06 - Aposentado</li>
+                                <li>07 - Desempregado</li>
+                                <li>08 - Trabalho temporário</li>
+                            </ul>
+                            <ul>
+                                <li>09 - Cooperativado</li>
+                                <li>10 - Trabalhador avulso</li>
+                                <li>11 - Empregado</li>
+                                <li>12 - Outros</li>
+                            </ul>
+                            <ul>
+                                <li>99 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-5 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label for="campo-tempo-trabalho">Ocupação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-3 d-flex justify-content-end">
+                                <input id="campo-tempo-trabalho" type="number" class="input-dado form-control">
+                            </div>
+                            <div class="col-9 container-tipo-tempo-trabalho">
+                                <ul class="d-flex align-items-center letra-miuda">
+                                    <li><input id="campo-tipo-tempo-trabalho" type="number"
+                                               class="input-dado-quadrado form-control" min="1" max="4"></li>
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7 div-input campo-local-acidente">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">34</span>
+                                <label for="campo-local-acidente">Local Onde Ocorreu o Acidente</label>
+                            </div>
+                            <input id="campo-local-acidente" type="number" class="input-dado form-control" min="1"
+                                   max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            <ul>
+                                <li>1 - Instalações do contratante</li>
+                                <li>2 - Via pública</li>
+                            </ul>
+                            <ul>
+                                <li>3 - Instalações de terceiros</li>
+                                <li>4 - Domicílio próprio</li>
+                            </ul>
+                            <ul>
+                                <li>9 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 mt-3 mb-3 negrito">
+                        Dados da Empresa Contratante
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">35</span>
+                            <label for="campo-cnpj-contratante">Registro / CNPJ ou CPF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cnpj-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">36</span>
+                            <label for="campo-nome-contratante">Nome da empresa ou Empregador</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">37</span>
+                            <label for="campo-atividade-contratante">Atividade Econômica (CNAE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-atividade-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">38</span>
+                            <label for="campo-uf-contratante">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-contratante" type="text" class="input-dado form-control" maxlength="2">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">39</span>
+                            <label for="campo-municipio-contratante">Município</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-atividade-contratante">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-contratante" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">40</span>
+                            <label for="campo-distrito-contratante">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">41</span>
+                            <label for="campo-bairro-contratante">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">42</span>
+                            <label for="campo-endereco-contratante">Endereço</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-endereco-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">43</span>
+                            <label for="campo-numero-contratante">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-contratante" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">44</span>
+                            <label for="campo-ponto-ref-contratante">Ponto de Referência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ponto-ref-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">45</span>
+                            <label for="campo-telefone-contratante">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-empresa-terceirizada">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">46</span>
+                                <label for="campo-empresa-terceirizada-contratante">Ocupação</label>
+                            </div>
+                            <input id="campo-empresa-terceirizada-contratante" type="number"
+                                   class="input-dado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            <ul class="d-flex">
+                                <li>1 - Sim</li>
+                                <li>2 - Não</li>
+                                <li>3 - Não se aplica</li>
+                                <li>9 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
