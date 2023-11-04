@@ -16,19 +16,30 @@ ul {
     font-size: x-small;
 }
 
+.descricao-tipos {
+    position: relative;
+    top: -20px;
+}
+
+.elevacao10px {
+    position: relative;
+    top: -10px;
+}
+
 #fichaAcidenteTrabalho {
     line-height: 1.2;
 }
 
-#fichaAcidenteTrabalho, #fichaAcidenteTrabalho input, #fichaAcidenteTrabalho label {
+#fichaAcidenteTrabalho,
+#fichaAcidenteTrabalho input,
+#fichaAcidenteTrabalho label,
+#fichaAcidenteTrabalho textarea{
     font-size: small;
 }
 
 .container-cabecalho {
     display: flex;
     align-items: center;
-    font-size: small;
-    text-align: center;
     text-align: -webkit-center;
 }
 
@@ -36,6 +47,10 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.right-div .input-group {
+    width: 90%;
 }
 
 .descricao {
@@ -100,12 +115,6 @@ ul {
     justify-content: space-between;
 }
 
-.div-input .info-predefinida {
-    display: block;
-    text-align: center;
-    width: -webkit-fill-available;
-}
-
 .div-input .numeracao {
     border: 1px solid #000;
     font-weight: bold;
@@ -114,7 +123,6 @@ ul {
 
 .container-input-dado {
     display: flex;
-    /*align-items: center;*/
     justify-content: center;
 }
 
@@ -145,11 +153,6 @@ ul {
     height: 22px;
 }
 
-.descricao-tipos {
-    position: relative;
-    top: -20px;
-}
-
 .campo-escolaridade {
     height: 75px;
 }
@@ -175,19 +178,16 @@ ul {
 }
 
 .titulo-section {
-    padding: 3px;
+    padding: 5px;
     display: block;
     text-align: center;
     border-radius: 7px;
     border: 1px solid #000;
+    background-color: #f4f4f4;
 }
 
 .campo-situacao-mercado-trabalho {
     height: 70px;
-}
-
-.campo-situacao-mercado-trabalho ul {
-    margin-right: 20px;
 }
 
 .container-tipo-tempo-trabalho {
@@ -199,7 +199,7 @@ ul {
     height: 53px;
 }
 
-.container-tipo-tempo-trabalho ul li, .campo-local-acidente ul li{
+.container-tipo-tempo-trabalho ul li {
     margin-right: 10px;
 }
 
@@ -207,13 +207,27 @@ ul {
     height: 35px;
 }
 
-.campo-empresa-terceirizada ul li {
-    margin-right: 30px;
+.textArea span {
+    display: block;
+    padding: 5px 10px;
+    border-radius: 7px 7px 0 0;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
 }
 
+.textArea textarea {
+    border-radius: 0 0 7px 7px;
+}
 
+.campo-partes-corpo-atendimento {
+    height: 100px;
+}
 
-
+.footer-ficha {
+    margin-left: 36px;
+}
 
 
 
