@@ -1,8 +1,9 @@
+import json
 import os
 
 from django.http import FileResponse
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.template.loader import render_to_string
 
 
@@ -16,7 +17,11 @@ def home(request):
 
 
 def pagina_inicial(request):
-    fichas = [{"id": 1, "nome": "Ficha 1"}, {"id": 2, "nome": "Ficha 2"}, {"id": 3, "nome": "Ficha 3"}]
+    fichas = [
+        {"id": 1, "nome": "Ficha Geral"},
+        {"id": 2, "nome": "Acidente de Trabalho Grave"},
+        {"id": 3, "nome": "Violência Interpessoal/Autoprovocada"}
+    ]
     return JsonResponse({'html': [render_to_string(
                 'pagina_inicial.html',
                 {'fichas': fichas, 'quantidade':  len(fichas)}
@@ -32,11 +37,14 @@ def imagem_local(request, cod_img):
 
 
 def abrir_ficha(request):
-    return JsonResponse({'html': [render_to_string(
-            'fichaAcidenteTrabalho.html',
-            # {'fichas': fichas, 'quantidade':  len(fichas)}
-            )]
-        })
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        id_ficha = int(body['idFicha'])
+
+        if id_ficha == 2:
+            return JsonResponse({'html': [render_to_string('fichaAcidenteTrabalho.html')]})
+        elif id_ficha == 3:
+            return JsonResponse({'html': [render_to_string('fichaViolenciaInterpessoal.html')]})
 
 
 
