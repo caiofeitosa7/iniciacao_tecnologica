@@ -1,0 +1,49 @@
+.descricao-violenciaInterpessoal {
+    display: block;
+    text-align: justify;
+}
+
+.campo-un-notificadora .container-input-dado {
+    padding: 0 5px 5px 5px;
+}
+
+.campo-un-notificadora input {
+    margin-right: 5px;
+}
+
+.campo-dt-violencia {
+    position: relative;
+    top: -30px;
+}
+
+.telefones-uteis {
+    border: 1px solid #000;
+    border-radius: 7px;
+    padding: 10px 5px;
+}
+
+.telefones-uteis .titulo{
+    padding: 3px 30px;
+    margin-bottom: 5px;
+    background-color: #a5a5a5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
