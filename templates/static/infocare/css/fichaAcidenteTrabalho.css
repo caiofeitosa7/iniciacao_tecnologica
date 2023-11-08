@@ -5,46 +5,6 @@
     line-height: 1.5;
 }
 
-.info-elevada-com-input .input-dado {
-    margin-right: 3px;
-    padding: 0 3px;
-    height: 30px;
-    width: 30px;
-}
-
-.campo-situacao-mercado-trabalho {
-    height: 70px;
-}
-
-.container-tipo-tempo-trabalho {
-    display: flex;
-    justify-content: center;
-}
-
-.campo-local-acidente {
-    height: 53px;
-}
-
-.container-tipo-tempo-trabalho ul li {
-    margin-right: 10px;
-}
-
-.campo-empresa-terceirizada {
-    height: 35px;
-}
-
 .campo-partes-corpo-atendimento {
     height: 100px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
