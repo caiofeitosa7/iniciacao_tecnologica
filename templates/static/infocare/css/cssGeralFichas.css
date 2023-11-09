@@ -12,6 +12,10 @@ ul {
     font-weight: 600;
 }
 
+.label-nowrap {
+    text-wrap: nowrap;
+}
+
 .letra-miuda {
     font-size: x-small;
 }
@@ -140,10 +144,6 @@ ul {
     height: 22px;
 }
 
-.campo-escolaridade {
-    height: 75px;
-}
-
 .campo-zona-residencia, .campo-zona-ocorrencia {
     height: 48px;
 }
@@ -188,7 +188,7 @@ ul {
 }
 
 .footer-ficha {
-    margin-left: 36px;
+    margin-left: 41px;
 }
 
 
