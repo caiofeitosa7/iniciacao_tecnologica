@@ -41,7 +41,9 @@ def abrir_ficha(request):
         body = json.loads(request.body)
         id_ficha = int(body['idFicha'])
 
-        if id_ficha == 2:
+        if id_ficha == 1:
+            return JsonResponse({'html': [render_to_string('fichaNotificacaoGeral.html')]})
+        elif id_ficha == 2:
             return JsonResponse({'html': [render_to_string('fichaAcidenteTrabalho.html')]})
         elif id_ficha == 3:
             return JsonResponse({'html': [render_to_string('fichaViolenciaInterpessoal.html')]})
