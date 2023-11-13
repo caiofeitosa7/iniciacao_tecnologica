@@ -18,7 +18,7 @@ def logar_usuario(request):
         usuario = body['usuario']
         senha = body['senha']
 
-        if usuario == 'Caio' and senha == '123':
+        if usuario == 'admin' and senha == '123':
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'error'})
