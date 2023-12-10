@@ -134,3 +134,8 @@ body {
 #barra-superior i {
     font-size: 25px;
 }
+
+#conteudo {
+    width: 95%;
+    margin: auto;
+}

@@ -8,9 +8,10 @@ function logarUsuario(urlLogarUsuario, urlHome) {
 
     fetch(urlLogarUsuario, {
         method: "POST",
+        credentials: 'include',
         headers: {
             "Content-type": "application/json;charset=UTF-8",
-            "X-CSRFToken": csrfToken,
+            "X-CSRFToken": csrfToken
         },
         body: JSON.stringify({
             usuario: usuario,

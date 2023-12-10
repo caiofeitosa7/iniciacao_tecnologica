@@ -34,6 +34,7 @@
 		    </div>
 
 			<form class="login-form">
+				{% csrf_token %}
 				<div class="wrap-input">
 					<span class="label-input">Usuário</span>
 					<input id="usuario" class="input" type="text" name="usuario" placeholder="Digite seu usuário" onkeydown="checkEnter(event)">
