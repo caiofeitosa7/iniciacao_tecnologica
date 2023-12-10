@@ -11,8 +11,8 @@
         </div>
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
-                <label class="input-group-text negrito" for="cod-ficha">N°</label>
-                <input type="number" class="form-control" id="cod-ficha">
+                <label class="input-group-text negrito" for="numero-ficha">N°</label>
+                <input type="number" class="form-control" id="numero-ficha">
             </div>
         </div>
     </div>
@@ -175,7 +175,7 @@
                             </div>
                             <input id="campo-sexo" type="text" class="input-dado-quadrado form-control" maxlength="1">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda">
+                        <div class="container-input-dado letra-miuda">
                             <ul>
                                 <li>M - Masculino</li>
                                 <li>F - Feminino</li>
@@ -330,8 +330,8 @@
                                     <li>9 - Casos Dispersos Pelo Município</li>
                                 </ul>
                             </div>
-                            <div class="my-2">
-                                <ul class="d-flex">
+                            <div class="my-2 px-1">
+                                <ul class="d-flex align-items-center">
                                     <li class="px-2">
                                         10 - Casos Dispersos em ais de um Município
                                     </li>
@@ -342,7 +342,7 @@
                                         Especificar
                                     </li>
                                     <li>
-                                        <input class="input-dado form-control" aria-label="">
+                                        <input id="campo-local-inicial-ocorrencia-outro" class="input-dado form-control" aria-label="">
                                     </li>
                                 </ul>
                             </div>
@@ -387,10 +387,10 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">19</span>
-                            <label for="campo-distrito">Distrito</label>
+                            <label for="campo-distrito-residencia">Distrito</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-distrito" type="text" class="input-dado form-control">
+                            <input id="campo-distrito-residencia" type="text" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -675,12 +675,12 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">07</span>
-                            <label for="campo-dt-inicio-exatema">
-                                Data do início do exatema
+                            <label for="campo-dt-inicio-exantema">
+                                Data do início do exantema
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-inicio-exatema" type="date" class="input-dado form-control">
+                            <input id="campo-dt-inicio-exantema" type="date" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-5 div-input">
@@ -828,10 +828,10 @@
                     </div>
                     <div class="col-2 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-hospital">Código</label>
+                            <label for="campo-codigo-hospital">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-hospital" type="number" class="input-dado form-control">
+                            <input id="campo-codigo-hospital" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,10 @@
     padding: 10px 5px;
 }
 
+.telefones-uteis span {
+    text-align: center;
+}
+
 .telefones-uteis .titulo{
     padding: 3px 30px;
     margin-bottom: 5px;
