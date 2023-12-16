@@ -12,7 +12,7 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha"/>
+                <input type="number" class="form-control" id="numero-ficha" oninput="atribuirValor(this.id)"/>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control"/>
+                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2"/>
+                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -78,7 +78,7 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control"/>
+                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -90,6 +90,7 @@
                                     id="campo-cod-ibge-notificacao"
                                     type="number"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -103,11 +104,7 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input
-                                    id="campo-unidade-saude"
-                                    type="text"
-                                    class="input-dado form-control"
-                            />
+                            <input id="campo-unidade-saude" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -119,6 +116,7 @@
                                     id="campo-codigo-unidade-saude"
                                     type="number"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -156,6 +154,7 @@
                                     id="campo-nome-paciente"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -165,11 +164,7 @@
                             <label for="campo-dt-nascimento">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-nascimento"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
+                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                 </div>
@@ -181,7 +176,7 @@
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3"/>
+                                <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3" oninput="atribuirValor(this.id)"/>
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input
@@ -191,6 +186,7 @@
                                         min="1"
                                         max="4"
                                         aria-label=""
+                                        oninput="atribuirValor(this.id)"
                                 />
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
@@ -212,6 +208,7 @@
                                     type="text"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado letra-miuda">
@@ -234,6 +231,7 @@
                                     class="input-dado-quadrado form-control"
                                     min="1"
                                     max="9"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -256,6 +254,7 @@
                                     class="input-dado-quadrado form-control"
                                     min="1"
                                     max="9"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -279,6 +278,7 @@
                                     type="number"
                                     class="input-dado-quadrado form-control"
                                     maxlength="2"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
@@ -305,11 +305,7 @@
                             <label for="campo-numero-sus">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
-                            <input
-                                    id="campo-numero-sus"
-                                    type="number"
-                                    class="input-dado form-control"
-                            />
+                            <input id="campo-numero-sus" type="number" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-8 div-input">
@@ -318,11 +314,7 @@
                             <label for="campo-nome-mae">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input
-                                    id="campo-nome-mae"
-                                    type="text"
-                                    class="input-dado form-control"
-                            />
+                            <input id="campo-nome-mae" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                 </div>
@@ -438,6 +430,7 @@
                                     type="text"
                                     class="input-dado form-control"
                                     maxlength="2"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -453,6 +446,7 @@
                                 id="campo-municipio-residencia"
                                 type="text"
                                 class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -465,6 +459,7 @@
                                 id="campo-cod-ibge-residencia"
                                 type="number"
                                 class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -478,6 +473,7 @@
                                 id="campo-distrito-residencia"
                                 type="text"
                                 class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -493,6 +489,7 @@
                                 id="campo-bairro-residencia"
                                 type="text"
                                 class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -508,6 +505,7 @@
                                     id="campo-logradouro-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -520,6 +518,7 @@
                                     id="campo-codigo-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -535,6 +534,7 @@
                                     id="campo-numero-residencia"
                                     type="number"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -550,6 +550,7 @@
                                     id="campo-complemento-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -563,6 +564,7 @@
                                     id="campo-geo-campo1"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -578,6 +580,7 @@
                                     id="campo-geo-campo2"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -593,6 +596,7 @@
                                     id="campo-ponto-ref-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -607,6 +611,7 @@
                                     type="text"
                                     class="input-dado form-control"
                                     maxlength="9"
+                                    onblur="pesquisaCep(this)"
                             />
                         </div>
                     </div>
@@ -622,6 +627,7 @@
                                     id="campo-telefone-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -636,6 +642,7 @@
                                     type="number"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
@@ -655,6 +662,7 @@
                                     id="campo-pais-residencia"
                                     type="text"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -1373,7 +1381,7 @@
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
-                                       min="1" max="4" aria-label="">>
+                                       min="1" max="4" aria-label="">
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
                                     <li>2 - Dia</li>
@@ -1554,7 +1562,7 @@
                     </div>
                 </div>
                 <div class="linha-dados">
-                    <div class="col-2 div-input">2
+                    <div class="col-2 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">22</span>
                             <label for="campo-numero-residencia2">Número</label>
@@ -1575,10 +1583,10 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">24</span>
-                            <label for="campo-geo-campo1-2">Geo campo 1</label>
+                            <label for="campo-geo-campo12">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo1-2" type="text" class="input-dado form-control">
+                            <input id="campo-geo-campo12" type="text" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1586,10 +1594,10 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">25</span>
-                            <label for="campo-geo-campo2-2">Geo campo 2</label>
+                            <label for="campo-geo-campo22">Geo campo 2</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo2-2" type="text" class="input-dado form-control">
+                            <input id="campo-geo-campo22" type="text" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-6 div-input">
@@ -2019,7 +2027,7 @@
                             <input id="campo-tipo-acidente" type="number"
                                    class="input-dado-quadrado form-control" min="1" max="9">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly">
+                        <div class="container-input-dado letra-miuda justify-content-evenly">
                             <span>1 - Típico</span>
                             <span>2 - Trajeto</span>
                             <span>9 - Ignorado</span>
@@ -2035,7 +2043,7 @@
                             <input id="campo-outros-trabalhadores-acidente" type="number"
                                    class="input-dado-quadrado form-control" min="1" max="9">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly">
+                        <div class="container-input-dado letra-miuda justify-content-evenly">
                             <span>1 - Sim</span>
                             <span>2 - Não</span>
                             <span>9 - Ignorado</span>
@@ -2340,6 +2348,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
