@@ -7,7 +7,8 @@ function abrirFichaEscolhida(urlAbrirFicha) {
     let csrfToken = getCookie('csrftoken');
     let idFichaEscolhida = $("#selectTipoFicha")[0].value;
 
-    toggleModalTiposDeFicha()
+    toggleModalTiposDeFicha();
+
     fetch(urlAbrirFicha, {
         method: "POST",
         headers: {

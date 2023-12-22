@@ -30,6 +30,14 @@ ul {
     top: -10px;
 }
 
+.campo-hut {
+    width: 40%;
+}
+
+.campo-hut label {
+    font-size: small;
+}
+
 .ficha {
     line-height: 1.2;
 }

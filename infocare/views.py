@@ -18,7 +18,7 @@ def home(request):
 
 def pagina_inicial(request):
     fichas = [
-        {"id": 1, "nome": "Ficha Geral"},
+        {"id": 1, "nome": "Ficha de Notificação"},
         {"id": 2, "nome": "Acidente de Trabalho Grave"},
         {"id": 3, "nome": "Violência Interpessoal/Autoprovocada"}
     ]
