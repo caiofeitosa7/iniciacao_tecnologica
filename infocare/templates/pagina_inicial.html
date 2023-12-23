@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <select id="selectTipoFicha" class="form-select" size="{{ quantidade }}">
                     {% for ficha in fichas %}
-                        <option value="{{ ficha.id }}" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">{{ ficha.nome }}</option>
+                        <option value="{{ ficha.codigo }}" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">{{ ficha.nome }}</option>
                     {% endfor %}
                 </select>
             </div>
