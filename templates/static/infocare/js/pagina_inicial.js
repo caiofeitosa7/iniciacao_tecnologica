@@ -8,7 +8,6 @@ function abrirFichaEscolhida(urlAbrirFicha) {
     let idFichaEscolhida = $("#selectTipoFicha")[0].value;
 
     toggleModalTiposDeFicha();
-
     fetch(urlAbrirFicha, {
         method: "POST",
         headers: {

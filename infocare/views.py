@@ -17,6 +17,13 @@ def home(request):
     return render(request, 'base.html')
 
 
+def imagem_local(request, cod_img):
+    if not cod_img:
+        imagem_url = os.path.join('templates', 'images', 'bg-login.png')
+
+    return FileResponse(open(imagem_url, 'rb'))
+
+
 def pagina_inicial(request):
     fichas = models.get_formularios_ativos()
 
@@ -25,13 +32,6 @@ def pagina_inicial(request):
                 {'fichas': fichas, 'quantidade':  len(fichas)}
                 )]
             })
-
-
-def imagem_local(request, cod_img):
-    if not cod_img:
-        imagem_url = os.path.join('templates', 'images', 'bg-login.png')
-
-    return FileResponse(open(imagem_url, 'rb'))
 
 
 def abrir_ficha(request):
@@ -45,6 +45,15 @@ def abrir_ficha(request):
             return JsonResponse({'html': [render_to_string('fichaAcidenteTrabalho.html')]})
         elif id_ficha == 3:
             return JsonResponse({'html': [render_to_string('fichaViolenciaInterpessoal.html')]})
+
+
+def set_ficha_notificacao(request):
+    if request.method == 'POST':
+        try:
+            models.registrar_ficha_notificacao(json.loads(request.body))
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error'})
 
 
 

@@ -122,11 +122,11 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-unidade-saude">Código</label>
+                            <label for="campo-cod-unidade-saude">Código</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-codigo-unidade-saude"
+                                    id="campo-cod-unidade-saude"
                                     type="number"
                                     class="input-dado form-control"
                             />
@@ -1205,7 +1205,8 @@
             <button class="btn mx-4" onclick="abrirOpcaoPaginaInicial()" style="border: 2px solid #2F5368; color: #2F5368">
                 CANCELAR
             </button>
-            <button class="btn mx-4" onclick="cadastrarFichaNotificacao()" style="background-color: #2F5368; color: #fff">
+            <button class="btn mx-4" onclick="cadastrarFichaNotificacao('{% url 'set_ficha_notificacao' %}')"
+                    style="background-color: #2F5368; color: #fff">
                 CADASTRAR
             </button>
         </div>
