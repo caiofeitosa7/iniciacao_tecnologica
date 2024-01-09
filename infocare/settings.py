@@ -52,7 +52,6 @@ MIDDLEWARE = [
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
 ROOT_URLCONF = 'infocare.urls'
 
 TEMPLATES = [

@@ -49,11 +49,11 @@ def abrir_ficha(request):
 
 def set_ficha_notificacao(request):
     if request.method == 'POST':
-        try:
-            models.registrar_ficha_notificacao(json.loads(request.body))
-            return JsonResponse({'status': 'success'})
-        except Exception as e:
-            return JsonResponse({'status': 'error'})
+        # try:
+        models.registrar_ficha_notificacao(json.loads(request.body))
+        return JsonResponse({'status': 'success'})
+        # except Exception as e:
+        #     return JsonResponse({'status': 'error'})
 
 
 

@@ -4,7 +4,6 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
         if (campo.value === "")
           campo.value = 0;
     });
-
     let csrfToken = getCookie("csrftoken");
     let cod_formulario = document.getElementById("cod-formulario").value;
     let prontuario = document.getElementById("prontuario").value;
@@ -59,7 +58,7 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
     let campo_obito = document.getElementById("campo-obito").value;
     let campo_caso_semelhante = document.getElementById("campo-caso-semelhante").value;
     let campo_exantema = document.getElementById("campo-exantema").value;
-    let campo_dt_inicio_exatema = document.getElementById("campo-dt-inicio-exatema").value;
+    let campo_dt_inicio_exantema = document.getElementById("campo-dt-inicio-exatema").value;
     let campo_petequiaSufusao = document.getElementById("campo-petequiaSufusao").value;
     let campo_liquor = document.getElementById("campo-liquor").value;
     let campo_bacterioscopia = document.getElementById("campo-bacterioscopia").value;
@@ -94,9 +93,6 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
             "X-CSRFToken": csrfToken
         },
         body: JSON.stringify({
-            cod_formulario: cod_formulario,
-            prontuario: prontuario,
-            setor: setor,
             numero_ficha: numero_ficha,
             tipo_notificacao: campo_tipo_notificacao,
             agravoDoenca: campo_agravoDoenca,
@@ -147,7 +143,7 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
             obito: campo_obito,
             caso_semelhante: campo_caso_semelhante,
             exantema: campo_exantema,
-            dt_inicio_exantema: campo_dt_inicio_exatema,
+            dt_inicio_exantema: campo_dt_inicio_exantema,
             petequiaSufusao: campo_petequiaSufusao,
             liquor: campo_liquor,
             bacterioscopia: campo_bacterioscopia,
@@ -166,7 +162,10 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
             distrito_infeccao: campo_distrito_infeccao,
             uf_infeccao: campo_uf_infeccao,
             municipio_infeccao: campo_municipio_infeccao,
-            bairro_infeccao: campo_bairro_infeccao
+            bairro_infeccao: campo_bairro_infeccao,
+            setor: setor,
+            prontuario: prontuario,
+            cod_formulario: cod_formulario,
         })
     })
         .then(response => response.json())
