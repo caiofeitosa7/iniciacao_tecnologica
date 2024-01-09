@@ -9,7 +9,7 @@
         <input id="setor" class="form-control"/>
     </div>
 </div>
-<div class="ficha">
+<div id="fichaNotificacao" class="ficha">
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -1197,12 +1197,11 @@
                 <span>17/07/2006</span>
             </div>
         </div>
-        <div class="d-flex justify-content-center my-3">
-            <button class="btn mx-4" onclick="abrirOpcaoPaginaInicial()" style="border: 2px solid #2F5368; color: #2F5368">
+        <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
+            <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
                 CANCELAR
             </button>
-            <button class="btn mx-4" onclick="cadastrarFichaNotificacao('{% url 'set_ficha_notificacao' %}')"
-                    style="background-color: #2F5368; color: #fff">
+            <button class="btnCadastrar btn mx-4" onclick="cadastrarFichaNotificacao('{% url 'set_ficha_notificacao' %}')">
                 CADASTRAR
             </button>
         </div>

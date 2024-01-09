@@ -199,9 +199,27 @@ ul {
     margin-left: 41px;
 }
 
+#containerBtnAcao .btnCancelar {
+    border: 2px solid var(--dark-color);
+    color: var(--dark-color);
+}
 
 
+#containerBtnAcao .btnCancelar:hover {
+    border: 2px solid var(--dark-color);;
+    background-color: white;
+    color: var(--dark-color);
+}
 
+#containerBtnAcao .btnCadastrar {
+    background-color: var(--dark-color);
+    color: #fff;
+}
+
+#containerBtnAcao .btnCadastrar:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
 
 
 

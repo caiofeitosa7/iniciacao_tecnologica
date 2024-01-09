@@ -15,6 +15,23 @@ def fechar_conexao(conexao, commit: bool = True):
 
 
 def criar_dicionario(colunas: list, valores: list) -> dict:
+    """
+    # Cria um dicionário com as chaves iguais aos nomes das colunas e os valores iguais aos valores das colunas.
+
+    # :param colunas: Lista de strings com os nomes das colunas
+    # :param valores: Lista de valores correspondentes às colunas
+    # :return: Dicionário com as chaves iguais aos nomes das colunas e os valores iguais aos valores das colunas
+
+    # Exemplo de uso:
+    # colunas = ['nome', 'idade', 'cidade']
+    # valores = ['João', 30, 'São Paulo']
+    # dicionario = criar_dicionario(colunas, valores)
+    # print(dicionario)
+    # {'nome': 'João', 'idade': 30, 'cidade': 'São Paulo'}
+
+    # Verifica se o valor da coluna é um objeto datetime.
+    """
+
     dados = dict()
     for i, coluna in enumerate(colunas):
         if 'dt' in coluna.lower() and valores[i] is not None:
@@ -26,6 +43,14 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
 
 
 def get_colunas_tabela(nome_tabela: str, indentificacao: bool = False) -> list:
+    """
+    Retorna uma lista com os nomes das colunas de uma tabela.
+
+    :param nome_tabela: Nome da tabela.
+    :param indentificacao: Se True, adiciona uma identificação ao nome da coluna.
+    :return: Lista com os nomes das colunas.
+    """
+
     conexao, cursor = abrir_conexao()
     cursor.execute(f"PRAGMA table_info({nome_tabela});")
     resultados = cursor.fetchall()
@@ -71,7 +96,6 @@ def get_maior_codigo_ficha_registrado():
     """
 
     maior_codigo_geral = 0
-
     conexao, cursor = abrir_conexao()
     # cursor.execute("SELECT tabela FROM formulario ")
     cursor.execute("SELECT tabela FROM formulario WHERE codigo = 1")
@@ -131,6 +155,7 @@ def get_formularios_ativos():
     [{'codigo': 1, 'nome': 'Ficha Notificação'}, {'codigo': 2, 'nome': 'Ficha Acidente de Trabalho Grave'},
     {'codigo': 3, 'nome': 'Ficha Violência Interpessoal/Autoprovocada'}]
     """
+
     nome_tabela = 'formulario'
     conexao, cursor = abrir_conexao()
     cursor.execute(f"SELECT codigo, nome FROM {nome_tabela} WHERE ativo = 1")
@@ -160,6 +185,7 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     >>> get_tabela_formulario(1)
     'ficha_1'
     """
+    
     conexao, cursor = abrir_conexao()
     cursor.execute(f"SELECT tabela FROM formulario WHERE codigo = {cod_formulario}")
     tabela = cursor.fetchone()[0]
@@ -189,172 +215,26 @@ def registrar_ficha_notificacao(campos: dict, tabela: str = ""):
     # if not tabela:
     #     registrar_ficha_preliminar(cursor, cod_ficha, campos['cod_formulario'])
 
-    placeholders = ', '.join(['?' for _ in range(74)])
     tabela_ficha_notificacao = get_tabela_formulario(1)
-    tabela = tabela_ficha_notificacao if tabela == "" else tabela
+    nome_tabela = tabela_ficha_notificacao if tabela == "" else tabela
 
-    cursor = conexao.cursor()
+    print(nome_tabela)
 
-    print(tabela)
+    colunas = get_colunas_tabela(nome_tabela)
+    query = f"""
+        INSERT INTO {nome_tabela} (
+            {get_placeholders(colunas, True)}
+        ) VALUES (
+            {get_placeholders(colunas, False)}
+        )
+    """
 
-    # try:
-    cursor.execute(f"""
-            INSERT INTO {tabela} (
-                codigo,
-                numero_ficha,
-                tipo_notificacao,
-                agravoDoenca,
-                dt_notificacao,
-                uf_notificacao,
-                municipio_notificacao,
-                cod_ibge_notificacao,
-                unidade_saude,
-                cod_unidade_saude,
-                dt_sintomas,
-                nome_paciente,
-                dt_nascimento,
-                idade,
-                tipo_idade,
-                sexo,
-                gestante,
-                raca,
-                escolaridade,
-                numero_sus,
-                nome_mae,
-                dt_primeiro_sintoma,
-                numero_casos_suspeitos,
-                local_inicial_ocorrencia,
-                local_inicial_ocorrencia_outro,
-                uf_residencia,
-                municipio_residencia,
-                cod_ibge_residencia,
-                distrito_residencia,
-                bairro_residencia,
-                logradouro_residencia,
-                codigo_residencia,
-                numero_residencia,
-                complemento_residencia,
-                geo_campo1,
-                geo_campo2,
-                ponto_ref_residencia,
-                cep_residencia,
-                telefone_residencia,
-                zona_residencia,
-                pais_residencia,
-                municipio_us_notificante,
-                nome_notificante,
-                funcao_notificante,
-                assinatura_notificante,
-                dt_amostra_sorologia,
-                dt_outra_amostra,
-                tipo_exame,
-                obito,
-                caso_semelhante,
-                exantema,
-                dt_inicio_exantema,
-                petequiaSufusao,
-                liquor,
-                bacterioscopia,
-                tomou_vacina,
-                dt_ultima_dose_tomada,
-                hospitalizacao,
-                dt_hospitalizacao,
-                uf_hospital,
-                municipio_hospital,
-                cod_ibge_hospital,
-                nome_hospital,
-                cod_hospital,
-                hipotese_diagnostica1,
-                hipotese_diagnostica2,
-                pais_infeccao,
-                uf_infeccao,
-                municipio_infeccao,
-                distrito_infeccao,
-                bairro_infeccao,
-                setor,
-                prontuario,
-                cod_formulario
-            ) VALUES ({placeholders})
-            """, (
-        cod_ficha,
-        int(campos['numero_ficha']),
-        int(campos['tipo_notificacao']),
-        campos['agravoDoenca'],
-        campos['dt_notificacao'],
-        campos['uf_notificacao'],
-        campos['municipio_notificacao'],
-        int(campos['cod_ibge_notificacao']),
-        campos['unidade_saude'],
-        int(campos['cod_unidade_saude']),
-        campos['dt_sintomas'],
-        campos['nome_paciente'],
-        campos['dt_nascimento'],
-        int(campos['idade']),
-        int(campos['tipo_idade']),
-        str(campos['sexo']).upper(),
-        int(campos['gestante']),
-        int(campos['raca']),
-        int(campos['escolaridade']),
-        int(campos['numero_sus']),
-        campos['nome_mae'],
-        campos['dt_primeiro_sintoma'],
-        int(campos['numero_casos_suspeitos']),
-        int(campos['local_inicial_ocorrencia']),
-        campos['local_inicial_ocorrencia_outro'],
-        campos['uf_residencia'],
-        campos['municipio_residencia'],
-        int(campos['cod_ibge_residencia']),
-        campos['distrito_residencia'],
-        campos['bairro_residencia'],
-        campos['logradouro_residencia'],
-        int(campos['codigo_residencia']),
-        int(campos['numero_residencia']),
-        campos['complemento_residencia'],
-        campos['geo_campo1'],
-        campos['geo_campo2'],
-        campos['ponto_ref_residencia'],
-        campos['cep_residencia'],
-        campos['telefone_residencia'],
-        int(campos['zona_residencia']),
-        campos['pais_residencia'],
-        campos['municipio_us_notificante'],
-        campos['nome_notificante'],
-        campos['funcao_notificante'],
-        campos['assinatura_notificante'],
-        campos['dt_amostra_sorologia'],
-        campos['dt_outra_amostra'],
-        campos['tipo_exame'],
-        int(campos['obito']),
-        int(campos['caso_semelhante']),
-        int(campos['exantema']),
-        campos['dt_inicio_exantema'],
-        int(campos['petequiaSufusao']),
-        int(campos['liquor']),
-        campos['bacterioscopia'],
-        int(campos['tomou_vacina']),
-        campos['dt_ultima_dose_tomada'],
-        int(campos['hospitalizacao']),
-        campos['dt_hospitalizacao'],
-        campos['uf_hospital'],
-        campos['municipio_hospital'],
-        int(campos['cod_ibge_hospital']),
-        campos['nome_hospital'],
-        int(campos['cod_hospital']),
-        campos['hipotese_diagnostica1'],
-        campos['hipotese_diagnostica2'],
-        campos['pais_infeccao'],
-        campos['uf_infeccao'],
-        campos['municipio_infeccao'],
-        campos['distrito_infeccao'],
-        campos['bairro_infeccao'],
-        campos['setor'],
-        int(campos['prontuario']),
-        int(campos['cod_formulario'])
-    ))
-
-
-# except Exception as e:
-#     print(e)
+    try:
+        cursor = conexao.cursor()
+        valores = (cod_ficha,) + tuple(campos.values())
+        cursor.execute(query, valores)
+    except Exception as e:
+        print(e)
 
     fechar_conexao(conexao)
 
