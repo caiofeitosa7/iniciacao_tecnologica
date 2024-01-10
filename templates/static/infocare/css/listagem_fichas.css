@@ -1,0 +1,44 @@
+.tabela .titulo {
+    border-radius: 7px 7px 0 0;
+}
+
+.tabela .linha-tabela {
+    background-color: white;
+    border-bottom: 2px solid var(--light-color);
+}
+
+#tabelaNotificacoesPreliminares .cabecalho, #tabelaNotificacoesPreliminares .titulo {
+    background-color: var(--main-color);
+    /*background-color: #ddcb1e;*/
+    color: white;
+}
+
+#tabelaNotificacoesPendentes .cabecalho, #tabelaNotificacoesPendentes .titulo {
+    background-color: #950000db;
+    color: white;
+}
+
+#tabelaNotificacoesConcluidas .cabecalho, #tabelaNotificacoesConcluidas .titulo {
+    background-color: #245B10;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+<div id="{{ id_tabela }}" class="tabela">
+    <div class="titulo d-flex justify-content-between mt-2 py-3 px-3">
+        <div class="col-1">
+            <i class="clicavel bi bi-arrow-left-square-fill" onclick="requisicaoGetPadrao('{% url 'pagina_inicial' %}')"></i>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <span class="negrito">{{ titulo }}</span>
+        </div>
+        <div class="col-1 col-1 d-flex justify-content-end">
+            <i class="bi bi-funnel-fill"></i>
+        </div>
+    </div>
+    <div class="cabecalho font-smaller d-flex py-2 px-3">
+        <div class="col-2">
+            <label class="negrito">Número</label>
+        </div>
+        <div class="col-4">
+            <label class="negrito">Notificação</label>
+        </div>
+        <div class="col-2">
+            <label class="negrito">Setor</label>
+        </div>
+        <div class="col-2">
+            <label class="negrito">Notificante</label>
+        </div>
+        <div class="col-2">
+            <label class="negrito">Data</label>
+        </div>
+    </div>
+    <div class="linha-tabela clicavel font-smaller d-flex align-items-center py-2 px-3">
+        <!--        onclick="requisicaoGetPadrao('{# url 'visualizar_paciente' codigo=paciente.codigo %}', 'Histórico do Paciente')">-->
+        <div class="col-2">
+            <label class="clicavel font-weight-600">46660</label>
+        </div>
+        <div class="col-4 d-flex flex-column">
+            <label class="clicavel font-weight-600">Acidente de Trabalho Grave</label>
+            <label class="clicavel">Jumentilde da Silva</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Internação</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Caio</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Data</label>
+        </div>
+    </div>
+    <div class="linha-tabela clicavel font-smaller d-flex align-items-center py-2 px-3">
+<!--        onclick="requisicaoGetPadrao('{# url 'visualizar_paciente' codigo=paciente.codigo %}', 'Histórico do Paciente')">-->
+        <div class="col-2">
+            <label class="clicavel font-weight-600">46660</label>
+        </div>
+        <div class="col-4 d-flex flex-column">
+            <label class="clicavel font-weight-600">Acidente de Trabalho Grave</label>
+            <label class="clicavel">Jumentilde da Silva</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Internação</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Caio</label>
+        </div>
+        <div class="col-2">
+            <label class="clicavel font-weight-600">Data</label>
+        </div>
+    </div>
+
+</div>

@@ -2,19 +2,19 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Escolha uma ficha</h1>
+                <h1 class="modal-title fs-5">Escolha uma Ficha</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <select id="selectTipoFicha" class="form-select" size="{{ quantidade }}">
+            <div class="modal-body d-flex flex-column">
                     {% for ficha in fichas %}
-                        <option value="{{ ficha.codigo }}" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">{{ ficha.nome }}</option>
+                        <label class="clicavel my-1" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' codigo=ficha.codigo %}')">
+                            {{ ficha.nome }}
+                        </label>
                     {% endfor %}
-                </select>
             </div>
 <!--            <div class="modal-footer">-->
 <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>-->
-<!--                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">Abrir</button>-->
+<!--                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{# url 'abrir_ficha' %}')">Abrir</button>-->
 <!--            </div>-->
         </div>
     </div>
@@ -24,17 +24,17 @@
     <div id="card-home-novaNotificacao" class="col-5 card-home" onclick="abrirMenuTiposDeFicha()">
         <span class="label-card-home">NOVA NOTIFICAÇÃO</span>
     </div>
-    <div id="card-home-preliminares" class="col-5 card-home">
+    <div id="card-home-preliminares" class="col-5 card-home" onclick="requisicaoGetPadrao('{% url 'fichas_preliminares' %}')">
         <span class="label-card-home">NOTIFICAÇÕES PRELIMINARES</span>
         <span class="card-home-quantidade">3</span>
     </div>
 </div>
 <div class="row row-cards">
-    <div id="card-home-pendentes" class="col-5 card-home">
+    <div id="card-home-pendentes" class="col-5 card-home" onclick="requisicaoGetPadrao('{% url 'fichas_pendentes' %}')">
         <span class="label-card-home">NOTIFICAÇÕES PENDENTES</span>
         <span class="card-home-quantidade">1</span>
     </div>
-    <div id="card-home-concluidas" class="col-5 card-home">
+    <div id="card-home-concluidas" class="col-5 card-home" onclick="requisicaoGetPadrao('{% url 'fichas_concluidas' %}')">
         <span class="label-card-home">NOTIFICAÇÕES CONCLUÍDAS</span>
     </div>
     <br>

@@ -185,7 +185,7 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     >>> get_tabela_formulario(1)
     'ficha_1'
     """
-    
+
     conexao, cursor = abrir_conexao()
     cursor.execute(f"SELECT tabela FROM formulario WHERE codigo = {cod_formulario}")
     tabela = cursor.fetchone()[0]
@@ -212,8 +212,8 @@ def registrar_ficha_notificacao(campos: dict, tabela: str = ""):
 
     print('codigo da ficha', cod_ficha)
 
-    # if not tabela:
-    #     registrar_ficha_preliminar(cursor, cod_ficha, campos['cod_formulario'])
+    if not tabela:
+        registrar_ficha_preliminar(cursor, cod_ficha, campos['cod_formulario'])
 
     tabela_ficha_notificacao = get_tabela_formulario(1)
     nome_tabela = tabela_ficha_notificacao if tabela == "" else tabela

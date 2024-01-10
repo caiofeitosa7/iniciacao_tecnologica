@@ -15,8 +15,21 @@
     font-family: "Poppins", sans-serif;
 }
 
+.clicavel {
+    cursor: pointer;
+}
+
+.font-smaller {
+    font-size: smaller;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
 body {
     background: var(--light-color);
+    overflow: hidden;
 }
 
 .sidebar {
@@ -146,6 +159,35 @@ body {
 }
 
 #conteudo {
-    width: 95%;
-    margin: auto;
+    max-height: 92vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 20px;
 }
+
+#conteudo::-webkit-scrollbar {
+    width: 7px;
+    background-color: var(--light-color);
+}
+
+#conteudo::-webkit-scrollbar-thumb {
+    background-color: var(--dark-color); /* cor do botão de rolagem */
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

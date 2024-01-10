@@ -45,7 +45,10 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
         .then(
             function (json) {
                 if (json["status"] === 'success') {
-                    // abrirOpcaoPaginaInicial()
+                    abrirOpcaoPaginaInicial()
+                    $('#mensagem-retorno .modal-title').html("Sucesso!");
+                    $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                    $('#mensagem-retorno').modal("toggle");
                 } else {
                     $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
                     $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
@@ -55,3 +58,17 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
         )
         .catch(err => console.log(err));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

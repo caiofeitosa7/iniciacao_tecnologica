@@ -95,14 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function escaparCaracteresEspeciaisHTML(input) {
-    return input.replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;')
-}
-
 function atribuirValor(elementId) {
     let valorDoCampo = document.getElementById(elementId).value;
     let novoElementId = elementId + "2";
@@ -110,10 +102,10 @@ function atribuirValor(elementId) {
     document.getElementById(novoElementId).value = valorDoCampo;
 }
 
-function pesquisaCep(elemento) {
+function pesquisaCepComReplicacao(elemento) {
     let cep = elemento.value.replace(/\D/g, '');  // somente numeros
 
-    if (cep != "") {
+    if (cep !== "") {
         let validacep = /^[0-9]{8}$/;
 
         if (validacep.test(cep)) {
@@ -167,6 +159,84 @@ function pesquisaCep(elemento) {
         }
     }
 }
+
+function pesquisaCepSemReplicacao(elemento) {
+    let cep = elemento.value.replace(/\D/g, '');  // somente numeros
+
+    if (cep !== "") {
+        let validacep = /^[0-9]{8}$/;
+
+        if (validacep.test(cep)) {
+            let apiUrl = 'https://viacep.com.br/ws/'+ cep + '/json/';
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok)
+                        console.log('Erro ao consultar o CEP');
+                    return response.json();
+                })
+                .then(data => {
+                    elemento.value = data["cep"];
+                    document.getElementById("campo-uf-residencia").value = data["uf"];
+                    document.getElementById("campo-municipio-residencia").value = data["localidade"];
+                    document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
+                    document.getElementById("campo-bairro-residencia").value = data["bairro"];
+                    document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                    elemento.value = "";
+                    document.getElementById("campo-uf-residencia").value = "";
+                    document.getElementById("campo-municipio-residencia").value = "";
+                    document.getElementById("campo-cod-ibge-residencia").value = "";
+                    document.getElementById("campo-bairro-residencia").value = "";
+                    document.getElementById("campo-logradouro-residencia").value = "";
+                });
+        }
+        else {
+            console.error('CEP não passou no teste do regex');
+            elemento.value = "";
+            document.getElementById("campo-uf-residencia").value = "";
+            document.getElementById("campo-municipio-residencia").value = "";
+            document.getElementById("campo-cod-ibge-residencia").value = "";
+            document.getElementById("campo-bairro-residencia").value = "";
+            document.getElementById("campo-logradouro-residencia").value = "";
+        }
+    }
+}
+
+// ------------------------------ Funcoes Auxiliares --------------------------------- //
+
+function escaparCaracteresEspeciaisHTML(input) {
+    return input.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+}
+
+function requisicaoGetPadrao(url) {
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json;charset=UTF-8"
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            // if (tituloAba)
+            //     alterarTituloAba(tituloAba);
+            $('#conteudo')[0].innerHTML = data.html[0];
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
+}
+
+
+
+
+
 
 
 
