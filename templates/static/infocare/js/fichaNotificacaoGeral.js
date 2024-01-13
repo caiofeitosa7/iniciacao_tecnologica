@@ -1,7 +1,7 @@
 function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
     let csrfToken = getCookie("csrftoken");
     let ficha = document.getElementById("fichaNotificacao");
-    let cod_formulario = document.getElementById("cod-formulario").value;
+    let cod_formulario = document.getElementById("cod_formulario").value;
     let prontuario = document.getElementById("prontuario").value;
     let setor = document.getElementById("setor").value;
 

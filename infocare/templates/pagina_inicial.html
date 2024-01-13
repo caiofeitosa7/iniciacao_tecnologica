@@ -6,9 +6,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex flex-column">
-                    {% for ficha in fichas %}
-                        <label class="clicavel my-1" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' codigo=ficha.codigo %}')">
-                            {{ ficha.nome }}
+                    {% for formulario in formularios %}
+                        <label class="clicavel my-1" onclick="abrirFichaEscolhida('{% url 'abrir_formulario' codigo=formulario.codigo %}')">
+                            {{ formulario.nome }}
                         </label>
                     {% endfor %}
             </div>

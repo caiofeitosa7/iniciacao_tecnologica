@@ -1,9 +1,12 @@
 from django.db import connections
 from datetime import date, datetime, timedelta
 
+import sqlite3
+
 
 def abrir_conexao():
     conexao = connections['default']
+    # conexao = sqlite3.connect('..\db.sqlite3')
     cursor = conexao.cursor()
     return conexao, cursor
 
@@ -34,7 +37,7 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
 
     dados = dict()
     for i, coluna in enumerate(colunas):
-        if 'dt' in coluna.lower() and valores[i] is not None:
+        if 'dt' in coluna.lower() and valores[i]:
             data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
             valores[i] = data_obj.strftime('%d/%m/%Y')
         dados[coluna] = valores[i]
@@ -80,6 +83,49 @@ def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
     query += f" WHERE {clausura_where}" if clausura_where else ""
 
     return query
+
+
+def inserir_registro_tabela(nome_tabela: str, dados: dict):
+    colunas = get_colunas_tabela(nome_tabela)
+    conexao, cursor = abrir_conexao()
+    valores = tuple(dados.values())
+    query = f"""INSERT INTO {nome_tabela} (
+                    {get_placeholders(colunas[1:], True)}
+                ) VALUES (
+                    {get_placeholders(colunas[1:], False)}
+                )
+            """
+
+    try:
+        cursor.execute(query, valores)
+    except Exception as e:
+        print(e)
+
+    fechar_conexao(conexao)
+
+
+def alterar_registro_tabela(nome_tabela: str, dados: dict):
+    colunas = get_colunas_tabela(nome_tabela)
+    conexao, cursor = abrir_conexao()
+    valores = tuple(dados.values())[1:]
+
+    lista = list()
+    for i, coluna in enumerate(colunas[1:]):
+        lista.append(f"{coluna} = ?")
+
+    query = f"""
+            UPDATE {nome_tabela}
+            SET 
+                {get_placeholders(lista, True)}
+            WHERE codigo = {dados['codigo']};
+        """
+
+    try:
+        cursor.execute(query, valores)
+    except Exception as e:
+        print(e)
+
+    fechar_conexao(conexao)
 
 
 def get_maior_codigo_ficha_registrado():
@@ -172,7 +218,7 @@ def get_formularios_ativos():
 
 def get_tabela_formulario(cod_formulario: int) -> str:
     """
-    Retorna a tabela do formulário de acordo com o código de formulário.
+    Retorna a tabela do formulário de acordo com o código do formulário.
 
     :param cod_formulario: int - Código do formulário.
     :type cod_formulario: int
@@ -190,30 +236,22 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     cursor.execute(f"SELECT tabela FROM formulario WHERE codigo = {cod_formulario}")
     tabela = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
-
     return tabela
 
 
-def registrar_ficha_preliminar(cursor, cod_ficha, cod_formulario):
-    nome_tabela = 'preliminar'
-    colunas = get_colunas_tabela(nome_tabela)[1:]
-    cursor.execute(f"""
-        INSERT INTO {nome_tabela} (
-            {get_placeholders(colunas, True)}
-        ) VALUES (
-            {get_placeholders(colunas, False)}
-        )
-    """,  (cod_ficha, cod_formulario))
-
-
-def registrar_ficha_notificacao(campos: dict, tabela: str = ""):
+def set_ficha_notificacao(campos: dict, tabela: str = ""):
     cod_ficha = proximo_codigo_ficha()
     conexao, cursor = abrir_conexao()
 
     print('codigo da ficha', cod_ficha)
 
-    if not tabela:
-        registrar_ficha_preliminar(cursor, cod_ficha, campos['cod_formulario'])
+    estado_ficha = {
+        'cod_ficha': cod_ficha,
+        'tabela': get_tabela_formulario(campos['cod_formulario']),
+        'status': 'preliminar'
+    }
+
+    inserir_registro_tabela('estado', estado_ficha)
 
     tabela_ficha_notificacao = get_tabela_formulario(1)
     nome_tabela = tabela_ficha_notificacao if tabela == "" else tabela
@@ -238,6 +276,70 @@ def registrar_ficha_notificacao(campos: dict, tabela: str = ""):
 
     fechar_conexao(conexao)
 
+
+def get_ficha(cod_ficha: int, cod_formulario: int):
+    tabela = get_tabela_formulario(cod_formulario)
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"SELECT * FROM {tabela} WHERE codigo = {cod_ficha}")
+    resultado = cursor.fetchone()
+    colunas = get_colunas_tabela(tabela)
+    ficha = criar_dicionario(colunas, list(resultado))
+    fechar_conexao(conexao, False)
+    return ficha
+
+
+def alterar_ficha(campos: dict):
+    tabela = get_tabela_formulario(campos['cod_formulario'])
+    alterar_registro_tabela(tabela, campos)
+
+
+def listar_fichas(status: str):
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"SELECT cod_ficha, tabela FROM estado WHERE status = '{status}'")
+    resultados = cursor.fetchall()
+
+    colunas = [
+        'cod_ficha',
+        'numero_ficha',
+        'nome_paciente',
+        'nome_formulario',
+        'cod_formulario',
+        'setor',
+        'nome_notificante',
+        'dt_notificacao'
+    ]
+
+    dados = list()
+    for resultado in resultados:
+        cod_ficha = int(resultado[0])
+        tabela = resultado[1]
+
+        cursor.execute(f"""
+            SELECT
+                {tabela}.codigo,
+                numero_ficha,
+                nome_paciente,
+                formulario.nome,
+                formulario.codigo,
+                setor,
+                nome_notificante,
+                dt_notificacao
+            FROM {tabela}
+                INNER JOIN formulario ON formulario.codigo = {tabela}.cod_formulario
+            WHERE {tabela}.codigo = {cod_ficha}
+        """)
+
+        dados.append(criar_dicionario(colunas, list(cursor.fetchone())))
+
+    fechar_conexao(conexao, False)
+    return dados
+
+
+
+
+
+# print(listar_fichas('concluida'))
+# print(get_ficha(3, 1))
 
 
 

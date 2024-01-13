@@ -24,11 +24,11 @@ def imagem_local(request, cod_img):
     return FileResponse(open(imagem_url, 'rb'))
 
 
-def pagina_inicial(request):
-    fichas = models.get_formularios_ativos()
+def pagina_inicial_view(request):
+    formularios = models.get_formularios_ativos()
 
     return JsonResponse({
-        'html': [render_to_string('pagina_inicial.html', {'fichas': fichas})]
+        'html': [render_to_string('pagina_inicial.html', {'formularios': formularios})]
     })
 
 
@@ -39,8 +39,7 @@ def fichas_preliminares(request):
         # dados = retirar_caracteres_especiais(dados)
 
     else:
-        # fichas = models.get_notificacoes_preliminares()
-        fichas = []
+        fichas = models.listar_fichas(status='preliminar')
 
     contexto = {
         'fichas': fichas,
@@ -59,8 +58,7 @@ def fichas_pendentes(request):
         # dados = retirar_caracteres_especiais(dados)
 
     else:
-        # fichas = models.get_notificacoes_preliminares()
-        fichas = []
+        fichas = models.listar_fichas(status='pendente')
 
     contexto = {
         'fichas': fichas,
@@ -79,8 +77,7 @@ def fichas_concluidas(request):
         # dados = retirar_caracteres_especiais(dados)
 
     else:
-        # fichas = models.get_notificacoes_preliminares()
-        fichas = []
+        fichas = models.listar_fichas(status='concluida')
 
     contexto = {
         'fichas': fichas,
@@ -92,21 +89,37 @@ def fichas_concluidas(request):
     })
 
 
-def abrir_ficha(request, codigo: int):
-    arquivos_ficha: list[str] = [
+def abrir_formulario_view(request, codigo: int):
+    arquivos_formulario: list[str] = [
         'fichaNotificacaoGeral.html',
         'fichaAcidenteTrabalho.html',
         'fichaViolenciaInterpessoal.html'
     ]
 
     if request.method == 'GET':
-        return JsonResponse({'html': [render_to_string(arquivos_ficha[codigo - 1])]})
+        return JsonResponse({'html': [render_to_string(arquivos_formulario[codigo - 1])]})
 
 
-def set_ficha_notificacao(request):
+def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
+    contexto = {'ficha': models.get_ficha(cod_ficha, cod_formulario)}
+    arquivos_ficha: list[str] = [
+        'editar_fichaNotificacaoGeral.html',
+        'editar_fichaAcidenteTrabalho.html',
+        'editar_fichaViolenciaInterpessoal.html'
+    ]
+
+    if request.method == 'GET':
+        arquivo_html = os.path.join('edicao', arquivos_ficha[cod_formulario - 1])
+        return JsonResponse({
+            'html': [render_to_string(arquivo_html, contexto)],
+            'status': 'success'
+        })
+
+
+def registrar_ficha_notificacao(request):
     if request.method == 'POST':
         try:
-            models.registrar_ficha_notificacao(json.loads(request.body))
+            models.set_ficha_notificacao(json.loads(request.body))
             return JsonResponse({'status': 'success'})
         except Exception as e:
             return JsonResponse({'status': 'error'})
