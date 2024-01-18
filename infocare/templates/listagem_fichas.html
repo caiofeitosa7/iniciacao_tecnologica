@@ -1,12 +1,14 @@
 <div id="{{ id_tabela }}" class="tabela">
-    <div class="titulo d-flex justify-content-between mt-2 py-3 px-3">
+    <div class="titulo d-flex justify-content-between align-items-center mt-2 py-3 px-3">
         <div class="col-1">
-            <i class="clicavel bi bi-arrow-left-square-fill" onclick="requisicaoGetPadrao('{% url 'pagina_inicial' %}')"></i>
+            <i class="clicavel font-xlarge bi bi-arrow-left-square-fill"
+               onclick="requisicaoGetPadrao('{% url 'pagina_inicial' %}')">
+            </i>
         </div>
         <div class="col d-flex justify-content-center">
             <span class="negrito">{{ titulo }}</span>
         </div>
-        <div class="col-1 col-1 d-flex justify-content-end">
+        <div class="col-1 font-xlarge d-flex justify-content-end">
             <i class="bi bi-funnel-fill"></i>
         </div>
     </div>

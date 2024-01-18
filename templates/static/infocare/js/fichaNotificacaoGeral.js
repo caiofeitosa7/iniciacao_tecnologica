@@ -18,11 +18,11 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
             if (campo.type === 'number')
                 dicionario[campo.id] = parseInt(campo.value, 10);
             else
-                dicionario[campo.id] = campo.value;
+                dicionario[campo.id] = escaparCaracteresEspeciaisHTML(campo.value);
         }
     });
 
-    dicionario['setor'] = setor;
+    dicionario['setor'] = escaparCaracteresEspeciaisHTML(setor);
     dicionario['prontuario'] = parseInt(prontuario, 10);
     dicionario['cod_formulario'] = parseInt(cod_formulario, 10);
 
@@ -45,10 +45,10 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao, urlHome) {
         .then(
             function (json) {
                 if (json["status"] === 'success') {
-                    abrirOpcaoPaginaInicial()
                     $('#mensagem-retorno .modal-title').html("Sucesso!");
                     $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
                     $('#mensagem-retorno').modal("toggle");
+                    $('#conteudo')[0].innerHTML = json.html[0];
                 } else {
                     $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
                     $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");

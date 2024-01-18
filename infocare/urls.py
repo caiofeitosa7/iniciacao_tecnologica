@@ -14,5 +14,8 @@ urlpatterns = [
     path('home/fichas_concluidas/', views.fichas_concluidas, name='fichas_concluidas'),
     path('home/fichas/visualizar_ficha/<int:cod_ficha>/<int:cod_formulario>', views.visualizar_ficha_view, name='visualizar_ficha'),
     path('home/fichas/registrar_ficha_notificacao', views.registrar_ficha_notificacao, name='registrar_ficha_notificacao'),
+    path('home/fichas/observacoes/<int:cod_ficha>', views.observacoes_view, name='observacoes'),
+    # path('home/fichas/observacoes/apagar_obervacao/<int:codigo>', views.apagar_observacao, name='apagar_observacao'),
+    # path('home/fichas/observacoes/fechar_obervacao/<int:codigo>', views.fechar_observacao, name='fechar_observacao'),
     path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
 ]

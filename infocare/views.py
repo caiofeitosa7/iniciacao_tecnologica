@@ -1,9 +1,7 @@
-import json
-import os
+import json, string, os
 
-from django.http import FileResponse
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import FileResponse, JsonResponse
+from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
 from . import models
 
@@ -28,7 +26,8 @@ def pagina_inicial_view(request):
     formularios = models.get_formularios_ativos()
 
     return JsonResponse({
-        'html': [render_to_string('pagina_inicial.html', {'formularios': formularios})]
+        'html': [render_to_string('pagina_inicial.html', {'formularios': formularios})],
+        'status': 'success'
     })
 
 
@@ -101,25 +100,66 @@ def abrir_formulario_view(request, codigo: int):
 
 
 def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
-    contexto = {'ficha': models.get_ficha(cod_ficha, cod_formulario)}
-    arquivos_ficha: list[str] = [
-        'editar_fichaNotificacaoGeral.html',
-        'editar_fichaAcidenteTrabalho.html',
-        'editar_fichaViolenciaInterpessoal.html'
-    ]
-
     if request.method == 'GET':
+        dados = models.get_ficha(cod_ficha, cod_formulario)
+        arquivos_ficha: list[str] = [
+            'editar_fichaNotificacaoGeral.html',
+            'editar_fichaAcidenteTrabalho.html',
+            'editar_fichaViolenciaInterpessoal.html'
+        ]
+
+        for key in dados.keys():
+            if 'dt' in key and dados[key]:
+                dados[key] = '-'.join(dados[key].split('/')[::-1])
+
         arquivo_html = os.path.join('edicao', arquivos_ficha[cod_formulario - 1])
         return JsonResponse({
-            'html': [render_to_string(arquivo_html, contexto)],
+            'html': [render_to_string(arquivo_html, {'ficha': dados})],
             'status': 'success'
         })
 
 
 def registrar_ficha_notificacao(request):
     if request.method == 'POST':
+        dados = json.loads(request.body)
+
         try:
-            models.set_ficha_notificacao(json.loads(request.body))
-            return JsonResponse({'status': 'success'})
+            if dados.get('codigo', False):
+                args = {
+                    'cod_ficha': dados['codigo'],
+                    'cod_formulario': dados['cod_formulario'],
+                }
+
+                models.alterar_ficha(dados)
+                return redirect(reverse('visualizar_ficha', kwargs=args))
+            else:
+                models.set_ficha_notificacao(dados)
+                return redirect('home')
+
         except Exception as e:
-            return JsonResponse({'status': 'error'})
+            return redirect('pagina_inicial')
+
+
+def observacoes_view(request, cod_ficha):
+    return JsonResponse({
+        'html': [render_to_string('observacoes.html')],
+        'status': 'success'
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

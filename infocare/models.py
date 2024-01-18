@@ -143,7 +143,7 @@ def get_maior_codigo_ficha_registrado():
 
     maior_codigo_geral = 0
     conexao, cursor = abrir_conexao()
-    # cursor.execute("SELECT tabela FROM formulario ")
+    # cursor.execute("SELECT tabela FROM formulario")
     cursor.execute("SELECT tabela FROM formulario WHERE codigo = 1")
     tabelas = cursor.fetchall()
 
@@ -156,8 +156,6 @@ def get_maior_codigo_ficha_registrado():
 
         cursor.execute(f"SELECT MAX(codigo) FROM {tabela[0]}")
         maior_codigo_tabela = cursor.fetchone()[0]
-
-        print('maior codigo da tabela', tabela[0], '=', maior_codigo_tabela)
 
         if maior_codigo_tabela > maior_codigo_geral:
             maior_codigo_geral = maior_codigo_tabela

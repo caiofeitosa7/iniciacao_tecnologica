@@ -1,15 +1,18 @@
 <div class="linha-dados justify-content-around pb-3">
-    <input id="cod-formulario" value="1" aria-label="" hidden disabled>
+    <input id="cod_formulario" value="{{ ficha.cod_formulario }}" aria-label="" hidden disabled>
     <div class="input-group flex-nowrap campo-hut">
         <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-        <input id="prontuario" type="number" class="form-control"/>
+        <input id="prontuario" type="number" class="form-control"
+               value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"
+        />
     </div>
     <div class="input-group flex-nowrap campo-hut">
         <label class="input-group-text negrito" for="setor">Setor</label>
-        <input id="setor" class="form-control"/>
+        <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
     </div>
 </div>
 <div id="fichaNotificacao" class="ficha">
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -23,7 +26,9 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha"/>
+                <input type="number" class="form-control" id="numero-ficha"
+                       value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
+                />
             </div>
         </div>
     </div>
@@ -41,7 +46,9 @@
                                 <label for="campo-tipo-notificacao">Tipo de Notificação</label>
                             </div>
                             <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                    type="number" min="1" max="4"/>
+                                   value="{% if ficha.tipo_notificacao %}{{ ficha.tipo_notificacao }}{% endif %}"
+                                   type="number" min="1" max="4"
+                            />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                             <span class="mb-1">
@@ -59,7 +66,8 @@
                             <label for="campo-agravoDoenca">Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-agravoDoenca" type="text" class="input-dado form-control"/>
+                            <input id="campo-agravoDoenca" value="{{ ficha.agravoDoenca }}"
+                                   class="input-dado form-control"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -68,7 +76,8 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control"/>
+                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}" type="date"
+                                   class="input-dado form-control"/>
                         </div>
                     </div>
                 </div>
@@ -79,7 +88,8 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2"/>
+                            <input id="campo-uf-notificacao" value="{{ ficha.uf_notificacao }}"
+                                   class="input-dado form-control" maxlength="2"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -88,7 +98,8 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control"/>
+                            <input id="campo-municipio-notificacao" value="{{ ficha.municipio_notificacao }}"
+                                   class="input-dado form-control"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -100,6 +111,7 @@
                                     id="campo-cod-ibge-notificacao"
                                     type="number"
                                     class="input-dado form-control"
+                                    value="{% if ficha.cod_ibge_notificacao %}{{ ficha.cod_ibge_notificacao }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -115,8 +127,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-unidade-saude"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ ficha.unidade_saude }}"
                             />
                         </div>
                     </div>
@@ -129,6 +141,7 @@
                                     id="campo-cod-unidade-saude"
                                     type="number"
                                     class="input-dado form-control"
+                                    value="{% if ficha.cod_unidade_saude %}{{ ficha.cod_unidade_saude }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -144,6 +157,7 @@
                                     id="campo-dt-sintomas"
                                     type="date"
                                     class="input-dado form-control"
+                                    value="{{ ficha.dt_sintomas }}"
                             />
                         </div>
                     </div>
@@ -164,8 +178,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-paciente"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ ficha.nome_paciente }}"
                             />
                         </div>
                     </div>
@@ -179,6 +193,7 @@
                                     id="campo-dt-nascimento"
                                     type="date"
                                     class="input-dado form-control"
+                                    value="{{ ficha.dt_nascimento }}"
                             />
                         </div>
                     </div>
@@ -194,6 +209,7 @@
                                 <input
                                         id="campo-idade"
                                         type="number"
+                                        value="{% if ficha.idade %}{{ ficha.idade }}{% endif %}"
                                         class="input-dado form-control"
                                         maxlength="3"
                                 />
@@ -203,6 +219,7 @@
                                         type="number"
                                         id="campo-tipo-idade"
                                         class="input-dado-quadrado form-control"
+                                        value="{% if ficha.tipo_idade %}{{ ficha.tipo_idade }}{% endif %}"
                                         min="1"
                                         max="4"
                                 />
@@ -223,7 +240,7 @@
                             </div>
                             <input
                                     id="campo-sexo"
-                                    type="text"
+                                    value="{{ ficha.sexo }}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
                             />
@@ -245,6 +262,7 @@
                             <input
                                     id="campo-gestante"
                                     type="number"
+                                    value="{% if ficha.gestante %}{{ ficha.gestante }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     min="1"
                                     max="9"
@@ -268,6 +286,7 @@
                                     id="campo-raca"
                                     type="number"
                                     class="input-dado-quadrado form-control"
+                                    value="{% if ficha.raca %}{{ ficha.raca }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -291,6 +310,7 @@
                             <input
                                     id="campo-escolaridade"
                                     type="number"
+                                    value="{% if ficha.escolaridade %}{{ ficha.escolaridade }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="2"
                             />
@@ -323,6 +343,7 @@
                                     id="campo-numero-sus"
                                     type="number"
                                     class="input-dado form-control"
+                                    value="{% if ficha.numero_sus %}{{ ficha.numero_sus }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -334,7 +355,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-mae"
-                                    type="text"
+                                    value="{{ ficha.nome_mae }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -360,6 +381,7 @@
                                 <input
                                         id="campo-dt-primeiro-sintoma"
                                         type="date"
+                                        value="{{ ficha.dt_primeiro_sintoma }}"
                                         class="input-dado form-control"
                                 />
                             </div>
@@ -375,6 +397,7 @@
                                 <input
                                         id="campo-numero-casos-suspeitos"
                                         type="number"
+                                        value="{% if ficha.numero_casos_suspeitos %}{{ ficha.numero_casos_suspeitos }}{% endif %}"
                                         class="input-dado form-control"
                                 />
                             </div>
@@ -392,6 +415,7 @@
                                     id="campo-local-inicial-ocorrencia"
                                     type="number"
                                     class="input-dado-quadrado form-control"
+                                    value="{% if ficha.local_inicial_ocorrencia %}{{ ficha.local_inicial_ocorrencia }}{% endif %}"
                                     min="1"
                                     max="11"
                             />
@@ -426,6 +450,7 @@
                                                 id="campo-local-especificar-ocorrencia"
                                                 class="input-dado form-control"
                                                 aria-label=""
+                                                value="{{ ficha.local_inicial_ocorrencia_outro }}"
                                         />
                                     </li>
                                 </ul>
@@ -449,7 +474,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-residencia"
-                                    type="text"
+                                    value="{{ ficha.uf_residencia }}"
                                     class="input-dado form-control"
                                     maxlength="2"
                             />
@@ -464,9 +489,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-municipio-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-municipio-residencia"
+                                    value="{{ ficha.municipio_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -476,9 +501,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-cod-ibge-residencia"
-                                type="number"
-                                class="input-dado form-control"
+                                    id="campo-cod-ibge-residencia"
+                                    type="number"
+                                    value="{% if ficha.cod_ibge_residencia %}{{ ficha.cod_ibge_residencia }}{% endif %}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -489,9 +515,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-distrito-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-distrito-residencia"
+                                    value="{{ ficha.distrito_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -504,9 +530,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-bairro-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-bairro-residencia"
+                                    value="{{ ficha.bairro_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -518,7 +544,11 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia" class="input-dado form-control"/>
+                            <input
+                                    id="campo-logradouro-residencia"
+                                    class="input-dado form-control"
+                                    value="{{ ficha.logradouro_residencia }}"
+                            />
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -529,6 +559,7 @@
                             <input
                                     id="campo-codigo-residencia"
                                     type="number"
+                                    value="{% if ficha.codigo_residencia %}{{ ficha.codigo_residencia }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -544,6 +575,7 @@
                             <input
                                     id="campo-numero-residencia"
                                     type="number"
+                                    value="{% if ficha.numero_residencia %}{{ ficha.numero_residencia }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -558,7 +590,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-complemento-residencia"
-                                    type="text"
+                                    value="{{ ficha.complemento_residencia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -571,7 +603,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo1"
-                                    type="text"
+                                    value="{{ ficha.geo_campo1 }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -586,7 +618,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo2"
-                                    type="text"
+                                    value="{{ ficha.geo_campo2 }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -601,7 +633,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-ponto-ref-residencia"
-                                    type="text"
+                                    value="{{ ficha.ponto_ref_residencia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -614,7 +646,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-cep-residencia"
-                                    type="text"
+                                    value="{{ ficha.cep_residencia }}"
                                     class="input-dado form-control"
                                     maxlength="9"
                             />
@@ -630,7 +662,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-telefone-residencia"
-                                    type="text"
+                                    value="{{ ficha.telefone_residencia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -644,6 +676,7 @@
                             <input
                                     id="campo-zona-residencia"
                                     type="number"
+                                    value="{% if ficha.zona_residencia %}{{ ficha.zona_residencia }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
                             />
@@ -663,7 +696,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-pais-residencia"
-                                    type="text"
+                                    value="{{ ficha.pais_residencia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -686,7 +719,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-us-notificante"
-                                    type="text"
+                                    value="{{ ficha.municipio_us_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -700,7 +733,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
-                                    type="text"
+                                    value="{{ ficha.nome_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -712,7 +745,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
-                                    type="text"
+                                    value="{{ ficha.funcao_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -724,7 +757,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
-                                    type="text"
+                                    value="{{ ficha.assinatura_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -763,6 +796,7 @@
                             <input
                                     id="campo-dt-amostra-sorologia"
                                     type="date"
+                                    value="{{ ficha.dt_amostra_sorologia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -778,6 +812,7 @@
                             <input
                                     id="campo-dt-outra-amostra"
                                     type="date"
+                                    value="{{ ficha.dt_outra_amostra }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -790,7 +825,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-tipo-exame"
-                                    type="text"
+                                    value="{{ ficha.tipo_exame }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -807,6 +842,7 @@
                                     id="campo-obito"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.obito %}{{ ficha.obito }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -830,6 +866,7 @@
                                     id="campo-caso-semelhante"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.caso_semelhante %}{{ ficha.caso_semelhante }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -853,6 +890,7 @@
                                     id="campo-exantema"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.exantema %}{{ ficha.exantema }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -875,6 +913,7 @@
                             <input
                                     id="campo-dt-inicio-exatema"
                                     type="date"
+                                    value="{{ ficha.dt_inicio_exantema }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -891,6 +930,7 @@
                                     id="campo-petequiaSufusao"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.petequiaSufusao %}{{ ficha.petequiaSufusao }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -914,6 +954,7 @@
                                     id="campo-liquor"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.liquor %}{{ ficha.liquor }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -934,7 +975,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-bacterioscopia"
-                                    type="text"
+                                    value="{{ ficha.bacterioscopia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -954,6 +995,7 @@
                                     id="campo-tomou-vacina"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.tomou_vacina %}{{ ficha.tomou_vacina }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -975,6 +1017,7 @@
                             <input
                                     id="campo-dt-ultima-dose-tomada"
                                     type="date"
+                                    value="{{ ficha.dt_ultima_dose_tomada }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -991,6 +1034,7 @@
                                     id="campo-hospitalizacao"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.hospitalizacao %}{{ ficha.hospitalizacao }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -1012,6 +1056,7 @@
                             <input
                                     id="campo-dt-hospitalizacao"
                                     type="date"
+                                    value="{{ ficha.dt_hospitalizacao }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1026,7 +1071,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-hospital"
-                                    type="text"
+                                    value="{{ ficha.uf_hospital }}"
                                     class="input-dado form-control"
                                     maxlength="2"
                             />
@@ -1042,7 +1087,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-hospital"
-                                    type="text"
+                                    value="{{ ficha.municipio_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1055,6 +1100,7 @@
                             <input
                                     id="campo-cod-ibge-hospital"
                                     type="number"
+                                    value="{% if ficha.cod_ibge_hospital %}{{ ficha.cod_ibge_hospital }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1067,7 +1113,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-hospital"
-                                    type="text"
+                                    value="{{ ficha.nome_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1080,6 +1126,7 @@
                             <input
                                     id="campo-cod-hospital"
                                     type="number"
+                                    value="{% if ficha.cod_hospital %}{{ ficha.cod_hospital }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1106,6 +1153,7 @@
                                 <input
                                         id="campo-hipotese-diagnostica1"
                                         class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica1 }}"
                                 />
                             </div>
                             <div class="pb-3 d-flex align-items-center">
@@ -1115,6 +1163,7 @@
                                 <input
                                         id="campo-hipotese-diagnostica2"
                                         class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica2 }}"
                                 />
                             </div>
                         </div>
@@ -1142,6 +1191,7 @@
                                     <input
                                             id="campo-pais-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.pais_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1151,6 +1201,7 @@
                                     <input
                                             id="campo-distrito-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.distrito_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1162,6 +1213,7 @@
                                     <input
                                             id="campo-uf-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.uf_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1173,6 +1225,7 @@
                                     <input
                                             id="campo-municipio-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.municipio_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1182,6 +1235,7 @@
                                     <input
                                             id="campo-bairro-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.bairro_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1199,11 +1253,17 @@
         </div>
         <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
             <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
-                CANCELAR
+                VOLTAR
             </button>
-            <button class="btnCadastrar btn mx-4" onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
-                CADASTRAR
+            <button class="btnCadastrar btn mx-4"
+                    onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+                ATUALIZAR
             </button>
         </div>
+        <button class="btnAbrirObservacoes btn"
+                onclick="requisicaoGetPadrao('{% url 'observacoes' cod_ficha=ficha.codigo %}')">
+            <i class="mx-1 bi bi-chat-right-text-fill"></i>
+            <span id="possuiComentarios" class="rounded-circle"></span>
+        </button>
     </section>
 </div>
