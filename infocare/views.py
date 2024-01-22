@@ -1,4 +1,5 @@
 import json, string, os
+from datetime import datetime
 
 from django.http import FileResponse, JsonResponse
 from django.shortcuts import render, redirect, reverse
@@ -18,7 +19,6 @@ def home(request):
 def imagem_local(request, cod_img):
     if not cod_img:
         imagem_url = os.path.join('templates', 'images', 'bg-login.png')
-
     return FileResponse(open(imagem_url, 'rb'))
 
 
@@ -113,8 +113,12 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
                 dados[key] = '-'.join(dados[key].split('/')[::-1])
 
         arquivo_html = os.path.join('edicao', arquivos_ficha[cod_formulario - 1])
+        contexto = {
+            'ficha': dados,
+            'quant_obs': models.get_quantidade_observacoes(cod_ficha),
+        }
         return JsonResponse({
-            'html': [render_to_string(arquivo_html, {'ficha': dados})],
+            'html': [render_to_string(arquivo_html, contexto)],
             'status': 'success'
         })
 
@@ -141,10 +145,23 @@ def registrar_ficha_notificacao(request):
 
 
 def observacoes_view(request, cod_ficha):
+    contexto = {
+        'cod_usuario': request.session.get('cod_usuario'),
+        'observacoes': models.listar_observacoes(cod_ficha)
+    }
     return JsonResponse({
-        'html': [render_to_string('observacoes.html')],
+        'html': [render_to_string('observacoes.html', contexto)],
         'status': 'success'
     })
+
+
+def registrar_observacao(request):
+    if request.method == 'POST':
+        dados = json.loads(request.body)
+        dados['dataHora_cadastro'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        dados['dataHora_concluida'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        models.set_observacao(dados)
+        return redirect(reverse('observacoes', kwargs={'cod_ficha': dados['cod_ficha']}))
 
 
 

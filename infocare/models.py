@@ -40,8 +40,10 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
         if 'dt' in coluna.lower() and valores[i]:
             data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
             valores[i] = data_obj.strftime('%d/%m/%Y')
+        elif 'dataHora' in coluna.lower() and valores[i]:
+            data_hora = datetime.strptime(str(valores[i]), '%Y-%m-%d %H:%M:%S')
+            valores[i] = data_hora.strftime('%d/%m/%Y %H:%M')
         dados[coluna] = valores[i]
-
     return dados
 
 
@@ -101,6 +103,31 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
     except Exception as e:
         print(e)
 
+    fechar_conexao(conexao)
+
+
+def apagar_registro_tabela(nome_tabela: str, codigo: int):
+    """
+    Apaga um registro da tabela.
+
+    :param nome_tabela: Nome da tabela.
+    :param codigo: Código do registro a ser apagado.
+    :return: None.
+
+    :Example:
+
+    >>> apagar_registro_tabela('ficha', 1)
+    None
+
+    :Note:
+
+    - O código do registro a ser apagado deve ser um inteiro.
+    - O código do registro deve existir na tabela.
+    - Não é possível apagar um registro que tenha sido utilizado em uma ficha.
+    """
+    conexao, cursor = abrir_conexao()
+    query = f"DELETE FROM {nome_tabela} WHERE codigo = {codigo}"
+    cursor.execute(query)
     fechar_conexao(conexao)
 
 
@@ -291,7 +318,7 @@ def alterar_ficha(campos: dict):
     alterar_registro_tabela(tabela, campos)
 
 
-def listar_fichas(status: str):
+def listar_fichas(status: str, numero_ficha: int = 0, setor: str = ''):
     conexao, cursor = abrir_conexao()
     cursor.execute(f"SELECT cod_ficha, tabela FROM estado WHERE status = '{status}'")
     resultados = cursor.fetchall()
@@ -311,8 +338,7 @@ def listar_fichas(status: str):
     for resultado in resultados:
         cod_ficha = int(resultado[0])
         tabela = resultado[1]
-
-        cursor.execute(f"""
+        query = f"""
             SELECT
                 {tabela}.codigo,
                 numero_ficha,
@@ -325,38 +351,74 @@ def listar_fichas(status: str):
             FROM {tabela}
                 INNER JOIN formulario ON formulario.codigo = {tabela}.cod_formulario
             WHERE {tabela}.codigo = {cod_ficha}
-        """)
+            ORDER BY setor
+        """
 
+        cursor.execute(query)
         dados.append(criar_dicionario(colunas, list(cursor.fetchone())))
 
     fechar_conexao(conexao, False)
     return dados
 
 
+def listar_observacoes(cod_ficha: int):
+    nome_tabela = 'observacao'
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"""
+        SELECT
+            {nome_tabela}.codigo,
+            {nome_tabela}.descricao,
+            {nome_tabela}.concluida,
+            {nome_tabela}.cod_ficha,
+            {nome_tabela}.cod_usuario_autor,
+            {nome_tabela}.cod_usuario_concluinte,
+            {nome_tabela}.dataHora_cadastro,
+            {nome_tabela}.dataHora_concluida,
+            AUTOR.codigo,
+            AUTOR.nome
+        FROM observacao
+            INNER JOIN usuario AS AUTOR
+                ON cod_usuario_autor = AUTOR.codigo
+--             INNER JOIN usuario AS CONCLUINTE
+--                 ON cod_usuario_concluinte == CONCLUINTE.codigo
+        WHERE cod_ficha = {cod_ficha}
+    """)
+
+    resultados = cursor.fetchall()
+    fechar_conexao(conexao, False)
+    colunas = get_colunas_tabela(nome_tabela) + ['cod_autor', 'nome_autor']
+    observacoes = [criar_dicionario(colunas, list(resultado)) for resultado in resultados] if resultados else []
+
+    for observacao in observacoes:
+        observacao['nome_autor'] = observacao['nome_autor'].split(' ')[0]
+        observacao['inicial_autor'] = observacao['nome_autor'][0].upper()
+
+    return observacoes
 
 
-
-# print(listar_fichas('concluida'))
-# print(get_ficha(3, 1))
-
+def set_observacao(observacao: dict):
+    inserir_registro_tabela('observacao', observacao)
 
 
+def alterar_observacao(observacao: dict):
+    alterar_registro_tabela('observacao', observacao)
 
 
+def deletar_observacao(cod_observacao: int):
+    apagar_registro_tabela('observacao', cod_observacao)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+def get_quantidade_observacoes(cod_ficha: int):
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"""
+        SELECT COUNT(codigo)
+        FROM observacao
+        WHERE cod_ficha = {cod_ficha}
+            AND concluida = 0
+    """)
+    quant_obs = cursor.fetchone()[0]
+    fechar_conexao(conexao, False)
+    return quant_obs
 
 
 

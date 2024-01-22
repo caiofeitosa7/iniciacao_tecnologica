@@ -1263,7 +1263,9 @@
         <button class="btnAbrirObservacoes btn"
                 onclick="requisicaoGetPadrao('{% url 'observacoes' cod_ficha=ficha.codigo %}')">
             <i class="mx-1 bi bi-chat-right-text-fill"></i>
+            {% if quant_obs %}
             <span id="possuiComentarios" class="rounded-circle"></span>
+            {% endif %}
         </button>
     </section>
 </div>
