@@ -90,6 +90,16 @@ document.addEventListener('DOMContentLoaded', function() {
         case 2:
             abrirOpcaoUsuarios();
             break;
+        case 97:
+            abrirOpcaoColorida('fichas_preliminares/');
+            break;
+        case 98:
+            abrirOpcaoColorida('fichas_pendentes/');
+            break;
+        case 99:
+            abrirOpcaoColorida('fichas_concluidas/');
+            break;
+
         default:
             abrirOpcaoPaginaInicial();
     }
