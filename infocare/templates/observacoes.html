@@ -63,7 +63,7 @@
                     </div>
                     {% else %}
                     <div class="status mx-1 text-danger">
-                        <span class="mx-1">• Em aberto</span>
+                        <span class="obs-aberta mx-1">• Em aberto</span>
                         <i class="bi bi-exclamation-triangle-fill"></i>
                     </div>
                     {% endif %}
@@ -80,19 +80,24 @@
                 </span>
             </div>
             {% else %}
-                <div class="d-flex justify-content-end">
-                    <button class="btn {% if obs.cod_autor == cod_usuario %} btn-minha-obs {% else %} btn-obs-outro {% endif %}"
-                            onclick="requisicaoGetPadrao('{% url 'fechar_observacao' cod_ficha=cod_ficha cod_obs=obs.codigo %}')">
-                        FECHAR
-                    </button>
-                </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn {% if obs.cod_autor == cod_usuario %} btn-minha-obs {% else %} btn-obs-outro {% endif %}"
+                        onclick="requisicaoGetPadrao('{% url 'fechar_observacao' cod_ficha=cod_ficha cod_obs=obs.codigo %}')">
+                    Fechar
+                </button>
+            </div>
             {% endif %}
         </div>
     </div>
     {% endfor %}
+    {% if status_ficha_aberta == 'pendente' %}
     <div class="d-flex justify-content-center mt-4">
-        <button class="btn" onclick="marcaFichaConcluida('{% url 'concluir_ficha' cod_ficha %}')">Tudo Pronto</button>
+        <button class="btn btnTudoPronto"
+                onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_preliminar' cod_ficha=cod_ficha %}')">
+            Tudo Pronto
+        </button>
     </div>
+    {% endif %}
     {% else %}
     <div class="d-flex justify-content-center pt-3">
         <span class="negrito font-xlarge">Não há obervações para esta ficha!</span>

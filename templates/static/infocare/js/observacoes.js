@@ -1,3 +1,19 @@
+function enviarFichaParaConclusao(url) {
+    let quantObsAbertas = 0
+    document.querySelectorAll('span.obs-aberta').forEach(function(span){
+        quantObsAbertas += 1
+    });
+
+    if (quantObsAbertas > 0) {
+        $('#mensagem-retorno .modal-title').html("Erro!");
+        $('#mensagem-retorno .modal-body').html("Para enviar a ficha para análise, você precisa terminar todas as observações.");
+        $('#mensagem-retorno').modal("toggle");
+    } else {
+        requisicaoGetPadrao(url)
+    }
+}
+
+
 function abrirModalNovaObservacao() {
     $('#modalNovaObservacao').modal("toggle");
     $(".modal-backdrop").css("display", 'none');

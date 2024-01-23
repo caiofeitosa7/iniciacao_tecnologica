@@ -47,7 +47,8 @@ def listagem_fichas(request, status: str, titulo: str, id_tabela: str):
     contexto = {
         'fichas': fichas,
         'titulo': titulo,
-        'id_tabela': id_tabela
+        'id_tabela': id_tabela,
+        'status_fichas': status,
     }
     return JsonResponse({
         'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
@@ -113,7 +114,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         contexto = {
             'ficha': dados,
             'status_ficha_aberta': request.session.get('status_ficha_aberta'),
-            'quant_obs': models.get_quantidade_observacoes(cod_ficha),
+            'quant_obs': models.get_quantidade_observacoes_abertas(cod_ficha),
         }
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],
@@ -145,6 +146,7 @@ def registrar_ficha_notificacao(request):
 def observacoes_view(request, cod_ficha):
     contexto = {
         'cod_ficha': cod_ficha,
+        'status_ficha_aberta': request.session.get('status_ficha_aberta'),
         'cod_formulario': request.session.get('ultimo_form_aberto'),
         'cod_usuario': request.session.get('cod_usuario'),
         'observacoes': models.listar_observacoes(cod_ficha)

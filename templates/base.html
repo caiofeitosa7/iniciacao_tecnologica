@@ -71,8 +71,9 @@
     <section class="home-section">
         <nav id="barra-superior">
             <i id="btnMenu" class=' clicavel bx bxs-grid-alt'></i>
-            <i class='clicavel bx bxs-bell'></i>
-            <i class='clicavel bx bxs-bell-ring' style='display: none'></i>
+            <i class="clicavel bi bi-box-arrow-in-right" onclick="deslogarUsuario('{% url 'logout' %}')"></i>
+<!--            <i class='clicavel bx bxs-bell'></i>-->
+<!--            <i class='clicavel bx bxs-bell-ring' style='display: none'></i>-->
         </nav>
         <div id="conteudo"></div>
     </section>

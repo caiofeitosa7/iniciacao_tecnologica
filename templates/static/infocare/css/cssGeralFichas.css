@@ -235,7 +235,7 @@ ul {
     background-color: white;
 }
 
-.btnAbrirObservacoes #possuiComentarios {
+.btnAbrirObservacoes #possuiObservacoes {
     border: 2px solid var(--light-color);
     background-color: orange;
     position: absolute;

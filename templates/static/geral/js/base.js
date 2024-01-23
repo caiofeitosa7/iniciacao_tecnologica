@@ -213,6 +213,11 @@ function pesquisaCepSemReplicacao(elemento) {
     }
 }
 
+function deslogarUsuario(url) {
+    localStorage.clear();
+    window.location.href = url;
+}
+
 // ------------------------------ Funcoes Auxiliares --------------------------------- //
 
 function escaparCaracteresEspeciaisHTML(input) {

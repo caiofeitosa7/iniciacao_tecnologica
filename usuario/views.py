@@ -45,8 +45,6 @@ def logar_usuario(request):
         usuario = body['usuario']
         senha = body['senha']
 
-        print(usuario, senha)
-
         for usuario_bd in models.listar_usuarios():
             if usuario == usuario_bd['usuario'] and senha == usuario_bd['senha']:
                 request.session['nome_usuario'] = usuario_bd['nome'].split(' ')[0].capitalize()

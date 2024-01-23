@@ -23,7 +23,9 @@
     color: white;
 }
 
-
+.linha-destacada {
+    background-color: #ffbf0069 !important;
+}
 
 
 

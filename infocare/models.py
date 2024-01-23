@@ -436,13 +436,13 @@ def deletar_observacao(cod_observacao: int):
     apagar_registro_tabela('observacao', cod_observacao)
 
 
-def get_quantidade_observacoes(cod_ficha: int):
+def get_quantidade_observacoes_abertas(cod_ficha: int):
     conexao, cursor = abrir_conexao()
     cursor.execute(f"""
         SELECT COUNT(codigo)
         FROM observacao
         WHERE cod_ficha = {cod_ficha}
-            AND concluida = 0
+            AND concluida <> 1
     """)
     quant_obs = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
