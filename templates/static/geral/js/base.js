@@ -29,7 +29,7 @@ function abreFechaMenu() {
 }
 
 function menuBtnChange() {
-    if(sidebar.classList.contains("open")){
+    if (sidebar.classList.contains("open")) {
         menuLateral.style.display = "block";
         nomeLogo.style.display = "block";
         sidebar.style.left = "0";
@@ -41,7 +41,7 @@ function menuBtnChange() {
 }
 
 function abrirOpcaoPaginaInicial() {
-    if(sidebar.classList.contains("open"))
+    if (sidebar.classList.contains("open"))
         abreFechaMenu();
 
     fetch("pagina_inicial/", {
@@ -50,18 +50,18 @@ function abrirOpcaoPaginaInicial() {
             "Content-type": "application/json;charset=UTF-8"
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('opcaoSelecionada', 1);
-        document.getElementById('conteudo').innerHTML = data.html[0];
-    })
-    .catch(error => {
-        console.error('Erro na requisição:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('opcaoSelecionada', 1);
+            document.getElementById('conteudo').innerHTML = data.html[0];
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
 }
 
 function abrirOpcaoUsuarios() {
-    if(sidebar.classList.contains("open"))
+    if (sidebar.classList.contains("open"))
         abreFechaMenu();
 
     fetch("usuarios/", {
@@ -70,17 +70,17 @@ function abrirOpcaoUsuarios() {
             "Content-type": "application/json;charset=UTF-8"
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('opcaoSelecionada', 2)
-        $('#conteudo')[0].innerHTML = data.html[0];
-    })
-    .catch(error => {
-        console.error('Erro na requisição:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('opcaoSelecionada', 2)
+            $('#conteudo')[0].innerHTML = data.html[0];
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let opMenu = parseInt(localStorage.getItem('opcaoSelecionada'))
 
     switch (opMenu) {
@@ -119,7 +119,7 @@ function pesquisaCepComReplicacao(elemento) {
         let validacep = /^[0-9]{8}$/;
 
         if (validacep.test(cep)) {
-            let apiUrl = 'https://viacep.com.br/ws/'+ cep + '/json/';
+            let apiUrl = 'https://viacep.com.br/ws/' + cep + '/json/';
 
             fetch(apiUrl)
                 .then(response => {
@@ -156,8 +156,7 @@ function pesquisaCepComReplicacao(elemento) {
                     document.getElementById("campo-logradouro-residencia").value = "";
                     document.getElementById("campo-logradouro-residencia2").value = "";
                 });
-        }
-        else {
+        } else {
             console.error('CEP não passou no teste do regex');
             elemento.value = "";
             document.getElementById(elemento.id + "2").value = "";
@@ -177,7 +176,7 @@ function pesquisaCepSemReplicacao(elemento) {
         let validacep = /^[0-9]{8}$/;
 
         if (validacep.test(cep)) {
-            let apiUrl = 'https://viacep.com.br/ws/'+ cep + '/json/';
+            let apiUrl = 'https://viacep.com.br/ws/' + cep + '/json/';
 
             fetch(apiUrl)
                 .then(response => {
@@ -202,8 +201,7 @@ function pesquisaCepSemReplicacao(elemento) {
                     document.getElementById("campo-bairro-residencia").value = "";
                     document.getElementById("campo-logradouro-residencia").value = "";
                 });
-        }
-        else {
+        } else {
             console.error('CEP não passou no teste do regex');
             elemento.value = "";
             document.getElementById("campo-uf-residencia").value = "";
@@ -243,7 +241,23 @@ function requisicaoGetPadrao(url) {
         });
 }
 
+function retornoListagemFichas() {
+    let ultimaListaSelecionada = parseInt(localStorage.getItem('opcaoSelecionada'));
 
+    switch (ultimaListaSelecionada) {
+        case 97:
+            abrirOpcaoColorida('fichas_preliminares/');
+            break;
+        case 98:
+            abrirOpcaoColorida('fichas_pendentes/');
+            break;
+        case 99:
+            abrirOpcaoColorida('fichas_concluidas/');
+            break;
+        default:
+            abrirOpcaoPaginaInicial();
+    }
+}
 
 
 

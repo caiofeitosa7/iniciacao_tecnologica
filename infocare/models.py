@@ -375,33 +375,36 @@ def listar_observacoes(cod_ficha: int):
             {nome_tabela}.dataHora_cadastro,
             {nome_tabela}.dataHora_concluida,
             AUTOR.codigo,
-            AUTOR.nome
+            AUTOR.nome,
+            CONCLUINTE.codigo,
+            CONCLUINTE.nome
         FROM observacao
             INNER JOIN usuario AS AUTOR
                 ON cod_usuario_autor = AUTOR.codigo
---             INNER JOIN usuario AS CONCLUINTE
---                 ON cod_usuario_concluinte == CONCLUINTE.codigo
+            INNER JOIN usuario AS CONCLUINTE
+                ON cod_usuario_concluinte == CONCLUINTE.codigo
         WHERE cod_ficha = {cod_ficha}
     """)
 
     resultados = cursor.fetchall()
     fechar_conexao(conexao, False)
-    colunas = get_colunas_tabela(nome_tabela) + ['cod_autor', 'nome_autor']
+    colunas = get_colunas_tabela(nome_tabela) + ['cod_autor', 'nome_autor', 'cod_concluinte', 'nome_concluinte']
     observacoes = [criar_dicionario(colunas, list(resultado)) for resultado in resultados] if resultados else []
 
     for observacao in observacoes:
+        observacao['nome_concluinte'] = observacao['nome_concluinte'].split(' ')[0]
         observacao['nome_autor'] = observacao['nome_autor'].split(' ')[0]
         observacao['inicial_autor'] = observacao['nome_autor'][0].upper()
 
     return observacoes
 
 
-def set_observacao(observacao: dict):
-    inserir_registro_tabela('observacao', observacao)
+def set_observacao(dados: dict):
+    inserir_registro_tabela('observacao', dados)
 
 
-def alterar_observacao(observacao: dict):
-    alterar_registro_tabela('observacao', observacao)
+def alterar_observacao(dados: dict):
+    alterar_registro_tabela('observacao', dados)
 
 
 def deletar_observacao(cod_observacao: int):
@@ -420,6 +423,33 @@ def get_quantidade_observacoes(cod_ficha: int):
     fechar_conexao(conexao, False)
     return quant_obs
 
+
+def fechar_observacao(dados: dict):
+    try:
+        conexao, cursor = abrir_conexao()
+        cursor.execute(f"""
+            UPDATE
+                observacao
+            SET concluida = 1,
+                dataHora_concluida = '{dados['dataHora_concluida']}',
+                cod_usuario_concluinte = '{dados['cod_usuario_concluinte']}'
+            WHERE 
+                codigo = {dados['cod_observacao']}
+        """)
+        fechar_conexao(conexao)
+    except Exception as e:
+        print(e)
+
+
+
+
+dados = {
+    'cod_observacao': 1,
+    'dataHora_concluida': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    'cod_usuario_concluinte': 2
+}
+
+fechar_observacao(dados)
 
 
 

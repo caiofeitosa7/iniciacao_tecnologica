@@ -23,10 +23,10 @@ def imagem_local(request, cod_img):
 
 
 def pagina_inicial_view(request):
-    formularios = models.get_formularios_ativos()
+    contexto = {'formularios': models.get_formularios_ativos()}
 
     return JsonResponse({
-        'html': [render_to_string('pagina_inicial.html', {'formularios': formularios})],
+        'html': [render_to_string('pagina_inicial.html', contexto, request=request)],
         'status': 'success'
     })
 
@@ -46,7 +46,7 @@ def fichas_preliminares(request):
         'id_tabela': 'tabelaNotificacoesPreliminares'
     }
     return JsonResponse({
-        'html': [render_to_string('listagem_fichas.html', contexto)]
+        'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
     })
 
 
@@ -65,7 +65,7 @@ def fichas_pendentes(request):
         'id_tabela': 'tabelaNotificacoesPendentes'
     }
     return JsonResponse({
-        'html': [render_to_string('listagem_fichas.html', contexto)]
+        'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
     })
 
 
@@ -84,7 +84,7 @@ def fichas_concluidas(request):
         'id_tabela': 'tabelaNotificacoesConcluidas'
     }
     return JsonResponse({
-        'html': [render_to_string('listagem_fichas.html', contexto)]
+        'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
     })
 
 
@@ -96,7 +96,9 @@ def abrir_formulario_view(request, codigo: int):
     ]
 
     if request.method == 'GET':
-        return JsonResponse({'html': [render_to_string(arquivos_formulario[codigo - 1])]})
+        return JsonResponse({
+            'html': [render_to_string(arquivos_formulario[codigo - 1], request=request)]
+        })
 
 
 def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
@@ -146,11 +148,12 @@ def registrar_ficha_notificacao(request):
 
 def observacoes_view(request, cod_ficha):
     contexto = {
+        'cod_ficha': cod_ficha,
         'cod_usuario': request.session.get('cod_usuario'),
         'observacoes': models.listar_observacoes(cod_ficha)
     }
     return JsonResponse({
-        'html': [render_to_string('observacoes.html', contexto)],
+        'html': [render_to_string('observacoes.html', contexto, request=request)],
         'status': 'success'
     })
 
@@ -158,10 +161,24 @@ def observacoes_view(request, cod_ficha):
 def registrar_observacao(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
+        dados['cod_usuario_concluinte'] = request.session.get('cod_usuario')
         dados['dataHora_cadastro'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        dados['dataHora_concluida'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        dados['dataHora_concluida'] = dados['dataHora_cadastro']
         models.set_observacao(dados)
         return redirect(reverse('observacoes', kwargs={'cod_ficha': dados['cod_ficha']}))
+
+
+def fechar_observacao(request, cod_ficha, cod_obs):
+    if request.method == 'GET':
+        dados = {
+            'cod_observacao': cod_obs,
+            'dataHora_concluida': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'cod_usuario_concluinte': request.session.get('cod_usuario')
+        }
+
+        models.fechar_observacao(dados)
+        return redirect(reverse('observacoes', kwargs={'cod_ficha': cod_ficha}))
+
 
 
 
