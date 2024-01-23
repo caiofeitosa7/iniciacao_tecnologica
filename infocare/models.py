@@ -106,6 +106,30 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
     fechar_conexao(conexao)
 
 
+def alterar_registro_tabela(nome_tabela: str, dados: dict):
+    colunas = get_colunas_tabela(nome_tabela)
+    conexao, cursor = abrir_conexao()
+    valores = tuple(dados.values())[1:]
+
+    lista = list()
+    for i, coluna in enumerate(colunas[1:]):
+        lista.append(f"{coluna} = ?")
+
+    query = f"""
+            UPDATE {nome_tabela}
+            SET 
+                {get_placeholders(lista, True)}
+            WHERE codigo = {dados['codigo']};
+        """
+
+    try:
+        cursor.execute(query, valores)
+    except Exception as e:
+        print(e)
+
+    fechar_conexao(conexao)
+
+
 def apagar_registro_tabela(nome_tabela: str, codigo: int):
     """
     Apaga um registro da tabela.
@@ -128,30 +152,6 @@ def apagar_registro_tabela(nome_tabela: str, codigo: int):
     conexao, cursor = abrir_conexao()
     query = f"DELETE FROM {nome_tabela} WHERE codigo = {codigo}"
     cursor.execute(query)
-    fechar_conexao(conexao)
-
-
-def alterar_registro_tabela(nome_tabela: str, dados: dict):
-    colunas = get_colunas_tabela(nome_tabela)
-    conexao, cursor = abrir_conexao()
-    valores = tuple(dados.values())[1:]
-
-    lista = list()
-    for i, coluna in enumerate(colunas[1:]):
-        lista.append(f"{coluna} = ?")
-
-    query = f"""
-            UPDATE {nome_tabela}
-            SET 
-                {get_placeholders(lista, True)}
-            WHERE codigo = {dados['codigo']};
-        """
-
-    try:
-        cursor.execute(query, valores)
-    except Exception as e:
-        print(e)
-
     fechar_conexao(conexao)
 
 
@@ -264,6 +264,16 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     return tabela
 
 
+def alterar_estado_ficha(cod_ficha: int, status: str):
+    nome_tabela = 'estado'
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"""
+        UPDATE {nome_tabela}
+        SET status = '{status}'
+        WHERE cod_ficha = {cod_ficha}
+    """)
+
+
 def set_ficha_notificacao(campos: dict, tabela: str = ""):
     cod_ficha = proximo_codigo_ficha()
     conexao, cursor = abrir_conexao()
@@ -318,6 +328,14 @@ def alterar_ficha(campos: dict):
     alterar_registro_tabela(tabela, campos)
 
 
+def get_quantidade_fichas(status: str):
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"SELECT COUNT(*) FROM estado WHERE status = '{status}'")
+    quant_fichas = cursor.fetchone()[0]
+    fechar_conexao(conexao, False)
+    return quant_fichas
+
+
 def listar_fichas(status: str, numero_ficha: int = 0, setor: str = ''):
     conexao, cursor = abrir_conexao()
     cursor.execute(f"SELECT cod_ficha, tabela FROM estado WHERE status = '{status}'")
@@ -331,7 +349,8 @@ def listar_fichas(status: str, numero_ficha: int = 0, setor: str = ''):
         'cod_formulario',
         'setor',
         'nome_notificante',
-        'dt_notificacao'
+        'dt_notificacao',
+        'quant_obs'
     ]
 
     dados = list()
@@ -347,15 +366,20 @@ def listar_fichas(status: str, numero_ficha: int = 0, setor: str = ''):
                 formulario.codigo,
                 setor,
                 nome_notificante,
-                dt_notificacao
+                dt_notificacao,
+                COUNT(observacao.codigo)
             FROM {tabela}
                 INNER JOIN formulario ON formulario.codigo = {tabela}.cod_formulario
+                LEFT JOIN observacao ON observacao.cod_ficha = {cod_ficha}
             WHERE {tabela}.codigo = {cod_ficha}
             ORDER BY setor
         """
 
         cursor.execute(query)
-        dados.append(criar_dicionario(colunas, list(cursor.fetchone())))
+        valores = list(cursor.fetchone())
+        # quant_observacoes = cursor.execute(f"SELECT COUNT(*) FROM observacao WHERE cod_ficha = {cod_ficha}")
+        # valores.append(int(quant_observacoes.fetchone()[0]))
+        dados.append(criar_dicionario(colunas, valores))
 
     fechar_conexao(conexao, False)
     return dados
@@ -401,6 +425,7 @@ def listar_observacoes(cod_ficha: int):
 
 def set_observacao(dados: dict):
     inserir_registro_tabela('observacao', dados)
+    alterar_estado_ficha(dados['cod_ficha'], 'pendente')
 
 
 def alterar_observacao(dados: dict):
@@ -441,15 +466,13 @@ def fechar_observacao(dados: dict):
         print(e)
 
 
+def set_ficha_concluida(cod_ficha: int):
+    alterar_estado_ficha(cod_ficha, 'concluida')
 
 
-dados = {
-    'cod_observacao': 1,
-    'dataHora_concluida': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-    'cod_usuario_concluinte': 2
-}
+def set_ficha_preliminar(cod_ficha: int):
+    alterar_estado_ficha(cod_ficha, 'preliminar')
 
-fechar_observacao(dados)
 
 
 

@@ -241,7 +241,7 @@ function requisicaoGetPadrao(url) {
         });
 }
 
-function retornoListagemFichas() {
+function retornoListaFichas() {
     let ultimaListaSelecionada = parseInt(localStorage.getItem('opcaoSelecionada'));
 
     switch (ultimaListaSelecionada) {

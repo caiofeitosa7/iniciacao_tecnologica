@@ -23,7 +23,11 @@ def imagem_local(request, cod_img):
 
 
 def pagina_inicial_view(request):
-    contexto = {'formularios': models.get_formularios_ativos()}
+    contexto = {
+        'quant_fichas_preliminares': models.get_quantidade_fichas('preliminar'),
+        'quant_fichas_pendentes': models.get_quantidade_fichas('pendente'),
+        'formularios': models.get_formularios_ativos()
+    }
 
     return JsonResponse({
         'html': [render_to_string('pagina_inicial.html', contexto, request=request)],
@@ -31,61 +35,50 @@ def pagina_inicial_view(request):
     })
 
 
-def fichas_preliminares(request):
+def listagem_fichas(request, status: str, titulo: str, id_tabela: str):
     if request.method == 'POST':
         pass
         # dados = json.loads(request.body)
         # dados = retirar_caracteres_especiais(dados)
-
     else:
-        fichas = models.listar_fichas(status='preliminar')
+        request.session['status_ficha_aberta'] = status
+        fichas = models.listar_fichas(status)
 
     contexto = {
         'fichas': fichas,
-        'titulo': 'NOTIFICAÇÕES PRELIMINARES',
-        'id_tabela': 'tabelaNotificacoesPreliminares'
+        'titulo': titulo,
+        'id_tabela': id_tabela
     }
     return JsonResponse({
         'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
     })
 
 
-def fichas_pendentes(request):
-    if request.method == 'POST':
-        pass
-        # dados = json.loads(request.body)
-        # dados = retirar_caracteres_especiais(dados)
-
-    else:
-        fichas = models.listar_fichas(status='pendente')
-
-    contexto = {
-        'fichas': fichas,
-        'titulo': 'NOTIFICAÇÕES PENDENTES',
-        'id_tabela': 'tabelaNotificacoesPendentes'
-    }
-    return JsonResponse({
-        'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
-    })
+def fichas_preliminares_view(request):
+    return listagem_fichas(
+        request,
+        'preliminar',
+        'NOTIFICAÇÕES PRELIMINARES',
+        'tabelaNotificacoesPreliminares'
+    )
 
 
-def fichas_concluidas(request):
-    if request.method == 'POST':
-        pass
-        # dados = json.loads(request.body)
-        # dados = retirar_caracteres_especiais(dados)
+def fichas_pendentes_view(request):
+    return listagem_fichas(
+        request,
+        'pendente',
+        'NOTIFICAÇÕES PENDENTES',
+        'tabelaNotificacoesPendentes'
+    )
 
-    else:
-        fichas = models.listar_fichas(status='concluida')
 
-    contexto = {
-        'fichas': fichas,
-        'titulo': 'NOTIFICAÇÕES CONCLUÍDAS',
-        'id_tabela': 'tabelaNotificacoesConcluidas'
-    }
-    return JsonResponse({
-        'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
-    })
+def fichas_concluidas_view(request):
+    return listagem_fichas(
+        request,
+        'concluida',
+        'NOTIFICAÇÕES CONCLUÍDAS',
+        'tabelaNotificacoesConcluidas'
+    )
 
 
 def abrir_formulario_view(request, codigo: int):
@@ -96,13 +89,15 @@ def abrir_formulario_view(request, codigo: int):
     ]
 
     if request.method == 'GET':
+        contexto = {'cod_formulario': codigo}
         return JsonResponse({
-            'html': [render_to_string(arquivos_formulario[codigo - 1], request=request)]
+            'html': [render_to_string(arquivos_formulario[codigo - 1], contexto, request=request)]
         })
 
 
 def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
     if request.method == 'GET':
+        request.session['ultimo_form_aberto'] = cod_formulario
         dados = models.get_ficha(cod_ficha, cod_formulario)
         arquivos_ficha: list[str] = [
             'editar_fichaNotificacaoGeral.html',
@@ -117,6 +112,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         arquivo_html = os.path.join('edicao', arquivos_ficha[cod_formulario - 1])
         contexto = {
             'ficha': dados,
+            'status_ficha_aberta': request.session.get('status_ficha_aberta'),
             'quant_obs': models.get_quantidade_observacoes(cod_ficha),
         }
         return JsonResponse({
@@ -149,6 +145,7 @@ def registrar_ficha_notificacao(request):
 def observacoes_view(request, cod_ficha):
     contexto = {
         'cod_ficha': cod_ficha,
+        'cod_formulario': request.session.get('ultimo_form_aberto'),
         'cod_usuario': request.session.get('cod_usuario'),
         'observacoes': models.listar_observacoes(cod_ficha)
     }
@@ -180,10 +177,16 @@ def fechar_observacao(request, cod_ficha, cod_obs):
         return redirect(reverse('observacoes', kwargs={'cod_ficha': cod_ficha}))
 
 
+def marcar_ficha_concluida(request, cod_ficha):
+    if request.method == 'GET':
+        models.set_ficha_concluida(cod_ficha)
+        return redirect(reverse('fichas_preliminares'))
 
 
-
-
+def marcar_ficha_preliminar(request, cod_ficha):
+    if request.method == 'GET':
+        models.set_ficha_preliminar(cod_ficha)
+        return redirect(reverse('fichas_pendentes'))
 
 
 

@@ -204,10 +204,9 @@ ul {
     color: var(--dark-color);
 }
 
-
 #containerBtnAcao .btnCancelar:hover {
     border: 2px solid var(--dark-color);;
-    background-color: white;
+    background-color: #abcbee;
     color: var(--dark-color);
 }
 

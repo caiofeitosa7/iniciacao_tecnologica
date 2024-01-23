@@ -1,13 +1,17 @@
-<div class="linha-dados justify-content-around pb-3">
-    <input id="cod_formulario" value="1" aria-label="" hidden>
-    <div class="input-group flex-nowrap campo-hut">
-        <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-        <input id="prontuario" type="number" class="form-control"/>
+<div class="linha-dados justify-content-between">
+    <div class="col-1"></div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" class="form-control"/>
+        </div>
     </div>
-    <div class="input-group flex-nowrap campo-hut">
-        <label class="input-group-text negrito" for="setor">Setor</label>
-        <input id="setor" class="form-control"/>
-    </div>
+    <div class="col-1"></div>
 </div>
 <div id="fichaNotificacao" class="ficha">
     <div class="mt-2 container-cabecalho">
@@ -41,7 +45,7 @@
                                 <label for="campo-tipo-notificacao">Tipo de Notificação</label>
                             </div>
                             <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                    type="number" min="1" max="4"/>
+                                   type="number" min="1" max="4"/>
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                             <span class="mb-1">
@@ -464,9 +468,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-municipio-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-municipio-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -476,9 +480,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-cod-ibge-residencia"
-                                type="number"
-                                class="input-dado form-control"
+                                    id="campo-cod-ibge-residencia"
+                                    type="number"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -489,9 +493,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-distrito-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-distrito-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -504,9 +508,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-bairro-residencia"
-                                type="text"
-                                class="input-dado form-control"
+                                    id="campo-bairro-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -1202,7 +1206,8 @@
             <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
                 CANCELAR
             </button>
-            <button class="btnCadastrar btn mx-4" onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+            <button class="btnCadastrar btn mx-4"
+                    onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
                 CADASTRAR
             </button>
         </div>

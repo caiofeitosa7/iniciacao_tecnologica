@@ -1,14 +1,22 @@
-<div class="linha-dados justify-content-around pb-3">
-    <input id="cod_formulario" value="{{ ficha.cod_formulario }}" aria-label="" hidden disabled>
-    <div class="input-group flex-nowrap campo-hut">
-        <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-        <input id="prontuario" type="number" class="form-control"
-               value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"/>
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="retornoListaFichas()">
+        </i>
     </div>
-    <div class="input-group flex-nowrap campo-hut">
-        <label class="input-group-text negrito" for="setor">Setor</label>
-        <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ ficha.cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"
+                   value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
+        </div>
     </div>
+    <div class="col-1"></div>
 </div>
 <div id="fichaNotificacao" class="ficha">
     <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
@@ -1251,7 +1259,7 @@
             </div>
         </div>
         <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
-            <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
+            <button class="btnCancelar btn mx-4" onclick="retornoListaFichas()">
                 VOLTAR
             </button>
             <button class="btnCadastrar btn mx-4"
