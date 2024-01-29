@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div
   class="modal fade"
   id="modalTiposFicha"
@@ -36,11 +37,33 @@
       <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>-->
       <!--                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{% url 'abrir_ficha' %}')">Abrir</button>-->
       <!--            </div>-->
+=======
+<div class="modal fade" id="modalTiposFicha" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Escolha uma Ficha</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column">
+                    {% for formulario in formularios %}
+                        <label class="clicavel my-1" onclick="abrirFichaEscolhida('{% url 'abrir_formulario' codigo=formulario.codigo %}')">
+                            {{ formulario.nome }}
+                        </label>
+                    {% endfor %}
+            </div>
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>-->
+<!--                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{# url 'abrir_ficha' %}')">Abrir</button>-->
+<!--            </div>-->
+        </div>
+>>>>>>> db60f451a36e8d5c456d5881f2f7c9684fa37955
     </div>
   </div>
 </div>
 
 <div class="row row-cards">
+<<<<<<< HEAD
   <div
     id="card-home-novaNotificacao"
     class="col-5 card-home"
@@ -70,3 +93,23 @@
     Abrir ficha
   </button>
 </div>
+=======
+    <div id="card-home-novaNotificacao" class="col-5 card-home" onclick="abrirMenuTiposDeFicha()">
+        <span class="label-card-home">NOVA NOTIFICAÇÃO</span>
+    </div>
+    <div id="card-home-preliminares" class="col-5 card-home" onclick="abrirOpcaoColorida('{% url 'fichas_preliminares' %}')">
+        <span class="label-card-home">NOTIFICAÇÕES PRELIMINARES</span>
+        <span class="card-home-quantidade">{{ quant_fichas_preliminares }}</span>
+    </div>
+</div>
+<div class="row row-cards">
+    <div id="card-home-pendentes" class="col-5 card-home" onclick="abrirOpcaoColorida('{% url 'fichas_pendentes' %}')">
+        <span class="label-card-home">NOTIFICAÇÕES PENDENTES</span>
+        <span class="card-home-quantidade">{{ quant_fichas_pendentes }}</span>
+    </div>
+    <div id="card-home-concluidas" class="col-5 card-home" onclick="abrirOpcaoColorida('{% url 'fichas_concluidas' %}')">
+        <span class="label-card-home">NOTIFICAÇÕES CONCLUÍDAS</span>
+    </div>
+    <br>
+</div>
+>>>>>>> db60f451a36e8d5c456d5881f2f7c9684fa37955
