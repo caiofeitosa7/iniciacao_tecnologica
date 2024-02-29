@@ -1,6 +1,9 @@
 from . import views
 from django.contrib import admin
 from django.urls import path, include
+from django.core.files.storage import FileSystemStorage
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,4 +24,5 @@ urlpatterns = [
     path('home/fichas/observacoes/fechar_obervacao/<int:cod_ficha>/<int:cod_obs>', views.fechar_observacao, name='fechar_observacao'),
     # path('home/fichas/observacoes/apagar_obervacao/<int:codigo>', views.apagar_observacao, name='apagar_observacao'),
     path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
-]
+    path('upload/<int:cod_ficha>', views.upload_arquivos, name='upload'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

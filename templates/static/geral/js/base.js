@@ -128,18 +128,20 @@ function pesquisaCepComReplicacao(elemento) {
                     return response.json();
                 })
                 .then(data => {
-                    elemento.value = data["cep"];
-                    document.getElementById(elemento.id + "2").value = data["cep"];
-                    document.getElementById("campo-uf-residencia").value = data["uf"];
-                    document.getElementById("campo-uf-residencia2").value = data["uf"];
-                    document.getElementById("campo-municipio-residencia").value = data["localidade"];
-                    document.getElementById("campo-municipio-residencia2").value = data["localidade"];
-                    document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
-                    document.getElementById("campo-cod-ibge-residencia2").value = data["ibge"];
-                    document.getElementById("campo-bairro-residencia").value = data["bairro"];
-                    document.getElementById("campo-bairro-residencia2").value = data["bairro"];
-                    document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
-                    document.getElementById("campo-logradouro-residencia2").value = data["logradouro"];
+                    if (data["cep"] !== 'undefined') {
+                        elemento.value = data["cep"];
+                        document.getElementById(elemento.id + "2").value = data["cep"];
+                        document.getElementById("campo-uf-residencia").value = data["uf"];
+                        document.getElementById("campo-uf-residencia2").value = data["uf"];
+                        document.getElementById("campo-municipio-residencia").value = data["localidade"];
+                        document.getElementById("campo-municipio-residencia2").value = data["localidade"];
+                        document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
+                        document.getElementById("campo-cod-ibge-residencia2").value = data["ibge"];
+                        document.getElementById("campo-bairro-residencia").value = data["bairro"];
+                        document.getElementById("campo-bairro-residencia2").value = data["bairro"];
+                        document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
+                        document.getElementById("campo-logradouro-residencia2").value = data["logradouro"];
+                    }
                 })
                 .catch(error => {
                     console.error('Erro na requisição:', error);
@@ -185,12 +187,14 @@ function pesquisaCepSemReplicacao(elemento) {
                     return response.json();
                 })
                 .then(data => {
-                    elemento.value = data["cep"];
-                    document.getElementById("campo-uf-residencia").value = data["uf"];
-                    document.getElementById("campo-municipio-residencia").value = data["localidade"];
-                    document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
-                    document.getElementById("campo-bairro-residencia").value = data["bairro"];
-                    document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
+                    if (data["cep"] !== 'undefined') {
+                        elemento.value = data["cep"];
+                        document.getElementById("campo-uf-residencia").value = data["uf"];
+                        document.getElementById("campo-municipio-residencia").value = data["localidade"];
+                        document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
+                        document.getElementById("campo-bairro-residencia").value = data["bairro"];
+                        document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
+                    }
                 })
                 .catch(error => {
                     console.error('Erro na requisição:', error);

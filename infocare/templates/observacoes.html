@@ -30,7 +30,7 @@
        onclick="requisicaoGetPadrao('{% url 'visualizar_ficha' cod_ficha=cod_ficha cod_formulario=cod_formulario %}')">
     </i>
     <button class="btn btnNovaObservacao" onclick="abrirModalNovaObservacao()">
-        Observação
+        Pendência
     </button>
 </div>
 <div class="pb-3">
@@ -100,7 +100,7 @@
     {% endif %}
     {% else %}
     <div class="d-flex justify-content-center pt-3">
-        <span class="negrito font-xlarge">Não há obervações para esta ficha!</span>
+        <span class="negrito font-xlarge">Não há pendências para esta ficha!</span>
     </div>
     {% endif %}
 </div>

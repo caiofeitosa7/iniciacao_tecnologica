@@ -1,10 +1,13 @@
 import json, string, os
 from datetime import datetime
 
+from django.http import HttpResponse
 from django.http import FileResponse, JsonResponse
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
 from . import models
+
+from django.core.files.storage import FileSystemStorage
 
 
 def login(request):
@@ -136,11 +139,37 @@ def registrar_ficha_notificacao(request):
                 models.alterar_ficha(dados)
                 return redirect(reverse('visualizar_ficha', kwargs=args))
             else:
-                models.set_ficha_notificacao(dados)
-                return redirect('home')
+                cod_ficha = models.set_ficha_notificacao(dados)
+                return JsonResponse({
+                    'cod_ficha': cod_ficha,
+                    'status': 'success'
+                })
 
         except Exception as e:
-            return redirect('pagina_inicial')
+            return redirect(reverse('pagina_inicial'))
+
+        return redirect(reverse('home'))
+
+
+# def registrar_ficha_notificacao(request):
+#     if request.method == 'POST':
+#         dados = json.loads(request.body)
+#
+#         try:
+#             if dados.get('codigo', False):
+#                 args = {
+#                     'cod_ficha': dados['codigo'],
+#                     'cod_formulario': dados['cod_formulario'],
+#                 }
+#
+#                 models.alterar_ficha(dados)
+#                 return redirect(reverse('visualizar_ficha', kwargs=args))
+#             else:
+#                 models.set_ficha_notificacao(dados)
+#                 return redirect(reverse('pagina_inicial'))
+#
+#         except Exception as e:
+#             return redirect(reverse('pagina_inicial'))
 
 
 def observacoes_view(request, cod_ficha):
@@ -190,6 +219,21 @@ def marcar_ficha_preliminar(request, cod_ficha):
         models.set_ficha_preliminar(cod_ficha)
         return redirect(reverse('fichas_pendentes'))
 
+
+def upload_arquivos(request, cod_ficha):
+    def salvarArquivo(chave):
+        f = request.FILES[chave]
+        fs = FileSystemStorage()
+        filename = fs.save(str(f.name), f)
+        uploaded_file_url = fs.url(filename)
+        print(uploaded_file_url)
+
+    if request.method == 'POST':
+        print('chegou aqui:', request.FILES.keys())
+        for key in request.FILES.keys():
+            salvarArquivo(key)
+
+        return redirect('home')
 
 
 

@@ -13,7 +13,8 @@
     </div>
     <div class="col-1"></div>
 </div>
-<div id="fichaNotificacao" class="ficha">
+<form id="fichaNotificacao" class="ficha">
+    {% csrf_token %}
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -1196,20 +1197,30 @@
             </div>
         </div>
         <div class="linha-dados footer-ficha">
-            <span class="col-9">Dados Complementares/ Notificação</span>
+            <span class="col-9">Dados Complementare / Notificação</span>
             <div class="col-3 d-flex justify-content-evenly">
                 <span>SVS</span>
                 <span>17/07/2006</span>
             </div>
         </div>
-        <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
-            <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
-                CANCELAR
-            </button>
-            <button class="btnCadastrar btn mx-4"
-                    onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
-                CADASTRAR
-            </button>
-        </div>
     </section>
+</form>
+<div class="arquivos my-3">
+    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{% url 'upload' 0 %}">
+        {% csrf_token %}
+        <input type="file" id="file" name="file" accept=".pdf" class="form-group">
+        <input type="file" id="file2" name="file2" accept=".pdf" class="form-group">
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+    <div id="previewContainer" class="d-flex">
+    </div>
+</div>
+<div id="containerBtnAcao" class="d-flex justify-content-center my-3">
+    <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
+        CANCELAR
+    </button>
+    <button class="btnCadastrar btn mx-4"
+            onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+        CADASTRAR
+    </button>
 </div>

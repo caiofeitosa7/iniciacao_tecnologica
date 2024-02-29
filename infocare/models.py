@@ -91,6 +91,7 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
     colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
     valores = tuple(dados.values())
+
     query = f"""INSERT INTO {nome_tabela} (
                     {get_placeholders(colunas[1:], True)}
                 ) VALUES (
@@ -99,11 +100,14 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
             """
 
     try:
+        cursor = conexao.cursor()
         cursor.execute(query, valores)
+        cod_registro = cursor.lastrowid
+        fechar_conexao(conexao)
+
+        return cod_registro
     except Exception as e:
         print(e)
-
-    fechar_conexao(conexao)
 
 
 def alterar_registro_tabela(nome_tabela: str, dados: dict):
@@ -306,10 +310,12 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
         cursor = conexao.cursor()
         valores = (cod_ficha,) + tuple(campos.values())
         cursor.execute(query, valores)
+        fechar_conexao(conexao)
     except Exception as e:
         print(e)
 
-    fechar_conexao(conexao)
+    print(cod_ficha)
+    return cod_ficha
 
 
 def get_ficha(cod_ficha: int, cod_formulario: int):
@@ -472,6 +478,10 @@ def set_ficha_concluida(cod_ficha: int):
 
 def set_ficha_preliminar(cod_ficha: int):
     alterar_estado_ficha(cod_ficha, 'preliminar')
+
+
+def set_ficha_descartada(cod_ficha: int):
+    alterar_registro_tabela(cod_ficha, 'descartada')
 
 
 

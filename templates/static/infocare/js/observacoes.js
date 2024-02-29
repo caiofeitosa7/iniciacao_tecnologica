@@ -13,11 +13,10 @@ function enviarFichaParaConclusao(url) {
     }
 }
 
-
 function abrirModalNovaObservacao() {
     $('#modalNovaObservacao').modal("toggle");
     $(".modal-backdrop").css("display", 'none');
-    $('#modal-title').html('Observação');
+    $('#modal-title').html('Pendência');
 }
 
 function salvarObservacao(url, idModal){
