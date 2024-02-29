@@ -85,11 +85,21 @@ def fichas_concluidas_view(request):
     )
 
 
+def fichas_descartadas_view(request):
+    return listagem_fichas(
+        request,
+        'descartada',
+        'NOTIFICAÇÕES DESCARTADAS',
+        'tabelaNotificacoesDescartadas'
+    )
+
+
 def abrir_formulario_view(request, codigo: int):
     arquivos_formulario: list[str] = [
         'fichaNotificacaoGeral.html',
         'fichaAcidenteTrabalho.html',
-        'fichaViolenciaInterpessoal.html'
+        'fichaViolenciaInterpessoal.html',
+        'fichaAntiRabica.html',
     ]
 
     if request.method == 'GET':
@@ -106,7 +116,8 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         arquivos_ficha: list[str] = [
             'editar_fichaNotificacaoGeral.html',
             'editar_fichaAcidenteTrabalho.html',
-            'editar_fichaViolenciaInterpessoal.html'
+            'editar_fichaViolenciaInterpessoal.html',
+            'editar_fichaAntiRabica.html',
         ]
 
         for key in dados.keys():
@@ -147,8 +158,6 @@ def registrar_ficha_notificacao(request):
 
         except Exception as e:
             return redirect(reverse('pagina_inicial'))
-
-        return redirect(reverse('home'))
 
 
 # def registrar_ficha_notificacao(request):
@@ -220,6 +229,12 @@ def marcar_ficha_preliminar(request, cod_ficha):
         return redirect(reverse('fichas_pendentes'))
 
 
+def marcar_ficha_descartada(request, cod_ficha):
+    if request.method == 'GET':
+        models.set_ficha_descartada(cod_ficha)
+        return redirect(reverse('fichas_descartadas'))
+
+
 def upload_arquivos(request, cod_ficha):
     def salvarArquivo(chave):
         f = request.FILES[chave]
@@ -234,6 +249,9 @@ def upload_arquivos(request, cod_ficha):
             salvarArquivo(key)
 
         return redirect('home')
+
+
+
 
 
 

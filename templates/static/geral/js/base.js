@@ -72,12 +72,17 @@ function abrirOpcaoUsuarios() {
     })
         .then(response => response.json())
         .then(data => {
-            localStorage.setItem('opcaoSelecionada', 2)
+            localStorage.setItem('opcaoSelecionada', 4)
             $('#conteudo')[0].innerHTML = data.html[0];
         })
         .catch(error => {
             console.error('Erro na requisição:', error);
         });
+}
+
+function abrirOpcaoFichasDescartadas(){
+    localStorage.setItem('opcaoSelecionada', 2)
+    requisicaoGetPadrao('fichas_descartadas/');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -88,6 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
             abrirOpcaoPaginaInicial();
             break;
         case 2:
+            abrirOpcaoFichasDescartadas();
+            break;
+        case 4:
             abrirOpcaoUsuarios();
             break;
         case 97:
@@ -104,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
             abrirOpcaoPaginaInicial();
     }
 });
+
 
 function atribuirValor(elementId) {
     let valorDoCampo = document.getElementById(elementId).value;

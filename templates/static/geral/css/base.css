@@ -89,6 +89,7 @@ body {
 .sidebar li {
     position: relative;
     list-style: none;
+    cursor: pointer;
     margin: 8px 0;
 }
 
@@ -112,6 +113,7 @@ body {
 .sidebar li a .links_name {
     opacity: 0;
     color: white;
+    cursor: pointer;
     font-size: 15px;
     font-weight: 400;
     white-space: nowrap;
@@ -121,6 +123,7 @@ body {
 
 .sidebar.open li a .links_name {
     opacity: 1;
+    cursor: pointer;
     pointer-events: auto;
 }
 

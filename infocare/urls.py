@@ -15,6 +15,7 @@ urlpatterns = [
     path('home/fichas_preliminares/', views.fichas_preliminares_view, name='fichas_preliminares'),
     path('home/fichas_pendentes/', views.fichas_pendentes_view, name='fichas_pendentes'),
     path('home/fichas_concluidas/', views.fichas_concluidas_view, name='fichas_concluidas'),
+    path('home/fichas_descartadas/', views.fichas_descartadas_view, name='fichas_descartadas'),
     path('home/fichas/visualizar_ficha/<int:cod_ficha>/<int:cod_formulario>', views.visualizar_ficha_view, name='visualizar_ficha'),
     path('home/fichas/visualizar_ficha/concluir/<int:cod_ficha>', views.marcar_ficha_concluida, name='marcar_ficha_concluida'),
     path('home/fichas/visualizar_ficha/preliminar/<int:cod_ficha>', views.marcar_ficha_preliminar, name='marcar_ficha_preliminar'),
