@@ -40,50 +40,35 @@ function menuBtnChange() {
     }
 }
 
-function abrirOpcaoPaginaInicial() {
+
+function abrirOpcaoMenu(url, numeroOpcao){
     if (sidebar.classList.contains("open"))
         abreFechaMenu();
 
-    fetch("pagina_inicial/", {
-        method: 'GET',
-        headers: {
-            "Content-type": "application/json;charset=UTF-8"
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('opcaoSelecionada', 1);
-            document.getElementById('conteudo').innerHTML = data.html[0];
-        })
-        .catch(error => {
-            console.error('Erro na requisição:', error);
-        });
+    localStorage.setItem('opcaoSelecionada', numeroOpcao)
+    requisicaoGetPadrao(url);
+}
+
+function abrirOpcaoPaginaInicial() {
+    abrirOpcaoMenu('pagina_inicial/', 1);
+}
+
+function abrirOpcaoFichasDescartadas(){
+    if (sidebar.classList.contains("open"))
+        abreFechaMenu();
+
+    localStorage.setItem('opcaoSelecionada', 2)
+    abrirOpcaoMenu('fichas_descartadas/', 2);
 }
 
 function abrirOpcaoUsuarios() {
     if (sidebar.classList.contains("open"))
         abreFechaMenu();
 
-    fetch("usuarios/", {
-        method: 'GET',
-        headers: {
-            "Content-type": "application/json;charset=UTF-8"
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('opcaoSelecionada', 4)
-            $('#conteudo')[0].innerHTML = data.html[0];
-        })
-        .catch(error => {
-            console.error('Erro na requisição:', error);
-        });
+    localStorage.setItem('opcaoSelecionada', 4)
+    requisicaoGetPadrao('usuarios/');
 }
 
-function abrirOpcaoFichasDescartadas(){
-    localStorage.setItem('opcaoSelecionada', 2)
-    requisicaoGetPadrao('fichas_descartadas/');
-}
 
 document.addEventListener('DOMContentLoaded', function () {
     let opMenu = parseInt(localStorage.getItem('opcaoSelecionada'))
@@ -263,6 +248,9 @@ function retornoListaFichas() {
     let ultimaListaSelecionada = parseInt(localStorage.getItem('opcaoSelecionada'));
 
     switch (ultimaListaSelecionada) {
+        case 2:
+            abrirOpcaoFichasDescartadas();
+            break;
         case 97:
             abrirOpcaoColorida('fichas_preliminares/');
             break;

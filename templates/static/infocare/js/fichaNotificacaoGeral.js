@@ -1,5 +1,3 @@
-var listaArquivos = [];
-
 function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     let csrfToken = getCookie("csrftoken");
     let ficha = document.getElementById("fichaNotificacao");
@@ -54,12 +52,12 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
                     uploadForm.submit();
 
                     // $('#conteudo')[0].innerHTML = json.html[0];
-                    $('#mensagem-retorno .modal-title').html("Sucesso!");
-                    $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
-                    $('#mensagem-retorno').modal("toggle");
+                    // $('#mensagem-retorno .modal-title').html("Sucesso!");
+                    // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                    // $('#mensagem-retorno').modal("toggle");
                 } else {
                     $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
-                    $('#mensagem-retorno .modal-body').html("Algo deu errado ao sallet as informações.");
+                    $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
                     $('#mensagem-retorno').modal("toggle");
                 }
             }
@@ -67,35 +65,18 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         .catch(err => console.log(err));
 }
 
+function addInputFile() {
+    let containerInputs = document.getElementById("containerInputsPDF");
+    let proxInputs = containerInputs.querySelectorAll('input').length + 1;
 
-function upLoadArquivo() {
-    let files = document.getElementById('file').files;
-    // if (files.length === 0) {
-    //     alert('Por favor, selecione pelo menos um arquivo PDF.');
-    //     return;
-    // }
+    let inputFile = document.createElement('input');
+    inputFile.classList.add('form-control', 'mt-2');
+    inputFile.setAttribute('name', 'file' + proxInputs);
+    inputFile.setAttribute('id', 'file' + proxInputs);
+    inputFile.setAttribute('accept', '.pdf');
+    inputFile.setAttribute('type', 'file');
 
-    let previewContainer = document.getElementById('previewContainer');
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        let reader = new FileReader();
-
-        reader.onload = function (e) {
-            let previewCol = document.createElement('div');
-            previewCol.setAttribute('class', 'col');
-
-            let preview = document.createElement('embed');
-            preview.setAttribute('src', e.target.result);
-            preview.setAttribute('width', '100');
-            preview.setAttribute('height', '141');
-
-            previewCol.appendChild(preview);
-            previewContainer.appendChild(previewCol);
-        };
-
-        reader.readAsDataURL(file);
-        listaArquivos.push(file);
-    }
+    containerInputs.appendChild(inputFile);
 }
 
 

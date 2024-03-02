@@ -1,15 +1,15 @@
-function abrirMenuTiposDeFicha() {
-    toggleModalTiposDeFicha()
+function abrirMenuTiposDeFormulario() {
+    toggleModalTiposDeFormulario()
     $(".modal-backdrop").css("z-index", 0);
 }
 
-function abrirFichaEscolhida(url) {
-    toggleModalTiposDeFicha();
+function abrirFormularioEscolhido(url) {
+    toggleModalTiposDeFormulario();
     requisicaoGetPadrao(url);
 }
 
-function toggleModalTiposDeFicha() {
-    $('#modalTiposFicha').modal("toggle");
+function toggleModalTiposDeFormulario() {
+    $('#modalTiposFormulario').modal("toggle");
 }
 
 function abrirOpcaoColorida(url) {

@@ -7,11 +7,16 @@
     border-bottom: 2px solid var(--light-color);
 }
 
-#tabelaNotificacoesPreliminares .cabecalho, #tabelaNotificacoesPreliminares .titulo {
+#tabelaNotificacoesPreliminares .cabecalho,
+#tabelaNotificacoesPreliminares .titulo,
+#tabelaNotificacoesDescartadas .cabecalho,
+#tabelaNotificacoesDescartadas .titulo {
     background-color: var(--main-color);
     /*background-color: #ddcb1e;*/
     color: white;
 }
+
+
 
 #tabelaNotificacoesPendentes .cabecalho, #tabelaNotificacoesPendentes .titulo {
     background-color: #950000db;

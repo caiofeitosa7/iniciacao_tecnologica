@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalTiposFicha" tabindex="-1" aria-modal="true" role="dialog">
+<div class="modal fade" id="modalTiposFormulario" tabindex="-1" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,22 +6,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex flex-column">
-                    {% for formulario in formularios %}
-                        <label class="clicavel my-1" onclick="abrirFichaEscolhida('{% url 'abrir_formulario' codigo=formulario.codigo %}')">
-                            {{ formulario.nome }}
-                        </label>
-                    {% endfor %}
+                {% for formulario in formularios %}
+                    <label class="clicavel my-1" onclick="abrirFormularioEscolhido('{% url 'abrir_formulario' codigo=formulario.codigo %}')">
+                        {{ formulario.nome }}
+                    </label>
+                {% endfor %}
             </div>
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>-->
-<!--                <button type="button" class="btn btn-primary" onclick="abrirFichaEscolhida('{# url 'abrir_ficha' %}')">Abrir</button>-->
-<!--            </div>-->
         </div>
     </div>
 </div>
 
 <div class="row row-cards">
-    <div id="card-home-novaNotificacao" class="col-5 card-home" onclick="abrirMenuTiposDeFicha()">
+    <div id="card-home-novaNotificacao" class="col-5 card-home" onclick="abrirMenuTiposDeFormulario()">
         <span class="label-card-home">NOVA NOTIFICAÇÃO</span>
     </div>
     <div id="card-home-preliminares" class="col-5 card-home" onclick="abrirOpcaoColorida('{% url 'fichas_preliminares' %}')">

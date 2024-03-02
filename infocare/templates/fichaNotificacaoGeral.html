@@ -1,5 +1,9 @@
 <div class="linha-dados justify-content-between">
-    <div class="col-1"></div>
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="requisicaoGetPadrao('pagina_inicial')">
+        </i>
+    </div>
     <div class="d-flex justify-content-around pb-3">
         <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
@@ -13,7 +17,7 @@
     </div>
     <div class="col-1"></div>
 </div>
-<form id="fichaNotificacao" class="ficha">
+<div id="fichaNotificacao" class="ficha">
     {% csrf_token %}
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
@@ -1204,22 +1208,29 @@
             </div>
         </div>
     </section>
-</form>
-<div class="arquivos my-3">
-    <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{% url 'upload' 0 %}">
-        {% csrf_token %}
-        <input type="file" id="file" name="file" accept=".pdf" class="form-group">
-        <input type="file" id="file2" name="file2" accept=".pdf" class="form-group">
-        <button type="submit" class="btn">Enviar</button>
-    </form>
-    <div id="previewContainer" class="d-flex">
-    </div>
 </div>
+<form id="uploadForm" class="py-4" enctype="multipart/form-data"
+      method="POST" action="{% url 'upload' 0 %}">
+    <div class="d-flex justify-content-center py-4">
+        <span class="negrito">Anexar Arquivos PDF</span>
+    </div>
+
+    {% csrf_token %}
+    <div id="containerInputsPDF">
+        <div class="d-flex align-items-center">
+            <input id="file" name="file" type="file" accept=".pdf" class="form-control">
+            <div class="btnCorPrincipal btn mx-2 px-2 py-1" onclick="addInputFile()">
+                <i class="bi bi-file-earmark-plus"></i>
+                PDF
+            </div>
+        </div>
+    </div>
+</form>
 <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
     <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
         CANCELAR
     </button>
-    <button class="btnCadastrar btn mx-4"
+    <button class="btnCorPrincipal btn mx-4"
             onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
         CADASTRAR
     </button>
