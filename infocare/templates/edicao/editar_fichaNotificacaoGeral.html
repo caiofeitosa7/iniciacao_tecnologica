@@ -1264,14 +1264,14 @@
             </button>
 
             {% if status_ficha_aberta == 'preliminar' %}
-            <button class="btnCadastrar btn mx-4"
+            <button class="btnCorPrincipal btn mx-4"
                     onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' cod_ficha=ficha.codigo %}')">
                 TUDO CERTO
             </button>
             {% endif %}
 
             {% if status_ficha_aberta == 'pendente' %}
-            <button class="btnCadastrar btn mx-4"
+            <button class="btnCorPrincipal btn mx-4"
                     onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
                 ATUALIZAR
             </button>

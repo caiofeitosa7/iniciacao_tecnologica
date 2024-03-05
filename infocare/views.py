@@ -95,17 +95,12 @@ def fichas_descartadas_view(request):
 
 
 def abrir_formulario_view(request, codigo: int):
-    arquivos_formulario: list[str] = [
-        'fichaNotificacaoGeral.html',
-        'fichaAcidenteTrabalho.html',
-        'fichaViolenciaInterpessoal.html',
-        'fichaAntiRabica.html',
-    ]
+    html = models.get_html_formulario(codigo)
 
     if request.method == 'GET':
         contexto = {'cod_formulario': codigo}
         return JsonResponse({
-            'html': [render_to_string(arquivos_formulario[codigo - 1], contexto, request=request)]
+            'html': [render_to_string(html, contexto, request=request)]
         })
 
 
@@ -113,22 +108,17 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
     if request.method == 'GET':
         request.session['ultimo_form_aberto'] = cod_formulario
         dados = models.get_ficha(cod_ficha, cod_formulario)
-        arquivos_ficha: list[str] = [
-            'editar_fichaNotificacaoGeral.html',
-            'editar_fichaAcidenteTrabalho.html',
-            'editar_fichaViolenciaInterpessoal.html',
-            'editar_fichaAntiRabica.html',
-        ]
 
         for key in dados.keys():
             if 'dt' in key and dados[key]:
                 dados[key] = '-'.join(dados[key].split('/')[::-1])
 
-        arquivo_html = os.path.join('edicao', arquivos_ficha[cod_formulario - 1])
+        html = models.get_html_formulario(cod_formulario)
+        arquivo_html = os.path.join('edicao', 'editar_' + html)
         contexto = {
             'ficha': dados,
             'status_ficha_aberta': request.session.get('status_ficha_aberta'),
-            'quant_obs': models.get_quantidade_observacoes_abertas(cod_ficha),
+            'quant_obs': models.get_quant_obs_abertas(cod_ficha),
         }
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],

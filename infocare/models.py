@@ -233,7 +233,12 @@ def get_formularios_ativos():
 
     nome_tabela = 'formulario'
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT codigo, nome FROM {nome_tabela} WHERE ativo = 1")
+    cursor.execute(f"""
+        SELECT codigo, nome
+        FROM {nome_tabela}
+        WHERE ativo = 1
+        ORDER BY nome
+    """)
     resultado = cursor.fetchall()
     colunas = get_colunas_tabela(nome_tabela)[:2]
     formularios = list()
@@ -266,6 +271,32 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     tabela = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
     return tabela
+
+
+def get_html_formulario(codigo: int):
+
+    """
+    Retorna o template HTML do formulário de acordo com o código do formulário.
+
+    :param codigo: int - Código do formulário.
+    :type codigo: int
+
+    :return: str - HTML do formulário.
+    :rtype: str
+
+    :Example:
+
+    >>> get_html_formulario(1)
+    '<div class="form-group"><label for="nome">Nome:</label><input type="text" class="form-control" id="nome" name="nome"></div>'
+    """
+
+    nome_tabela = 'formulario'
+    conexao, cursor = abrir_conexao()
+    cursor.execute(f"SELECT arquivoHTML FROM {nome_tabela} WHERE codigo = {codigo}")
+    html = cursor.fetchone()[0]
+
+    fechar_conexao(conexao, False)
+    return html
 
 
 def alterar_estado_ficha(cod_ficha: int, status: str):
@@ -442,7 +473,7 @@ def deletar_observacao(cod_observacao: int):
     apagar_registro_tabela('observacao', cod_observacao)
 
 
-def get_quantidade_observacoes_abertas(cod_ficha: int):
+def get_quant_obs_abertas(cod_ficha: int):
     conexao, cursor = abrir_conexao()
     cursor.execute(f"""
         SELECT COUNT(codigo)
