@@ -79,6 +79,7 @@ ul {
     transform: rotate(180deg);
     white-space: nowrap;
     margin-right: .8vh;
+    min-width: 35px;
     width: 35px;
     display: flex;
     align-items: center;
@@ -94,6 +95,7 @@ ul {
 }
 
 .linha-dados {
+    width: -webkit-fill-available;
     margin-top: 1.7vh;
     display: flex;
 }
@@ -121,7 +123,7 @@ ul {
     justify-content: space-between;
 }
 
-.div-input .numeracao {
+.numeracao {
     border: 1px solid #000;
     font-weight: bold;
     padding: 0 6px;
@@ -199,14 +201,60 @@ ul {
     margin-left: 41px;
 }
 
+#containerBtnAcao .btnCancelar {
+    border: 2px solid var(--dark-color);
+    color: var(--dark-color);
+}
 
+#containerBtnAcao .btnCancelar:hover {
+    border: 2px solid var(--dark-color);;
+    background-color: #abcbee;
+    color: var(--dark-color);
+}
 
+.btnCorPrincipal {
+    background-color: var(--dark-color);
+    color: #fff;
+}
 
+.btnCorPrincipal:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
 
+.btnAbrirObservacoes {
+    background-color: var(--dark-color);
+    border-radius: 50%;
+    position: fixed;
+    padding: 12px;
+    color: white;
+    bottom: 17px;
+    right: 27px;
+}
 
+.btnAbrirObservacoes:hover {
+    color: var(--dark-color);
+    background-color: white;
+}
 
+.btnAbrirObservacoes #possuiObservacoes {
+    border: 2px solid var(--light-color);
+    background-color: orange;
+    position: absolute;
+    padding: 7px;
+    top: -1px;
+}
 
+#uploadForm {
+    input, button {
+        font-size: small !important;
+    }
 
+    input {
+        width: 50%;
+        margin-bottom: 0;
+    }
+}
 
 
 

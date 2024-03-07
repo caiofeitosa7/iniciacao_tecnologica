@@ -22,6 +22,7 @@ function logarUsuario(urlLogarUsuario, urlHome) {
         .then(
             function (json) {
                 if (json["status"] === 'success') {
+                    localStorage.setItem('opcaoSelecionada', 1);
                     window.location.href = urlHome;
                 } else {
                     $('#mensagem-retorno .modal-title').html("Algo deu errado!");
