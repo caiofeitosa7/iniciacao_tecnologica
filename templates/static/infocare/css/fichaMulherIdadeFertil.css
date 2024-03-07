@@ -1,0 +1,43 @@
+.fichaContornada {
+    padding: 5px;
+    border: 1px solid var(--preto);
+
+    .divFundoVerde {
+        background-color: #61c761;
+        color: #fff;
+    }
+
+    .fundo-cinza, .titulo-bloco {
+        background-color:#d0cfe7;
+    }
+
+    .titulo-bloco {
+        padding: 5px 10px 5px 30px;
+        width: -webkit-fill-available;
+        border-bottom: 1px solid var(--preto);
+    }
+
+    .numeracao {
+        background-color: var(--preto);
+        color: #fff;
+    }
+
+    .colADireita {
+        padding-left: 10px;
+    }
+}
+
+#fichaMulherIdadeFertil {
+    .container-ano {
+        min-width: 115px;
+    }
+
+    .form-check {
+        align-self: flex-end;
+    }
+
+    .spanLGN {
+        padding: 3px;
+        border: 1px solid var(--preto);
+    }
+}

@@ -95,6 +95,7 @@ ul {
 }
 
 .linha-dados {
+    width: -webkit-fill-available;
     margin-top: 1.7vh;
     display: flex;
 }

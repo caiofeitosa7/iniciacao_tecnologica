@@ -19,13 +19,9 @@ function submit_info() {
   let campo_nome_un_notificadora = document.getElementById(
     "campo-nome-un-notificadora"
   ).value
-  let campo_codigo_unidade_saude = document.getElementById(
-    "campo-codigo-unidade-saude"
-  ).value
+  let campo_codigo_unidade_saude = document.getElementById("campo-codigo-unidade-saude").value
   let campo_unidade_saude = document.getElementById("campo-unidade-saude").value
-  let campo_cod_cnes_unidade_saude = document.getElementById(
-    "campo-cod-cnes-unidade-saude"
-  ).value
+  let campo_cod_cnes_unidade_saude = document.getElementById("campo-cod-cnes-unidade-saude").value
   let campo_dt_violencia = document.getElementById("campo-dt-violencia").value
   let campo_nome_paciente = document.getElementById("campo-nome-paciente").value
   let campo_dt_nascimento = document.getElementById("campo-dt-nascimento").value

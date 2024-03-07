@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 :root{
+    --preto: #252525;
     --main-color: #3E6D88;
     --dark-color: #2F5368;
     --light-color: #D6E4EA;
@@ -35,6 +36,21 @@ body {
     background: var(--light-color);
     overflow: hidden;
 }
+
+/* Retirando setas do input do tipo number */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* --------------------------------------- */
 
 .sidebar {
     background: var(--dark-color);
