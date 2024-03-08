@@ -1,0 +1,739 @@
+<div class="ficha mb-3">
+    <div class="mt-2 container-cabecalho">
+        <div class="col-3 left-div negrito">
+            <label>República Federativa do Brasil</label>
+            <label>Ministério do Saúde</label>
+        </div>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
+            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
+            <label>FICHA DE INVESTIGAÇÃO <label class="negrito">LEPTOSPIROSE</label></label>
+        </div>
+        <div class="col-3 right-div">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha2">N°</label>
+                <input type="number" class="form-control" id="numero-ficha2">
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 descricao-acidenteTrabalho">
+        <span class="negrito letra-miuda">
+            <b>CASO SUSPEITO:</b> Indivíduo com febre de início súbito, mialgias, cefaléia, 
+            mal estar e/ou prostração, associados a um ou mais dos seguintes sinais e/ou 
+            sintomas: sufusão conjuntival ou conjuntivite, náuseas e/ou vômitos, calafrios, 
+            alterações do volume urinário, icterícia, fenômeno hemorrágico e/ou alterações 
+            hepáticas, renais e vasculares compatíveis com leptospirose icteríca 
+            (Síndrome de Weil) ou anictérica grave.<br>
+            Indivíduo que apresente sinais e sintomas de processo infeccioso inespecífico 
+            com antecendentes epidemiológicos sugestivos nos últimos trinta dias anteriores 
+            à data de início dos primeiros sintomas.
+        </span>
+    </div>
+    <section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Gerais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">1</span>
+                            <label>Tipo de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="mb-1">2 - Individual</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">2</span>
+                            <label>Agravo/doença</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="negrito">LEPTOSPIROSE</span>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label>Código (CID10)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="negrito">A 27.9 </span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">3</span>
+                            <label for="campo-dt-notificacao2">Data da Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-notificacao2" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">4</span>
+                            <label for="campo-uf-notificacao2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-notificacao2" type="text" class="input-dado form-control" maxlength="2">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">5</span>
+                            <label for="campo-municipio-notificacao2">Município de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-notificacao2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-notificacao2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-notificacao2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">6</span>
+                            <label for="campo-unidade-saude2">Unidade de Saúde (ou outra fonte notificadora)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-unidade-saude2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-unidade-saude2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-sintomas2">Data dos Primeiros Sintomas</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-sintomas2" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente2">Nome do Paciente</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">9</span>
+                            <label for="campo-dt-nascimento2">Data de Nascimento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-idade2">(ou) Idade</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-4">
+                                <input id="campo-idade2" type="number" class="input-dado form-control" maxlength="3">
+                            </div>
+                            <div class="col-7 container-tipo-idade">
+                                <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
+                                       min="1" max="4" aria-label="">
+                                <ul class="letra-miuda">
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input campo-sexo">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">11</span>
+                                <label for="campo-sexo2">Sexo</label>
+                            </div>
+                            <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
+                        </div>
+                        <div class="container-input-dado letra-miuda">
+                            <ul>
+                                <li>M - Masculino</li>
+                                <li>F - Feminino</li>
+                                <li>I - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input campo-gestante">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">12</span>
+                                <label for="campo-gestante2">Gestante</label>
+                            </div>
+                            <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-3°Trimestre<br>
+                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            6-Não se aplica<br>
+                            9-Ignorado
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-raca">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-raca2">Raça/Cor</label>
+                            </div>
+                            <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-Amarela<br>
+                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            9-Ignorado
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-escolaridade">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">14</span>
+                                <label for="campo-escolaridade2">Escolaridade</label>
+                            </div>
+                            <input id="campo-escolaridade2" type="number" class="input-dado-quadrado form-control"
+                                   maxlength="2">
+                        </div>
+                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
+                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série incompleta do EF (antigo
+                            primário ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo primário ou 1° grau)<br>
+                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino médio incompleto (antigo colegial ou 2° grau)<br>
+                            6-Ensino médio completo (antigo colegial ou 2° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-numero-sus2">Número do Cartão SUS</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-sus2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-nome-mae2">Nome da mãe</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-mae2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados de Residência</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-uf-residencia2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-residencia2" type="text" class="input-dado form-control"
+                                   maxlength="2">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <label for="campo-municipio-residencia2">Município de Residência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-residencia2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-residencia2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <label for="campo-distrito-residencia2">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">20</span>
+                            <label for="campo-bairro-residencia2">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">21</span>
+                            <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-logradouro-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-residencia2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">22</span>
+                            <label for="campo-numero-residencia2">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-residencia2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">23</span>
+                            <label for="campo-complemento-residencia2">Complemento (apto, casa, ...)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-complemento-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">24</span>
+                            <label for="campo-geo-campo12">Geo campo 1</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo12" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">25</span>
+                            <label for="campo-geo-campo22">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo22" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">26</span>
+                            <label for="campo-ponto-ref-residencia2">Ponto de Referência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ponto-ref-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">27</span>
+                            <label for="campo-cep-residencia2">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cep-residencia2" type="text" class="input-dado form-control"
+                                   maxlength="9">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">28</span>
+                            <label for="campo-telefone-residencia2">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-zona-residencia">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">29</span>
+                                <label for="campo-zona-residencia2">Zona</label>
+                            </div>
+                            <input id="campo-zona-residencia2" type="number" class="input-dado-quadrado form-control"
+                                   maxlength="1">
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
+                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-pais-residencia2">País (se residente fora do Brasil)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-pais-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-3 container-dadosComplementares">
+        <span class="titulo-section negrito">Dados Complementares do Caso</span>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Antecedentes Epidemiológicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
+                            <label for="campo-dt-investigacao">
+                                Data da Investigação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-investigacao" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">32</span>
+                            <label for="campo-ocupacao">
+                                Ocupação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ocupacao" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label>
+                                <b>Situação de Risco Ocorrida nos 30 dias que Antecederam os Primeiros Sintomas</b> 
+                                - Contato/limpeza de:
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-lama-enchente" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-lama-enchente">
+                                        Água ou lama de enchente
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-fossa" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-fossa">
+                                        Fossa, caixa de gordura ou esgoto
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-rio" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-rio">
+                                        Rio, córrego, lagoa ou represa
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-terreno-baldio" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-terreno-baldio">
+                                        Terreno baldio
+                                    </label>
+                                </li>
+                            </ul>
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-animais" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-animais">
+                                        Criação de animais
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-sinal-roedores" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-sinal-roedores">
+                                        Local com sinais de roedores
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-roedores-direto" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-roedores-direto">
+                                        Roedores diretamente
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-lixo" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-lixo">
+                                        Lixo/ entulho
+                                    </label>
+                                </li>
+                            </ul>
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-caixa-dagua" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-caixa-dagua">
+                                        Caixa d'água
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-lavoura" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-lavoura">
+                                        Plantio/ colheita (lavoura)
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-armaz-graos" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-armaz-graos">
+                                        Armazenamento de grãos/ alimentos
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-risco-ocorrido-outro" class="form-check-input" type="checkbox" name="situacao-risco-1-sintoma">
+                                    <label class="form-check-label" for="op-risco-ocorrido-outro">
+                                        Outras
+                                    </label>
+                                    <input id="campo-risco-ocorrido-outro" class="form-control input-dado mt-1">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">34</span>
+                            <label>
+                                Casos Anteriores de Leptospirose no Local Provável de Infecção nos últimos dois meses
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            FAZ AQUI DEPOIS
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Clinicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3">
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">35</span>
+                                <label for="campo-dt-atendimento">
+                                    Data da Atendimento
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-atendimento" type="date" class="input-dado form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">36</span>
+                            <label>
+                                Sinais e Sintomas
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-febre" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-febre">
+                                        Febre
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-conjestao-conjuntival" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-conjestao-conjuntival">
+                                        Congestão conjuntival
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-ictericia" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-ictericia">
+                                        Icterícia
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-hemorragia-pulmonar" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-hemorragia-pulmonar">
+                                        Hemorragia pulmonar
+                                    </label>
+                                </li>
+                            </ul>
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-mialgia" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-mialgia">
+                                        Mialgia
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-dor-panturrilha" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-dor-panturrilha">
+                                        Dor na panturrilha
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-insuficiencia-renal" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-insuficiencia-renal">
+                                        Insuficiência renal
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-outras-hemorragias" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-outras-hemorragias">
+                                        Outras hemorragias
+                                    </label>
+                                </li>
+                            </ul>
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-cefaleia" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-cefaleia">
+                                        Cefaleia
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-vomito" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-vomito">
+                                        Vômito
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-alter-respiratorias" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-alter-respiratorias">
+                                        Alterações respiratórias
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-meningismo" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-meningismo">
+                                        Meningismo
+                                    </label>
+                                </li>
+                            </ul>
+                            <ul class="px-2">
+                                <li class="form-check m-0">
+                                    <input id="op-prostracao" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-prostracao">
+                                        Prostração
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-diarreia" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-diarreia">
+                                        Diarreia
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-alter-cardiacas" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-alter-cardiacas">
+                                        Alterações cardíacas
+                                    </label>
+                                </li>
+                                <li class="form-check m-0">
+                                    <input id="op-outros-sinais" class="form-check-input" type="checkbox" name="sinais-sintomas">
+                                    <label class="form-check-label" for="op-outros-sinais">
+                                        Outros, quais?
+                                    </label>
+                                    <input id="campo-outros-sinais" class="form-control input-dado">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
