@@ -1,0 +1,357 @@
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="requisicaoGetPadrao('pagina_inicial')">
+        </i>
+    </div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" class="form-control"/>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="ficha">
+    {% csrf_token %}
+    <div class="d-flex flex-column my-2">
+        <label>REPÚBLICA FEDERATIVA DO BRASIL</label>
+        <label>MINISTÉRIO DA SAÚDE</label>
+        <label class="negrito fs-5 mt-4">
+            Ficha de investigação do óbito com menção de tuberculose
+        </label>
+        <label class="fs-6">
+            Unidade Hospitalar, Unidade de Urgência e Emergência
+        </label>
+    </div>
+    <div class="d-flex justify-content-end">
+        <div class="col-2" style="min-width: 130px;">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha">N°</label>
+                <input type="number" class="form-control" id="numero-ficha"/>
+            </div>
+        </div>
+    </div>
+    <div class="container-sections mt-2">
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-2">A</span>
+                <span class="mx-2">IDENTIFICAÇÃO</span>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza">
+                    <span>Uso exclusivo do PCT</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-8 d-flex border-right p-2">
+                            <label for="notif-antes-morrer">
+                                Foi notificado no Sinan antes de morrer?
+                            </label>
+                            <div class="d-flex align-items-center">
+                                <input id="notif-antes-morrer" type="number" class="form-control input-dado-quadrado mx-3">
+                                <span>
+                                    1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Não
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-4 p-2">
+                            <label for="num-notificaoes-sinan" class="mb-1">
+                                Nº de notificações no Sinan-TB:
+                            </label>
+                            <input id="num-notificaoes-sinan" type="number" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 d-flex align-items-center border-right p-2">
+                            <label for="dt-ultima-notificacao" class="label-nowrap mb-1">
+                                Data da última notificação:
+                            </label>
+                            <input id="dt-ultima-notificacao" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="num-ficha-sinan" class="label-nowrap mb-1">
+                                Nº da ficha do Sinan:
+                            </label>
+                            <input id="num-ficha-sinan" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 d-flex p-2">
+                            <label for="num-ficha-sinan" class="label-nowrap mb-1">
+                                Situação do caso no SIM:
+                            </label>
+                            <input id="num-ficha-sinan" type="number" class="form-control input-dado-quadrado mx-3">
+                            <span>
+                                1 - Tuberculose causa básica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Tuberculose causa associada
+                                <br>3 - Consta no SIM sem menção de tuberculose&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                4 - Sem registro do caso no SIM
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza-claro">
+                    <span>Dados do paciente</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-6 d-flex align-items-center border-right p-2">
+                            <label for="dt-obito" class="label-nowrap mb-1">
+                                Data do óbito:
+                            </label>
+                            <input id="dt-obito" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="num-declaracao-obito" class="label-nowrap mb-1">
+                                Nº da declaração de óbito:
+                            </label>
+                            <input id="num-declaracao-obito" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-paciente" class="mb-1">
+                                Nome do paciente:
+                            </label>
+                            <input id="nome-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-mae" class="mb-1">
+                                Nome da mãe:
+                            </label>
+                            <input id="nome-mae" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-5 d-flex align-items-center border-right p-2">
+                            <label for="dt-nascimento-paciente" class="label-nowrap mb-1">
+                                Data de nascimento:
+                            </label>
+                            <input id="dt-nascimento-paciente" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-3 d-flex align-items-center border-right p-2">
+                            <label for="idade-paciente" class="label-nowrap mb-1">
+                                Idade:
+                            </label>
+                            <input id="idade-paciente" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 100px;">
+                        </div>
+                        <div class="col-5 d-flex p-2">
+                            <label for="sexo-paciente">
+                                Sexo:
+                            </label>
+                            <div class="d-flex align-items-center">
+                                <input id="sexo-paciente" type="number" class="form-control input-dado-quadrado mx-3">
+                                <span class="label-nowrap">
+                                    1 - Masculino&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Feminino
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="endereco-paciente" class="mb-1">
+                                Endereço:
+                            </label>
+                            <input id="endereco-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-5 border-right p-2">
+                            <label for="bairro-paciente" class="mb-1">
+                                Bairro:
+                            </label>
+                            <input id="bairro-paciente" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 border-right p-2">
+                            <label for="municipio-paciente" class="mb-1">
+                                Município de residência:
+                            </label>
+                            <input id="municipio-paciente" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-1 p-2">
+                            <label for="uf-paciente" class="mb-1">
+                                UF:
+                            </label>
+                            <input id="uf-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-2">B</span>
+                <span class="mx-2">
+                    Investigação em âmbito hospitalar, de emergência e urgência
+                </span>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza">
+                    <span>Geral</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-hospital" class="mb-1">
+                                Nome do hospital:
+                            </label>
+                            <input id="nome-hospital" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 border-right p-2">
+                            <label for="numero-prontuario" class="mb-1">
+                                Nº do prontuário:
+                            </label>
+                            <input id="numero-prontuario" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="dt-admissao" class="label-nowrap mb-1">
+                                Data da admissão:
+                            </label>
+                            <input id="dt-admissao" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="motivo-internacao" class="mb-1">
+                                Motivo da internação ou hipótese diagnóstica:
+                            </label>
+                            <textarea id="motivo-internacao" class="form-control input-dado mx-1"></textarea>
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-contato" class="mb-1">
+                                Nome de um contato da pessoa falecida:
+                            </label>
+                            <input id="nome-contato" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 border-right p-2">
+                            <label for="telefone" class="mb-1">
+                                Telefone:
+                            </label>
+                            <input id="telefone" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 p-2">
+                            <label for="parentesco" class="mb-1">
+                                Parentesco:
+                            </label>
+                            <input id="parentesco" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza-claro">
+                    <span>História clínica do paciente</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="d-flex justify-content-between p-2" style="background: #e7e7e8;">
+                        <span class="negrito">
+                            Sinais e sintomas descritos no prontuário
+                        </span>
+                        <span>
+                            <b>1</b> - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>2</b> - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>9</b> - Sem registro
+                        </span>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <div class="d-flex align-items-center">
+                                <input id="sinal-tosse" type="number" class="form-control input-dado-quadrado">
+                                <span class="mx-2">Tosse. Por quanto tempo? (em dias):</span>
+                                <input id="tempo-tosse" type="number" class="form-control input-dado-quadrado">
+                            </div>
+                            <div class="d-flex mt-1">
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-febre" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-febre" class="mx-1">Febre</label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-desnutricao" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-desnutricao" class="mx-1">
+                                        Emagrecimento/caquexia/desnutrição
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-sudorese" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-sudorese" class="mx-1">Sudorese</label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-catarro" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-catarro" class="mx-1">
+                                        Catarro
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-dispneia" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-dispneia" class="mx-1">
+                                        Dispneia
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center" style="margin-left: 10px;">
+                                    <input id="sinal-dor-toracica" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-dor-toracica" class="mx-1">
+                                        Dor torácica
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-catarro-sangue" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-catarro-sangue" class="label-nowrap mx-1">
+                                        Catarro com sangue
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-outro" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-outro" class="label-nowrap mx-1">
+                                        Outros sinais e sintomas. Quais?
+                                    </label>
+                                </div>
+                                <input id="sinal-outro-descricao" class="form-control input-dado">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
