@@ -150,27 +150,6 @@ def registrar_ficha_notificacao(request):
             return redirect(reverse('pagina_inicial'))
 
 
-# def registrar_ficha_notificacao(request):
-#     if request.method == 'POST':
-#         dados = json.loads(request.body)
-#
-#         try:
-#             if dados.get('codigo', False):
-#                 args = {
-#                     'cod_ficha': dados['codigo'],
-#                     'cod_formulario': dados['cod_formulario'],
-#                 }
-#
-#                 models.alterar_ficha(dados)
-#                 return redirect(reverse('visualizar_ficha', kwargs=args))
-#             else:
-#                 models.set_ficha_notificacao(dados)
-#                 return redirect(reverse('pagina_inicial'))
-#
-#         except Exception as e:
-#             return redirect(reverse('pagina_inicial'))
-
-
 def observacoes_view(request, cod_ficha):
     contexto = {
         'cod_ficha': cod_ficha,
