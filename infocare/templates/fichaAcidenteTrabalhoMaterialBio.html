@@ -92,7 +92,7 @@
                 id="campo-agravoDoenca"
                 type="text"
                 class="input-dado form-control negrito"
-                value="ACIDENTES POR ANIMAIS PEÇONHENTOS"
+                value="ACIDENTE DE TRABALHO com Exposição a Material Biológico"
                 readonly
               />
             </div>
@@ -1298,7 +1298,7 @@
 </div>
 <div class="d-flex flex-column align-items-center my-3 negrito">
   <span>FICHA DE INVESTIGAÇÃO</span>
-  <span>ACIDENTE COM ANIMAL PEÇONHENTO</span>
+  <span>ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO</span>
 </div>
 <div class="ficha pt-5">
   <div class="mt-2 container-cabecalho">
@@ -1309,7 +1309,7 @@
     <div class="col-6 center-div negrito">
       <label>SINAN</label>
       <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
-      <label>FICHA DE NOTIFICAÇÃO INDIVIDUAL</label>
+      <label>ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO</label>
     </div>
     <div class="col-3 right-div">
       <div class="input-group flex-nowrap">
@@ -1318,14 +1318,19 @@
       </div>
     </div>
   </div>
-  <div class="mt-2 avisoAcidenteAnimalPeconhento">
-    <h5 class="descricao-acidenteAnimalPeconhento negrito">
-      CASO CONFIRMADO:
+  <div class="mt-2 avisoFicha">
+    <h5 class="descricao-aviso negrito">
+      Definição de caso:
       <span class="descricao-acidenteAnimalPeconhento">
-        Paciente com evidências clínicas de envenenamento, específicas para cada
-        tipo de animal, independentemente do animal causador do acidente ter
-        sido identificado ou não. Não há necessidade de preenchimento da ficha
-        para casos suspeitos.
+        Acidentes envolvendo sangue e outros fluidos orgânicos ocorridos com os
+        profissionais da área da saúde durante o desenvolvimento do seu
+        trabalho, aonde os mesmos estão expostos a materiais biológicos
+        potencialmente contaminados. Os ferimentos com agulhas e material
+        perfuro cortante em geral são considerados extremamente perigosos por
+        serem potencialmente capazes de transmitir mais de 20 tipos de patógenos
+        diferentes, sendo o vírus da imunodeficiência humana (HIV), o da
+        hepatite B (HBV) e o da hepatite C (HCV) os agentes infecciosos mais
+        comumente envolvidos.
       </span>
     </h5>
   </div>
@@ -1353,7 +1358,9 @@
               <label>Agravo/doença</label>
             </div>
             <div class="container-input-dado">
-              <span class="negrito">ACIDENTE COM ANIMAL PEÇONHENTO</span>
+              <span class="negrito"
+                >ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO</span
+              >
             </div>
           </div>
           <div class="col-2 div-input">
@@ -1361,7 +1368,7 @@
               <label>Código (CID10)</label>
             </div>
             <div class="container-input-dado">
-              <span class="negrito">X 29</span>
+              <span class="negrito">Z20.9</span>
             </div>
           </div>
           <div class="col-3 div-input">
@@ -1907,7 +1914,7 @@
       </div>
     </div>
   </section>
-  <div class="dadosComplementaresAcidenteAnimPec">
+  <div class="dadosComplementares-ficha">
     <h5>Dados Complementares do Caso</h5>
   </div>
   <section>
@@ -1917,22 +1924,9 @@
       </div>
       <div class="conteudo-bloco">
         <div class="linha-dados">
-          <div class="col-2 div-input">
+          <div class="col-12 div-input">
             <div class="info-elevada">
               <span class="numeracao">31</span>
-              <label for="campo-dt-investigacao">Data da investigação</label>
-            </div>
-            <div class="container-input-dado">
-              <input
-                id="campo-dt-investigacao"
-                type="date"
-                class="input-dado form-control"
-              />
-            </div>
-          </div>
-          <div class="col-8 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">32</span>
               <label for="campo-ocupacao">Ocupação</label>
             </div>
             <div class="container-input-dado">
@@ -1943,45 +1937,159 @@
               />
             </div>
           </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-10 div-input campo-situacao-mercado-trabalho">
+            <div class="info-elevada-com-input">
+              <div>
+                <span class="numeracao">32</span>
+                <label for="campo-situacao-mercado-trabalho"
+                  >Situação no Mercado de Trabalho</label
+                >
+              </div>
+              <input
+                id="campo-situacao-mercado-trabalho"
+                type="number"
+                class="input-dado-quadrado form-control"
+                min="1"
+                max="99"
+              />
+            </div>
+            <div
+              class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly"
+            >
+              <ul>
+                <li>01 - Empregado registrado com carteira assinada</li>
+                <li>02 - Empregado não registrado</li>
+                <li>03 - Autônomo / conta própria</li>
+                <li>04 - Servidor público estatutário</li>
+              </ul>
+              <ul>
+                <li>05 - Servidor público celetista</li>
+                <li>06 - Aposentado</li>
+                <li>07 - Desempregado</li>
+                <li>08 - Trabalho temporário</li>
+              </ul>
+              <ul>
+                <li>09 - Cooperativado</li>
+                <li>10 - Trabalhador avulso</li>
+                <li>11 - Empregado</li>
+                <li>12 - Outros</li>
+              </ul>
+              <ul>
+                <li>99 - Ignorado</li>
+              </ul>
+            </div>
+          </div>
           <div class="col-2 div-input">
             <div class="info-elevada">
               <span class="numeracao">33</span>
-              <label for="campo-dt-acidente">Data do acidente</label>
+              <label for="campo-tempo-trabalho"
+                >Tempo de Trabalho na Ocupação</label
+              >
+            </div>
+            <div class="container-input-dado">
+              <div class="col-3">
+                <input
+                  id="campo-tempo-trabalho"
+                  type="number"
+                  class="input-dado form-control"
+                />
+              </div>
+              <div class="col-8 d-flex justify-content-center">
+                <ul class="d-flex align-items-center letra-miuda">
+                  <li class="px-2">
+                    <input
+                      id="campo-tipo-tempo-trabalho"
+                      type="number"
+                      aria-label=""
+                      class="input-dado-quadrado form-control"
+                      min="1"
+                      max="4"
+                    />
+                  </li>
+                  <li class="px-1">1 - Hora</li>
+                  <li class="px-1">2 - Dia</li>
+                  <li class="px-1">3 - Mês</li>
+                  <li class="px-1">4 - Ano</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-12 mt-3 mb-3 negrito">
+            Dados da Empresa Contratante
+          </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-4 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">34</span>
+              <label for="campo-cnpj-contratante">Registro / CNPJ ou CPF</label>
             </div>
             <div class="container-input-dado">
               <input
-                id="campo-dt-acidente"
-                type="date"
+                id="campo-cnpj-contratante"
+                type="text"
+                class="input-dado form-control"
+              />
+            </div>
+          </div>
+          <div class="col-8 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">35</span>
+              <label for="campo-nome-contratante"
+                >Nome da empresa ou Empregador</label
+              >
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-nome-contratante"
+                type="text"
                 class="input-dado form-control"
               />
             </div>
           </div>
         </div>
         <div class="linha-dados">
-          <div class="col-1 div-input">
+          <div class="col-3 div-input">
             <div class="info-elevada">
-              <span class="numeracao">34</span>
-              <label for="campo-uf-acidente">UF</label>
+              <span class="numeracao">36</span>
+              <label for="campo-atividade-contratante"
+                >Atividade Econômica (CNAE)</label
+              >
             </div>
             <div class="container-input-dado">
               <input
-                id="campo-uf-acidente"
+                id="campo-atividade-contratante"
+                type="text"
+                class="input-dado form-control"
+              />
+            </div>
+          </div>
+          <div class="col-1 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">37</span>
+              <label for="campo-uf-contratante">UF</label>
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-uf-contratante"
                 type="text"
                 class="input-dado form-control"
                 maxlength="2"
               />
             </div>
           </div>
-          <div class="col-4 div-input">
+          <div class="col-6 div-input">
             <div class="info-elevada">
-              <span class="numeracao">35</span>
-              <label for="campo-municipio-acidente"
-                >Município de ocorrencia do acidente</label
-              >
+              <span class="numeracao">38</span>
+              <label for="campo-municipio-contratante">Município</label>
             </div>
             <div class="container-input-dado">
               <input
-                id="campo-municipio-acidente"
+                id="campo-municipio-contratante"
                 type="text"
                 class="input-dado form-control"
               />
@@ -1989,26 +2097,53 @@
           </div>
           <div class="col-2 div-input">
             <div class="info-elevada-sem-numeracao">
-              <label for="campo-cod-ibge-acidente">Código (IBGE)</label>
+              <label for="campo-atividade-contratante">Código (IBGE)</label>
             </div>
             <div class="container-input-dado">
               <input
-                id="campo-cod-ibge-acidente"
+                id="campo-cod-ibge-contratante"
                 type="number"
+                class="input-dado form-control"
+                aria-label=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-4 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">39</span>
+              <label for="campo-distrito-contratante">Distrito</label>
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-distrito-contratante"
+                type="text"
                 class="input-dado form-control"
               />
             </div>
           </div>
-          <div class="col-5 div-input">
+          <div class="col-4 div-input">
             <div class="info-elevada">
-              <span class="numeracao">36</span>
-              <label for="campo-local-acidente"
-                >Localidade de ocorrência do acidente</label
-              >
+              <span class="numeracao">40</span>
+              <label for="campo-bairro-contratante">Bairro</label>
             </div>
             <div class="container-input-dado">
               <input
-                id="campo-local-acidente"
+                id="campo-bairro-contratante"
+                type="text"
+                class="input-dado form-control"
+              />
+            </div>
+          </div>
+          <div class="col-4 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">41</span>
+              <label for="campo-endereco-contratante">Endereço</label>
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-endereco-contratante"
                 type="text"
                 class="input-dado form-control"
               />
@@ -2016,65 +2151,72 @@
           </div>
         </div>
         <div class="linha-dados">
-          <div class="col-5 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">37</span>
-                <label for="campo-zona-ocorrencia">Zona de ocorrência</label>
-              </div>
-              <input
-                id="campo-zona-ocorrencia"
-                type="number"
-                class="input-dado-quadrado form-control"
-                maxlength="1"
-              />
+          <div class="col-2 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">42</span>
+              <label for="campo-numero-contratante">Número</label>
             </div>
-            <div class="container-input-dado descricao-tipos">
-              1 - Urbana 2 - Rural 3 - Periurbana 9 - Ignorado
+            <div class="container-input-dado">
+              <input
+                id="campo-numero-contratante"
+                type="number"
+                class="input-dado form-control"
+              />
             </div>
           </div>
           <div class="col-7 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">38</span>
-                <label for="campo-tempo-decorrido-picada-atendimento"
-                  >Tempo decorrido picada/atendimento</label
-                >
-              </div>
+            <div class="info-elevada">
+              <span class="numeracao">43</span>
+              <label for="campo-ponto-ref-contratante"
+                >Ponto de Referência</label
+              >
+            </div>
+            <div class="container-input-dado">
               <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                maxlength="1"
-                id="campo-tempo-decorrido-picada-atendimento"
+                id="campo-ponto-ref-contratante"
+                type="text"
+                class="input-dado form-control"
               />
             </div>
-            <div class="container-input-dado descricao-tipos">
-              1) 0⊢1h &nbsp&nbsp&nbsp 2) 1⊢3h &nbsp&nbsp&nbsp 3) 3⊢6h
-              &nbsp&nbsp&nbsp 4) 6⊢12h &nbsp&nbsp&nbsp 5) 12⊢24h &nbsp&nbsp&nbsp
-              6) 24 e +h &nbsp&nbsp&nbsp 9) Ignorado
+          </div>
+          <div class="col-3 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">44</span>
+              <label for="campo-telefone-contratante">(DDD) Telefone</label>
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-telefone-contratante"
+                type="text"
+                class="input-dado form-control"
+              />
             </div>
           </div>
         </div>
         <div class="linha-dados">
-          <div class="col-12 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">39</span>
-              <label for="campo-local-picada">Local da picada</label>
+          <div class="col-12 div-input campo-empresa-terceirizada">
+            <div class="info-elevada-com-input">
+              <div>
+                <span class="numeracao">45</span>
+                <label for="campo-empresa-terceirizada-contratante"
+                  >O Empregador é Empresa Terceirizada</label
+                >
+              </div>
+              <input
+                id="campo-empresa-terceirizada-contratante"
+                type="number"
+                class="input-dado-quadrado form-control"
+                min="1"
+                max="9"
+              />
             </div>
-            <div class="input-esquerda">
-              <div>
-                <input
-                  type="number"
-                  maxlength="2"
-                  id="campo-local-picada"
-                  class="input-dado-quadrado form-control"
-                />
-              </div>
-              <div>
-                01 - Cabeça 02 - Braço 03 - Ante-Braço 04 - Mão 05 - Dedo da Mão
-                06 - Tronco 07 - Coxa 08 - Perna 09 - Pé 10 - Dedo do Pé 99 -
-                Ignorado
-              </div>
+            <div
+              class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly"
+            >
+              <label>1 - Sim</label>
+              <label>2 - Não</label>
+              <label>3 - Não se aplica</label>
+              <label>9 - Ignorado</label>
             </div>
           </div>
         </div>
@@ -2084,578 +2226,352 @@
   <section>
     <div class="bloco-dados">
       <div class="titulo-bloco">
-        <span> Dados Clínicos</span>
+        <span>Acidente com material biológico</span>
       </div>
       <div class="conteudo-bloco">
         <div class="linha-dados">
-          <div class="col-3 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">40</span>
-                <label for="campo-manifestacoes-locais"
-                  >Manifestações Locais</label
-                >
-              </div>
-              <input
-                id="campo-manifestacoes-locais"
-                type="number"
-                class="input-dado-quadrado form-control"
-                maxlength="1"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Sim 2 - Não 9 - Ignorado
-            </div>
-          </div>
-          <div class="col-9 div-input">
+          <div class="col-12 div-input">
             <div class="info-elevada">
-              <span class="numeracao">41</span>
-              <label for="campo-sim-manifestacao-local"
-                >Se Manifestações Locais Sim, especificar: 1-Sim 2-Não
-                9-Ignorado</label
+              <span class="numeracao">46</span>
+              <label for="campo-tipo-exposicao"
+                >Tipo de Exposição: 1- Sim 2- Não 9- Ignorado</label
               >
             </div>
-            <div class="container-input-dado-manifestacao">
+            <div class="container-input-dado-exposicao">
               <div class="container-input-dado">
                 <input
-                  id="campo-dor-manifestacao-local"
+                  id="campo-percutanea-tipo-exposicao"
                   type="number"
                   class="input-dado-quadrado form-control"
                   maxlength="1"
                 />
-                DOR
+                Percutânea
               </div>
               <div class="container-input-dado">
                 <input
                   type="number"
                   class="input-dado-quadrado form-control"
-                  id="campo-edema-manifestacao-local"
+                  id="campo-mucosa-tipo-exposicao"
                   maxlength="1"
                 />
-                EDEMA
+                Mucosa (oral/ocular)
               </div>
               <div class="container-input-dado">
                 <input
                   type="number"
                   class="input-dado-quadrado form-control"
-                  id="campo-equimose-manifestacao-local"
+                  id="campo-pele-integra-tipo-exposicao"
                   maxlength="1"
                 />
-                EQUIMOSE
+                Pele-íntegra
               </div>
               <div class="container-input-dado">
                 <input
                   type="number"
                   class="input-dado-quadrado form-control"
-                  id="campo-necrose-local"
+                  id="campo-pele-n-integra-tipo-exposicao"
                   maxlength="1"
                 />
-                NECROSE
+                Pele não íntegra
               </div>
               <div class="container-input-dado">
                 <input
                   type="number"
                   class="input-dado-quadrado form-control"
-                  id="campo-outras-manifestacao-local"
+                  id="campo-outras-tipo-exposicao"
                   maxlength="1"
                 />
                 OUTRAS
                 <input
                   type="text"
-                  class="campo-outras-manifestacao-local"
-                  id="input-outras-manifestacao-local"
+                  class="campo-outras-tipo-exposicao"
+                  id="input-outras-tipo-exposicao"
                 />
               </div>
             </div>
           </div>
         </div>
         <div class="linha-dados">
-          <div class="col-2 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">42</span>
-                <label for="campo-manifestacoes-sistemicas"
-                  >Manifestações Sistêmicas</label
-                >
-              </div>
-              <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="campo-manifestacoes-sistemicas"
-                maxlength="1"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Sim 2 - Não 9 - Ignorado
-            </div>
-          </div>
-          <div class="col-8 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">43</span>
-              <label for="campo-sim-manifestacao-sistemica"
-                >Se Manifestações Sistêmicas Sim, especificar: 1-Sim 2-Não
-                9-Ignorado</label
-              >
-            </div>
-            <div class="container-input-dado-manifestacao-sistemica">
-              <div class="container-manifestacao-sistemica-linha">
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-neuroparaliticas"
-                    maxlength="1"
-                  />
-                  neuroparaliticas (ptose, palpebral, turvação visual)
-                </div>
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-hemorragicas"
-                    maxlength="1"
-                  />
-                  hemorrágicas (gengivorragia, outros sangramentos)
-                </div>
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-vagais"
-                    maxlength="1"
-                  />
-                  vagais (vômitos, diarréias)
-                </div>
-              </div>
-              <div class="container-manifestacao-sistemica-linha">
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-miolíticas-hemolíticas"
-                    maxlength="1"
-                  />
-                  miolíticas/hemolíticas (mialgia, anemia, urina escura)
-                </div>
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-renais"
-                    maxlength="1"
-                  />
-                  renais (oligúria/anúria)
-                </div>
-                <div class="input-manifestacao-sistematica">
-                  <input
-                    type="number"
-                    class="input-dado-quadrado form-control"
-                    id="campo-manifestacao-sistematica-outras"
-                    maxlength="1"
-                  />
-                  Outras (Espec.)
-                  <input
-                    type="text"
-                    class="input-outros"
-                    id="input-outras-manifestacao-sistemica"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-2 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">44</span>
-                <label for="campo-tempo-coagulacao">Tempo de coagulação</label>
-              </div>
-              <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="campo-input-tempo-coagulacao"
-                maxlength="1"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Normal &nbsp&nbsp&nbsp 2 - Alterado &nbsp&nbsp&nbsp 9 - Não
-              Realizado
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="bloco-dados">
-      <div class="titulo-bloco">
-        <span>Dados do Acidente</span>
-      </div>
-      <div class="conteudo-bloco">
-        <div class="linha-dados">
-          <div class="col-6 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">45</span>
-                <label for="campo-tipo-acidente">Tipo de Acidente</label>
-              </div>
-              <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="input-tipo-acidente"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Serpente &nbsp&nbsp&nbsp 2 - Aranha &nbsp&nbsp&nbsp 3 -
-              Escorpião &nbsp&nbsp&nbsp 4 - Lagarta &nbsp&nbsp&nbsp 5 - Abelha
-              &nbsp&nbsp&nbsp 9 - Ignorado &nbsp&nbsp&nbsp 6 - Outros
-              <input
-                type="text"
-                class="input-outros"
-                id="input-outros-tipo-acidentee"
-              />
-            </div>
-          </div>
-          <div class="col-6 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">46</span>
-                <label for="campo-evolucao-acidente"
-                  >Serpente - Tipo de Acidente</label
-                >
-              </div>
-              <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="campo-input-serpente-tipo-acidente"
-                maxlength="1"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Botrópico &nbsp&nbsp&nbsp 2 - Crotálico &nbsp&nbsp&nbsp 3 -
-              Elapídico &nbsp&nbsp&nbsp 4 - Laquético &nbsp&nbsp&nbsp 5 -
-              Serepente Não Peçonhenta &nbsp&nbsp&nbsp 9 - Ignorado
-            </div>
-          </div>
-        </div>
-        <div class="linha-dados">
-          <div class="col-6 div-input">
+          <div class="col-12 div-input">
             <div class="info-elevada-com-input">
               <div>
                 <span class="numeracao">47</span>
-                <label for="campo-Aranha-tipo-acidente"
-                  >Aranha - Tipo De Acidente</label
-                >
+                <label for="campo-material-organico">Material orgânico</label>
               </div>
               <input
+                id="campo-material-organico"
                 type="number"
                 class="input-dado-quadrado form-control"
-                id="campo-input-aranha-tipo-acidente"
+                min="1"
+                max="9"
                 maxlength="1"
               />
             </div>
             <div class="descricao-tipos-meia-altura">
-              1 - Foneutrismo &nbsp&nbsp&nbsp 2 - Loxoscelismo &nbsp&nbsp&nbsp 3
-              - Latrodectismo &nbsp&nbsp&nbsp 4 - Outra Aranha &nbsp&nbsp&nbsp 9
-              - Ignorado
-            </div>
-          </div>
-          <div class="col-6 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">48</span>
-                <label for="campo-lagarta-tipo-acidente"
-                  >Lagarta - Tipo de Acidente</label
-                >
-              </div>
+              &nbsp&nbsp&nbsp 1-Sangue &nbsp&nbsp&nbsp 2-Líquor &nbsp&nbsp&nbsp
+              3-Líquido pleural &nbsp&nbsp&nbsp 4-Líquido ascítico
+              &nbsp&nbsp&nbsp 5-Líquido amniótico &nbsp&nbsp&nbsp 6-Fluido com
+              sangue &nbsp&nbsp&nbsp 7-Soro/plasma &nbsp&nbsp&nbsp 9-Ignorado
+              &nbsp&nbsp&nbsp 8-Outros:
               <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="campo-input-lagarta-tipo-acidente"
-                maxlength="1"
+                type="text"
+                class="campo-material-organico"
+                id="input-material-organico"
               />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Lonomia &nbsp&nbsp&nbsp 2 - Outra Lagarta &nbsp&nbsp&nbsp 9 -
-              Ignorado
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="bloco-dados">
-      <div class="titulo-bloco">
-        <span>Tratamento</span>
-      </div>
-      <div class="conteudo-bloco">
         <div class="linha-dados">
-          <div class="col-7 div-input">
+          <div class="col-12 div-input">
             <div class="info-elevada-com-input">
               <div>
-                <span class="numeracao">49</span>
-                <label for="campo-classificacao-caso"
-                  >classificação do Caso</label
+                <span class="numeracao">48</span>
+                <label for="campo-circunstancia-acidente"
+                  >Circunstância do Acidente</label
                 >
               </div>
               <input
+                id="campo-circunstancia-acidente"
                 type="number"
                 class="input-dado-quadrado form-control"
-                id="campo-input-classificacao-caso"
+                min="1"
+                max="99"
                 maxlength="1"
               />
             </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Leve &nbsp&nbsp&nbsp 2 - Moderado &nbsp&nbsp&nbsp 3 - Grave
-              &nbsp&nbsp&nbsp 9 - Ignorado
+            <div class="descricao-tipos-meia-altura coluna-adjust">
+              <div class="coluna">
+                <ul>
+                  <li>01 - Administ. de medicação endovenosa</li>
+                  <li>02 - Administ. de medicação intramuscular</li>
+                  <li>03 - Administ. de medicação subcutânea</li>
+                  <li>04 - Administ. de medicação intradérmica</li>
+                  <li>05 - Punção venosa/arterial para coleta de sangue</li>
+                  <li>06 - Punção venosa/arterial não especificada</li>
+                  <li>
+                    07 - Descarte inadequado de material perfurocortante em saco
+                    de lixo
+                  </li>
+                  <li>
+                    08 - Descarte inadequado de material perfurocortante em
+                    bancada, cama, chão, etc...
+                  </li>
+                </ul>
+              </div>
+              <div class="coluna">
+                <ul>
+                  <li>09 - Lavanderia</li>
+                  <li>10 - Lavagem de material</li>
+                  <li>
+                    11 - Manipulação de caixa com material perfurocortante
+                  </li>
+                  <li>12 - Procedimento cirúrgico</li>
+                  <li>13 - Procedimento odontológico</li>
+                  <li>14 - Procedimento laboratorial</li>
+                  <li>15 - Dextro</li>
+                  <li>16 - Reencape</li>
+                  <li>98 - Outros</li>
+                  <li>99 - Ignorado</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="col-5 div-input">
+        </div>
+        <div class="linha-dados">
+          <div class="col-12 div-input">
             <div class="info-elevada-com-input">
               <div>
-                <span class="numeracao">50</span>
-                <label for="campo-soroterapia">Soroterapia</label>
+                <span class="numeracao">49</span>
+                <label for="campo-agente">Agente</label>
               </div>
               <input
+                id="campo-agente"
                 type="number"
                 class="input-dado-quadrado form-control"
-                id="campo-input-soroterapia"
+                min="1"
+                max="99"
                 maxlength="1"
               />
             </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Sim &nbsp&nbsp&nbsp 2 - Não &nbsp&nbsp&nbsp 9 - Ignorado
+            <div class="descricao-tipos-meia-altura coluna-adjust">
+              <div class="coluna">
+                <ul>
+                  <li>1 - Agulha com lúmen (luz)</li>
+                  <li>2 - Agulha sem lúmen/maciça</li>
+                  <li>3 - Intracath</li>
+                  <li>4 - Vidros</li>
+                </ul>
+              </div>
+              <div class="coluna">
+                <ul>
+                  <li>5 - Lâmina/lanceta (qualquer tipo)</li>
+                  <li>6 - Outros</li>
+                  <li>9 - Ignorado</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
         <div class="linha-dados">
           <div class="col-12 div-input">
             <div class="info-elevada">
-              <span class="numeracao">51</span>
-              <label for="campo-sim-soroterapia"
-                >Se Soroterapia Sim, especificar número de ampolas de
-                soro:</label
-              >
-            </div>
-            <div class="container-input-dado-soroterapia">
-              <div class="input-dado-soroterapia-linha">
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antibotrópico(SAB)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antibotropico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Anticrotálico(SAC)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-anticrotalico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antiaracnídico (SAAr)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antiaracnidico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="input-dado-soroterapia-linha">
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">
-                    Antibotrópico-laquético (SABL)
-                  </div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antibotropico-laquetico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antielapídico (SAE)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antielapidico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antiloxoscélico (SALox)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antiloxoscelico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="input-dado-soroterapia-linha">
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">
-                    Antilbotrópico-crotálico (SABC)
-                  </div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antilbotropico-crotalico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antiescorpiônico (SAEs)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antiescorpionico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-                <div class="input-tipo-soroterapia">
-                  <div class="tipo-soroterapia">Antilonômico (SALon)</div>
-                  <div class="input-soroterapia">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="campo-soroterapia-antilonomico"
-                      maxlength="1"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="linha-dados">
-          <div class="col-2 div-input">
-            <div class="info-elevada-com-input">
-              <div>
-                <span class="numeracao">52</span>
-                <label for="campo-complicacoes-locais"
-                  >Complicações Locais</label
-                >
-              </div>
-              <input
-                type="number"
-                class="input-dado-quadrado form-control"
-                id="input-campo-complicacoes-locais"
-                maxlength="1"
-              />
-            </div>
-            <div class="descricao-tipos-meia-altura">
-              1 - Sim &nbsp&nbsp&nbsp 2 - Não &nbsp&nbsp&nbsp 9 - Ignorado
-            </div>
-          </div>
-          <div class="col-10 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">53</span>
-              <label for="campo-sim-complicacoes-locais"
-                >Se Complicações Locais Sim, especificar: 1 - Sim 2 - Não 9 -
+              <span class="numeracao">50</span>
+              <label for="campo-uso-epi"
+                >Uso de EPI (aceita mais de uma opção) 1- Sim 2 - Não 9 -
                 Ignorado</label
               >
             </div>
-            <div class="container-input-dado-complicacoes-locais">
-              <div class="input-dado-complicacoes-locais-linha">
-                <div class="input-tipo-complicacoes-locais">
-                  <div class="input-complicacoes-locais">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-infeccao-secundaria"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-locais">
-                    Infecção Secundária
-                  </div>
+            <div class="container-input-dado-exposicao">
+              <div class="container-input-dado">
+                <input
+                  id="campo-epi-luva"
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  maxlength="1"
+                />
+                LUVA
+              </div>
+              <div class="container-input-dado">
+                <input
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  id="campo-epi-Avental"
+                  maxlength="1"
+                />
+                Avental
+              </div>
+              <div class="container-input-dado">
+                <input
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  id="campo-epi-oculos"
+                  maxlength="1"
+                />
+                Óculos
+              </div>
+              <div class="container-input-dado">
+                <input
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  id="campo-epi-mascara"
+                  maxlength="1"
+                />
+                Máscara
+              </div>
+              <div class="container-input-dado">
+                <input
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  id="campo-epi-protecao-facial"
+                  maxlength="1"
+                />
+                Proteção facial
+              </div>
+              <div class="container-input-dado">
+                <input
+                  type="number"
+                  class="input-dado-quadrado form-control"
+                  id="campo-epi-bota"
+                  maxlength="1"
+                />
+                Bota
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-5 div-input">
+            <div class="info-elevada-com-input">
+              <div>
+                <span class="numeracao">51</span>
+                <label for="campo-situacao-vacinal-relacao-hepatite-b"
+                  >Situação vacinal do acidentado em relação à hepatite B (3
+                  doses)</label
+                >
+              </div>
+              <input
+                id="campo-situacao-vacinal-relacao-hepatite-b"
+                type="number"
+                class="input-dado-quadrado form-control"
+                min="1"
+                max="9"
+                maxlength="1"
+              />
+            </div>
+            <div class="descricao-tipos-meia-altura">
+              1 - Vacinado &nbsp&nbsp&nbsp 2 - Não Vacinado &nbsp&nbsp&nbsp 9 -
+              Ignorado
+            </div>
+          </div>
+          <div class="col-7 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">52</span>
+              <label for="campo-resultado-exames-acidentado"
+                >Resultados de exames do acidentado (no momento do acidente -
+                data ZERO)</label
+              >
+            </div>
+            <div class="descricao-tipos-meia-altura">
+              1-Positivo &nbsp&nbsp&nbsp 2-Negativo &nbsp&nbsp&nbsp
+              3-Inconclusivo &nbsp&nbsp&nbsp 4-Não realizado &nbsp&nbsp&nbsp
+              9-Ignorado
+              <div class="container-input-resultado-exames">
+                <div class="container-input-dado">
+                  <input
+                    id="campo-exame-antihiv"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Anti-HIV
                 </div>
-                <div class="input-tipo-complicacoes-locais">
-                  <div class="input-complicacoes-locais">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-necrose-extensa"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-locais">Necrose Extensa</div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-exame-hbsag"
+                    maxlength="1"
+                  />
+                  HbsAg
                 </div>
-                <div class="input-tipo-complicacoes-locais">
-                  <div class="input-complicacoes-locais">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-sindrome-compartimental"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-locais">
-                    Síndrome Compartimental
-                  </div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-antihbs"
+                    maxlength="1"
+                  />
+                  Anti-HBs
                 </div>
-                <div class="input-tipo-complicacoes-locais">
-                  <div class="input-complicacoes-locais">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-deficit-funcional"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-locais">Déficit Funcional</div>
-                </div>
-                <div class="input-tipo-complicacoes-locais">
-                  <div class="input-complicacoes-locais">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-amputacao"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-locais">Amputação</div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-antihcv"
+                    maxlength="1"
+                  />
+                  Anti-HCV
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="linha-dados">
-          <div class="col-2 div-input">
+          <div class="col-6 div-input">
             <div class="info-elevada-com-input">
               <div>
-                <span class="numeracao">54</span>
-                <label for="campo-complicacoes-sistemicas"
-                  >Complicações Sistêmicas</label
+                <span class="numeracao">53</span>
+                <label for="campo-fonte-conhecida"
+                  >Dados do Paciente Fonte ( no momento do acidente) Paciente
+                  Fonte Conhecida?</label
                 >
               </div>
               <input
+                id="campo-fonte-conhecida"
                 type="number"
                 class="input-dado-quadrado form-control"
-                id="input-campo-complicacoes-sistemicas"
+                min="1"
+                max="9"
                 maxlength="1"
               />
             </div>
@@ -2663,63 +2579,148 @@
               1 - Sim &nbsp&nbsp&nbsp 2 - Não &nbsp&nbsp&nbsp 9 - Ignorado
             </div>
           </div>
-          <div class="col-10 div-input">
+          <div class="col-6 div-input">
             <div class="info-elevada">
-              <span class="numeracao">55</span>
-              <label for="campo-sim-complicacoes-sistemicas"
-                >Se Complicações Sistêmicas Sim, especificar: 1 - Sim 2 - Não 9
-                - Ignorado</label
+              <span class="numeracao">54</span>
+              <label for="campo-resultado-teste-sorologico"
+                >Se sim, qual o resultado dos testes sorológicos?</label
               >
             </div>
-            <div class="container-input-dado-complicacoes-sistematicas">
-              <div class="container-complicacoes-sistematicas-linha">
-                <div class="container-tipo-complicacoes-sistematicas">
-                  <div class="input-complicacoes-sistematica">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-insuficia-renal"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-sistematica">
-                    Insuficiência Renal
-                  </div>
+            <div class="descricao-tipos-meia-altura">
+              1-Positivo &nbsp&nbsp&nbsp 2-Negativo &nbsp&nbsp&nbsp
+              3-Inconclusivo &nbsp&nbsp&nbsp 4-Não realizado &nbsp&nbsp&nbsp
+              9-Ignorado
+              <div class="container-input-resultado-exames">
+                <div class="container-input-dado">
+                  <input
+                    id="campo-exame-antihiv-fonte"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Anti-HIV
                 </div>
-                <div class="container-tipo-complicacoes-sistematicas">
-                  <div class="input-complicacoes-sistematica">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-insuficiencia-respiratoria-edema-pulmonar-agudo"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-sistematica">
-                    Insuficiência Respiratória / Edema Pulmonar Agudo
-                  </div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-exame-hbsag-fonte"
+                    maxlength="1"
+                  />
+                  HbsAg
                 </div>
-                <div class="container-tipo-complicacoes-sistematicas">
-                  <div class="input-complicacoes-sistematica">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-Septicemia"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-sistematica">Septicemia</div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-antihbc-fonte"
+                    maxlength="1"
+                  />
+                  Anti-HBc
                 </div>
-                <div class="container-tipo-complicacoes-sistematicas">
-                  <div class="input-complicacoes-sistematica">
-                    <input
-                      type="number"
-                      class="input-dado-quadrado form-control"
-                      id="input-Choque"
-                      maxlength="1"
-                    />
-                  </div>
-                  <div class="tipo-complicacoes-sistematica">Choque</div>
+                <div class="container-input-dado">
+                  <input
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    id="campo-antihcv-fonte"
+                    maxlength="1"
+                  />
+                  Anti-HCV
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="linha-dados">
+          <div class="col-12 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">55</span>
+              <label for="campo-conduta-momento-acidente"
+                >Conduta no momento do acidente 1- Sim 2- Não 9- Ignorado</label
+              >
+            </div>
+            <div class="container-input-conduta-momento-acidente coluna-adjust">
+              <div class="coluna">
+                <div class="disp-ruby">
+                  <input
+                    id="input-sem-quimioprofilaxia"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Sem indicação de quimioprofilaxia
+                </div>
+                <div class="disp-ruby">
+                  <input
+                    id="input-recusou-quimioprofilaxia-indicada"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Recusou quimioprofilaxia indicada
+                </div>
+                <div class="disp-ruby">
+                  <input
+                    id="input-azt-3tc"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  AZT+3TC
+                </div>
+              </div class="disp-ruby">
+              <div class="coluna">
+                <div class="disp-ruby">
+                  <input
+                    id="input-azt-3tc-indinavir"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  AZT+3TC+Indinavir
+                </div >
+                <div class="disp-ruby">
+                  <input
+                    id="input-azt-3tc-nelfinavir"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  AZT+3TC+Nelfinavir
+                </div>
+                <div class="disp-ruby">
+                  <input
+                    id="input-imunoglobulina-humana-vs-hepatite-b"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Imunoglobulina humana contra hepatite B (HBIG)
+                </div>
+              </div>
+              <div class="coluna">
+                <div class="disp-ruby">
+                  <input
+                    id="input-vacina-contra-hepatite-b"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Vacina contra hepatite B
+                </div>
+                <div class="disp-ruby">
+                  <input
+                    id="input-outro-esquema-arv"
+                    type="number"
+                    class="input-dado-quadrado form-control"
+                    maxlength="1"
+                  />
+                  Outro Esquema de ARV Especifique
+                  <input
+                    id="input-outro-esquema-arv-especifique"
+                    type="text"
+                    class="input-dado form-control"
+                  />
                 </div>
               </div>
             </div>
@@ -2735,389 +2736,77 @@
       </div>
       <div class="conteudo-bloco">
         <div class="linha-dados">
-          <div class="col-2 div-input">
+          <div class="col-12 div-input">
             <div class="info-elevada-com-input">
               <div>
                 <span class="numeracao">56</span>
-                <label for="campo-acidente-relacionado-trabalho"
-                  >Acidente Relacionado ao Trabalho</label
+                <label for="campo-evolucao-acidente"
+                  >Evolução do Caso</label
                 >
               </div>
               <input
+                id="campo-evolucao-acidente"
                 type="number"
                 class="input-dado-quadrado form-control"
-                id="input-acidente-relacionado-trabalho"
-                maxlength="1"
-              />
+                min="1"
+                max="9"
+                maxlength="1"/>
             </div>
             <div class="descricao-tipos-meia-altura">
-              1 - Sim &nbsp&nbsp&nbsp 2 - Não &nbsp&nbsp&nbsp 9 - Ignorado
+              <div>1-Alta com conversão sorológica, Especificar vírus: 
+                <input
+                  id="input-tipo-virus"
+                  type="text"
+                  class="campo-input-tipo-virus"
+                />
+              </div>
+              2-Alta sem conversão sorológica &nbsp&nbsp&nbsp 3-Alta paciente fonte negativo &nbsp&nbsp&nbsp 4- Abandono &nbsp&nbsp&nbsp 5- Óbito por acidente com exposição à material biológico &nbsp&nbsp&nbsp 6- Óbito por Outra Causa &nbsp&nbsp&nbsp 9- Ignorado
             </div>
           </div>
-          <div class="col-6 div-input">
+        </div>
+        <div class="linha-dados">
+          <div class="col-2 div-input">
+            <div class="info-elevada">
+              <span class="numeracao">57</span>
+              <label for="campo-data-obito"
+                >Se Óbito, Data</label
+              >
+            </div>
+            <div class="container-input-dado">
+              <input
+                id="campo-dt-obito"
+                type="date"
+                class="input-dado form-control"
+              />
+            </div>
+          </div>
+          <div class="col-10 div-input">
             <div class="info-elevada-com-input">
               <div>
-                <span class="numeracao">57</span>
-                <label for="campo-evolucao-caso">Evolução do Caso</label>
+                <span class="numeracao">58</span>
+                <label for="campo-emitida-comunicacao-acidente-trabalho">Foi emitida a Comunicação de Acidente do Trabalho</label>
               </div>
               <input
+                id="campo-emitida-comunicacao-acidente-trabalho"
                 type="number"
                 class="input-dado-quadrado form-control"
-                maxlength="1"
-                id="input-evolucao-caso"
-              />
+                min="1"
+                max="9"
+                maxlength="1"/>
             </div>
             <div class="descricao-tipos-meia-altura">
-              1 - Cura &nbsp&nbsp&nbsp 2 - Óbito por acidentes por animais
-              peçonhentos &nbsp&nbsp&nbsp 3 - Óbito por outras causas
-              &nbsp&nbsp&nbsp 9 - Ignorado
-            </div>
-          </div>
-          <div class="col-2 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">58</span>
-              <label for="campo-dt-obito">Data do Óbito</label>
-            </div>
-            <div class="container-input-dado">
-              <input
-                type="date"
-                id="campo-dt-obito"
-                class="input-dado form-control"
-              />
-            </div>
-          </div>
-          <div class="col-2 div-input">
-            <div class="info-elevada">
-              <span class="numeracao">58</span>
-              <label for="campo-dt-encerramento">Data do Encerramento</label>
-            </div>
-            <div class="container-input-dado">
-              <input
-                type="date"
-                id="campo-dt-encerramento"
-                class="input-dado form-control"
-              />
+              1 - Sim &nbsp&nbsp&nbsp 2 - Não &nbsp&nbsp&nbsp 3- Não se aplica &nbsp&nbsp&nbsp 9 - Ignorado
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <div class="info-complementar-observacoes">
+    <span>Informações complementares e observações</span>
+  </div>
+  <textarea class="form-control" rows="7" aria-label=""></textarea>
   <section class="mt-3 container-observacoes">
-    <div class="bloco-dados">
-      <div class="conteudo-bloco" id="conteudo-tb">
-        <div class="textArea">
-          <span id="titulo-tb">
-            Acidentes com animais peçonhentos: manifestações clínicas,
-            classificação e soroterapia
-          </span>
-        </div>
-        <div class="linha-top-tb">
-          <div class="col-2 tb-headers">TIPO</div>
-          <div class="col-8 tb-headers">Manifestacoes clinicas</div>
-          <div class="col-1 tb-headers">Tipo soro</div>
-          <div class="col-1 tb-headers">Nº ampolas</div>
-        </div>
-      </div>
-    </div>
-    <section>
-      <div class="bloco-dados bloco-tb">
-        <div class="titulo-bloco padding-tb">
-          <span>OFIDISMO</span>
-        </div>
-        <div class="conteudo-bloco">
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Botrópico</span>
-                <ul>
-                  <li>jararaca</li>
-                  <li>jararacuçu</li>
-                  <li>urutu</li>
-                  <li>caiçara</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Leve: dor, edema local e equimose discreto</span>
-              </div>
-              <div class="linha-interna">
-                <span
-                  >Moderado: dor, edema e equimose evidentes, manifestações
-                  hemorrágicas discretas</span
-                >
-              </div>
-              <div class="linha-interna">
-                <span
-                  >Grave: dor e edema intenso e extenso, bolhas, hemorragia
-                  intensa, oligoanúria, hipotensão</span
-                >
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SAB</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">2 - 4</div>
-              <div class="linha-interna tb-center">4 - 8</div>
-              <div class="linha-interna tb-center">12</div>
-            </div>
-          </div>
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Crotálico</span>
-                <ul>
-                  <li>cascavel</li>
-                  <li>boicininga</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span
-                  >Leve: ptose palpebral, turvação visual discretos de
-                  aparecimento tardio, sem alteração da cor da urina, mialgia
-                  discreta ou ausente</span
-                >
-              </div>
-              <div class="linha-interna">
-                <span
-                  >Moderado: ptose palpebral, turvação visual discretos de
-                  início precoce, mialgia discreta, urina escura</span
-                >
-              </div>
-              <div class="linha-interna">
-                <span
-                  >Grave: ptose palpebral, turvação visual evidentes e intensos,
-                  mialgia intensa e generalizada, urina escura, oligúria ou
-                  anúria</span
-                >
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SAC</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">5</div>
-              <div class="linha-interna tb-center">10</div>
-              <div class="linha-interna tb-center">20</div>
-            </div>
-          </div>
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Laquético</span>
-                <ul>
-                  <li>surucucu</li>
-                  <li>pico-de-jaca</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Moderado: dor, edema, bolhas e hemorragia discreta</span>
-              </div>
-              <div class="linha-interna">
-                <span
-                  >Grave: dor, edema, bolhas, hemorragia, cólicas abdominais,
-                  diarréia, bradicardia, hipotensão arterial</span
-                >
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SABL</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">10</div>
-              <div class="linha-interna tb-center">20</div>
-            </div>
-          </div>
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Elapídico</span>
-                <ul>
-                  <li>coral verdadeira</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span
-                  >Grave: dor ou parestesia discreta, ptose palpebral, turvação
-                  visual</span
-                >
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SAEL</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="bloco-dados bloco-tb">
-        <div class="titulo-bloco padding-tb">
-          <span>ESCORPIONISMO</span>
-        </div>
-        <div class="conteudo-bloco adjust-height-tb">
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Escorpiônico</span>
-                <ul>
-                  <li>escorpião</li>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Leve: dor, eritema e parestesia local</span>
-              </div>
-              <div class="linha-interna">
-                <span>Moderado: sudorese, náuseas, vômitos ocasionais, taquicardia, agitação e hipertensão arterial leve</span>
-              </div>
-              <div class="linha-interna">
-                <span>Grave: vômitos profusos e incoercíveis, sudorese profusa, prostração, bradicardia, edema pulmonar agudo e choque</span>
-              </div>
-          </div>
-          <div class="col-1 column-tb">
-            <span>SAEsc ou SAA</span>
-          </div>
-          <div class="col-1 column-tb">
-            <div class="linha-interna tb-center">---</div>
-            <div class="linha-interna tb-center">5</div>
-            <div class="linha-interna tb-center">10</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="bloco-dados bloco-tb">
-        <div class="titulo-bloco padding-tb">
-          <span>ARANEÍSMO</span>
-        </div>
-        <div class="conteudo-bloco adjust-height-tb">
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Loxoscélico</span>
-                <ul>
-                  <li>aranha-marrom</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Leve: lesão incaracterística sem aranha identificada</span>
-              </div>
-              <div class="linha-interna">
-                <span>Moderado: lesão sugestiva com equimose, palidez, eritema e edema endurado local, cefaléia, febre, exantema</span>
-              </div>
-              <div class="linha-interna">
-                <span>Grave: lesão característica, hemólise intravascular</span>
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SAA ou SALox</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">---</div>
-              <div class="linha-interna tb-center">5</div>
-              <div class="linha-interna tb-center">10</div>
-            </div>
-          </div>
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <span class="name-tb">Foneutrismo</span>
-                <ul>
-                  <li>aranha-armadeira</li>
-                  <li>aranha-da-banana</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Leve: dor local</span>
-              </div>
-              <div class="linha-interna">
-                <span>Moderado: sudorese ocasional, vômitos ocasionais, agitação, hipertensão arterial</span>
-              </div>
-              <div class="linha-interna">
-                <span>Grave: sudorese profusa, vômitos freqüentes, priapismo, edema pulmonar agudo, hipotensão arterial</span>
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SAA</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">---</div>
-              <div class="linha-interna tb-center">2 - 4</div>
-              <div class="linha-interna tb-center">5 - 10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="bloco-dados bloco-tb">
-        <div class="titulo-bloco padding-tb">
-          <span>LONOMIA</span>
-        </div>
-        <div class="conteudo-bloco adjust-height-tb">
-          <div class="linha">
-            <div class="col-2 column-tb">
-              <div class="conteudo-tb">
-                <ul>
-                  <li>taturana</li>
-                  <li>oruga</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-8 column-tb">
-              <div class="linha-interna">
-                <span>Leve: dor, eritema, adenomegalia regional, coagulação normal, sem hemorragia</span>
-              </div>
-              <div class="linha-interna">
-                <span>Moderado: alteração na coagulação, hemorragia em pele e/ou mucosas</span>
-              </div>
-              <div class="linha-interna">
-                <span>Grave: alteração na coagulação, hemorragia em vísceras, insuficiência renal</span>
-              </div>
-            </div>
-            <div class="col-1 column-tb">
-              <span>SALon</span>
-            </div>
-            <div class="col-1 column-tb">
-              <div class="linha-interna tb-center">---</div>
-              <div class="linha-interna tb-center">5</div>
-              <div class="linha-interna tb-center">10</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </section>
-  <section class="mt-3 container-observacoes">
-    <span class="titulo-section negrito"
-      >Informações complementares e observações</span
-    >
-    <div class="bloco-dados">
-      <div class="conteudo-bloco">
-        <div class="textArea">
-          <span
-            >Anotar todas as informações consideradas importantes e que não estão na ficha (ex: outros dados clínicos, dados laboratoriais, laudos de outros exames e necrópsia, etc.)</span
-          >
-          <textarea class="form-control" rows="6" aria-label=""></textarea>
-        </div>
-      </div>
-    </div>
     <div class="bloco-dados">
       <div class="titulo-bloco">
         <span>Investigador</span>
