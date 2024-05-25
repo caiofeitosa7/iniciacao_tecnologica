@@ -18,6 +18,7 @@
     <div class="col-1"></div>
 </div>
 <div class="ficha pb-5">
+    {% csrf_token %}
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -67,7 +68,7 @@
                             <label for="campo-agravoDoenca">Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-agravoDoenca" type="text" class="input-dado form-control negrito"
+                            <input id="campo-agravoDoenca" class="input-dado form-control negrito"
                                 value="ACIDENTE DE TRABALHO GRAVE"/>
                         </div>
                     </div>
@@ -88,7 +89,7 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-uf-notificacao" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -97,7 +98,7 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-municipio-notificacao" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -123,7 +124,7 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-unidade-saude" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -171,7 +172,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-paciente"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -224,7 +224,6 @@
                             </div>
                             <input
                                     id="campo-sexo"
-                                    type="text"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
                                     oninput="atribuirValor(this.id)"
@@ -446,7 +445,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     maxlength="2"
                                     oninput="atribuirValor(this.id)"
@@ -463,7 +461,6 @@
                         <div class="container-input-dado">
                             <input
                                 id="campo-municipio-residencia"
-                                type="text"
                                 class="input-dado form-control"
                                 oninput="atribuirValor(this.id)"
                             />
@@ -490,7 +487,6 @@
                         <div class="container-input-dado">
                             <input
                                 id="campo-distrito-residencia"
-                                type="text"
                                 class="input-dado form-control"
                                 oninput="atribuirValor(this.id)"
                             />
@@ -506,7 +502,6 @@
                         <div class="container-input-dado">
                             <input
                                 id="campo-bairro-residencia"
-                                type="text"
                                 class="input-dado form-control"
                                 oninput="atribuirValor(this.id)"
                             />
@@ -522,7 +517,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-logradouro-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -535,7 +529,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-codigo-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -567,7 +560,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-complemento-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -581,7 +573,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo1"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -597,7 +588,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo2"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -613,7 +603,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-ponto-ref-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -627,7 +616,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-cep-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     maxlength="9"
                                     onblur="pesquisaCepComReplicacao(this)"
@@ -644,7 +632,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-telefone-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -679,7 +666,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-pais-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -703,7 +689,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-us-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -717,7 +702,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -729,7 +713,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -741,7 +724,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -807,7 +789,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-tipo-exame"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -951,7 +932,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-bacterioscopia"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1043,7 +1023,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-hospital"
-                                    type="text"
                                     class="input-dado form-control"
                                     maxlength="2"
                             />
@@ -1059,7 +1038,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-hospital"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1084,7 +1062,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-hospital"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1121,8 +1098,8 @@
                                     1° Hipótese Diagnóstica - CID 10:
                                 </label>
                                 <input
-                                        id="campo-hipotese-diagnostica1"
-                                        class="input-dado form-control mx-2"
+                                    id="campo-hipotese-diagnostica1"
+                                    class="input-dado form-control mx-2"
                                 />
                             </div>
                             <div class="pb-3 d-flex align-items-center">
@@ -1130,8 +1107,8 @@
                                     2° Hipótese Diagnóstica - CID 10:
                                 </label>
                                 <input
-                                        id="campo-hipotese-diagnostica2"
-                                        class="input-dado form-control mx-2"
+                                    id="campo-hipotese-diagnostica2"
+                                    class="input-dado form-control mx-2"
                                 />
                             </div>
                         </div>
@@ -1157,8 +1134,8 @@
                                         País:
                                     </label>
                                     <input
-                                            id="campo-pais-infeccao"
-                                            class="input-dado form-control mx-2"
+                                        id="campo-pais-infeccao"
+                                        class="input-dado form-control mx-2"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1166,8 +1143,8 @@
                                         Distrito:
                                     </label>
                                     <input
-                                            id="campo-distrito-infeccao"
-                                            class="input-dado form-control mx-2"
+                                        id="campo-distrito-infeccao"
+                                        class="input-dado form-control mx-2"
                                     />
                                 </div>
                             </div>
@@ -2365,6 +2342,33 @@
             <span>SVS</span>
             <span>27/09/2005</span>
         </div>
+    </div>
+</div>
+<div class="rodape-ficha">
+    <form id="uploadForm" class="py-4" enctype="multipart/form-data"
+        method="POST" action="{% url 'upload' 0 %}">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center py-4">
+            <span class="negrito">Anexar Arquivos PDF</span>
+        </div>
+        <div id="containerInputsPDF">
+            <div class="d-flex align-items-center">
+                <input id="file" name="file" type="file" accept=".pdf" class="form-control">
+                <div class="btnCorPrincipal btn mx-2 px-2 py-1" onclick="addInputFile()">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    PDF
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
+        <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
+            CANCELAR
+        </button>
+        <button class="btnCorPrincipal btn mx-4"
+                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+            CADASTRAR
+        </button>
     </div>
 </div>
 

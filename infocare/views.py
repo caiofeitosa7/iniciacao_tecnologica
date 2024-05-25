@@ -145,7 +145,6 @@ def registrar_ficha_notificacao(request):
                     'cod_ficha': cod_ficha,
                     'status': 'success'
                 })
-
         except Exception as e:
             return redirect(reverse('pagina_inicial'))
 

@@ -18,6 +18,7 @@
     <div class="col-1"></div>
 </div>
 <div class="ficha pb-5">
+    {% csrf_token %}
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -68,7 +69,7 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-agravoDoenca" type="text" class="input-dado form-control negrito"
-                                value="VIOLÊNCIA INTERPESSOAL/AUTOPROVOCADA"/>
+                                value="ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -88,7 +89,7 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-uf-notificacao" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -97,7 +98,7 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-municipio-notificacao" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -123,7 +124,7 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-unidade-saude" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -132,10 +133,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-codigo-unidade-saude"
-                                type="number"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-codigo-unidade-saude"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -1218,7 +1219,7 @@
 </div>
 <div class="d-flex flex-column align-items-center my-3 negrito">
     <span>FICHA DE INVESTIGAÇÃO</span>
-    <span>VIOLÊNCIA INTERPESSOAL/AUTOPROVOCADA</span>
+    <span>ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO</span>
 </div>
 <div class="ficha pt-5">
     <div class="mt-2 container-cabecalho">
@@ -1226,10 +1227,15 @@
             <label>República Federativa do Brasil</label>
             <label>Ministério do Saúde</label>
         </div>
-        <div class="col-6 center-div negrito">
-            <label>SINAN</label>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
             <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
-            <label>FICHA DE NOTIFICAÇÃO INDIVIDUAL</label>
+            <label>
+                FICHA DE INVESTIGAÇÃO
+                <label class="negrito">
+                    ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO
+                </label>
+            </label>
         </div>
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
@@ -1238,12 +1244,14 @@
             </div>
         </div>
     </div>
-    <div class="mt-2">
-        <span class="descricao-violenciaInterpessoal negrito letra-miuda">
-            Caso suspeito ou confirmado de violência doméstica/intrafamiliar, sexual, autoprovocada, tráfico de pessoas,
-            trabalho escravo, trabalho infantil, tortura, intervenção legal e violências contra mulheres e homens em todas as idades.
-            No caso de violência extrafamiliar/comunitária, somente serão objetos de notificação as violências contra crianças,
-            adolescentes, mulheres, pessoas idosas, pessoa com deficiência, indígenas e populações LGBT.
+    <div class="mt-2 descricao-acidenteTrabalho">
+        <span class="negrito letra-miuda">
+            <b>Definição de caso:</b> Acidentes envolvendo sangue e outros fluidos orgânicos ocorridos com os profissionais da área da saúde
+            durante o desenvolvimento do seu trabalho, aonde os mesmos estão expostos a materiais biológicos potencialmente
+            contaminados.
+            Os ferimentos com agulhas e material perfuro cortante em geral são considerados extremamente perigosos por serem
+            potencialmente capazes de transmitir mais de 20 tipos de patógenos diferentes, sendo o vírus da imunodeficiência humana
+            (HIV), o da hepatite B (HBV) e o da hepatite C (HCV) os agentes infecciosos mais comumente envolvidos.
         </span>
     </div>
     <section>
@@ -1270,7 +1278,7 @@
                             <label>Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <span class="negrito">VIOLÊNCIA INTERPESSOAL/AUTOPROVOCADA</span>
+                            <span class="negrito">ACIDENTE DE TRABALHO COM EXPOSIÇÃO À MATERIAL BIOLÓGICO</span>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1278,7 +1286,7 @@
                             <label>Código (CID10)</label>
                         </div>
                         <div class="container-input-dado">
-                            <span class="negrito">Y 09</span>
+                            <span class="negrito">Z20.9</span>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1320,70 +1328,30 @@
                     </div>
                 </div>
                 <div class="linha-dados">
-                    <div class="col-12 div-input campo-un-notificadora">
+                    <div class="col-6 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">6</span>
-                            <label for="campo-unidade-notificadora">Unidade Notificadora</label>
-                        </div>
-                        <div class="container-input-dado align-items-center">
-                            <input id="campo-unidade-notificadora" class="input-dado-quadrado form-control"
-                                   type="number" min="1" max="7">
-                            <span class="letra-miuda">
-                                1- Unidade de Saúde&nbsp;&nbsp;&nbsp;&nbsp;
-                                2- Unidade de Assistência Social&nbsp;&nbsp;&nbsp;&nbsp;
-                                3- Estabelecimento de Ensino&nbsp;&nbsp;&nbsp;&nbsp;
-                                4- Conselho Tutelar&nbsp;&nbsp;&nbsp;&nbsp;
-                                5- Unidade de Saúde Indígena&nbsp;&nbsp;&nbsp;&nbsp;
-                                6- Centro Espacializado de Atendimento à Mulher&nbsp;&nbsp;&nbsp;&nbsp;
-                                7- Outros
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">7</span>
-                            <label for="campo-nome-un-notificadora">Nome da Unidade Notificadora</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-nome-un-notificadora" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-unidade-saude2">Código Unidade</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">8</span>
-                            <label for="campo-unidade-saude2">Unidade de Saúde</label>
+                            <label for="campo-unidade-saude2">Unidade de Saúde (ou outra fonte notificadora)</label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-unidade-saude2" type="text" class="input-dado form-control">
                         </div>
                     </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-num22eracao">
-                            <label for="campo-cod-cnes-unidade-saude">Código (CNES)</label>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-unidade-saude2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-cnes-unidade-saude" type="number" class="input-dado form-control">
+                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
                         </div>
                     </div>
-                    <div class="col-3 div-input campo-dt-violencia">
+                    <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">9</span>
-                            <label for="campo-dt-violencia">Data da ocorrência da violência</label>
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-acidente">Data do Acidente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-violencia" type="date" class="input-dado form-control">
+                            <input id="campo-dt-acidente" type="date" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1397,27 +1365,27 @@
                 <div class="linha-dados">
                     <div class="col-9 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">10</span>
-                            <label for="campo-nome-paciente22">Nome do Paciente</label>
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente2">Nome do Paciente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-paciente22" type="text" class="input-dado form-control">
+                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">11</span>
+                            <span class="numeracao">9</span>
                             <label for="campo-dt-nascimento2">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control" aria-label="">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">12</span>
+                            <span class="numeracao">10</span>
                             <label for="campo-idade2">(ou) Idade</label>
                         </div>
                         <div class="container-input-dado">
@@ -1439,7 +1407,7 @@
                     <div class="col-2 div-input campo-sexo">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">13</span>
+                                <span class="numeracao">11</span>
                                 <label for="campo-sexo2">Sexo</label>
                             </div>
                             <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
@@ -1455,7 +1423,7 @@
                     <div class="col-4 div-input campo-gestante">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">14</span>
+                                <span class="numeracao">12</span>
                                 <label for="campo-gestante2">Gestante</label>
                             </div>
                             <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
@@ -1473,7 +1441,7 @@
                     <div class="col-3 div-input campo-raca">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">15</span>
+                                <span class="numeracao">13</span>
                                 <label for="campo-raca2">Raça/Cor</label>
                             </div>
                             <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
@@ -1492,7 +1460,7 @@
                     <div class="col-12 div-input campo-escolaridade">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">16</span>
+                                <span class="numeracao">14</span>
                                 <label for="campo-escolaridade2">Escolaridade</label>
                             </div>
                             <input id="campo-escolaridade2" type="number" class="input-dado-quadrado form-control"
@@ -1516,7 +1484,7 @@
                 <div class="linha-dados">
                     <div class="col-4 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">17</span>
+                            <span class="numeracao">15</span>
                             <label for="campo-numero-sus2">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
@@ -1525,7 +1493,7 @@
                     </div>
                     <div class="col-8 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">18</span>
+                            <span class="numeracao">16</span>
                             <label for="campo-nome-mae2">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
@@ -1543,7 +1511,7 @@
                 <div class="linha-dados">
                     <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">19</span>
+                            <span class="numeracao">17</span>
                             <label for="campo-uf-residencia2">UF</label>
                         </div>
                         <div class="container-input-dado">
@@ -1553,7 +1521,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">20</span>
+                            <span class="numeracao">18</span>
                             <label for="campo-municipio-residencia2">Município de Residência</label>
                         </div>
                         <div class="container-input-dado">
@@ -1570,7 +1538,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">21</span>
+                            <span class="numeracao">19</span>
                             <label for="campo-distrito-residencia2">Distrito</label>
                         </div>
                         <div class="container-input-dado">
@@ -1581,7 +1549,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">22</span>
+                            <span class="numeracao">20</span>
                             <label for="campo-bairro-residencia2">Bairro</label>
                         </div>
                         <div class="container-input-dado">
@@ -1590,7 +1558,7 @@
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">23</span>
+                            <span class="numeracao">21</span>
                             <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
                         </div>
                         <div class="container-input-dado">
@@ -1609,7 +1577,7 @@
                 <div class="linha-dados">
                     <div class="col-2 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">24</span>
+                            <span class="numeracao">22</span>
                             <label for="campo-numero-residencia2">Número</label>
                         </div>
                         <div class="container-input-dado">
@@ -1618,7 +1586,7 @@
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">25</span>
+                            <span class="numeracao">23</span>
                             <label for="campo-complemento-residencia2">Complemento (apto, casa, ...)</label>
                         </div>
                         <div class="container-input-dado">
@@ -1627,7 +1595,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">26</span>
+                            <span class="numeracao">24</span>
                             <label for="campo-geo-campo12">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
@@ -1638,7 +1606,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">27</span>
+                            <span class="numeracao">25</span>
                             <label for="campo-geo-campo22">Geo campo 2</label>
                         </div>
                         <div class="container-input-dado">
@@ -1647,7 +1615,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">28</span>
+                            <span class="numeracao">26</span>
                             <label for="campo-ponto-ref-residencia2">Ponto de Referência</label>
                         </div>
                         <div class="container-input-dado">
@@ -1656,7 +1624,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">29</span>
+                            <span class="numeracao">27</span>
                             <label for="campo-cep-residencia2">CEP</label>
                         </div>
                         <div class="container-input-dado">
@@ -1668,7 +1636,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">30</span>
+                            <span class="numeracao">28</span>
                             <label for="campo-telefone-residencia2">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
@@ -1678,7 +1646,7 @@
                     <div class="col-3 div-input campo-zona-residencia">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">31</span>
+                                <span class="numeracao">29</span>
                                 <label for="campo-zona-residencia2">Zona</label>
                             </div>
                             <input id="campo-zona-residencia2" type="number" class="input-dado-quadrado form-control"
@@ -1691,7 +1659,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">32</span>
+                            <span class="numeracao">30</span>
                             <label for="campo-pais-residencia2">País (se residente fora do Brasil)</label>
                         </div>
                         <div class="container-input-dado">
@@ -1703,25 +1671,16 @@
         </div>
     </section>
     <section class="mt-3 container-dadosComplementares">
-        <span class="titulo-section negrito">Dados Complementares</span>
+        <span class="titulo-section negrito">Dados Complementares do Caso</span>
         <div class="bloco-dados">
             <div class="titulo-bloco">
-                <span>Dados da Pessoa Atendida</span>
+                <span>Antecedentes Epidemiológicos</span>
             </div>
             <div class="conteudo-bloco">
                 <div class="linha-dados">
-                    <div class="col-7 div-input">
+                    <div class="col-12 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">33</span>
-                            <label for="campo-nome-social">Nome Social</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-nome-social" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-5 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">34</span>
+                            <span class="numeracao">31</span>
                             <label for="campo-ocupacao">Ocupação</label>
                         </div>
                         <div class="container-input-dado">
@@ -1730,1153 +1689,683 @@
                     </div>
                 </div>
                 <div class="linha-dados">
-                    <div class="col-12 div-input">
+                    <div class="col-7 div-input campo-local-acidente">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">35</span>
-                                <label for="campo-estado-civil">Situação conjugal / Estado civil</label>
+                                <span class="numeracao">32</span>
+                                <label for="campo-sit-merc-trab">Situação no Mercado de Trabalho</label>
                             </div>
-                            <input id="campo-estado-civil" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
+                            <input id="campo-sit-merc-trab" type="number" class="input-dado-quadrado form-control" min="1"
+                                   max="99">
                         </div>
-                        <div class="container-input-dado mb-1 justify-content-evenly">
-                            <span>1 - Solteiro</span>
-                            <span>2 - Casado/união estável</span>
-                            <span>3 - Viúvo</span>
-                            <span>4 - Separado</span>
-                            <span>8 - Não se aplica</span>
-                            <span>9 - Ignorado</span>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra justify-content-evenly">
+                            <ul>
+                                <li>01- Empregado registrado com carteira assinada</li>
+                                <li>02 - Empregado não registrado</li>
+                                <li>03- Autônomo/ conta própria</li>
+                                <li>04- Servidor público estatuário</li>
+                            </ul>
+                            <ul>
+                                <li>05 - Servidor público celetista</li>
+                                <li>06- Aposentado</li>
+                                <li>07- Desempregado</li>
+                                <li>08 - Trabalho temporário</li>
+                            </ul>
+                            <ul>
+                                <li>09 - Cooperativado</li>
+                                <li>10- Trabalhador avulso</li>
+                                <li>11- Empregador</li>
+                                <li>12- Outros</li>
+                                <li>99 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-5 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label for="campo-tempo-trabalho">Tempo de Trabalho na Ocupação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-2">
+                                <input id="campo-tempo-trabalho" type="number" class="input-dado form-control">
+                            </div>
+                            <div class="col-8 d-flex justify-content-center">
+                                <ul class="d-flex align-items-center">
+                                    <li class="px-2">
+                                        <input id="campo-tipo-tempo-trabalho" type="number" aria-label=""
+                                               class="input-dado-quadrado form-control" min="1" max="4">
+                                    </li>
+                                    <li class="px-1">1 - Hora</li>
+                                    <li class="px-1">2 - Dia</li>
+                                    <li class="px-1">3 - Mês</li>
+                                    <li class="px-1">4 - Ano</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">36</span>
-                                <label for="campo-orientacao-sexual">Orientação Sexual</label>
-                            </div>
-                            <input id="campo-orientacao-sexual" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
-                        </div>
-                        <div class="container-input-dado letra-miuda descricao-tipos justify-content-evenly align-items-end">
-                            <ul>
-                                <li>1-Heterosexual</li>
-                                <li>2-Homosexual (gay/lésbica)</li>
-                            </ul>
-                            <ul>
-                                <li>3-Bissexual</li>
-                                <li>8-Não se aplica</li>
-                                <li>9-Ignorado</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">37</span>
-                                <label for="campo-identidade-genero">Identidade de gênero:</label>
-                            </div>
-                            <input id="campo-identidade-genero" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
-                        </div>
-                        <div class="container-input-dado letra-miuda descricao-tipos justify-content-evenly align-items-end">
-                            <ul>
-                                <li>1-Travesti</li>
-                                <li>2-Mulher Transexual</li>
-                            </ul>
-                            <ul>
-                                <li>3-Homem Transexual</li>
-                                <li>8-Não se aplica</li>
-                                <li>9-Ignorado</li>
-                            </ul>
-                        </div>
+                    <div class="col-12 mt-3 mb-3 negrito">
+                        Dados da Empresa Contratante
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-4 div-input">
-                        <div class="info-elevada-com-input">
-                            <div class="d-flex align-items-start">
-                                <span class="numeracao">38</span>
-                                <label for="campo-possui-deficiencia" class="mx-1">
-                                    Possui algum tipo de <br>deficiência / transtorno?
-                                </label>
-                            </div>
-                            <input id="campo-possui-deficiencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
+                        <div class="info-elevada">
+                            <span class="numeracao">34</span>
+                            <label for="campo-cnpj-contratante">Registro / CNPJ ou CPF</label>
                         </div>
-                        <div class="container-input-dado mb-1 justify-content-evenly">
-                            <span>1 - Sim</span>
-                            <span>2 - Não</span>
-                            <span>9 - Ignorado</span>
+                        <div class="container-input-dado">
+                            <input id="campo-cnpj-contratante" type="text" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-8 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">39</span>
-                            <span>Se sim, qual tipo de deficiência / transtorno?</span>
+                            <span class="numeracao">35</span>
+                            <label for="campo-nome-contratante">Nome da empresa ou Empregador</label>
                         </div>
-                        <div class="container-input-dado flex-column px-2">
-                            <div class="d-flex">
-                                <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-fisica">
-                                            <label class="form-check-label" for="opcao-deficiencia-fisica">
-                                                Deficiência Física
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-intelectual">
-                                            <label class="form-check-label" for="opcao-deficiencia-intelectual">
-                                                Deficiência Intelectual
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-visual">
-                                            <label class="form-check-label" for="opcao-deficiencia-visual">
-                                                Deficiência Visual
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-auditiva">
-                                            <label class="form-check-label" for="opcao-deficiencia-auditiva">
-                                                Deficiência auditiva
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-mental">
-                                            <label class="form-check-label" for="opcao-deficiencia-mental">
-                                                Transtorno mental
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-comportamento">
-                                            <label class="form-check-label" for="opcao-deficiencia-comportamento">
-                                                Transtorno de comportamento
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="d-flex align-items-baseline">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-deficiencia-outro">
-                                    <label class="form-check-label" for="opcao-deficiencia-outro">
-                                        Outro
-                                    </label>
-                                </div>
-                                <div class="col-5 mx-2">
-                                    <input id="descricao-deficiencia-outro" class="input-dado form-control"
-                                           aria-label="">
-                                </div>
-                            </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-contratante" type="text" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados da Ocorrência</span>
-            </div>
-            <div class="conteudo-bloco">
                 <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">36</span>
+                            <label for="campo-atividade-contratante">Atividade Econômica (CNAE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-atividade-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
                     <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">40</span>
-                            <label for="campo-uf-ocorrencia">UF</label>
+                            <span class="numeracao">37</span>
+                            <label for="campo-uf-contratante">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-ocorrencia" type="text" class="input-dado form-control"
-                                   maxlength="2">
+                            <input id="campo-uf-contratante" type="text" class="input-dado form-control" maxlength="2">
                         </div>
                     </div>
                     <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">38</span>
+                            <label for="campo-municipio-contratante">Município</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-atividade-contratante">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-contratante" type="number" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">39</span>
+                            <label for="campo-distrito-contratante">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">40</span>
+                            <label for="campo-bairro-contratante">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-contratante" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">41</span>
-                            <label for="campo-municipio-ocorrencia">Município de ocorrência</label>
+                            <label for="campo-endereco-contratante">Endereço</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-ocorrencia" type="text" class="input-dado form-control">
+                            <input id="campo-endereco-contratante" type="text" class="input-dado form-control">
                         </div>
                     </div>
+                </div>
+                <div class="linha-dados">
                     <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-ocorrencia">Código (IBGE)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-cod-ibge-ocorrencia" type="number" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">42</span>
-                            <label for="campo-distrito-ocorrencia">Distrito</label>
+                            <label for="campo-numero-contratante">Número</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-distrito-ocorrencia" type="text" class="input-dado form-control">
+                            <input id="campo-numero-contratante" type="number" class="input-dado form-control">
                         </div>
                     </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
+                    <div class="col-7 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">43</span>
-                            <label for="campo-bairro-ocorrencia">Bairro</label>
+                            <label for="campo-ponto-ref-contratante">Ponto de Referência</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-bairro-ocorrencia" type="text" class="input-dado form-control">
+                            <input id="campo-ponto-ref-contratante" type="text" class="input-dado form-control">
                         </div>
                     </div>
-                    <div class="col-7 div-input">
+                    <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">44</span>
-                            <label for="campo-logradouro-ocorrencia">Logradouro (rua, avenida, ...)</label>
+                            <label for="campo-telefone-contratante">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-ocorrencia" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-ocorrencia">Código</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-codigo-ocorrencia" type="text" class="input-dado form-control">
+                            <input id="campo-telefone-contratante" type="text" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
-                    <div class="col-2 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">45</span>
-                            <label for="campo-numero-ocorrencia">Número</label>
+                    <div class="col-12 div-input campo-empresa-terceirizada">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">45</span>
+                                <label for="campo-empresa-terceirizada-contratante">O Empregador é Empresa Terceirizada</label>
+                            </div>
+                            <input id="campo-empresa-terceirizada-contratante" type="number"
+                                   class="input-dado-quadrado form-control" min="1" max="9">
                         </div>
-                        <div class="container-input-dado">
-                            <input id="campo-numero-ocorrencia" type="number" class="input-dado form-control">
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly">
+                            <label>1 - Sim</label>
+                            <label>2 - Não</label>
+                            <label>3 - Não se aplica</label>
+                            <label>9 - Ignorado</label>
                         </div>
                     </div>
-                    <div class="col-4 div-input">
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Acidente com material biológico</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">46</span>
-                            <label for="campo-complemento-ocorrencia">Complemento (apto, casa, ...)</label>
+                            <label>
+                                Tipo de Exposição&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado">
-                            <input id="campo-complemento-ocorrencia" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">47</span>
-                            <label for="campo-geo-campo3">Geo campo 3</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-geo-campo3" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">48</span>
-                            <label for="campo-geo-campo4">Geo campo 4</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-geo-campo4" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-4 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">49</span>
-                            <label for="campo-ponto-ref-ocorrencia">Ponto de Referência</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-ponto-ref-ocorrencia" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input campo-zona-ocorrencia">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">50</span>
-                                <label for="campo-zona-ocorrencia">Zona</label>
-                            </div>
-                            <input id="campo-zona-ocorrencia" type="number" class="input-dado-quadrado form-control"
-                                   maxlength="1">
-                        </div>
-                        <div class="container-input-dado descricao-tipos letra-miuda">
-                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
-                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
-                        </div>
-                    </div>
-                    <div class="col-5 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">51</span>
-                            <label for="campo-hora-ocorrencia">Hora da ocorrência (00:00 - 23:59)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-hora-ocorrencia" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-8 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">52</span>
-                                <label for="campo-local-ocorrencia">Local de ocorrência</label>
-                            </div>
-                            <input id="campo-local-ocorrencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="99">
-                        </div>
-                        <div class="container-input-dado justify-content-evenly px-2">
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
                             <ul>
-                                <li>1- Residência</li>
-                                <li>2- Habitação coletiva</li>
-                                <li>3- Escola</li>
+                                <div class="d-flex align-items-center">
+                                    <input id="percutanea" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Percutânea</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="mucosa" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Mucosa (oral/ ocular)</span>
+                                </div>
                             </ul>
                             <ul>
-                                <li>4- Local de prática esportiva</li>
-                                <li>5- Bar ou similar</li>
-                                <li>6- Via pública</li>
+                                <div class="d-flex align-items-center">
+                                    <input id="pele-integra" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Pele íntegra</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="pele-nao-integra" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Pele não íntegra</span>
+                                </div>
                             </ul>
                             <ul>
-                                <li>7- Comércio/serviços</li>
-                                <li>8- Indústrias/construção</li>
-                                <li class="d-flex align-items-baseline">
-                                    <label for="descricao-local-outro">9- Outro</label>
-                                    <div class="col-7 d-flex justify-content-center">
-                                        <input id="descricao-local-outro" class="input-dado form-control" type="text">
-                                    </div>
-                                </li>
-                                <li>99- Ignorado</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="div-input mb-3">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">53</span>
-                                    <label for="campo-outras-vezes-ocorrencia">Ocorreu outras vezes?</label>
+                                <div class="d-flex align-items-center">
+                                    <input id="manif-local-outra" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Outros</span>
+                                    <input id="campo-doen-outr" class="form-control input-dado">
                                 </div>
-                                <input id="campo-outras-vezes-ocorrencia" type="number"
-                                       class="input-dado-quadrado form-control" min="1" max="9">
-                            </div>
-                            <div class="container-input-dado justify-content-evenly mb-2">
-                                <span>1 - Sim</span>
-                                <span>2 - Não</span>
-                                <span>9 - Ignorado</span>
-                            </div>
-                        </div>
-                        <div class="div-input">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">54</span>
-                                    <label for="campo-autoprovocada-ocorrencia">A lesão foi autoprovocada?</label>
-                                </div>
-                                <input id="campo-autoprovocada-ocorrencia" type="number"
-                                       class="input-dado-quadrado form-control" min="1" max="9">
-                            </div>
-                            <div class="container-input-dado justify-content-evenly mb-2">
-                                <span>1 - Sim</span>
-                                <span>2 - Não</span>
-                                <span>9 - Ignorado</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Violência</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">55</span>
-                                <label for="campo-motivacao-violencia">Essa violência foi motivada por:</label>
-                            </div>
-                            <input id="campo-motivacao-violencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="99">
-                        </div>
-                        <div class="container-input-dado letra-miuda justify-content-evenly">
-                            <ul class="mx-1">
-                                <li class="mb-2">1-Sexismo</li>
-                                <li>2-Conflito geracional</li>
                             </ul>
-                            <ul class="mx-1">
-                                <li class="mb-2">2-Homofobia/Lesbofobia/Bifobia/Transfobia</li>
-                                <ul class="d-flex justify-content-evenly">
-                                    <li>7-Situação de rua</li>
-                                    <li>8-Deficiência</li>
-                                </ul>
-                            </ul>
-                            <ul class="col-2 mx-1">
-                                <li>3-Racismo</li>
-                                <li class="d-flex align-items-baseline">
-                                    <span>9-Outros</span>
-                                    <div class="col-6 d-flex justify-content-end">
-                                        <input id="descricao-violencia-outro" class="input-dado form-control"
-                                               aria-label="">
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="mb-2">4-Intolerância religiosa</li>
-                                <li>88-Não se aplica</li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="mb-2">5-Xenofobia</li>
-                                <li>99-Ignorado</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">56</span>
-                            <span>Tipo de violência</span>
-                        </div>
-                        <div class="container-input-dado justify-content-evenly px-2 font-xsmall">
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-fisica">
-                                    <label class="form-check-label" for="opcao-violencia-fisica">
-                                        Física
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-psicologica">
-                                    <label class="form-check-label" for="opcao-violencia-psicologica">
-                                        Psicológica/Moral
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-tortura">
-                                    <label class="form-check-label" for="opcao-violencia-tortura">
-                                        Tortura
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-sexual">
-                                    <label class="form-check-label" for="opcao-violencia-sexual">
-                                        Sexual
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-trafico-humano">
-                                    <label class="form-check-label" for="opcao-violencia-trafico-humano">
-                                        Tráfico de seres humanos
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-financeira">
-                                    <label class="form-check-label" for="opcao-violencia-financeira">
-                                        Financeira/Econômica
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-abandono">
-                                    <label class="form-check-label" for="opcao-violencia-abandono">
-                                        Negligência/Abandono
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-trabalho-infantil">
-                                    <label class="form-check-label" for="opcao-violencia-trabalho-infantil">
-                                        Trabalho infantil
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-intervencao-legal">
-                                    <label class="form-check-label" for="opcao-violencia-intervencao-legal">
-                                        Intervenção legal
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-outros">
-                                    <label class="form-check-label" for="opcao-violencia-outros">
-                                        Outros
-                                    </label>
-                                </li>
-                                <li class="col-7">
-                                    <input id="descricao-violencia-outros" class="input-dado form-control"
-                                           aria-label="">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-5 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">57</span>
-                            <span>Meio de agressão</span>
-                        </div>
-                        <div class="container-input-dado justify-content-evenly px-2 font-xsmall">
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-espancamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-espancamento">
-                                        Força corporal/<br>espancamento
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-enforcamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-enforcamento">
-                                        Enforcamento
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-objContundente">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objContundente">
-                                        Obj. contundente
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-objPerfurocortante">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objPerfurocortante">
-                                        Obj. pérfuro-<br>cortante
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-objQuente">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objQuente">
-                                        Substância/<br>Obj. quente
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-envenenamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-envenenamento">
-                                        Envenenamento,<br>intoxicação
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-armaFogo">
-                                    <label class="form-check-label" for="opcao-meio-agressao-armaFogo">
-                                        Arma de fogo
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-ameaca">
-                                    <label class="form-check-label" for="opcao-meio-agressao-ameaca">
-                                        Ameaça
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-meio-agressao-outro">
-                                    <label class="form-check-label" for="opcao-meio-agressao-outro">
-                                        Outro
-                                    </label>
-                                </li>
-                                <li class="col-9">
-                                    <input id="descricao-meio-agressao-outro" class="input-dado form-control"
-                                           aria-label="">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Violência Sexual</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">58</span>
-                            <span>Se ocorreu violência sexual, qual o tipo?</span>
-                        </div>
-                        <div class="container-input-dado align-items-end justify-content-evenly px-1">
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-assedio">
-                                <label class="form-check-label" for="opcao-violencia-sexual-assedio">
-                                    Assédio sexual
-                                </label>
-                            </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-estupro">
-                                <label class="form-check-label" for="opcao-violencia-sexual-estupro">
-                                    Estupro
-                                </label>
-                            </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-pornInfatil">
-                                <label class="form-check-label" for="opcao-violencia-sexual-pornInfatil">
-                                    Pornografia infantil
-                                </label>
-                            </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-exploracaoSexual">
-                                <label class="form-check-label" for="opcao-violencia-sexual-exploracaoSexual">
-                                    Exploração sexual
-                                </label>
-                            </div>
-                            <div class="d-flex col-2 mx-1 align-items-baseline">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-sexual-outros">
-                                    <label class="form-check-label" for="opcao-violencia-sexual-outros">
-                                        Outro
-                                    </label>
-                                </div>
-                                <div class="col-8 px-1">
-                                    <input id="descricao-violencia-sexual-outros" class="input-dado form-control"
-                                           aria-label="">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">59</span>
-                            <span>Procedimento realizado</span>
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">47</span>
+                                <label for="campo-mat-org">Material orgânico</label>
+                            </div>
+                            <input id="campo-mat-org" type="number" class="input-dado-quadrado form-control"
+                                   min="1" max="9">
                         </div>
-                        <div class="container-input-dado justify-content-evenly px-1">
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-dst">
-                                    <label class="form-check-label" for="opcao-procedimento-dst">
-                                        Profilaxia DST
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-hiv">
-                                    <label class="form-check-label" for="opcao-procedimento-hiv">
-                                        Profilaxia HIV
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-hepatiteB">
-                                    <label class="form-check-label" for="opcao-procedimento-hepatiteB">
-                                        Profilaxia Hepatite B
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-sangue">
-                                    <label class="form-check-label" for="opcao-procedimento-sangue">
-                                        Coleta de sangue
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-semen">
-                                    <label class="form-check-label" for="opcao-procedimento-semen">
-                                        Coleta de sêmen
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-secrecaoVaginal">
-                                    <label class="form-check-label" for="opcao-procedimento-secrecaoVaginal">
-                                        Coleta de secreção vaginal
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-contracepcao">
-                                    <label class="form-check-label" for="opcao-procedimento-contracepcao">
-                                        Contracepção de emergência
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-aborto">
-                                    <label class="form-check-label" for="opcao-procedimento-aborto">
-                                        Aborto previsto em lei
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados do provável<br>autor da violência</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-2 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">60</span>
-                            <label class="mx-1" for="campo-numero-envolvidos">Número de<br>Envolvidos</label>
-                        </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
-                            <input id="campo-numero-envolvidos" class="input-dado-quadrado form-control mb-2"
-                                   type="number" min="1" max="9">
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
                             <ul>
-                                <li>1 - Um</li>
-                                <li>2 - Dois ou mais</li>
+                                <li>1-Sangue</li>
+                                <li>5-Líquido amniótico</li>
+                            </ul>
+                            <ul>
+                                <li>2-Líquor</li>
+                                <li>6-Fluido com sangue</li>
+                            </ul>
+                            <ul>
+                                <li>3-Líquido pleural</li>
+                                <li>7-Soro/plasma</li>
+                            </ul>
+                            <ul>
+                                <li>4-Líquido ascítico</li>
+                                <div class="d-flex align-items-center">
+                                    <span>8-Outros: <br></span>
+                                    <input id="campo-doen-outr" class="form-control input-dado">
+                                </div>
+                            </ul>
+                            <ul>
                                 <li>9 - Ignorado</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">61</span>
-                            <span class="mx-1">Vínculo/grau de parentesco com a pessoa atendida</span>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">48</span>
+                                <label for="circ-acid">Circunstância do Acidente</label>
+                            </div>
+                            <input id="circ-acid" type="number" class="input-dado-quadrado form-control"
+                                   min="1" max="99">
                         </div>
-                        <div class="container-input-dado font-xsmall justify-content-evenly pb-2 px-1">
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-pai">
-                                    <label class="form-check-label" for="opcao-vinculo-pai">
-                                        Pai
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-mae">
-                                    <label class="form-check-label" for="opcao-vinculo-mae">
-                                        Mãe
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-padrasto">
-                                    <label class="form-check-label" for="opcao-vinculo-padrasto">
-                                        Padrasto
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-madrasta">
-                                    <label class="form-check-label" for="opcao-vinculo-madrasta">
-                                        Madrasta
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-conjuge">
-                                    <label class="form-check-label" for="opcao-vinculo-conjuge">
-                                        Cônjuge
-                                    </label>
-                                </li>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>01 - Administ. de medicação endovenosa</li>
+                                <li>02 - Administ. de medicação intramuscular</li>
+                                <li>03 - Administ. de medicação subcutânea</li>
+                                <li>04 - Administ. de medicação intradérmica</li>
+                                <li>05 - Punção venosa/arterial para coleta de sangue</li>
+                                <li>06 - Punção venosa/arterial não especificada</li>
+                                <li>07 - Descarte inadequado de material perfurocortante em saco de lixo</li>
+                                <li>08 - Descarte inadequado de material perfurocortante em bancada, cama, chão, etc...</li>
+                                <li>09 - Lavanderia</li>
                             </ul>
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-ex-conjuge">
-                                    <label class="form-check-label" for="opcao-vinculo-ex-conjuge">
-                                        Ex-Cônjuge
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-namorado">
-                                    <label class="form-check-label" for="opcao-vinculo-namorado">
-                                        Namorado(a)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-ex-namorado">
-                                    <label class="form-check-label" for="opcao-vinculo-ex-namorado">
-                                        Ex-Namorado(a)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-filho">
-                                    <label class="form-check-label" for="opcao-vinculo-filho">
-                                        Filho(a)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-irmao">
-                                    <label class="form-check-label" for="opcao-vinculo-irmao">
-                                        Irmão(ã)
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-amigos">
-                                    <label class="form-check-label" for="opcao-vinculo-amigos">
-                                        Amigos/conhecidos
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-desconhecido">
-                                    <label class="form-check-label" for="opcao-vinculo-desconhecido">
-                                        Desconhecido(a)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-cuidador">
-                                    <label class="form-check-label" for="opcao-vinculo-cuidador">
-                                        Cuidador(a)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-patrao">
-                                    <label class="form-check-label" for="opcao-vinculo-patrao">
-                                        Patrão/chefe
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-relacao-institucional">
-                                    <label class="form-check-label" for="opcao-vinculo-relacao-institucional">
-                                        Pessoa com relação<br>institucional
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-policial">
-                                    <label class="form-check-label" for="opcao-vinculo-policial">
-                                        Policial/agente da lei
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-propria-pessoa">
-                                    <label class="form-check-label" for="opcao-vinculo-propria-pessoa">
-                                        Própria pessoa
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-outros">
-                                    <label class="form-check-label" for="opcao-vinculo-outros">
-                                        Outros
-                                    </label>
-                                </li>
-                                <li class="col-7">
-                                    <input id="descricao-vinculo-outros" class="input-dado form-control"
-                                           aria-label="">
-                                </li>
+                            <ul>
+                                <li>10 - Lavagem de material</li>
+                                <li>11 - Manipulação de caixa com material perfurocortante</li>
+                                <li>12 - Procedimento cirúrgico</li>
+                                <li>13 - Procedimento odontológico</li>
+                                <li>14 - Procedimento laboratorial</li>
+                                <li>15 - Dextro</li>
+                                <li>16 - Reencape</li>
+                                <li>98 - Outros</li>
+                                <li>99 - Ignorado</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">62</span>
-                            <label class="mx-1" for="campo-sexo-autor">Sexo do provável<br>autor da violência</label>
-                        </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
-                            <input id="campo-sexo-autor" class="input-dado-quadrado form-control mb-2" type="number"
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">49</span>
+                                <label for="campo-agente">Agente</label>
+                            </div>
+                            <input id="campo-agente" type="number" class="input-dado-quadrado form-control"
                                    min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
                             <ul>
-                                <li>1 - Masculino</li>
-                                <li>2 - Feminino</li>
-                                <li>3 - Ambos os sexos</li>
+                                <li>1-Agulha com lúmen (luz)</li>
+                                <li>5 - Lâmina/lanceta (qualquer tipo)</li>
+                            </ul>
+                            <ul>
+                                <li>2 - Agulha sem lúmen/maciça</li>
+                                <li>6 - Outros</li>
+                            </ul>
+                            <ul>
+                                <li>3 - Intracath</li>
                                 <li>9 - Ignorado</li>
                             </ul>
+                            <ul>
+                                <li>4 - Vidros</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">63</span>
-                            <label class="mx-1" for="campo-alcool-autor">Suspeita de<br>uso de álcool</label>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">50</span>
+                            <label>
+                                Uso de EPI (aceita mais de uma opção)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
-                            <input id="campo-alcool-autor" class="input-dado-quadrado form-control mb-2" type="number"
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="luva" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>LUVA</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="avental" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Avental</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="oculos" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Óculos</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="mascara" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Máscara</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="prot-facial" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Proteção facial</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="bota" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Bota</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-5 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">51</span>
+                                <label for="sit-vacinal">Situação vacinal do acidentado em relação à hepatite B (3 doses)</label>
+                            </div>
+                            <input id="sit-vacinal" type="number" class="input-dado-quadrado form-control"
                                    min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
                             <ul>
                                 <li>1 - Sim</li>
+                            </ul>
+                            <ul>
                                 <li>2 - Não</li>
+                            </ul>
+                            <ul>
                                 <li>9 - Ignorado</li>
                             </ul>
                         </div>
                     </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">52</span>
+                            <label>
+                                Resultados de exames do acidentado (no momento do acidente - data ZERO)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> 
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-Positivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2-Negativo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                3-Inconclusivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                4-Não realizado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9-Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ex-acid-anti-hiv" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HIV</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ex-acid--hbsg" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>HbsAg</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ex-acid-anti-hbs" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HBs</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ex-acid-anti-hcv" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HCV</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+                <div class="linha-dados">
+                    <div class="col-12 mt-3 mb-3 negrito">
+                        Dados do Paciente Fonte ( no momento do acidente)
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-5 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">53</span>
+                                <label for="sit-vacinal">Paciente Fonte Conhecida?</label>
+                            </div>
+                            <input id="sit-vacinal" type="number" class="input-dado-quadrado form-control"
+                                   min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1 - Sim</li>
+                            </ul>
+                            <ul>
+                                <li>2 - Não</li>
+                            </ul>
+                            <ul>
+                                <li>9 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">54</span>
+                            <label>
+                                Se sim, qual o resultado dos testes sorológicos?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> 
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-Positivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2-Negativo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                3-Inconclusivo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                4-Não realizado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9-Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="tes-sor-anti-hiv" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HIV</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="tes-sor-hbsag" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>HbsAg</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="tes-sor-anti-hbs" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HBs</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="tes-sor-anti-hcv" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Anti-HCV</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">55</span>
+                            <label>
+                                Conduta no momento do acidente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="sem-indic" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Sem indicação de quimioprofilaxia</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="rec-quimio" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Recusou quimioprofilaxia indicada</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="azt-3tc" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>AZT+3TC</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="azt-idinavir" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>AZT+3TC+Indinavir</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="azt-nelfinavir" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>AZT+3TC+Nelfinavir</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="imuno-hepb" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Imunoglobulina humana contra hepatite B (HBIG)</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-hepb" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Vacina contra hepatite B</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="conduta-outr" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Outro Esquema de ARV Especifique</span>
+                                    <input id="campo-doen-outr" class="form-control input-dado">
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Conclusão</span>
+            </div>
+            <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-12 div-input">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">64</span>
-                                <label for="campo-ciclo-vida-autor">
-                                    Ciclo de vida do provável autor da violência
-                                </label>
+                                <span class="numeracao">56</span>
+                                <label for="campo-evolucao-caso">Evolução do Caso</label>
                             </div>
-                            <input id="campo-ciclo-vida-autor" class="input-dado-quadrado form-control">
-                        </div>
-                        <div class="container-input-dado px-2 pb-1">
-                            <ul class="col-4">
-                                <li>1 - Criança (0 a 9 anos)</li>
-                                <li>2 - Adoslescente (10 a 19 anos)</li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>3 - Jovem (20 a 24 anos)</li>
-                                <li>4 - Pessoa adulta (25 a 59 anos)</li>
-                            </ul>
-                            <ul class="col-4">
-                                <li>5 - Pessoa idosa (60 anos ou mais)</li>
-                                <li>9 - Ignorado</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Encaminhamento</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">65</span>
-                            <span>Encaminhamento</span>
-                        </div>
-                        <div class="container-input-dado font-xsmall justify-content-evenly px-2 pb-1">
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeSaude">
-                                    <label class="form-check-label" for="opcao-encaminhamento-redeSaude">
-                                        Rede da Saúde (Unidade Báisca de Saúde, hospital, outras)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeAssistencial">
-                                    <label class="form-check-label" for="opcao-encaminhamento-redeAssistencial">
-                                        Rede da Assistência Social (CRAS, CREAS, outras)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeEducacao">
-                                    <label class="form-check-label" for="opcao-encaminhamento-redeEducacao">
-                                        Rede da Educação (Creche, escola, outras)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-atendimentoMulher">
-                                    <label class="form-check-label" for="opcao-encaminhamento-atendimentoMulher">
-                                        Rede de Atendimento à Mulher (Centro Especializado de<br>
-                                        Atendimento à Mulher, Casa da Mulher Brasileria, outras)
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-conselhoTutelar">
-                                    <label class="form-check-label" for="opcao-encaminhamento-conselhoTutelar">
-                                        Conselho Tutelar
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-conselhoIdoso">
-                                    <label class="form-check-label" for="opcao-encaminhamento-conselhoIdoso">
-                                        Conselho do Idoso
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaIdoso">
-                                    <label class="form-check-label" for="opcao-encaminhamento-delegaciaIdoso">
-                                        Delegacia de Atendimento ao Idoso
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-direitosHumanos">
-                                    <label class="form-check-label" for="opcao-encaminhamento-direitosHumanos">
-                                        Centro de referência dos Direitos Humanos
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-ministerioPublico">
-                                    <label class="form-check-label" for="opcao-encaminhamento-ministerioPublico">
-                                        Ministério Público
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaCrianca">
-                                    <label class="form-check-label" for="opcao-encaminhamento-delegaciaCrianca">
-                                        Delegacia Especializada de Proteção à<br>Criança e Adolescente
-                                    </label>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaMulher">
-                                    <label class="form-check-label" for="opcao-encaminhamento-delegaciaMulher">
-                                        Delegacia de Atendimento à<br>Mulher
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-outrasDelegacias">
-                                    <label class="form-check-label" for="opcao-encaminhamento-outrasDelegacias">
-                                        Outras delegacias
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-justicaInfancia">
-                                    <label class="form-check-label" for="opcao-encaminhamento-justicaInfancia">
-                                        Justiça da Infância e da<br>Juventude
-                                    </label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-defensoriaPublica">
-                                    <label class="form-check-label" for="opcao-encaminhamento-defensoriaPublica">
-                                        Defensoria Pública
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados finais</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-3 div-input pb-2">
-                        <div class="info-elevada-com-input">
-                            <div class="d-flex align-items-start">
-                                <span class="numeracao">66</span>
-                                <label class="px-1" for="campo-violencia-relacionada">
-                                    Violência Relacionada<br>ao Trabalho
-                                </label>
-                            </div>
-                            <input id="campo-violencia-relacionada" type="number"
-                                   class="input-dado-quadrado form-control"
+                            <input id="campo-evolucao-caso" type="number" class="input-dado-quadrado form-control"
                                    min="1" max="9">
                         </div>
-                        <div class="container-input-dado letra-miuda justify-content-evenly">
-                            <span>1 - Sim</span>
-                            <span>2 - Não</span>
-                            <span>9 - Ignorado</span>
-                        </div>
-                    </div>
-                    <div class="col-5 div-input">
-                        <div class="info-elevada-com-input">
-                            <div class="d-flex align-items-start">
-                                <span class="numeracao">67</span>
-                                <label class="px-1" for="campo-emitida-CAT">
-                                    Se sim, foi emitida a Comunicação de<br>Acidente de Trabalho (CAT)
-                                </label>
-                            </div>
-                            <input id="campo-emitida-CAT" type="number"
-                                   class="input-dado-quadrado form-control"
-                                   min="1" max="9">
-                        </div>
-                        <div class="container-input-dado letra-miuda justify-content-evenly">
-                            <span>1 - Sim</span>
-                            <span>2 - Não</span>
-                            <span>8 - Não se aplica</span>
-                            <span>9 - Ignorado</span>
-                        </div>
-                    </div>
-                    <div class="col-4 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">68</span>
-                            <label for="campo-circusntancia-lesao">Circunstancia da lesão</label>
-                        </div>
-                        <div class="container-input-dado align-items-center">
-                            <span class="px-2 negrito">CID 10 - Cap XX</span>
-                            <div class="col-5">
-                                <input id="campo-circusntancia-lesao" type="number"
-                                       class="input-dado form-control px-2">
-                            </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <span>1-Alta com conversão sorológica (Especificar vírus:)</span>
+                                    <input id="cover-virus" class="form-control input-dado">
+                                </div>
+                                
+                            </ul>
+                            <ul>
+                                <li>2-Alta sem conversão sorológica</li>
+                                <li>4- Abandono</li>
+                                <li>6- Óbito por Outra Causa</li>
+                            </ul>
+                            <ul>
+                                <li>3-Alta paciente fonte negativo</li>
+                                <li>5- Óbito por acidente com exposição à material biológico</li>
+                                <li>9- Ignorado</li>
+                            </ul>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">69</span>
-                            <label for="campo-dt-encerramento">Data de encerramento</label>
+                            <span class="numeracao">57</span>
+                            <label for="campo-dt-obito">Se Óbito, Data</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-encerramento" type="date" class="input-dado form-control">
+                            <input id="campo-dt-obito" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">58</span>
+                                <label for="campo-comunicacao-acidente-trabalho">Foi emitida a Comunicação de Acidente do Trabalho</label>
+                            </div>
+                            <input id="campo-comunicacao-acidente-trabalho" type="number"
+                                   class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <span>1 - Sim</span>
+                            <span>2 - Não</span>
+                            <span>3 - Não se aplica</span>
+                            <span>9 - Ignorado</span>
                         </div>
                     </div>
                 </div>
@@ -2887,58 +2376,14 @@
         <span class="titulo-section negrito">Informações complementares e observações</span>
         <div class="bloco-dados">
             <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-5 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-nome-acompanhante">Nome do acompanhante</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-nome-acompanhante" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-grau-parentesco">Vínculo/grau de parentesco</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-grau-parentesco" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-telefone-acompanhate">(DDD) Telefone</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-telefone-acompanhate" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-12 textArea">
-                        <span class="negrito">Obsercações Adicionais:</span>
-                        <textarea class="form-control" rows="6" aria-label=""></textarea>
-                    </div>
-                </div>
-                <div class="linha-dados negrito telefones-uteis justify-content-around align-items-center">
-                    <div class="d-flex flex-column align-items-center mx-2">
-                        <span class="text-center">Disque Saúde - Ouvidoria geral do SUS</span>
-                        <span>136</span>
-                    </div>
-                    <div class="d-flex flex-column align-items-center mx-2">
-                        <span class="titulo text-center">TELEFONES ÚTEIS</span>
-                        <span class="text-center">Central de Atendimento à Mulher</span>
-                        <span>180</span>
-                    </div>
-                    <div class="d-flex flex-column align-items-center mx-2">
-                        <span class="text-center">Disque Direitos Humanos</span>
-                        <span>100</span>
-                    </div>
+                <div class="mt-2 textArea">
+                    <textarea class="form-control" rows="6" aria-label=""></textarea>
                 </div>
             </div>
         </div>
         <div class="bloco-dados">
             <div class="titulo-bloco">
-                <span>Notificador</span>
+                <span>Investigador</span>
             </div>
             <div class="conteudo-bloco">
                 <div class="linha-dados">
@@ -2947,7 +2392,7 @@
                             <label for="campo-municipio-us-investigador">Município/Unidade de Saúde</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-us-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-us-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -2965,7 +2410,7 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2973,7 +2418,7 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2981,7 +2426,7 @@
                             <label for="campo-assinatura-investigador">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2989,11 +2434,11 @@
         </div>
     </section>
     <div class="linha-dados footer-ficha mb-3">
-        <span class="col-5">Violência interpessoal/autoprovocada</span>
-        <span class="col-2 d-flex justify-content-center">Sinan</span>
+        <span class="col-5">Acidente de trabalho com exposição à material biológico</span>
+        <span class="col-2 d-flex justify-content-center">Sinan Net</span>
         <div class="col-5 d-flex justify-content-evenly">
             <span>SVS</span>
-            <span>15.06.2015</span>
+            <span>27/09/2005</span>
         </div>
     </div>
 </div>

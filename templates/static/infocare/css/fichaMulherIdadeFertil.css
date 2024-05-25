@@ -25,6 +25,11 @@
     .colADireita {
         padding-left: 10px;
     }
+
+    .spanLGN {
+        padding: 3px;
+        border: 1px solid var(--preto);
+    }
 }
 
 #fichaMulherIdadeFertil {
@@ -34,10 +39,5 @@
 
     .form-check {
         align-self: flex-end;
-    }
-
-    .spanLGN {
-        padding: 3px;
-        border: 1px solid var(--preto);
     }
 }

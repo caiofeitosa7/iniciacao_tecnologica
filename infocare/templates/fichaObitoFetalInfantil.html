@@ -1,0 +1,3302 @@
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="requisicaoGetPadrao('pagina_inicial')">
+        </i>
+    </div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" class="form-control"/>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="ficha fichaContornada mb-3">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="col-8 d-flex flex-column">
+            <label class="fs-5">
+                Ficha de investigação do Óbito <b>Fetal e Infantil – Hospitalar</b>
+            </label>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+            <div class="container-ano col-7 d-flex align-items-center">
+                <label for="num-casos" class="label-nowrap">
+                    N° de casos:
+                </label>
+                <input id="num-casos" type="number" class="form-control mx-2" min="0" width="50px"/>
+            </div>
+            <div class="divFundoCinza d-grid col-3 justify-content-center py-2">
+                <label class="negrito">FI-H</label>
+            </div>
+        </div>
+    </div>
+    <div class="bloco">
+        <div class="d-flex titulo-bloco justify-content-between mt-2">
+            <span class="negrito fs-6" style="align-self: center;">
+                I. Informações do feto/da criança no momento do óbito
+            </span>
+            <div class="d-flex align-items-center form-check m-0 mx-2">
+                <input class="form-check-input" type="checkbox" name="obito_fetal_DO" id="obito_fetal_DO">
+                <label class="form-check-label ms-2" for="obito_fetal_DO">
+                    Óbito fetal na DO
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados">
+                <div class="col-9 d-flex align-items-center">
+                    <span class="numeracao negrito">1</span>
+                    <label for="nome" class="negrito mx-1">Nome</label>
+                    <input id="nome" class="form-control input-dado mx-1"/>
+                </div>
+                <div class="col-3 d-flex justify-content-between colADireita mt-1">
+                    <div class="d-flex">
+                        <div>
+                            <span class="numeracao negrito">2</span>
+                            <label for="sexo-m" class="negrito mx-1">Sexo:</label>
+                        </div>
+                        <div class="d-flex letra-miuda mx-1">
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="sexo" id="sexo-m">
+                                <label class="form-check-label" for="sexo-m">
+                                    M
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="sexo" id="sexo-f">
+                                <label class="form-check-label" for="sexo-f">
+                                    F
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-3 d-flex align-items-center">
+                    <span class="numeracao negrito">3</span>
+                    <label for="semanas_gestacao" class="negrito label-wrap-pretty mx-1">
+                        Semanas de gestação<br>para óbito fetal
+                    </label>
+                    <input id="semanas_gestacao" type="number" class="form-control input-dado mx-1" min="0"
+                        style="max-width: 50px;">
+                </div>
+                <div class="d-flex col-5 colADireita">
+                    <label for="idade-obito" class="negrito label-wrap-pretty me-2">
+                        Idade para<br>óbito infantil
+                    </label>
+                    <div class="d-flex align-items-center flex-wrap letra-miuda mx-1">
+                        <input id="idade-obito" type="number" class="form-control input-dado me-2" style="width: 50px;">
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-obito" id="idade-obito-meses">
+                            <label class="form-check-label" for="idade-obito-meses">
+                                Meses
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-obito" id="idade-obito-dias">
+                            <label class="form-check-label" for="idade-obito-dias">
+                                Dias
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-obito" id="idade-obito-horas">
+                            <label class="form-check-label" for="idade-obito-horas">
+                                Horas
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-obito" id="idade-obito-min">
+                            <label class="form-check-label" for="idade-obito-min">
+                                Min
+                            </label>
+                        </div>
+                        <span class="spanLGN ms-2">lgn</span>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-between align-items-center colADireita">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="numeracao negrito">4</span>
+                            <label for="peso" class="negrito mx-1">Peso:</label>
+                        </div>
+                        <div class="d-flex align-items-center letra-miuda mx-1">
+                            <input id="peso" type="number" class="form-control input-dado me-2" style="width: 50px;">
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="peso" id="peso-gr">
+                                <label class="form-check-label" for="peso-gr">
+                                    gr.
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="peso" id="peso-kg">
+                                <label class="form-check-label" for="peso-kg">
+                                    Kg
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-6 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">5</span>
+                            <label for="dt_obito" class="negrito label-nowrap mx-1">Data do óbito</label>
+                        </div>
+                        <input id="dt_obito" type="date" class="form-control input-dado">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+                <div class="col-6 d-flex justify-content-between align-items-center colADireita">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">6</span>
+                            <label for="num_DO" class="negrito label-nowrap mx-1">N° DO</label>
+                        </div>
+                        <input id="num_DO" type="number" class="form-control input-dado">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-6 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">7</span>
+                            <label for="dt_nascimento" class="negrito label-nowrap mx-1">Data nascimento</label>
+                        </div>
+                        <input id="dt_nascimento" type="date" class="form-control input-dado">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+                <div class="col-6 d-flex justify-content-between align-items-center colADireita">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">8</span>
+                            <label for="num_DN" class="negrito label-nowrap mx-1">N° DN</label>
+                        </div>
+                        <input id="num_DN" type="number" class="form-control input-dado">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-8 d-flex align-items-center me-2">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">9</span>
+                        <label for="endereco_residencia_responsavel" class="negrito label-wrap-pretty mx-1">
+                            Endereço de Residência do responsável:
+                        </label>
+                    </div>
+                    <input id="endereco_residencia_responsavel" class="form-control input-dado"
+                        style="max-width: 50%;">
+                        <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="col-4 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <label for="telefone_responsavel" class="negrito mx-1">
+                            Telefone:
+                        </label>
+                        <input id="telefone_responsavel" class="form-control input-dado">
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-8 d-flex align-items-center me-2">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">10</span>
+                        <label for="municipio_residencia_responsavel" class="negrito label-wrap-pretty mx-1">
+                            Município de Residência do responsável:
+                        </label>
+                    </div>
+                    <input id="municipio_residencia_responsavel" class="form-control input-dado"
+                        style="max-width: 50%;">
+                </div>
+                <div class="col-4 d-flex justify-content-between align-items-center colADireita">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">11</span>
+                        <label for="uf_residencia_responsavel" class="negrito label-wrap-pretty mx-1">
+                            UF
+                        </label>
+                        <input id="uf_residencia_responsavel" class="form-control input-dado"
+                        style="max-width: 50px;">
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="d-flex justify-content-between titulo-bloco">
+            <span class="negrito fs-6" style="align-self: center;">
+                II. Informações da mãe
+            </span>
+            <div class="d-flex align-items-center form-check m-0 mx-2">
+                <label class="form-check-label label-nowrap me-2" for="num_cartao_sus">
+                    Nº do Cartão SUS:
+                </label>
+                <input id="num_cartao_sus" type="number" class="form-control input-dado">
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados">
+                <div class="col-8 d-flex align-items-center">
+                    <span class="numeracao negrito">12</span>
+                    <label for="nome_mae" class="negrito mx-1">Nome:</label>
+                    <input id="nome_mae" class="form-control input-dado ms-1"/>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="col-4 d-flex align-items-center colADireita">
+                    <span class="numeracao negrito">13</span>
+                    <label for="idade_mae" class="negrito mx-1">Idade:</label>
+                    <input id="idade_mae" class="form-control input-dado mx-1"/>
+                    <span>anos</span>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-5 d-flex align-items-start flex-wrap">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">14</span>
+                        <label for="nome_mae" class="negrito mx-1">Raça/cor:</label>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center letra-miuda mx-1">
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="raca" id="raca-branca">
+                                <label class="form-check-label" for="raca-branca">
+                                    Branca
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="raca" id="raca-preta">
+                                <label class="form-check-label" for="raca-preta">
+                                    Preta
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="raca" id="raca-indigena">
+                                <label class="form-check-label" for="raca-indigena">
+                                    Indígena
+                                </label>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center letra-miuda mx-1">
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="raca" id="raca-parda">
+                                <label class="form-check-label" for="raca-parda">
+                                    Parda
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-2">
+                                <input class="form-check-input" type="radio" name="raca" id="raca-amarela">
+                                <label class="form-check-label" for="raca-amarela">
+                                    Amarela
+                                </label>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 d-flex flex-column colADireita">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">14.1</span>
+                        <label for="etnia_indigena" class="negrito label-wrap-pretty ms-1 mb-2">
+                            Se “indígena”, informe a etnia:
+                        </label>
+                        <input id="etnia_indigena" class="form-control input-dado ms-1"
+                            style="max-width: 200px;"/>
+                        <span class="spanLGN ms-2">lgn</span>
+                    </div>
+                    <div class="d-flex align-items-center flex-wrap mt-2">
+                        <span class="numeracao negrito">14.2</span>
+                        <label for="aldeia_indigena" class="negrito label-nowrap ms-1">
+                            Se “indígena”, informe a aldeia:
+                        </label>
+                        <input id="aldeia_indigena" class="form-control input-dado ms-1"
+                            style="max-width: 200px;"/>
+                        <div class="d-flex align-items-center justify-content-between form-check m-0 ms-2">
+                            <input class="form-check-input" type="checkbox" name="nao_aldeada" id="nao_aldeada">
+                            <label class="form-check-label label-nowrap ms-2" for="nao_aldeada">
+                                Não aldeada
+                            </label>
+                            <span class="spanLGN ms-2">lgn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="d-flex">
+            <span class="titulo-bloco negrito">
+                III. Identificação do Hospital/Maternidade onde se realiza a investigação
+            </span>
+        </div>
+        <div class="linha-dados mt-2">
+            <div class="col-7 d-flex align-items-center">
+                <span class="numeracao negrito">15</span>
+                <label for="nome_hospital" class="mx-1">
+                    Nome:
+                </label>
+                <input id="nome_hospital" class="form-control input-dado">
+            </div>
+            <div class="col-5 d-flex align-items-center colADireita">
+                <span class="numeracao negrito">16</span>
+                <label for="cnes_hospital" class="ms-1">
+                    CNES:
+                </label>
+                <input id="cnes_hospital" class="form-control input-dado ms-1">
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+        </div>
+
+
+
+
+        <div class="linha-dados">
+            <div class="col-7 d-flex align-items-center">
+                <span class="numeracao negrito">17</span>
+                <label for="municipio-hospital" class="negrito mx-1">
+                    Município:
+                </label>
+                <input id="municipio-hospital" class="form-control input-dado ms-1"/>
+                <label for="uf-hospital" class="negrito ms-3">
+                    UF:
+                </label>
+                <input id="uf-hospital" class="form-control input-dado ms-1" style="max-width: 50px;"/>
+            </div>
+            <div class="col-5 d-flex colADireita mt-1">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">18</span>
+                    <label for="sexo" class="negrito mx-1">
+                        Tipo de<br>estabelecimento:
+                    </label>
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="d-flex letra-miuda mx-1">
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="tipo-estabelecimento" id="tipo-estabelecimento-SUS">
+                            <label class="form-check-label" for="tipo-estabelecimento-SUS">
+                                SUS
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="tipo-estabelecimento" id="tipo-estabelecimento-convenio-SUS">
+                            <label class="form-check-label" for="tipo-estabelecimento-convenio-SUS">
+                                Convênio SUS
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex letra-miuda mx-1">
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="tipo-estabelecimento" id="tipo-estabelecimento-privado">
+                            <label class="form-check-label" for="tipo-estabelecimento-privado">
+                                Privado
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="tipo-estabelecimento" id="tipo-estabelecimento-outro">
+                            <label class="form-check-label" for="tipo-estabelecimento-outro">
+                                Outro
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <div class="linha-dados">
+            <div class="col-7 d-flex align-items-center">
+                <span class="numeracao negrito">19</span>
+                <label for="prontuario-crianca" class="negrito mx-1">
+                    Prontuário da criança:
+                </label>
+                <input id="prontuario-crianca" class="form-control input-dado ms-1"/>
+            </div>
+            <div class="col-5 colADireita d-flex align-items-center">
+                <span class="numeracao negrito">20</span>
+                <label for="prontuario-mae" class="negrito mx-1">
+                    Prontuário da mãe:
+                </label>
+                <input id="prontuario-mae" class="form-control input-dado ms-1"/>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="d-flex">
+            <span class="titulo-bloco negrito">
+                IV. Admissão da mãe-gestante no hospital/maternidade
+            </span>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">21</span>
+                    <label for="dt-admissao-mae" class="negrito mx-1">
+                        Data da admissão:
+                    </label>
+                    <input id="dt-admissao-mae" type="date" class="form-control input-dado ms-1"
+                        style="max-width: 200px;"/>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <label for="hora-admissao-mae" class="negrito mx-1">
+                            Hora da admissão:
+                        </label>
+                        <input id="hora-admissao-mae" class="form-control input-dado ms-1" placeholder="00:00"
+                        style="max-width: 54px;"/>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">22</span>
+                        <label for="idade-gestacional-mae" class="negrito label-nowrap mx-1">
+                            Idade gestacional (IG):
+                        </label>
+                        <input id="idade-gestacional-mae" type="number" class="form-control input-dado ms-1 me-2"
+                            style="max-width: 50px;"/>
+                        <span class="label-nowrap me-2">
+                            semanas, por:
+                        </span>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-gestacional" id="idade-gestacional-DUM">
+                            <label class="form-check-label" for="idade-gestacional-DUM">
+                                DUM
+                            </label>
+                        </div>
+                        <input id="dt-DUM" type="date" class="form-control input-dado mx-1"
+                            style="max-width: 140px;"/>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-gestacional" id="idade-gestacional-exame-fisico">
+                            <label class="form-check-label label-nowrap" for="idade-gestacional-exame-fisico">
+                                Exame Físico
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-gestacional" id="idade-gestacional-outro">
+                            <label class="form-check-label" for="idade-gestacional-outro">
+                                Outro
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="radio" name="idade-gestacional" id="idade-gestacional-naoSeAplica">
+                            <label class="form-check-label label-nowrap" for="idade-gestacional-naoSeAplica">
+                                Não se aplica
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-7 d-flex align-items-center">
+                    <span class="numeracao negrito">23</span>
+                    <label for="pressao-arterial-mae" class="negrito label-nowrap mx-1">
+                        Pressão arterial (mmHg) na admissão:
+                    </label>
+                    <input id="pressao-arterial-mae" class="form-control input-dado ms-1 me-2"
+                        style="max-width: 74px;" placeholder="000 / 000"/>
+                </div>
+                <div class="col-5 d-flex  align-items-center justify-content-between">
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="checkbox" name="mae-chegou-obito" id="mae-obito-admissao">
+                        <label class="form-check-label label-nowrap" for="mae-obito-admissao">
+                            Chegou em óbito (vá para <span class="numeracao negrito">27</span>)
+                        </label>
+                    </div>
+                    <span class="spanLGN">
+                        lgn
+                    </span>
+                </div>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">24</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Em relação ao trabalho de parto, a admissão ocorreu:
+                    </label>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="parto-admisso" id="parto-admisso-antes">
+                        <label class="form-check-label" for="parto-admisso-antes">
+                            Antes do início do trabalho
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="parto-admisso" id="parto-admisso-periodo-naoExpulsivo">
+                        <label class="form-check-label" for="parto-admisso-periodo-naoExpulsivo">
+                            No período <b>não expulsivo</b>
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="parto-admisso" id="parto-admisso-periodo-expulsivo">
+                        <label class="form-check-label label-nowrap" for="parto-admisso-periodo-expulsivo">
+                            No período <b>expulsivo</b>
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados flex-column">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">25</span>
+                        <label class="negrito label-nowrap mx-1">
+                            Registros clínicos na admissão:
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="checkbox" name="registro-clinico-admissao" id="registro-clinico-admissao">
+                        <label class="form-check-label label-nowrap" for="registro-clinico-admissao">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex p-2 mx-2 mt-1" style="border: 2px dashed #000;">
+                    <div class="col-6 flex-column">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span class="numeracao negrito">i.</span>
+                                <label class="negrito label-wrap-pretty mx-2">
+                                    Dinâmica uterina
+                                </label>
+                                <input id="contracoes-10-min" type="number" class="form-control input-dado me-2" min="0"
+                                    style="max-width: 50px;">
+                                <span class="label-wrap-pretty">
+                                    contrações por 10 min.
+                                </span>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <span class="numeracao negrito">ii.</span>
+                                <label class="negrito label-wrap-pretty mx-2">
+                                    Apresentação fetal
+                                </label>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="apresentacao-fetal" id="apresentacao-fetal-cefalica">
+                                    <label class="form-check-label label-nowrap" for="apresentacao-fetal-cefalica">
+                                        Cefálica
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="apresentacao-fetal" id="apresentacao-fetal-pelvica">
+                                    <label class="form-check-label label-nowrap" for="apresentacao-fetal-pelvica">
+                                        Pélvica
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="apresentacao-fetal" id="apresentacao-fetal-outra">
+                                    <label class="form-check-label label-nowrap" for="apresentacao-fetal-outra">
+                                        Outra
+                                    </label>
+                                </div>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <span class="numeracao negrito">iii.</span>
+                                <label class="negrito mx-2">
+                                    BCF
+                                </label>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="bcf" id="op-bcf-positivo">
+                                    <label class="form-check-label label-nowrap" for="op-bcf-positivo">
+                                        Positivo
+                                    </label>
+                                </div>
+                                <input id="bcf-positivo-descricao" class="form-control input-dado mx-2" 
+                                    style="max-width: 100px;">
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="bcf" id="op-bcf-negativo">
+                                    <label class="form-check-label label-nowrap" for="op-bcf-negativo">
+                                        Negativo
+                                    </label>
+                                </div>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <span class="numeracao negrito">vii.</span>
+                                <label class="negrito label-wrap-pretty mx-2">
+                                    Descida de apresentação
+                                </label>
+                                <input id="descida-apresentacao" class="form-control input-dado mx-2" 
+                                    style="max-width: 100px;">
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                    </div>
+                    <div class="col-6 flex-column colADireita">
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <span class="numeracao negrito">iv.</span>
+                                <label class="negrito label-wrap-pretty ms-2">
+                                    Dilatação do colo
+                                </label>
+                                <input id="dilatacao-colo" class="form-control input-dado mx-2" 
+                                    style="max-width: 100px;">
+                                <span>cm</span>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <span class="numeracao negrito">v.</span>
+                                <label class="negrito label-wrap-pretty ms-2">
+                                    Membranas (bolsa)
+                                </label>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="membrana" id="op-membrana-integra">
+                                    <label class="form-check-label label-nowrap" for="op-membrana-integra">
+                                        Íntegras
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="membrana" id="op-membrana-rota">
+                                    <label class="form-check-label label-nowrap" for="op-membrana-rota">
+                                        Rotas
+                                    </label>
+                                </div>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <label class="negrito label-wrap-pretty ms-2">
+                                    - Se “Rotas”, tempo aproximado:
+                                </label>
+                                <input id="rotas-tempo" class="form-control input-dado mx-2" 
+                                    style="max-width: 50px;">
+                                <span>horas</span>
+                            </div>
+                            <span class="spanLGN">lgn</span>
+                        </div>
+                        <div class="d-flex align-items-center mt-1">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <label class="negrito label-wrap-pretty ms-2">
+                                    - Se “Rotas”, líquido amniótico:
+                                </label>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="rotas-liqAmniotico" id="op-rotas-liqAmniotico-claro">
+                                    <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-claro">
+                                        Claro
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="rotas-liqAmniotico" id="op-rotas-liqAmniotico-meconial">
+                                    <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-meconial">
+                                        Meconial
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="rotas-liqAmniotico" id="op-rotas-liqAmniotico-fetido">
+                                    <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-fetido">
+                                        Fétido
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 mx-2">
+                                    <input class="form-check-input" type="radio" name="rotas-liqAmniotico" id="op-rotas-liqAmniotico-outro">
+                                    <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-outro">
+                                        Outro
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="linha-dados flex-column">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">26</span>
+                        <label class="negrito label-wrap-pretty mx-2">
+                            Assinalar o(s) motivo(s) da internação, 
+                            especificando quando necessário. Inclua 
+                            também informações relevantes do pré-natal, se houver.
+                        </label>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between flex-wrap mt-1">
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-prematuro">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-prematuro">
+                            Trabalho de parto prematuro
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-posDatismo">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-posDatismo">
+                            Pós-datismo
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-ruptura">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-ruptura">
+                            Ruptura de membranas (bolsa rota)
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-preEclampsia">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-preEclampsia">
+                            Pré-eclâmpsia
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-eclampsia">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-eclampsia">
+                            Eclâmpsia
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-sangTransvaginal">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-sangTransvaginal">
+                            Sangramento transvaginal
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-cesariaAgendada">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-cesariaAgendada">
+                            Cesárea agendada
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-febre">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-febre">
+                            Febre
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-dimMovFecais">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-dimMovFecais">
+                            Diminuição de movimentos fetais
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-outros">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-outros">
+                            Outros
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-2">
+                        <input class="form-check-input" type="radio" name="motivo-internacao" id="op-motivo-internacao-nenhum">
+                        <label class="form-check-label label-nowrap" for="op-motivo-internacao-nenhum">
+                            Nenhum dos anteriores.
+                        </label>
+                    </div>
+                </div>
+                <textarea id="motivo-internacao-outros-descricao" class="form-control input-dado" rows="2"
+                    style="font-size: small; width: 100%;"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="titulo-bloco d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-wrap">
+                <span class="negrito me-3">
+                    V. História obstétrica* e doenças da mãe
+                </span>
+                <span>
+                    *Não considerar a gestação do filho falecido
+                </span>
+            </div>
+            <div class="form-check m-0 mx-3">
+                <input class="form-check-input" type="checkbox" name="historia-obstetrica" id="historia-obstetrica-naoSeAplica">
+                <label class="form-check-label label-nowrap" for="historia-obstetrica-naoSeAplica">
+                    Não se aplica
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">27</span>
+                            <label class="negrito label-nowrap mx-1">
+                                Nº de gestações anteriores:
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center mt-2">
+                            <input id="num-gestacoes-anteriores" class="form-control input-dado me-1" type="number"
+                                style="max-width: 50px;">
+                                <span>(Se = 00, vá para <span class="numeracao">29</span>)</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="quant-abortos">Abortos</label>
+                        <input id="quant-abortos" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 50px;">
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="quant-partos">Partos</label>
+                        <input id="quant-partos" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 50px;">
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="quant-vaginais">Vaginais</label>
+                        <input id="quant-vaginais" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 50px;">
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="quant-cesarias">Cesárias</label>
+                        <input id="quant-cesarias" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 50px;">
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="quant-nascidos-vivos">Nascidos vivos</label>
+                        <input id="quant-nascidos-vivos" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 50px;">
+                    </div>
+                    <div class="d-flex flex-column align-items-center mx-2">
+                        <label for="ano-ultimo-parto">Ano do último parto</label>
+                        <input id="ano-ultimo-parto" type="number" class="form-control input-dado mt-2"
+                            style="max-width: 80px;">
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">28</span>
+                    <label class="negrito label-nowrap ms-1">
+                        Doenças nas gestações anteriores:
+                    </label>
+                    <div class="form-check m-0 ms-4 me-3">
+                        <input class="form-check-input" type="radio" name="doenca-gestacao-anterior" id="doenca-gestacao-anterior-nao">
+                        <label class="form-check-label" for="doenca-gestacao-anterior-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="doenca-gestacao-anterior" id="doenca-gestacao-anterior-sim">
+                        <label class="form-check-label label-nowrap" for="doenca-gestacao-anterior-sim">
+                            Sim, quais?
+                        </label>
+                    </div>
+                    <input id="doenca-gestacao-anterior-sim-descricao" class="form-control input-dado" style="min-width: 150px;">
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center flex-wrap">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">29</span>
+                    <label class="negrito label-nowrap ms-1">
+                        Outras doenças (fora das gestações):
+                    </label>
+                    <div class="form-check m-0 ms-4 me-3">
+                        <input class="form-check-input" type="radio" name="doenca-fora-gestacao" id="doenca-fora-gestacao-nao">
+                        <label class="form-check-label" for="doenca-fora-gestacao-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="doenca-fora-gestacao" id="doenca-fora-gestacao-sim">
+                        <label class="form-check-label label-nowrap" for="doenca-fora-gestacao-sim">
+                            Sim, quais?
+                        </label>
+                    </div>
+                    <input id="doenca-fora-gestacao-sim-descricao" class="form-control input-dado" style="min-width: 150px;">
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="titulo-bloco d-flex justify-content-between align-items-center">
+            <span class="negrito">
+                VI. Internação hospitalar da mãe-gestante
+            </span>
+            <div class="form-check m-0 mx-2">
+                <input class="form-check-input" type="checkbox" name="internacao-mae" id="internacao-mae-naoSeAplica">
+                <label class="form-check-label label-nowrap" for="internacao-mae-naoSeAplica">
+                    Não se aplica
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados align-items-center">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">30</span>
+                    <label for="dt-internacao-gestante" class="negrito label-nowrap ms-1">
+                        Data da internação:
+                    </label>
+                    <input id="dt-internacao-gestante" class="form-control input-dado ms-2" type="date"
+                        style="max-width: 150px;">
+                        <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <label for="hr-internacao-gestante" class="negrito label-nowrap ms-1">
+                            Hora da internação:
+                        </label>
+                        <input id="hr-internacao-gestante" class="form-control input-dado ms-2" placeholder="00:00"
+                            style="max-width: 54px;">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">31</span>
+                    <label class="negrito label-nowrap ms-1">
+                        O parto ocorreu nesta internação?
+                    </label>
+                    <div class="form-check m-0 mx-4">
+                        <input class="form-check-input" type="radio" name="parto-internacao" id="parto-internacao-sim">
+                        <label class="form-check-label label-nowrap" for="parto-internacao-sim">
+                            Sim (continue)
+                        </label>
+                    </div>
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="parto-internacao" id="parto-internacao-nao">
+                        <label class="form-check-label label-nowrap" for="parto-internacao-nao">
+                            Não (vá para <span class="numeracao">44</span>)
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">32</span>
+                    <label class="negrito label-nowrap ms-1">
+                        Foi utilizado partograma?
+                    </label>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="utilizou-partograma" id="utilizou-partograma-sim">
+                        <label class="form-check-label" for="utilizou-partograma-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="utilizou-partograma" id="utilizou-partograma-nao">
+                        <label class="form-check-label" for="utilizou-partograma-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center" style="width: 70%;">
+                        <label for="utilizou-partograma-observacoes" class="ms-4 me-2">
+                            Observações:
+                        </label>
+                        <input id="utilizou-partograma-observacoes" class="form-control input-dado">
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">33</span>
+                    <label class="negrito label-nowrap ms-1">
+                        Nº de avaliações durante o trabalho de parto (após 4 cm de dilatação):
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <label for="quant-M-aternas" class="negrito ms-5 me-2">
+                            Maternas:
+                        </label>
+                        <input id="quant-M-aternas" class="form-control input-dado"
+                            style="width: 70px;">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <label for="quant-fetais" class="negrito ms-5 me-2">
+                            Fetais:
+                        </label>
+                        <input id="quant-fetais" class="form-control input-dado"
+                            style="width: 70px;">
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="checkbox" name="avaliacoes-parto" id="avaliacoes-parto-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="avaliacoes-parto-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">34</span>
+                    <label class="negrito label-nowrap ms-1">
+                        Houve intervalo >30min entre avaliações durante o trabalho de parto?
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <label class="form-check-label negrito ms-5">
+                            Materna
+                        </label>
+                        <div class="form-check d-flex align-items-center m-0 ms-2">
+                            <input class="form-check-input" type="radio" name="intervalo-avaliacoes-M-aterna" id="intervalo-avaliacoes-M-aterna-sim">
+                            <label class="form-check-label ms-1" for="intervalo-avaliacoes-M-aterna-sim">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check d-flex align-items-center m-0 ms-2">
+                            <input class="form-check-input" type="radio" name="intervalo-avaliacoes-M-aterna" id="intervalo-avaliacoes-M-aterna-nao">
+                            <label class="form-check-label ms-1" for="intervalo-avaliacoes-M-aterna-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <label class="form-check-label label-nowrap negrito ms-5">
+                            Fetal
+                        </label>
+                        <div class="form-check d-flex align-items-center m-0 ms-2">
+                            <input class="form-check-input" type="radio" name="intervalo-avaliacoes-fetal" id="intervalo-avaliacoes-fetal-sim">
+                            <label class="form-check-label ms-1" for="intervalo-avaliacoes-fetal-sim">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check d-flex align-items-center m-0 ms-2">
+                            <input class="form-check-input" type="radio" name="intervalo-avaliacoes-fetal" id="intervalo-avaliacoes-fetal-nao">
+                            <label class="form-check-label ms-1" for="intervalo-avaliacoes-fetal-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check d-flex align-items-center m-0 ms-5">
+                        <input class="form-check-input" type="checkbox" name="intervalo-avaliacoes" id="intervalo-avaliacoes-naoSeAplica">
+                        <label class="form-check-label label-nowrap ms-1" for="intervalo-avaliacoes-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">35</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Foi usado OCITOCINA durante o trabalho de parto?
+                    </label>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="ocitocina-mae" id="ocitocina-mae-sim">
+                        <label class="form-check-label" for="ocitocina-mae-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="ocitocina-mae" id="ocitocina-mae-nao">
+                        <label class="form-check-label" for="ocitocina-mae-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="ocitocina-mae" id="ocitocina-mae-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="ocitocina-mae-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">36</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Foi usado M EPERIDINA durante o trabalho de parto?
+                    </label>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="eperidina-mae" id="eperidina-mae-sim">
+                        <label class="form-check-label" for="eperidina-mae-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="eperidina-mae" id="eperidina-mae-nao">
+                        <label class="form-check-label" for="eperidina-mae-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="eperidina-mae" id="eperidina-mae-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="eperidina-mae-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">37</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Foi usado CORTICOIDE?
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 mx-3">
+                            <input class="form-check-input" type="radio" name="corticoide-mae" id="corticoide-mae-sim">
+                            <label class="form-check-label label-nowrap" for="corticoide-mae-sim">
+                                Sim, data de início:
+                            </label>
+                        </div>
+                        <input id="dt-inicio-corticoide" class="form-control input-dado">
+                        <span class="spanLGN ms-2">lgn</span>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="corticoide-mae" id="corticoide-mae-nao">
+                        <label class="form-check-label" for="corticoide-mae-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="corticoide-mae" id="corticoide-mae-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="corticoide-mae-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex flex-column">
+                    <div class="d-flex mb-1">
+                        <span class="numeracao negrito">38</span>
+                        <label for="outra-medicacao-internacao" class="negrito mx-1">
+                            Outras medicações usadas durante a internação:
+                        </label>
+                    </div>
+                    <textarea id="outra-medicacao-internacao" class="form-control input-dado" rows="2"
+                    style="font-size: small; width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">39</span>
+                    <label for="dt-parto-gestante" class="negrito label-nowrap ms-1">
+                        Data do parto:
+                    </label>
+                    <input id="dt-parto-gestante" class="form-control input-dado ms-2" type="date"
+                        style="max-width: 150px;">
+                        <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <label for="hr-parto-gestante" class="negrito label-nowrap ms-1">
+                            Hora do parto:
+                        </label>
+                        <input id="hr-parto-gestante" class="form-control input-dado ms-2" placeholder="00:00"
+                            style="max-width: 54px;">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">40</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Tipo de parto
+                    </label>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="tipo-parto" id="tipo-parto-vaginal-forceps">
+                        <label class="form-check-label" for="tipo-parto-vaginal-forceps">
+                            VAGINAL com fórceps ou vácuo-extrator
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="tipo-parto" id="tipo-parto-vaginal">
+                        <label class="form-check-label" for="tipo-parto-vaginal">
+                            VAGINAL
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="tipo-parto" id="tipo-parto-cesaria">
+                        <label class="form-check-label" for="tipo-parto-cesaria">
+                            CESÁRIA
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados p-2">
+                <span class="me-3">
+                    - Se cesária,<br>
+                    qual o motivo<br>
+                    registrado no<br>
+                    prontuário?
+                </span>
+                <div class="d-flex flex-column py-2" style="border: 2px dashed #000; width: -webkit-fill-available;">
+                    <div class="d-flex justify-content-between">
+                        <ul class="mx-3">
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-anomalia">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-anomalia">
+                                    Apresentação anómala
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-anterior">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-anterior">
+                                    Cesárea anterior
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-desproporcao">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-desproporcao">
+                                    Desproporção céfalo-pélvica
+                                </label>
+                            </li>
+                        </ul>
+                        <ul class="me-3">
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-placenta">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-placenta">
+                                    Descolam. prematuro placenta
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-falha">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-falha">
+                                    Falha de indução de parto
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-feto-morto">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-feto-morto">
+                                    Feto morto
+                                </label>
+                            </li>
+                        </ul>
+                        <ul class="me-3">
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-hemorragia-vaginal">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-hemorragia-vaginal">
+                                    Hemorragia vaginal
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-eclampsia">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-eclampsia">
+                                    Pré-eclâmpsia/ Eclâmpsia
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-ruptura-prematura">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-ruptura-prematura">
+                                    Ruptura prematura membrana
+                                </label>
+                            </li>
+                        </ul>
+                        <ul class="me-3">
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-sofirmento-fetal">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-sofirmento-fetal">
+                                    Sofrimento fetal agudo
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-parto-prolongado">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-parto-prolongado">
+                                    Trabalho de parto prolongado
+                                </label>
+                            </li>
+                            <li class="form-check m-0">
+                                <input class="form-check-input" type="radio" name="motivo-cesaria" id="motivo-cesaria-outro">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-outro">
+                                    Outra; especifique:
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <input id="motivo-cesaria-outro-descricao" class="form-control input-dado ms-3 mt-1">
+                </div>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex">
+                    <span class="numeracao negrito">41</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Quem atendeu o parto?
+                    </label>
+                </div>
+                <div class="d-flex align-items-center flex-wrap">
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-obstetra">
+                        <label class="form-check-label label-wrap-pretty" for="quem-atendeu-obstetra">
+                            Médico gineco-obstetra
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-nao-obstetra">
+                        <label class="form-check-label label-wrap-pretty" for="quem-atendeu-nao-obstetra">
+                            Médico não gineco-obstetra
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-obstretriz">
+                        <label class="form-check-label label-wrap-pretty" for="quem-atendeu-obstretriz">
+                            Enfermeira obstetriz
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-enfermeira">
+                        <label class="form-check-label" for="quem-atendeu-enfermeira">
+                            Enfermeira
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 mx-3">
+                            <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-outro">
+                            <label class="form-check-label" for="quem-atendeu-outro">
+                                Outro
+                            </label>
+                        </div>
+                        <input id="quem-atendeu-outro-descricao" class="form-control input-dado">
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="quem-atendeu" id="quem-atendeu-sem-assistencia">
+                        <label class="form-check-label label-wrap-pretty" for="quem-atendeu-sem-assistencia">
+                            Sem assistência
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados d-flex align-items-start justify-content-between">
+                <div class="d-flex">
+                    <span class="numeracao negrito">42</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Aspecto do líquido amniótico no parto:
+                    </label>
+                </div>
+                <div class="d-flex align-items-center flex-wrap">
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="liq-amniotico" id="liq-amniotico-claro">
+                        <label class="form-check-label label-wrap-pretty" for="liq-amniotico-claro">
+                            Claro
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="liq-amniotico" id="liq-amniotico-meconio">
+                        <label class="form-check-label label-nowrap" for="liq-amniotico-meconio">
+                            Com mecônio
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="liq-amniotico" id="liq-amniotico-sanguinolento">
+                        <label class="form-check-label" for="liq-amniotico-sanguinolento">
+                            Sanguinolento
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="liq-amniotico" id="liq-amniotico-fetido">
+                        <label class="form-check-label" for="liq-amniotico-fetido">
+                            Fétido
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 mx-3">
+                            <input class="form-check-input" type="radio" name="liq-amniotico" id="liq-amniotico-outro">
+                            <label class="form-check-label" for="liq-amniotico-outro">
+                                Outro:
+                            </label>
+                        </div>
+                        <input id="liq-amniotico-outro-descricao" class="form-control input-dado">
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>                    
+            <div class="linha-dados d-flex align-items-start justify-content-between">
+                <div class="d-flex">
+                    <span class="numeracao negrito">43</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Anestesia durante o trabalho de parto:
+                    </label>
+                </div>
+                <div class="d-flex align-items-center flex-wrap">
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-nenhuma">
+                        <label class="form-check-label" for="anestesia-parto-nenhuma">
+                            Nenhuma
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-geral">
+                        <label class="form-check-label" for="anestesia-parto-geral">
+                            Geral
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-raquidiana">
+                        <label class="form-check-label" for="anestesia-parto-raquidiana">
+                            Raquidiana
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-peridural">
+                        <label class="form-check-label" for="anestesia-parto-peridural">
+                            Peridural
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-local">
+                        <label class="form-check-label" for="anestesia-parto-local">
+                            Local
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 mx-3">
+                            <input class="form-check-input" type="radio" name="anestesia-parto" id="anestesia-parto-outro">
+                            <label class="form-check-label" for="anestesia-parto-outro">
+                                Outra:
+                            </label>
+                        </div>
+                        <input id="anestesia-parto-outro-descricao" class="form-control input-dado">
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados d-flex align-items-start justify-content-between">
+                <div class="d-flex">
+                    <span class="numeracao negrito">44</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Intercorrências maternas durante o parto:
+                    </label>
+                </div>
+                <div class="d-flex align-items-center flex-wrap">
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="intercorrencia-parto" id="intercorrencia-parto-nenhuma">
+                        <label class="form-check-label" for="intercorrencia-parto-nenhuma">
+                            Nenhuma
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="intercorrencia-parto" id="intercorrencia-parto-hipertensao">
+                        <label class="form-check-label" for="intercorrencia-parto-hipertensao">
+                            Hipertensão
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="intercorrencia-parto" id="intercorrencia-parto-hemorragia">
+                        <label class="form-check-label" for="intercorrencia-parto-hemorragia">
+                            Hemorragia
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 mx-3">
+                            <input class="form-check-input" type="radio" name="intercorrencia-parto" id="intercorrencia-parto-outro">
+                            <label class="form-check-label" for="intercorrencia-parto-outro">
+                                Outra:
+                            </label>
+                        </div>
+                        <input id="intercorrencia-parto-outro-descricao" class="form-control input-dado">
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex flex-column">
+                    <div class="d-flex mb-1">
+                        <span class="numeracao negrito">45</span>
+                        <label for="evolucao-internacao-mae" class="negrito mx-1">
+                            Evolução da internação da mãe (notas importantes):
+                        </label>
+                    </div>
+                    <textarea id="evolucao-internacao-mae" class="form-control input-dado" rows="3"
+                    style="font-size: small; width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados d-flex justify-content-between">
+                <div class="d-flex align-items-start">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">46</span>
+                        <label class="negrito label-nowrap mx-1">
+                            Teste rápido da mãe no parto:
+                        </label>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="d-flex">
+                            <span class="ms-3">Sífilis</span>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-sifilis" id="parto-sifilis-nao">
+                                <label class="form-check-label" for="parto-sifilis-nao">
+                                    Não reagente
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-sifilis" id="parto-sifilis-sim">
+                                <label class="form-check-label" for="parto-sifilis-sim">
+                                    Reagente
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-sifilis" id="parto-sifilis-naoRealizado">
+                                <label class="form-check-label" for="parto-sifilis-naoRealizado">
+                                    Não realizado
+                                </label>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="ms-3">HIV</span>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-hiv" id="parto-hiv-nao">
+                                <label class="form-check-label" for="parto-hiv-nao">
+                                    Não reagente
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-hiv" id="parto-hiv-sim">
+                                <label class="form-check-label" for="parto-hiv-sim">
+                                    Reagente
+                                </label>
+                            </div>
+                            <div class="form-check m-0 mx-3">
+                                <input class="form-check-input" type="radio" name="parto-hiv" id="parto-hiv-naoRealizado">
+                                <label class="form-check-label" for="parto-hiv-naoRealizado">
+                                    Não realizado
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2" style="max-height: 20px;">lgn</span>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="titulo-bloco d-flex justify-content-between align-items-center">
+            <span class="negrito">
+                VII. Condições ao nascimento
+            </span>
+            <div class="form-check m-0 mx-2">
+                <input class="form-check-input" type="checkbox" name="condicao-nascimento" id="condicao-nascimento-naoSeAplica">
+                <label class="form-check-label label-nowrap" for="condicao-nascimento-naoSeAplica">
+                    Não se aplica
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="col-12 linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">47</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Quem avaliou o natimorto/RN após o parto?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-obstetra">
+                        <label class="form-check-label" for="natimorto-avaliado-obstetra">
+                            Médico gineco-obstetra
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-pediatra">
+                        <label class="form-check-label" for="natimorto-avaliado-pediatra">
+                            Médico pediatra/neonatologista
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-outro-medico">
+                        <label class="form-check-label" for="natimorto-avaliado-outro-medico">
+                            Outro médico
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="col-12 d-flex mt-1 px-4">
+                <div class="form-check m-0 ms-3">
+                    <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-enfermeira">
+                    <label class="form-check-label" for="natimorto-avaliado-enfermeira">
+                        Enfermeira/obstetriz
+                    </label>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-parteira">
+                        <label class="form-check-label" for="natimorto-avaliado-parteira">
+                            Parteira
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-outro">
+                        <label class="form-check-label" for="natimorto-avaliado-outro">
+                            Outro
+                        </label>
+                    </div>
+                    <input id="natimorto-analisado-outro-descricao" class="form-control input-dado ms-1">
+                </div>
+                <div class="form-check m-0 ms-3">
+                    <input class="form-check-input" type="radio" name="natimorto-avaliado" id="natimorto-avaliado-ninguem">
+                    <label class="form-check-label" for="natimorto-avaliado-ninguem">
+                        Ninguém
+                    </label>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">48</span>
+                    <label for="idade-gestacional-nascimento" class="negrito label-wrap-pretty mx-2">
+                        Idade gestacional ao nascimento:
+                    </label>
+                    <input id="idade-gestacional-nascimento" type="number" class="form-control input-dado me-2" min="0"
+                        style="max-width: 50px;">
+                    <span class="label-wrap-pretty">
+                        semanas
+                    </span>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">49</span>
+                    <label for="peso-nascimento" class="negrito label-wrap-pretty mx-2">
+                        Peso ao nascimento:
+                    </label>
+                    <input id="peso-nascimento" type="number" class="form-control input-dado me-2" min="0"
+                        style="max-width: 70px;">
+                    <span class="label-wrap-pretty">
+                        gramas
+                    </span>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">50</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        O óbito ocorreu:
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="obito-ocorreu" id="obito-ocorreu-antes-parto">
+                        <label class="form-check-label" for="obito-ocorreu-antes-parto">
+                            <b>Antes</b> do início do trabalho de parto
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="obito-ocorreu" id="obito-ocorreu-durante-parto">
+                        <label class="form-check-label" for="obito-ocorreu-durante-parto">
+                            <b>Durante</b> o trabalho de parto
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="obito-ocorreu" id="obito-ocorreu-apos-parto">
+                        <label class="form-check-label" for="obito-ocorreu-apos-parto">
+                            <b>Após</b> o parto
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-4">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">50.1</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Se ocorreu ANTES do início do trabalho de parto, foi feto macerado?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="feto-macerado" id="feto-macerado-sim">
+                        <label class="form-check-label" for="feto-macerado-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="feto-macerado" id="feto-macerado-durante-nao">
+                        <label class="form-check-label" for="feto-macerado-durante-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center">
+                <span class="numeracao negrito">51</span>
+                <label for="idade-gestacional-nascimento" class="negrito label-wrap-pretty mx-2">
+                    APGAR
+                </label>
+                <label for="apgar-1min" class="label-wrap-pretty ms-5 me-2">
+                    1º min
+                </label>
+                <input id="apgar-1min" class="form-control input-dado me-3" style="max-width: 50px;">
+                <span class="spanLGN">lgn</span>
+                <label for="apgar-5min" class="label-wrap-pretty ms-5 me-2">
+                    5º min
+                </label>
+                <input id="apgar-5min" class="form-control input-dado me-3" style="max-width: 50px;">
+                <span class="spanLGN">lgn</span>
+                <div class="form-check m-0 ms-5">
+                    <input class="form-check-input" type="checkbox" name="apgar-natimorto" id="apgar-natimorto">
+                    <label class="form-check-label label-nowrap" for="apgar-natimorto">
+                        Natimorto
+                    </label>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">52</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Classificação do RN:
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="classificacaoRN" id="classificacaoRN-adequado">
+                        <label class="form-check-label" for="classificacaoRN-adequado">
+                            <b>Adequado</b> para Idade Gestacional
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="classificacaoRN" id="classificacaoRN-pequeno">
+                        <label class="form-check-label" for="classificacaoRN-pequeno">
+                            <b>Pequeno</b> para Idade Gestacional (PIG)
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="classificacaoRN" id="classificacaoRN-grande">
+                        <label class="form-check-label" for="classificacaoRN-grande">
+                            <b>Grande</b> para Idade Gestacional (GIG)
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">53</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Realizada alguma tentativa de reanimação?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="reanimacao" id="reanimacao-sim">
+                        <label class="form-check-label" for="reanimacao-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="reanimacao" id="reanimacao-nao">
+                        <label class="form-check-label" for="reanimacao-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="d-flex col-8 align-items-center">
+                    <span class="numeracao negrito">54</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Procedimentos usados na assistência ao RN na sala de parto:
+                    </label>
+                </div>
+                <div class="d-flex colADireita col-4 align-items-center justify-content-between">
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-nenhum">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-nenhum">
+                            Nenhum
+                        </label>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="d-flex flex-column px-4">
+                <div class="col-12 d-flex flex-wrap justify-content-between mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-aspiracao">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-aspiracao">
+                            Aspiração das vias aéreas
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-2">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-cateterismo">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-cateterismo">
+                            Cateterismo umbilical
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-2">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-entubacao">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-entubacao">
+                            Entubação
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-2">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-oxigenio">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-oxigenio">
+                            Oxigênio
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-2">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-sonda">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-sonda">
+                            Sonda nasogástrica
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0 me-1">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-outro-procedimento">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-outro-procedimento">
+                            Outros procedimentos:
+                        </label>
+                    </div>
+                    <input id="assistenciaRN-outro-procedimento-descricao" class="form-control input-dado">
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0 me-1">
+                        <input class="form-check-input" type="radio" name="assistenciaRN" id="assistenciaRN-medicamentos">
+                        <label class="form-check-label label-nowrap" for="assistenciaRN-medicamentos">
+                            Medicamentos utilizados:
+                        </label>
+                    </div>
+                    <input id="assistenciaRN-medicamentos-descricao" class="form-control input-dado">
+                </div>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">55</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        O RN fez hipoglicemia (glicose < 45)?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="hipoglicemia" id="hipoglicemia-sim">
+                        <label class="form-check-label" for="hipoglicemia-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3 me-5">
+                        <input class="form-check-input" type="radio" name="hipoglicemia" id="hipoglicemia-nao">
+                        <label class="form-check-label" for="hipoglicemia-nao">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="hipoglicemia" id="hipoglicemia-naoFez">
+                        <label class="form-check-label" for="hipoglicemia-naoFez">
+                            Não fez exame
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="titulo-bloco d-flex justify-content-between align-items-center">
+            <span class="negrito">
+                VIII. Atendimento após o nascimento
+            </span>
+            <div class="form-check m-0 mx-2">
+                <input class="form-check-input" type="checkbox" name="atendimento-apos-nascimento" id="atendimento-apos-nascimento-naoSeAplica">
+                <label class="form-check-label label-nowrap" for="atendimento-apos-nascimento-naoSeAplica">
+                    Não se aplica
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">56</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Setor de internação do RN:
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="setorRN" id="setorRN-aloj-conjunto">
+                        <label class="form-check-label" for="setorRN-aloj-conjunto">
+                            Alojamento conjunto
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="setorRN" id="setorRN-UTI-neonatal">
+                        <label class="form-check-label" for="setorRN-UTI-neonatal">
+                            UTI/CTI neonatal
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="setorRN" id="setorRN-ICINCo">
+                        <label class="form-check-label" for="setorRN-ICINCo">
+                            Cuidado Intermediário Neonatal Convencional (UCINCo)
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="d-flex px-4 pt-1">
+                <div class="form-check m-0">
+                    <input class="form-check-input" type="radio" name="setorRN" id="setorRN-ICINCa">
+                    <label class="form-check-label label-wrap-pretty" for="setorRN-ICINCa">
+                        Cuidado Intermediário Neonatal Canguru (UCINCa)
+                    </label>
+                </div>
+                <div class="form-check m-0 ms-5 me-1">
+                    <input class="form-check-input" type="radio" name="setorRN" id="setorRN-outro">
+                    <label class="form-check-label" for="setorRN-outro">
+                        Outro:
+                    </label>
+                </div>
+                <input id="setorRN-outro-descricao" class="form-control input-dado">
+            </div>
+            <div class="linha-dados">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">57</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        O RN tinha baixo peso (<2500g)?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="RN-baixo-peso" id="RN-baixo-peso-sim">
+                        <label class="form-check-label" for="RN-baixo-peso-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="RN-baixo-peso" id="RN-baixo-peso-nao">
+                        <label class="form-check-label" for="RN-baixo-peso-nao">
+                            Não
+                        </label>
+                    </div>
+                    <span class="spanLGN ms-4">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span class="numeracao negrito">58</span>
+                        <label class="label-wrap-pretty negrito mx-1">
+                            O RN era prematuro (IG < 37 sem)?
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="RN-prematuro" id="RN-prematuro-sim">
+                            <label class="form-check-label" for="RN-prematuro-sim">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="RN-prematuro" id="RN-prematuro-nao">
+                            <label class="form-check-label" for="RN-prematuro-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-4">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">59</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Intercorrências após o nascimento:
+                    </label>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-metabolico">
+                        <label class="form-check-label label-nowrap" for="INASC-metabolico">
+                            Distúrbio metabólico
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-membrana-hialina">
+                        <label class="form-check-label label-nowrap" for="INASC-membrana-hialina">
+                            Doença da membrana hialina
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-hemolitica">
+                        <label class="form-check-label label-nowrap" for="INASC-hemolitica">
+                            Doença hemolítica
+                        </label>
+                    </div>
+                    <div class="form-check m-0 mx-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-ictericia">
+                        <label class="form-check-label label-nowrap" for="INASC-ictericia">
+                            Icterícia
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="d-flex justify-content-between flex-wrap mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-infeccao-confirmada">
+                        <label class="form-check-label label-nowrap" for="INASC-infeccao-confirmada">
+                            Infecção confirmada
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-infeccao-suspeita">
+                        <label class="form-check-label label-nowrap" for="INASC-infeccao-suspeita">
+                            Infecção suspeita
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-malformacao">
+                        <label class="form-check-label label-nowrap" for="INASC-malformacao">
+                            Malformação congênita
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-aspiracao-meconial">
+                        <label class="form-check-label label-nowrap" for="INASC-aspiracao-meconial">
+                            Sd. aspiração meconial
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-taquipneia">
+                        <label class="form-check-label label-nowrap" for="INASC-taquipneia">
+                            Taquipnéia transitória do RN
+                        </label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-tocotraumatismo">
+                        <label class="form-check-label label-nowrap" for="INASC-tocotraumatismo">
+                            Tocotraumatismo
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INASC" id="INASC-outro">
+                        <label class="form-check-label label-nowrap" for="INASC-outro">
+                            Outra
+                        </label>
+                    </div>
+                    <input id="INASC-outro-descricao" class="form-control input-dado ms-1">
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">60</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Foi indicado admissão na UTI neonatal?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="IAUN" id="IAUN-sim">
+                        <label class="form-check-label label-nowrap" for="IAUN-sim">
+                            Sim. Motivo
+                        </label>
+                    </div>
+                    <input id="IAUN-motivo" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="IAUN" id="IAUN-nao">
+                        <label class="form-check-label label-nowrap" for="IAUN-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">60.1</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Se “Sim”, foi internado na UTI neonatal?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="IUN" id="IUN-sim">
+                        <label class="form-check-label label-nowrap" for="IUN-sim">
+                            Sim. Data
+                        </label>
+                    </div>
+                    <input id="IUN-dt" type="date" class="form-control input-dado ms-2" style="width: 140px;">
+                    <label for="IUN-hora" class="label-wrap-pretty ms-3">
+                        Hora
+                    </label>
+                    <input id="IUN-hora" class="form-control input-dado mx-2" placeholder="00:00" style="width: 52px;">
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="IUN" id="IUN-nao">
+                        <label class="form-check-label" for="IUN-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-4">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">60.1.1</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Demorou >3 horas para ser internado?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="mais3horas-internar" id="mais3horas-internar-sim">
+                        <label class="form-check-label label-nowrap" for="mais3horas-internar-sim">
+                            Sim. Por quê?
+                        </label>
+                    </div>
+                    <input id="mais3horas-internado-motivo" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="mais3horas-internar" id="mais3horas-internar-nao">
+                        <label class="form-check-label label-nowrap" for="mais3horas-internar-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-4">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">60.1.2</span>
+                    <label for="motivo-nao-internado" class="negrito label-nowrap mx-1">
+                        Por que não foi internado?
+                    </label>
+                    <input id="motivo-nao-internado" class="form-control input-dado ms-2">
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex flex-column">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">61</span>
+                            <label for="evolucao-internacao-RN" class="negrito ms-1">
+                                Evolução da internação do RN (notas importantes sobre o quadro clínico, 
+                                resultados de exames, novos diagnósticos e condutas):
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="evolucao-internacao-RN" class="form-control mt-2" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center">
+                <div class="d-flex col-8 align-items-center">
+                    <span class="numeracao negrito">62</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Procedimentos realizados durante a internação do RN:
+                    </label>
+                </div>
+                <div class="d-flex colADireita col-4 align-items-center justify-content-between">
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-nenhum">
+                        <label class="form-check-label" for="PRDIRN-nenhum">
+                            Nenhum
+                        </label>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="d-flex flex-column px-3">
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-antibioticoterapia">
+                        <label class="form-check-label" for="PRDIRN-antibioticoterapia">
+                            Antibioticoterapia
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-berco-aquecido">
+                        <label class="form-check-label" for="PRDIRN-berco-aquecido">
+                            Berço aquecido
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-metodo-canguru">
+                        <label class="form-check-label" for="PRDIRN-metodo-canguru">
+                            Método Canguru
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-cateterismo-umbilical">
+                        <label class="form-check-label" for="PRDIRN-cateterismo-umbilical">
+                            Cateterismo umbilical
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-CPAP">
+                        <label class="form-check-label" for="PRDIRN-CPAP">
+                            CPAP
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-disseccao-venenosa">
+                        <label class="form-check-label" for="PRDIRN-disseccao-venenosa">
+                            Dissecção venosa
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-entubacao">
+                        <label class="form-check-label" for="PRDIRN-entubacao">
+                            Entubação
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-fototerapia">
+                        <label class="form-check-label" for="PRDIRN-fototerapia">
+                            Fototerapia
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-exsanguineo">
+                        <label class="form-check-label" for="PRDIRN-exsanguineo">
+                            Exsanguineo-transfusão
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-hemotransfusao">
+                        <label class="form-check-label" for="PRDIRN-hemotransfusao">
+                            Hemotransfusão
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-incubadora">
+                        <label class="form-check-label" for="PRDIRN-incubadora">
+                            Incubadora
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-nutricao-parenteral">
+                        <label class="form-check-label" for="PRDIRN-nutricao-parenteral">
+                            Nutrição parenteral
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-oxigenio-capacete">
+                        <label class="form-check-label" for="PRDIRN-oxigenio-capacete">
+                            Oxigênio em capacete
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-oxigenio-inalatorio">
+                        <label class="form-check-label" for="PRDIRN-oxigenio-inalatorio">
+                            Oxigênio inalatório
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-puncao-nervosa">
+                        <label class="form-check-label" for="PRDIRN-puncao-nervosa">
+                            Punção venosa central
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-1">
+                    <div class="form-check m-0">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-surfactante">
+                        <label class="form-check-label" for="PRDIRN-surfactante">
+                            Surfactante
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-ventilacao-mecanica">
+                        <label class="form-check-label label-nowrap" for="PRDIRN-ventilacao-mecanica">
+                            Ventilação mecânica
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="PRDIRN" id="PRDIRN-outros">
+                        <label class="form-check-label" for="PRDIRN-outros">
+                            Outros
+                        </label>
+                    </div>
+                    <input id="PRDIRN-outros-descricao" class="form-control input-dado ms-2">
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <span class="numeracao negrito">63</span>
+                        <label class="label-wrap-pretty negrito mx-1">
+                            A mãe acompanhou o RN nessa internação?
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="MARNI" id="MARNI-sim-integral">
+                            <label class="form-check-label" for="MARNI-sim-integral">
+                                Sim, em tempo integral
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-4">
+                            <input class="form-check-input" type="radio" name="MARNI" id="MARNI-sim-parcial">
+                            <label class="form-check-label" for="MARNI-sim-parcial">
+                                Sim, parcialmente
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-4">
+                            <input class="form-check-input" type="radio" name="MARNI" id="MARNI-nao">
+                            <label class="form-check-label" for="MARNI-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <span class="numeracao negrito">64</span>
+                        <label class="label-wrap-pretty negrito mx-1">
+                            Se a mãe não acompanhou, o RN teve outro acompanhante?
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="RNOA" id="RNOA-sim-integral">
+                            <label class="form-check-label" for="RNOA-sim-integral">
+                                Sim, em tempo integral
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-4">
+                            <input class="form-check-input" type="radio" name="RNOA" id="RNOA-sim-parcial">
+                            <label class="form-check-label" for="RNOA-sim-parcial">
+                                Sim, parcialmente
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-4">
+                            <input class="form-check-input" type="radio" name="RNOA" id="RNOA-nao">
+                            <label class="form-check-label" for="RNOA-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">65</span>
+                        <label class="label-wrap-pretty negrito mx-1">
+                            Desfecho da internação após o nascimento:
+                        </label>
+                        <div class="form-check m-0 ms-5">
+                            <input class="form-check-input" type="radio" name="DIAN" id="DIAN-alta">
+                            <label class="form-check-label" for="DIAN-alta">
+                                Alta
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-5">
+                            <input class="form-check-input" type="radio" name="DIAN" id="DIAN-transferencia">
+                            <label class="form-check-label" for="DIAN-transferencia">
+                                Transferência
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-5">
+                            <input class="form-check-input" type="radio" name="DIAN" id="DIAN-obito">
+                            <label class="form-check-label" for="DIAN-obito">
+                                Óbito (vá para <span class="numeracao negrito">70</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-6 d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">66</span>
+                    <label for="dt-alta" class="negrito label-nowrap mx-1">
+                        Data da Alta/Transferência:
+                    </label>
+                    <input id="dt-alta" type="date" class="form-control input-dado ms-2" style="width: 140px;">
+                </div>
+                <div class="col-6 d-flex colADireita justify-content-between align-items-center ps-4">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">67</span>
+                        <label for="peso-alta" class="negrito label-nowrap mx-1">
+                            Peso ao Alta/Transferência:
+                        </label>
+                        <div class="d-flex align-items-center">
+                            <input id="peso-alta" class="form-control input-dado ms-2" style="width: 60px;">
+                            <span class="ms-2">gramas</span>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">68</span>
+                    <label for="motivo-transferencia" class="negrito label-wrap-pretty mx-1">
+                        Se foi transferido, qual o motivo?
+                    </label>
+                    <input id="motivo-transferencia" class="form-control input-dado ms-2">
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">69</span>
+                    <label for="motivo-transferencia" class="negrito label-wrap-pretty mx-1">
+                        Se foi transferido, qual o motivo?
+                    </label>
+                    <input id="motivo-transferencia" class="form-control input-dado ms-2">
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">69</span>
+                    <label for="motivo-transferencia" class="negrito label-wrap-pretty mx-1">
+                        Se foi transferido, qual o motivo?
+                    </label>
+                    <input id="motivo-transferencia" class="form-control input-dado ms-2">
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="col-8 d-flex align-items-center">
+                    <span class="numeracao negrito">70</span>
+                    <label for="hora-obito-RN" class="negrito label-wrap-pretty mx-1">
+                        Se foi a “Óbito”, indique a hora do óbito:
+                    </label>
+                    <input id="hora-obito-RN" class="form-control input-dado ms-2" placeholder="00:00"
+                    style="width: 53px;">
+                    <span class="spanLGN ms-4">lgn</span>
+                </div>
+                <div class="form-check m-0 mx-2">
+                    <input class="form-check-input" type="checkbox" name="hora-obito-RN" id="hora-obito-RN-naoSeAplica">
+                    <label class="form-check-label label-nowrap" for="hora-obito-RN-naoSeAplica">
+                        Não se aplica
+                    </label>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">71</span>
+                    <label class="label-wrap-pretty negrito mx-1">
+                        Se foi a “Óbito”, onde ocorreu?
+                    </label>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="obito-RN" id="obito-RN-alojamento-conjunto">
+                        <label class="form-check-label" for="obito-RN-alojamento-conjunto">
+                            Alojamento conjunto
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="obito-RN" id="obito-RN-cuidado-intermediario">
+                        <label class="form-check-label" for="obito-RN-cuidado-intermediario">
+                            Cuidado intermediário
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="obito-RN" id="obito-RN-UTI-neonatal">
+                        <label class="form-check-label" for="obito-RN-UTI-neonatal">
+                            UTI neonatal
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="obito-RN" id="obito-RN-centro-obstetrico">
+                        <label class="form-check-label" for="obito-RN-centro-obstetrico">
+                            Centro obstétrico
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="obito-RN" id="obito-RN-outro">
+                        <label class="form-check-label" for="obito-RN-outro">
+                            Outro
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN ms-2">lgn</span>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="titulo-bloco d-flex justify-content-between align-items-center">
+            <span class="negrito">
+                IX. Assistência hospitalar à criança durante a situação que levou ao óbito
+            </span>
+            <div class="form-check m-0 mx-2">
+                <input class="form-check-input" type="checkbox" name="AHCDSO" id="AHCDSO-naoSeAplica">
+                <label class="form-check-label label-nowrap" for="AHCDSO-naoSeAplica">
+                    Não se aplica
+                </label>
+            </div>
+        </div>
+        <div class="conteudo-bloco">
+            <div class="d-flex fundo-cinza px-4 py-2">
+                Não se aplica se a resposta 
+                <span class="numeracao mx-1" style="max-height: 16px;">65</span> 
+                foi “óbito” OU em caso de óbito fora do hospital sem reinternação após o nascimento.
+            </div>
+            <div class="linha-dados align-items-center px-2">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">72</span>
+                    <label for="dt-internacao-crianca" class="negrito label-nowrap ms-1">
+                        Data da internação:
+                    </label>
+                    <input id="dt-internacao-crianca" class="form-control input-dado ms-2" type="date"
+                        style="max-width: 150px;">
+                    <span class="spanLGN ms-3">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class=" d-flex align-items-center">
+                        <label for="hr-internacao-crianca" class="negrito label-nowrap ms-1">
+                            Hora da internação:
+                        </label>
+                        <input id="hr-internacao-crianca" class="form-control input-dado ms-2" placeholder="00:00"
+                            style="max-width: 54px;">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between px-2">
+                <div class="d-flex align-items-center">
+                    <span class="numeracao negrito">73</span>
+                    <label class="label-nowrap negrito mx-1">
+                        A criança veio transferida de outro hospital?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="CVTH" id="CVTH-sim">
+                        <label class="form-check-label label-nowrap" for="CVTH-sim">
+                            Sim, qual?
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="CVTH" id="CVTH-nao">
+                        <label class="form-check-label" for="CVTH-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="d-flex ps-4 pe-2">
+                <div class="d-flex col-6 align-items-center">
+                    <label for="CVTH-hospital" class="label-nowrap">
+                        - Nome:
+                    </label>
+                    <input id="CVTH-hospital" class="form-control input-dado ms-1">
+                </div>
+                <div class="d-flex col-6 colADireita align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <label for="tempo-internacao-crianca" class="negrito me-2">
+                            Tempo de Internação
+                        </label>
+                        <input id="tempo-internacao-crianca" type="number" class="form-control input-dado"
+                            style="max-width: 50px;">
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="TIT" id="TIT-dias">
+                            <label class="form-check-label label-nowrap" for="TIT-dias">
+                                dias
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="TIT" id="TIT-meses">
+                            <label class="form-check-label" for="TIT-meses">
+                                meses.
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados px-2">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">74</span>
+                            <label for="historia-admissao" class="negrito ms-1">
+                                Breve história (queixas principais) na admissão:
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="historia-admissao" class="form-control input-dado mt-2"
+                        rows="3" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados px-2">
+                <div class="col-6 d-flex align-items-center">
+                    <span class="numeracao negrito">75</span>
+                    <label class="label-nowrap negrito mx-1">
+                        Dados da criança na ADMISSÃO:
+                    </label>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center">
+                    <span class="numeracao negrito">75.1</span>
+                    <label for="ICA" class="negrito mx-1">
+                        Idade
+                    </label>
+                    <input id="ICA" type="number" class="form-control input-dado"
+                        style="max-width: 50px;">
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="ICAT" id="ICAT-dias">
+                        <label class="form-check-label label-nowrap" for="ICAT-dias">
+                            dias
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="ICAT" id="ICAT-meses">
+                        <label class="form-check-label" for="ICAT-meses">
+                            meses
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="ICAT" id="ICAT-anos">
+                        <label class="form-check-label" for="ICAT-anos">
+                            anos
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="linha-dados ps-3 pe-2">
+                <div class="col-6 d-flex align-items-center justify-content-between">
+                    <div class="col-6 d-flex align-items-center">
+                        <span class="numeracao negrito">75.2</span>
+                        <label for="PCA" class="negrito mx-1">
+                            Peso
+                        </label>
+                        <input id="PCA" type="number" class="form-control input-dado me-1"
+                            style="max-width: 50px;">
+                        <span>gr.</span>
+                    </div>
+                    <span class="spanLGN mx-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">75.3</span>
+                        <label for="ACA" class="negrito mx-1">
+                            Altura
+                        </label>
+                        <input id="ACA" type="number" class="form-control input-dado me-1"
+                            style="max-width: 50px;">
+                        <span>cm</span>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados ps-3 pe-2">
+                <div class="col-6 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">75.4</span>
+                        <label for="ENCA" class="negrito mx-1">
+                            Estado nutricional
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="ENCAT" id="ENCAT-eutrofica">
+                            <label class="form-check-label" for="ENCAT-eutrofica">
+                                Eutrófica
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="ENCAT" id="ENCAT-desnutrida">
+                            <label class="form-check-label" for="ENCAT-desnutrida">
+                                Desnutrida/baixo peso
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN mx-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">75.5</span>
+                        <label for="EHCA" class="negrito mx-1">
+                            Estado de hidratação
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="EHCAT" id="EHCAT-hidratada">
+                            <label class="form-check-label" for="EHCAT-hidratada">
+                                Hidratada
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="EHCAT" id="EHCAT-desidratada">
+                            <label class="form-check-label" for="EHCAT-desidratada">
+                                Desidratada
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados ps-3 pe-2">
+                <div class="col-6 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">75.6</span>
+                        <label for="EGGCA" class="negrito mx-1">
+                            Estado geral grave?
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="EGGCA" id="EGGCA-sim">
+                            <label class="form-check-label" for="EGGCA-sim">
+                                Sim
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="EGGCA" id="EGGCA-nao">
+                            <label class="form-check-label" for="EGGCA-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN mx-2">lgn</span>
+                </div>
+                <div class="col-6 colADireita d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="numeracao negrito">75.7</span>
+                        <label for="PCA" class="negrito mx-1">
+                            Perfusão
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="PCA" id="PCA-normal">
+                            <label class="form-check-label" for="PCA-normal">
+                                Normal
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="PCA" id="PCA-diminuida">
+                            <label class="form-check-label" for="PCA-diminuida">
+                                Dininuída
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="col-12 d-flex flex-wrap align-items-center ps-3 pe-2 pt-2">
+                <span class="numeracao negrito">75.8</span>
+                <label class="negrito ms-1 me-4">
+                    Sinais vitais
+                </label>
+                <div class="d-flex align-items-center ms-4">
+                    <label for="BCCA" class="negrito me-1">
+                        Batimentos cardíacos x min.
+                    </label>
+                    <input id="BCCA" class="form-control input-dado me-1"
+                        style="max-width: 70px;">
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="d-flex align-items-center ms-4">
+                    <label for="RCA" class="negrito me-1">
+                        Respirações x min.
+                    </label>
+                    <input id="RCA" class="form-control input-dado me-1"
+                        style="max-width: 70px;">
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+                <div class="d-flex align-items-center ms-4">
+                    <label for="TCA" class="negrito me-1">
+                        Temperatura
+                    </label>
+                    <input id="TCA" class="form-control input-dado me-1"
+                        style="max-width: 80px;">
+                    <span class="ms-1 me-3">°C</span>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados px-2">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">76</span>
+                            <label for="diagostico-crianca-admissao" class="negrito ms-1">
+                                Diagnósticos na admissão e conduta inicial:
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="diagostico-crianca-admissao" class="form-control input-dado mt-2"
+                        rows="3" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados px-2">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">77</span>
+                            <label for="REIC" class="negrito ms-1">
+                                Resumo da evolução durante a internação:
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="REIC" class="form-control input-dado mt-2"
+                        rows="4" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center px-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">78</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Foi indicado admissão na UTI pediátrica?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="IA-UTIP" id="IA-UTIP-sim">
+                        <label class="form-check-label label-nowrap" for="IA-UTIP-sim">
+                            Sim. Motivo:
+                        </label>
+                    </div>
+                    <input id="IA-UTIP-motivo" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="IA-UTIP" id="IA-UTIP-nao">
+                        <label class="form-check-label label-nowrap" for="IA-UTIP-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-3 pe-2">
+                <div class="col-11 d-flex flex-wrap align-items-center">
+                    <span class="numeracao negrito">78.1</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Se “Sim”, foi internado na UTI pediátrica?
+                    </label>
+                    <div class="d-flex align-items-center form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="INT-UTIP" id="INT-UTIP-sim">
+                        <label class="form-check-label label-nowrap ps-1" for="INT-UTIP-sim">
+                            Sim. Data
+                        </label>
+                        <input id="INT-UTIP-dt" type="date" class="form-control input-dado ms-2"
+                            style="width: 130px;">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <label for="INT-UTIP-hora" class="ms-4">
+                            Hora
+                        </label>
+                        <input id="INT-UTIP-hora" class="form-control input-dado mx-2" placeholder="00:00"
+                            style="width: 70px;">
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="INT-UTIP" id="INT-UTIP-nao">
+                        <label class="form-check-label label-nowrap" for="INT-UTIP-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-3 pe-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">78.1.1</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        Demorou >3 horas para ser internado?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="DM3HPSIC" id="DM3HPSIC-sim">
+                        <label class="form-check-label label-nowrap" for="DM3HPSIC-sim">
+                            Sim. Por que?
+                        </label>
+                    </div>
+                    <input id="DM3HPSIC-motivo" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="DM3HPSIC" id="DM3HPSIC-nao">
+                        <label class="form-check-label label-nowrap" for="DM3HPSIC-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center ps-3 pe-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">78.1.2</span>
+                    <label for="crianca-nao-internada-motivo" class="negrito label-nowrap mx-1">
+                        Por que não foi internado?
+                    </label>
+                    <input id="crianca-nao-internada-motivo" class="form-control input-dado ms-2">
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados align-items-center justify-content-between px-2">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">79</span>
+                    <label for="DIANC-alta" class="negrito mx-1">
+                        Desfecho da internação após o nascimento:
+                    </label>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="DIANC" id="DIANC-alta">
+                        <label class="form-check-label" for="DIANC-alta">
+                            Alta
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="DIANC" id="DIANC-transferencia">
+                        <label class="form-check-label" for="DIANC-transferencia">
+                            Transferência
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="DIANC" id="DIANC-obito">
+                        <label class="form-check-label" for="DIANC-obito">
+                            Óbito (vá para <span class="numeracao negrito">84</span>)
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados px-2">
+                <div class="col-6 d-flex flex-wrap align-items-center">
+                    <span class="numeracao negrito">80</span>
+                    <label for="dt-alta-crianca" class="negrito mx-1">
+                        Data da Alta/Transferência:
+                    </label>
+                    <input id="dt-alta-crianca" type="date" class="form-control input-dado"
+                        style="width: 130px;">
+                </div>
+                <div class="col-6 colADireita d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <span class="numeracao negrito">81</span>
+                        <label for="peso-alta-crianca" class="negrito label-wrap-pretty mx-1 mb-1">
+                            Peso ao Alta/Transferência:
+                        </label>
+                        <input id="peso-alta-crianca" class="form-control input-dado"
+                            style="width: 70px;">
+                    </div>
+                    <span class="spanLGN">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center px-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">82</span>
+                    <label for="CRIANCAT-motivo" class="negrito label-wrap-pretty mx-1">
+                        Se foi transferido, anote o motivo:
+                    </label>
+                    <input id="CRIANCAT-motivo" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="checkbox" name="CRIANCAT-motivo" id="CRIANCAT-motivo-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="CRIANCAT-motivo-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center px-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">83</span>
+                    <label for="CRIANCAT-nome-hospital" class="negrito label-wrap-pretty mx-1">
+                        Se foi transferido, indique para qual hospital:
+                    </label>
+                    <input id="CRIANCAT-nome-hospital" class="form-control input-dado ms-2">
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="checkbox" name="CRIANCAT-hospital" id="CRIANCAT-hospital-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="CRIANCAT-hospital-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+            <div class="linha-dados justify-content-between align-items-center px-2">
+                <div class="col-11 d-flex align-items-center">
+                    <span class="numeracao negrito">84</span>
+                    <label for="hora-obito-crianca" class="negrito label-wrap-pretty mx-1">
+                        Se foi a “Óbito”, indique a hora do óbito:
+                    </label>
+                    <input id="hora-obito-crianca" class="form-control input-dado ms-2"
+                        style="width: 54px;" placeholder="00:00">
+                    <span class="spanLGN ms-3 me-5">lgn</span>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="checkbox" name="HOC" id="HOC-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="HOC-naoSeAplica">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+
+
+
+
+
+            <div class="linha-dados align-items-center justify-content-between px-2">
+                <div class="d-flex align-items-center flex-wrap">
+                    <span class="numeracao negrito">85</span>
+                    <label for="SOC-UTIP" class="negrito mx-1">
+                        Se foi a “Óbito”, anote o setor de ocorrência:
+                    </label>
+                    <div class="form-check m-0 ms-4">
+                        <input class="form-check-input" type="radio" name="SOC" id="SOC-UTIP">
+                        <label class="form-check-label" for="SOC-UTIP">
+                            UTI neonatal/pediátrica
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="form-check m-0 ms-4">
+                            <input class="form-check-input" type="radio" name="SOC" id="SOC-outro">
+                            <label class="form-check-label" for="SOC-outro">
+                                Outro:
+                            </label>
+                        </div>
+                        <input id="SOC-outro-descricao" class="form-control input-dado ms-1 me-3">
+                    </div>
+                    <div class="form-check m-0 ms-5">
+                        <input class="form-check-input" type="radio" name="SOC" id="SOC-naoSeAplica">
+                        <label class="form-check-label label-nowrap" for="SOC-naoSeAplica" style="max-width: 300px;">
+                            Não se aplica
+                        </label>
+                    </div>
+                </div>
+                <span class="spanLGN">lgn</span>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="d-flex">
+            <span class="titulo-bloco negrito">
+                X. Informações complementares sobre o óbito
+            </span>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">86</span>
+                            <label for="diagnosticos-clinicos" class="negrito ms-1">
+                                Liste os diagnósticos ou hipóteses diagnósticas registradas durante a evolução clínica.
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="diagnosticos-clinicos" class="form-control input-dado mt-2"
+                        rows="4" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-7 d-flex flex-wrap align-items-center">
+                    <span class="numeracao negrito">87</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        O corpo foi encaminhado para necropsia?
+                    </label>
+                    <div class="d-flex">
+                        <div class="d-flex align-items-center form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="corpo-enviado-necropsia" id="corpo-enviado-necropsia-sim">
+                            <label class="form-check-label mx-1" for="corpo-enviado-necropsia-sim">
+                                Sim 
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>(</span>
+                            <div class="d-flex align-items-center form-check m-0 ms-1">
+                                <input class="form-check-input" type="radio" name="CENL" id="CENL-iml">
+                                <label class="form-check-label ms-1" for="CENL-iml">
+                                    IML
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CENL" id="CENL-svo">
+                                <label class="form-check-label ms-1" for="CENL-svo">
+                                    SVO
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CENL" id="CENL-outro">
+                                <label class="form-check-label ms-1" for="CENL-outro">
+                                    Outro
+                                </label>
+                            </div>
+                            <span>)</span>
+                        </div>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="corpo-enviado-necropsia" id="corpo-enviado-necropsia-nao">
+                        <label class="form-check-label" for="corpo-enviado-necropsia-nao">
+                            Não
+                        </label>
+                    </div>
+                    <span class="spanLGN ms-3">lgn</span>
+                </div>
+                <div class="col-5 colADireita d-flex align-items-center justify-content-between">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <span class="numeracao negrito">87.1</span>
+                        <label class="label-wrap-pretty mx-1">
+                            Se <b>Sim</b>, foi realizada a necropsia?
+                        </label>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="realizada-necropsia" id="realizada-necropsia-sim">
+                            <label class="form-check-label" for="realizada-necropsia-sim">
+                                Sim 
+                            </label>
+                        </div>
+                        <div class="form-check m-0 ms-3">
+                            <input class="form-check-input" type="radio" name="realizada-necropsia" id="realizada-necropsia-nao">
+                            <label class="form-check-label" for="realizada-necropsia-nao">
+                                Não
+                            </label>
+                        </div>
+                    </div>
+                    <span class="spanLGN ms-2">lgn</span>
+                </div>
+            </div>
+            <div class="linha-dados flex-column">
+                <div class="col-12 d-flex align-items-center">
+                    <span class="numeracao negrito">88</span>
+                    <label class="label-nowrap mx-1">
+                        Este caso foi <b>analisado</b> por alguma comissão/grupo do hospital?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="caso-analisado" id="caso-analisado-sim">
+                        <label class="form-check-label" for="caso-analisado-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="caso-analisado" id="caso-analisado-nao">
+                        <label class="form-check-label" for="caso-analisado-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-column pt-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label for="comissao-conclusao">
+                            - Se “Sim”, qual comissão/grupo e quais as conclusões 
+                            (causas do óbito, fragilidades na assistência hospitalar) e encaminhamentos?
+                        </label>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="comissao-conclusao" class="textArea form-control input-dado mt-2"
+                        rows="4" style="width: 100%;"></textarea>
+                </div>
+                <div class="col-12 d-flex flex-column pt-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <label for="CNA-outro-descricao">
+                                - Se “Não”, por quê?
+                            </label>
+                            <div class="form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CNA" id="CNA-nao-encaminhado">
+                                <label class="form-check-label" for="CNA-nao-encaminhado">
+                                    Não foi encaminhado.
+                                </label>
+                            </div>
+                            <div class="form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CNA" id="CNA-encaminhado-nao-analisado">
+                                <label class="form-check-label" for="CNA-encaminhado-nao-analisado">
+                                    Foi encaminhado, mas não analisado.
+                                </label>
+                            </div>
+                            <div class="form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CNA" id="CNA-sem-comissao">
+                                <label class="form-check-label" for="CNA-sem-comissao">
+                                    Não existe comissão/grupo
+                                </label>
+                            </div>
+                            <div class="form-check m-0 ms-3">
+                                <input class="form-check-input" type="radio" name="CNA" id="CNA-outro">
+                                <label class="form-check-label" for="CNA-outro">
+                                    Outro
+                                </label>
+                            </div>
+
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                </div>
+                <input id="CNA-outro-descricao" class="form-control input-dado mt-1" style="width: 100%;">
+            </div>
+            <div class="linha-dados">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span class="numeracao negrito">89</span>
+                            <label for="esclarecimento-notificante" class="negrito ms-1">
+                                Informações complementares ou esclarecimentos do investigador. 
+                                Algum tratamento, exame, conduta, etc., deixou de ser feito na internação?
+                            </label>
+                        </div>
+                        <span class="spanLGN">lgn</span>
+                    </div>
+                    <textarea id="esclarecimento-notificante" class="textArea form-control input-dado mt-2"
+                        rows="4" style="width: 100%;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bloco mt-3">
+        <div class="d-flex">
+            <span class="titulo-bloco negrito">
+                XI. Encerramento da investigação hospitalar
+            </span>
+        </div>
+        <div class="conteudo-bloco px-2">
+            <div class="linha-dados">
+                <div class="col-7 d-flex align-items-center">
+                    <span class="numeracao negrito">90</span>
+                    <label for="nome-notificante" class="negrito label-wrap-pretty mx-1">
+                        Responsável pelo preenchimento:
+                    </label>
+                    <input id="nome-notificante" class="form-control input-dado ms-1"/>
+                </div>
+                <div class="col-5 d-flex align-items-center colADireita">
+                    <span class="numeracao negrito">91</span>
+                    <label for="contato-notificante" class="negrito label-wrap-pretty mx-1">
+                        Telefone de contato:
+                    </label>
+                    <input id="contato-notificante" class="form-control input-dado ms-1"/>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-12 d-flex align-items-center">
+                    <span class="numeracao negrito">92</span>
+                    <label class="negrito label-wrap-pretty mx-1">
+                        O responsável pelo preenchimento é funcionário deste hospital?
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="funcionario-hospital" id="funcionario-hospital-sim">
+                        <label class="form-check-label" for="funcionario-hospital-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="funcionario-hospital" id="funcionario-hospital-nao">
+                        <label class="form-check-label" for="funcionario-hospital-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="linha-dados">
+                <div class="col-7 d-flex align-items-center">
+                    <span class="numeracao negrito">93</span>
+                    <label for="dt-encerramento-investigacao" class="label-wrap-pretty mx-1">
+                        Data do <b>encerramento</b> da investigação hospitalar:
+                    </label>
+                    <input id="dt-encerramento-investigacao" type="date" class="form-control input-dado ms-1"
+                    style="width: 150px;"/>
+                </div>
+                <div class="col-5 colADireita d-flex flex-wrap align-items-center">
+                    <span class="numeracao negrito">94</span>
+                    <label class="negrito label-nowrap mx-1">
+                        Informação anexa:
+                    </label>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="informacao-anexa" id="informacao-anexa-sim">
+                        <label class="form-check-label" for="informacao-anexa-sim">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check m-0 ms-3">
+                        <input class="form-check-input" type="radio" name="informacao-anexa" id="informacao-anexa-nao">
+                        <label class="form-check-label" for="informacao-anexa-nao">
+                            Não
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rodape-ficha">
+    <form id="uploadForm" class="py-4" enctype="multipart/form-data"
+        method="POST" action="{% url 'upload' 0 %}">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center py-4">
+            <span class="negrito">Anexar Arquivos PDF</span>
+        </div>
+        <div id="containerInputsPDF">
+            <div class="d-flex align-items-center">
+                <input id="file" name="file" type="file" accept=".pdf" class="form-control">
+                <div class="btnCorPrincipal btn mx-2 px-2 py-1" onclick="addInputFile()">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    PDF
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
+        <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
+            CANCELAR
+        </button>
+        <button class="btnCorPrincipal btn mx-4"
+                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+            CADASTRAR
+        </button>
+    </div>
+</div>
