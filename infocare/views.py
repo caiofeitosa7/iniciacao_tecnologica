@@ -166,7 +166,8 @@ def observacoes_view(request, cod_ficha):
 def registrar_observacao(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
-        dados['cod_usuario_concluinte'] = request.session.get('cod_usuario')
+        dados['cod_usuario'] = int(request.session.get('cod_usuario'))
+        dados['cod_usuario_concluinte'] = int(request.session.get('cod_usuario'))
         dados['dataHora_cadastro'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         dados['dataHora_concluida'] = dados['dataHora_cadastro']
         models.set_observacao(dados)
@@ -204,17 +205,15 @@ def marcar_ficha_descartada(request, cod_ficha):
 
 
 def upload_arquivos(request, cod_ficha):
-    def salvarArquivo(chave):
-        f = request.FILES[chave]
-        fs = FileSystemStorage()
-        filename = fs.save(str(f.name), f)
-        uploaded_file_url = fs.url(filename)
-        print(uploaded_file_url)
-
     if request.method == 'POST':
         print('chegou aqui:', request.FILES.keys())
+
         for key in request.FILES.keys():
-            salvarArquivo(key)
+            f = request.FILES[key]
+            fs = FileSystemStorage()
+            filename = fs.save(str(f.name), f)
+            uploaded_file_url = fs.url(filename)
+            print(uploaded_file_url)
 
         return redirect('home')
 

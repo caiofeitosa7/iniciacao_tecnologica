@@ -17,8 +17,12 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         if (campo.id) {   // exclui o campo do csrf_token
             if (campo.type === 'number')
                 dicionario[campo.id] = parseInt(campo.value, 10);
-            else
-                dicionario[campo.id] = campo.value;
+            else {
+                if (campo.type === 'date' && campo.value === '')
+                    dicionario[campo.id] = null;
+                else
+                    dicionario[campo.id] = campo.value;
+            }
         }
     });
 

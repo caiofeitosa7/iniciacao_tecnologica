@@ -52,25 +52,25 @@ def get_colunas_tabela(nome_tabela: str, indentificacao: bool = False) -> list:
     Retorna uma lista com os nomes das colunas de uma tabela.
 
     :param nome_tabela: Nome da tabela.
-    :param indentificacao: Se True, adiciona uma identificação ao nome da coluna.
+    :param indentificacao: Se True, adiciona o nome da tabela ao final do nome da coluna. Exemplo: coluna_tabela.
     :return: Lista com os nomes das colunas.
     """
 
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"PRAGMA table_info({nome_tabela});")
+    cursor.execute(f"SHOW COLUMNS FROM {nome_tabela};")
     resultados = cursor.fetchall()
     fechar_conexao(conexao)
 
     if indentificacao:
-        return [f'{resultado[1]}_{nome_tabela}' for resultado in resultados]
+        return [f'{resultado[0]}_{nome_tabela}' for resultado in resultados]
     else:
-        return [resultado[1] for resultado in resultados]
+        return [resultado[0] for resultado in resultados]
 
 
 def get_placeholders(colunas: list, usa_colunas: bool) -> str:
     if usa_colunas:
         return ', '.join(colunas)
-    return ', '.join(['?' for _ in range(len(colunas))])
+    return ', '.join(['%s'] * len(colunas))
 
 
 def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
@@ -92,46 +92,49 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
     conexao, cursor = abrir_conexao()
     valores = tuple(dados.values())
 
-    query = f"""INSERT INTO {nome_tabela} (
-                    {get_placeholders(colunas[1:], True)}
-                ) VALUES (
-                    {get_placeholders(colunas[1:], False)}
-                )
-            """
+    query = f"""
+        INSERT INTO {nome_tabela} (
+            {get_placeholders(colunas[1:], True)}
+        ) VALUES (
+            {get_placeholders(colunas[1:], False)}
+        )
+    """
 
     try:
-        cursor = conexao.cursor()
         cursor.execute(query, valores)
+        conexao.commit()
         cod_registro = cursor.lastrowid
-        fechar_conexao(conexao)
-
         return cod_registro
     except Exception as e:
+        conexao.rollback()
         print(e)
+    finally:
+        fechar_conexao(conexao)
 
 
 def alterar_registro_tabela(nome_tabela: str, dados: dict):
     colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
-    valores = tuple(dados.values())[1:]
-
-    lista = list()
-    for i, coluna in enumerate(colunas[1:]):
-        lista.append(f"{coluna} = ?")
+    codigo = dados.pop('codigo')
+    placeholders = [f"{coluna} = %s" for coluna in colunas if coluna in dados]
 
     query = f"""
-            UPDATE {nome_tabela}
-            SET 
-                {get_placeholders(lista, True)}
-            WHERE codigo = {dados['codigo']};
-        """
+        UPDATE {nome_tabela}
+        SET {', '.join(placeholders)}
+        WHERE codigo = %s;
+    """
+
+    valores = list(dados.values())
+    valores.append(codigo)
 
     try:
         cursor.execute(query, valores)
+        conexao.commit()
     except Exception as e:
+        conexao.rollback()
         print(e)
-
-    fechar_conexao(conexao)
+    finally:
+        fechar_conexao(conexao)
 
 
 def apagar_registro_tabela(nome_tabela: str, codigo: int):
@@ -154,8 +157,8 @@ def apagar_registro_tabela(nome_tabela: str, codigo: int):
     - Não é possível apagar um registro que tenha sido utilizado em uma ficha.
     """
     conexao, cursor = abrir_conexao()
-    query = f"DELETE FROM {nome_tabela} WHERE codigo = {codigo}"
-    cursor.execute(query)
+    query = f"DELETE FROM {nome_tabela} WHERE codigo = %s"
+    cursor.execute(query,  (codigo,))
     fechar_conexao(conexao)
 
 
@@ -167,7 +170,6 @@ def get_maior_codigo_ficha_registrado():
     :rtype: int
 
     :Example:
-
     >>> get_maior_codigo_ficha_registrado()
     1
     """
@@ -267,14 +269,13 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     """
 
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT tabela FROM formulario WHERE codigo = {cod_formulario}")
+    cursor.execute("SELECT tabela FROM formulario WHERE codigo = %s",  (cod_formulario, ))
     tabela = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
     return tabela
 
 
 def get_html_formulario(codigo: int):
-
     """
     Retorna o template HTML do formulário de acordo com o código do formulário.
 
@@ -290,11 +291,9 @@ def get_html_formulario(codigo: int):
     '<div class="form-group"><label for="nome">Nome:</label><input type="text" class="form-control" id="nome" name="nome"></div>'
     """
 
-    nome_tabela = 'formulario'
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT arquivoHTML FROM {nome_tabela} WHERE codigo = {codigo}")
+    cursor.execute(f"SELECT arquivoHTML FROM formulario WHERE codigo = %s",  (codigo,))
     html = cursor.fetchone()[0]
-
     fechar_conexao(conexao, False)
     return html
 
@@ -313,7 +312,7 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
     cod_ficha = proximo_codigo_ficha()
     conexao, cursor = abrir_conexao()
 
-    print('codigo da ficha', cod_ficha)
+    print('codigo da ficha: ', cod_ficha)
 
     estado_ficha = {
         'cod_ficha': cod_ficha,
@@ -323,10 +322,10 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
 
     inserir_registro_tabela('estado', estado_ficha)
 
+    print('passou do estado da ficha')
+
     tabela_ficha_notificacao = get_tabela_formulario(1)
     nome_tabela = tabela_ficha_notificacao if tabela == "" else tabela
-
-    print(nome_tabela)
 
     colunas = get_colunas_tabela(nome_tabela)
     query = f"""
@@ -337,15 +336,19 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
         )
     """
 
+    conexao, cursor = abrir_conexao()
     try:
-        cursor = conexao.cursor()
         valores = (cod_ficha,) + tuple(campos.values())
         cursor.execute(query, valores)
-        fechar_conexao(conexao)
+        conexao.commit()
     except Exception as e:
+        conexao.rollback()
         print(e)
+    finally:
+        fechar_conexao(conexao)
 
-    print(cod_ficha)
+    print('é pra ter salvo a ficha')
+
     return cod_ficha
 
 
@@ -427,25 +430,25 @@ def listar_observacoes(cod_ficha: int):
     conexao, cursor = abrir_conexao()
     cursor.execute(f"""
         SELECT
-            {nome_tabela}.codigo,
-            {nome_tabela}.descricao,
-            {nome_tabela}.concluida,
-            {nome_tabela}.cod_ficha,
-            {nome_tabela}.cod_usuario_autor,
-            {nome_tabela}.cod_usuario_concluinte,
-            {nome_tabela}.dataHora_cadastro,
-            {nome_tabela}.dataHora_concluida,
+            OBS.codigo,
+            OBS.descricao,
+            OBS.concluida,
+            OBS.cod_ficha,
+            OBS.cod_usuario_autor,
+            OBS.cod_usuario_concluinte,
+            OBS.dataHora_cadastro,
+            OBS.dataHora_concluida,
             AUTOR.codigo,
             AUTOR.nome,
             CONCLUINTE.codigo,
             CONCLUINTE.nome
-        FROM observacao
+        FROM {nome_tabela} AS OBS
             INNER JOIN usuario AS AUTOR
                 ON cod_usuario_autor = AUTOR.codigo
             INNER JOIN usuario AS CONCLUINTE
-                ON cod_usuario_concluinte == CONCLUINTE.codigo
-        WHERE cod_ficha = {cod_ficha}
-    """)
+                ON cod_usuario_concluinte = CONCLUINTE.codigo
+        WHERE cod_ficha = %s
+    """,  (cod_ficha,))
 
     resultados = cursor.fetchall()
     fechar_conexao(conexao, False)
