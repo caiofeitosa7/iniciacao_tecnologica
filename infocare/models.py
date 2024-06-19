@@ -1,12 +1,9 @@
 from django.db import connections
 from datetime import date, datetime, timedelta
 
-import sqlite3
-
 
 def abrir_conexao():
     conexao = connections['default']
-    # conexao = sqlite3.connect('..\db.sqlite3')
     cursor = conexao.cursor()
     return conexao, cursor
 
@@ -47,19 +44,18 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
     return dados
 
 
-def get_colunas_tabela(nome_tabela: str, indentificacao: bool = False) -> list:
+def get_colunas_tabela(cursor, nome_tabela: str, indentificacao: bool = False) -> list:
     """
     Retorna uma lista com os nomes das colunas de uma tabela.
 
+    :param cursor: Cursor da conexão com o banco de dados.
     :param nome_tabela: Nome da tabela.
     :param indentificacao: Se True, adiciona o nome da tabela ao final do nome da coluna. Exemplo: coluna_tabela.
     :return: Lista com os nomes das colunas.
     """
 
-    conexao, cursor = abrir_conexao()
     cursor.execute(f"SHOW COLUMNS FROM {nome_tabela};")
     resultados = cursor.fetchall()
-    fechar_conexao(conexao)
 
     if indentificacao:
         return [f'{resultado[0]}_{nome_tabela}' for resultado in resultados]
@@ -73,25 +69,24 @@ def get_placeholders(colunas: list, usa_colunas: bool) -> str:
     return ', '.join(['%s'] * len(colunas))
 
 
-def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
-    clausura_where = ''
-    for filtro in lista_filtros:
-        if filtro:
-            if clausura_where:
-                clausura_where += " AND "
-            clausura_where += filtro
-
-    query = f"SELECT * FROM {nome_tabela}"
-    query += f" WHERE {clausura_where}" if clausura_where else ""
-
-    return query
+# def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
+#     clausura_where = ''
+#     for filtro in lista_filtros:
+#         if filtro:
+#             if clausura_where:
+#                 clausura_where += " AND "
+#             clausura_where += filtro
+#
+#     query = f"SELECT * FROM {nome_tabela}"
+#     query += f" WHERE {clausura_where}" if clausura_where else ""
+#
+#     return query
 
 
 def inserir_registro_tabela(nome_tabela: str, dados: dict):
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     valores = tuple(dados.values())
-
     query = f"""
         INSERT INTO {nome_tabela} (
             {get_placeholders(colunas[1:], True)}
@@ -113,8 +108,8 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
 
 
 def alterar_registro_tabela(nome_tabela: str, dados: dict):
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     codigo = dados.pop('codigo')
     placeholders = [f"{coluna} = %s" for coluna in colunas if coluna in dados]
 
@@ -219,21 +214,21 @@ def proximo_codigo_ficha():
 MAIOR_CODIGO_FICHA_REGISTRADA = get_maior_codigo_ficha_registrado()
 
 
-def get_formularios_ativos():
+def get_tipos_ficha_ativos():
     """
-    Retorna uma lista com os códigos e nomes de todos os formulario ativos.
+    Retorna uma lista com os códigos e nomes de todos os tipos de fichas ativos.
 
-    :return: list - Lista com os códigos e nomes de todos os formulario ativos.
+    :return: list - Lista com os códigos e nomes de todos os tipos de fichas ativos.
     :rtype: list
 
     :Example:
 
-    >>> get_formularios_ativos()
-    [{'codigo': 1, 'nome': 'Ficha Notificação'}, {'codigo': 2, 'nome': 'Ficha Acidente de Trabalho Grave'},
+    >>> get_tipos_ficha_ativos()
+    [{'codigo': 1, 'nome': 'Ficha de Notificação'}, {'codigo': 2, 'nome': 'Ficha Acidente de Trabalho Grave'},
     {'codigo': 3, 'nome': 'Ficha Violência Interpessoal/Autoprovocada'}]
     """
 
-    nome_tabela = 'formulario'
+    nome_tabela = 'tipo_ficha'
     conexao, cursor = abrir_conexao()
     cursor.execute(f"""
         SELECT codigo, nome
@@ -242,9 +237,9 @@ def get_formularios_ativos():
         ORDER BY nome
     """)
     resultado = cursor.fetchall()
-    colunas = get_colunas_tabela(nome_tabela)[:2]
-    formularios = list()
+    colunas = get_colunas_tabela(cursor, nome_tabela)[:2]
 
+    formularios = list()
     for res in resultado:
         formularios.append(criar_dicionario(colunas, list(res)))
 
@@ -275,37 +270,39 @@ def get_tabela_formulario(cod_formulario: int) -> str:
     return tabela
 
 
-def get_html_formulario(codigo: int):
+def get_html_tipo_ficha(codigo: int):
     """
-    Retorna o template HTML do formulário de acordo com o código do formulário.
+    Retorna o template HTML do tipo de ficha de acordo com o código do tipo de ficha.
 
-    :param codigo: int - Código do formulário.
+    :param codigo: int - Código do tipo de ficha.
     :type codigo: int
 
-    :return: str - HTML do formulário.
+    :return: str - HTML do tipo de ficha.
     :rtype: str
 
     :Example:
 
-    >>> get_html_formulario(1)
-    '<div class="form-group"><label for="nome">Nome:</label><input type="text" class="form-control" id="nome" name="nome"></div>'
+    >>> get_html_tipo_ficha(1)
+    'fichaNotificacaoGeral.html'
     """
 
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT arquivoHTML FROM formulario WHERE codigo = %s",  (codigo,))
+    cursor.execute(f"SELECT arquivoHTML FROM tipo_ficha WHERE codigo = %s",  (codigo,))
     html = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
     return html
 
 
-def alterar_estado_ficha(cod_ficha: int, status: str):
-    nome_tabela = 'estado'
+def alterar_estado_ficha(codigo: int, status: int):
     conexao, cursor = abrir_conexao()
+    nome_tabela = 'ficha'
     cursor.execute(f"""
-        UPDATE {nome_tabela}
-        SET status = '{status}'
-        WHERE cod_ficha = {cod_ficha}
-    """)
+        UPDATE %s
+        SET cod_estado = %s
+        WHERE codigo = %s
+    """, (nome_tabela, status, codigo))
+
+    fechar_conexao(conexao)
 
 
 def set_ficha_notificacao(campos: dict, tabela: str = ""):
@@ -322,12 +319,10 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
 
     inserir_registro_tabela('estado', estado_ficha)
 
-    print('passou do estado da ficha')
-
     tabela_ficha_notificacao = get_tabela_formulario(1)
     nome_tabela = tabela_ficha_notificacao if tabela == "" else tabela
 
-    colunas = get_colunas_tabela(nome_tabela)
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     query = f"""
         INSERT INTO {nome_tabela} (
             {get_placeholders(colunas, True)}
@@ -353,13 +348,14 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
 
 
 def get_ficha(cod_ficha: int, cod_formulario: int):
-    tabela = get_tabela_formulario(cod_formulario)
     conexao, cursor = abrir_conexao()
+    tabela = get_tabela_formulario(cod_formulario)
     cursor.execute(f"SELECT * FROM {tabela} WHERE codigo = {cod_ficha}")
     resultado = cursor.fetchone()
-    colunas = get_colunas_tabela(tabela)
+    colunas = get_colunas_tabela(cursor, tabela)
     ficha = criar_dicionario(colunas, list(resultado))
     fechar_conexao(conexao, False)
+
     return ficha
 
 
@@ -368,61 +364,99 @@ def alterar_ficha(campos: dict):
     alterar_registro_tabela(tabela, campos)
 
 
-def get_quantidade_fichas(status: str):
+def get_quantidade_fichas(status: int):
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT COUNT(*) FROM estado WHERE status = '{status}'")
+    cursor.execute(f"SELECT COUNT(*) FROM ficha WHERE cod_estado = %s", (status,))
     quant_fichas = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
     return quant_fichas
 
 
-def listar_fichas(status: str, numero_ficha: int = 0, setor: str = ''):
+def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"SELECT cod_ficha, tabela FROM estado WHERE status = '{status}'")
+    # colunas = [
+    #     'cod_ficha',
+    #     'numero_ficha',
+    #     'nome_paciente',
+    #     'nome_formulario',
+    #     'cod_formulario',
+    #     'setor',
+    #     'nome_notificante',
+    #     'dt_notificacao',
+    #     'quant_obs'
+    # ]
+
+    query = f"""
+        SELECT F.codigo     AS COD_FICHA,
+               F.prontuario AS PRONTUARIO,
+               TF.nome      AS TIPO_FICHA,
+               TF.codigo    AS COD_TIPO_FICHA,
+               F.setor      AS SETOR,
+               C.nome       AS CAMPO,
+               MAX(CASE
+                       WHEN (C.cod_tipo_campo = 1) THEN VC.valor_string
+                       WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
+                       WHEN (C.cod_tipo_campo = 3) THEN VC.valor_data
+                   END)     AS VALOR_CAMPO,
+               OBS.quant    AS QUANT_OBS
+        FROM ficha AS F
+                 INNER JOIN campo_tipo_ficha AS CTF
+                            ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
+                 LEFT JOIN valorcampo AS VC
+                           ON VC.cod_ficha = F.codigo
+                 INNER JOIN tipo_ficha AS TF
+                            ON TF.codigo = F.cod_tipo_ficha
+                 INNER JOIN campo AS C
+                            ON C.codigo = VC.cod_campo
+                 LEFT JOIN (SELECT cod_ficha,
+                                   COUNT(codigo) AS quant
+                            FROM observacao
+                            GROUP BY cod_ficha) AS OBS ON OBS.cod_ficha = F.codigo
+        WHERE
+            F.cod_estado = {status}
+        GROUP BY F.codigo,
+                 F.prontuario,
+                 TF.nome,
+                 TF.codigo,
+                 F.setor,
+                 C.nome,
+                 OBS.quant
+        ORDER BY F.setor;
+    """
+
+    cursor.execute(query)
     resultados = cursor.fetchall()
-
-    colunas = [
-        'cod_ficha',
-        'numero_ficha',
-        'nome_paciente',
-        'nome_formulario',
-        'cod_formulario',
-        'setor',
-        'nome_notificante',
-        'dt_notificacao',
-        'quant_obs'
-    ]
-
-    dados = list()
-    for resultado in resultados:
-        cod_ficha = int(resultado[0])
-        tabela = resultado[1]
-        query = f"""
-            SELECT
-                {tabela}.codigo,
-                numero_ficha,
-                nome_paciente,
-                formulario.nome,
-                formulario.codigo,
-                setor,
-                nome_notificante,
-                dt_notificacao,
-                COUNT(observacao.codigo)
-            FROM {tabela}
-                INNER JOIN formulario ON formulario.codigo = {tabela}.cod_formulario
-                LEFT JOIN observacao ON observacao.cod_ficha = {cod_ficha}
-            WHERE {tabela}.codigo = {cod_ficha}
-            ORDER BY setor
-        """
-
-        cursor.execute(query)
-        valores = list(cursor.fetchone())
-        # quant_observacoes = cursor.execute(f"SELECT COUNT(*) FROM observacao WHERE cod_ficha = {cod_ficha}")
-        # valores.append(int(quant_observacoes.fetchone()[0]))
-        dados.append(criar_dicionario(colunas, valores))
-
     fechar_conexao(conexao, False)
-    return dados
+
+    fichas = []
+    for resultado in resultados:
+        ficha_id = resultado['COD_FICHA']
+        ficha_existente = next((ficha for ficha in fichas if ficha['codigo'] == ficha_id), None)
+
+        print(resultado)
+
+        if ficha_existente:
+            nome_campo = resultado['CAMPO']
+            valor_campo = resultado['VALOR_CAMPO']
+            ficha_existente['campos'].append({
+                nome_campo: valor_campo
+            })
+        else:
+            ficha = {
+                'cod_ficha': ficha_id,
+                'prontuario': resultado['PRONTUARIO'],
+                'nome_tipo_ficha': resultado['TIPO_FICHA'],
+                'cod_tipo_ficha': resultado['COD_TIPO_FICHA'],
+                'setor': resultado['SETOR'],
+                'quant_obs': resultado['QUANT_OBS'],
+                'campos': [{
+                    resultado['CAMPO']: resultado['VALOR_CAMPO']
+                }]
+            }
+
+            fichas.append(ficha)
+
+    return fichas
 
 
 def listar_observacoes(cod_ficha: int):
@@ -451,8 +485,7 @@ def listar_observacoes(cod_ficha: int):
     """,  (cod_ficha,))
 
     resultados = cursor.fetchall()
-    fechar_conexao(conexao, False)
-    colunas = get_colunas_tabela(nome_tabela) + ['cod_autor', 'nome_autor', 'cod_concluinte', 'nome_concluinte']
+    colunas = get_colunas_tabela(cursor, nome_tabela) + ['cod_autor', 'nome_autor', 'cod_concluinte', 'nome_concluinte']
     observacoes = [criar_dicionario(colunas, list(resultado)) for resultado in resultados] if resultados else []
 
     for observacao in observacoes:
@@ -460,12 +493,13 @@ def listar_observacoes(cod_ficha: int):
         observacao['nome_autor'] = observacao['nome_autor'].split(' ')[0]
         observacao['inicial_autor'] = observacao['nome_autor'][0].upper()
 
+    fechar_conexao(conexao, False)
     return observacoes
 
 
 def set_observacao(dados: dict):
     inserir_registro_tabela('observacao', dados)
-    alterar_estado_ficha(dados['cod_ficha'], 'pendente')
+    alterar_estado_ficha(dados['cod_ficha'], 4)
 
 
 def alterar_observacao(dados: dict):
@@ -481,41 +515,48 @@ def get_quant_obs_abertas(cod_ficha: int):
     cursor.execute(f"""
         SELECT COUNT(codigo)
         FROM observacao
-        WHERE cod_ficha = {cod_ficha}
+        WHERE cod_ficha = %s
             AND concluida <> 1
-    """)
+    """,  (cod_ficha, ))
     quant_obs = cursor.fetchone()[0]
     fechar_conexao(conexao, False)
+
     return quant_obs
 
 
 def fechar_observacao(dados: dict):
+    valores = (
+        dados['dataHora_concluida'],
+        dados['cod_usuario_concluinte'],
+        dados['cod_observacao']
+    )
+
     try:
         conexao, cursor = abrir_conexao()
         cursor.execute(f"""
             UPDATE
                 observacao
             SET concluida = 1,
-                dataHora_concluida = '{dados['dataHora_concluida']}',
-                cod_usuario_concluinte = '{dados['cod_usuario_concluinte']}'
+                dataHora_concluida = %s,
+                cod_usuario_concluinte = %s
             WHERE 
-                codigo = {dados['cod_observacao']}
-        """)
+                codigo = %s
+        """, valores)
         fechar_conexao(conexao)
     except Exception as e:
         print(e)
 
 
 def set_ficha_concluida(cod_ficha: int):
-    alterar_estado_ficha(cod_ficha, 'concluida')
+    alterar_estado_ficha(cod_ficha, 2)
 
 
 def set_ficha_preliminar(cod_ficha: int):
-    alterar_estado_ficha(cod_ficha, 'preliminar')
+    alterar_estado_ficha(cod_ficha, 1)
 
 
 def set_ficha_descartada(cod_ficha: int):
-    alterar_registro_tabela(cod_ficha, 'descartada')
+    alterar_registro_tabela(cod_ficha, 3)
 
 
 

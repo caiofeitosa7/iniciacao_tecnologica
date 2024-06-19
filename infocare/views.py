@@ -29,7 +29,7 @@ def pagina_inicial_view(request):
     contexto = {
         'quant_fichas_preliminares': models.get_quantidade_fichas('preliminar'),
         'quant_fichas_pendentes': models.get_quantidade_fichas('pendente'),
-        'formularios': models.get_formularios_ativos()
+        'formularios': models.get_tipos_ficha_ativos()
     }
 
     return JsonResponse({
@@ -95,7 +95,7 @@ def fichas_descartadas_view(request):
 
 
 def abrir_formulario_view(request, codigo: int):
-    html = models.get_html_formulario(codigo)
+    html = models.get_html_tipo_ficha(codigo)
 
     if request.method == 'GET':
         contexto = {'cod_formulario': codigo}
@@ -113,7 +113,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
             if 'dt' in key and dados[key]:
                 dados[key] = '-'.join(dados[key].split('/')[::-1])
 
-        html = models.get_html_formulario(cod_formulario)
+        html = models.get_html_tipo_ficha(cod_formulario)
         arquivo_html = os.path.join('edicao', 'editar_' + html)
         contexto = {
             'ficha': dados,

@@ -5,8 +5,8 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     let prontuario = document.getElementById("prontuario").value;
     let setor = document.getElementById("setor").value;
 
-    let camposNumeros = document.querySelectorAll('input[type="number"]');
-    camposNumeros.forEach(function (campo) {
+    let camposNumericos = document.querySelectorAll('input[type="number"]');
+    camposNumericos.forEach(function (campo) {
         if (campo.value === "")
             campo.value = 0;
     });
