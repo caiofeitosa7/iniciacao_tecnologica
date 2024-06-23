@@ -31,13 +31,13 @@
     </div>
     {% for ficha in fichas %}
     <div class="linha-tabela clicavel font-smaller d-flex align-items-center py-2 px-3
-            {% if ficha.quant_obs and status_fichas == 'preliminar' %} linha-destacada {% endif %}"
-            onclick="requisicaoGetPadrao('{% url 'visualizar_ficha' cod_ficha=ficha.cod_ficha cod_formulario=ficha.cod_formulario %}')">
+            {% if ficha.quant_obs and status_fichas == 1 %} linha-destacada {% endif %}"
+            onclick="requisicaoGetPadrao('{% url 'visualizar_ficha' ficha.cod_ficha ficha.cod_tipo_ficha %}')">
         <div class="col-2">
             <label class="clicavel font-weight-600">{{ ficha.numero_ficha }}</label>
         </div>
         <div class="col-4 d-flex flex-column">
-            <label class="clicavel font-weight-600">{{ ficha.nome_formulario }}</label>
+            <label class="clicavel font-weight-600">{{ ficha.nome_tipo_ficha }}</label>
             <label class="clicavel">{{ ficha.nome_paciente }}</label>
         </div>
         <div class="col-2">

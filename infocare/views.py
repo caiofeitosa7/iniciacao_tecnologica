@@ -27,8 +27,8 @@ def imagem_local(request, cod_img):
 
 def pagina_inicial_view(request):
     contexto = {
-        'quant_fichas_preliminares': models.get_quantidade_fichas('preliminar'),
-        'quant_fichas_pendentes': models.get_quantidade_fichas('pendente'),
+        'quant_fichas_preliminares': models.get_quantidade_fichas(1),
+        'quant_fichas_pendentes': models.get_quantidade_fichas(4),
         'formularios': models.get_tipos_ficha_ativos()
     }
 
@@ -38,7 +38,7 @@ def pagina_inicial_view(request):
     })
 
 
-def listagem_fichas(request, status: str, titulo: str, id_tabela: str):
+def listagem_fichas(request, status: int, titulo: str, id_tabela: str):
     if request.method == 'POST':
         pass
         # dados = json.loads(request.body)
@@ -61,7 +61,7 @@ def listagem_fichas(request, status: str, titulo: str, id_tabela: str):
 def fichas_preliminares_view(request):
     return listagem_fichas(
         request,
-        'preliminar',
+        1,
         'NOTIFICAÇÕES PRELIMINARES',
         'tabelaNotificacoesPreliminares'
     )
@@ -70,7 +70,7 @@ def fichas_preliminares_view(request):
 def fichas_pendentes_view(request):
     return listagem_fichas(
         request,
-        'pendente',
+        4,
         'NOTIFICAÇÕES PENDENTES',
         'tabelaNotificacoesPendentes'
     )
@@ -79,7 +79,7 @@ def fichas_pendentes_view(request):
 def fichas_concluidas_view(request):
     return listagem_fichas(
         request,
-        'concluida',
+        2,
         'NOTIFICAÇÕES CONCLUÍDAS',
         'tabelaNotificacoesConcluidas'
     )
@@ -88,7 +88,7 @@ def fichas_concluidas_view(request):
 def fichas_descartadas_view(request):
     return listagem_fichas(
         request,
-        'descartada',
+        3,
         'NOTIFICAÇÕES DESCARTADAS',
         'tabelaNotificacoesDescartadas'
     )
@@ -107,11 +107,7 @@ def abrir_formulario_view(request, codigo: int):
 def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
     if request.method == 'GET':
         request.session['ultimo_form_aberto'] = cod_formulario
-        dados = models.get_ficha(cod_ficha, cod_formulario)
-
-        for key in dados.keys():
-            if 'dt' in key and dados[key]:
-                dados[key] = '-'.join(dados[key].split('/')[::-1])
+        dados = models.get_ficha(cod_ficha)
 
         html = models.get_html_tipo_ficha(cod_formulario)
         arquivo_html = os.path.join('edicao', 'editar_' + html)
@@ -171,7 +167,13 @@ def registrar_observacao(request):
         dados['dataHora_cadastro'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         dados['dataHora_concluida'] = dados['dataHora_cadastro']
         models.set_observacao(dados)
-        return redirect(reverse('observacoes', kwargs={'cod_ficha': dados['cod_ficha']}))
+
+        return redirect(reverse(
+            'observacoes',
+            kwargs={
+                'cod_ficha': dados['cod_ficha']
+            }
+        ))
 
 
 def fechar_observacao(request, cod_ficha, cod_obs):

@@ -44,6 +44,21 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
     return dados
 
 
+# def formatar_datas_dicionario(dados: dict) -> dict:
+#     """
+#     Formata as datas do dicionário para o formato dd/mm/aaaa.
+#     """
+#     for key in dados:
+#         if 'dt' in key.lower() and dados[key]:
+#             data_obj = datetime.strptime(str(dados[key]), '%Y-%m-%d')
+#             dados[key] = data_obj.strftime('%d/%m/%Y')
+#         elif 'dataHora' in key.lower() and dados[key]:
+#             data_hora = datetime.strptime(str(dados[key]), '%Y-%m-%d %H:%M:%S')
+#             dados[key] = data_hora.strftime('%d/%m/%Y %H:%M')
+#
+#     return dados
+
+
 def get_colunas_tabela(cursor, nome_tabela: str, indentificacao: bool = False) -> list:
     """
     Retorna uma lista com os nomes das colunas de uma tabela.
@@ -295,12 +310,11 @@ def get_html_tipo_ficha(codigo: int):
 
 def alterar_estado_ficha(codigo: int, status: int):
     conexao, cursor = abrir_conexao()
-    nome_tabela = 'ficha'
     cursor.execute(f"""
-        UPDATE %s
+        UPDATE ficha
         SET cod_estado = %s
         WHERE codigo = %s
-    """, (nome_tabela, status, codigo))
+    """, (status, codigo))
 
     fechar_conexao(conexao)
 
@@ -347,16 +361,75 @@ def set_ficha_notificacao(campos: dict, tabela: str = ""):
     return cod_ficha
 
 
-def get_ficha(cod_ficha: int, cod_formulario: int):
+def get_ficha(cod_ficha: int):
     conexao, cursor = abrir_conexao()
-    tabela = get_tabela_formulario(cod_formulario)
-    cursor.execute(f"SELECT * FROM {tabela} WHERE codigo = {cod_ficha}")
-    resultado = cursor.fetchone()
-    colunas = get_colunas_tabela(cursor, tabela)
-    ficha = criar_dicionario(colunas, list(resultado))
+    query = f"""
+        SELECT F.codigo     AS COD_FICHA,
+               F.prontuario AS PRONTUARIO,
+               TF.nome      AS TIPO_FICHA,
+               TF.codigo    AS COD_TIPO_FICHA,
+               F.setor      AS SETOR,
+               C.nome       AS CAMPO,
+               MAX(CASE
+                       WHEN (C.cod_tipo_campo = 1) THEN VC.valor_string
+                       WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
+                       WHEN (C.cod_tipo_campo = 3) THEN VC.valor_data
+                   END)     AS VALOR_CAMPO,
+               OBS.quant    AS QUANT_OBS
+        FROM ficha AS F
+                 INNER JOIN campo_tipo_ficha AS CTF
+                            ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
+                 LEFT JOIN valorcampo AS VC
+                           ON VC.cod_ficha = F.codigo
+                 INNER JOIN tipo_ficha AS TF
+                            ON TF.codigo = F.cod_tipo_ficha
+                 INNER JOIN campo AS C
+                            ON C.codigo = VC.cod_campo
+                 LEFT JOIN (SELECT cod_ficha,
+                                   COUNT(codigo) AS quant
+                            FROM observacao
+                            GROUP BY cod_ficha) AS OBS ON OBS.cod_ficha = F.codigo
+        WHERE
+            F.codigo = %s
+        GROUP BY F.codigo,
+                 F.prontuario,
+                 TF.nome,
+                 TF.codigo,
+                 F.setor,
+                 C.nome,
+                 OBS.quant
+        ORDER BY F.setor;
+    """
+
+    cursor.execute(query, (cod_ficha,))
+    resultados = cursor.fetchall()
     fechar_conexao(conexao, False)
 
-    return ficha
+    fichas = []
+    for resultado in resultados:
+        ficha_id = resultado[0]
+        ficha_existente = next((ficha for ficha in fichas if ficha.get('codigo', None) == ficha_id), None)
+
+        if ficha_existente:
+            nome_campo = resultado[5]
+            valor_campo = resultado[6]
+            ficha_existente[nome_campo] = valor_campo
+        else:
+            ficha = {
+                'codigo': ficha_id,
+                'prontuario': resultado[1],
+                'nome_tipo_ficha': resultado[2],
+                'cod_tipo_ficha': resultado[3],
+                'setor': resultado[4],
+                'quant_obs': resultado[7],
+                resultado[5]: resultado[6]
+            }
+
+            fichas.append(ficha)
+
+    print(fichas)
+
+    return fichas[0]
 
 
 def alterar_ficha(campos: dict):
@@ -374,18 +447,6 @@ def get_quantidade_fichas(status: int):
 
 def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
     conexao, cursor = abrir_conexao()
-    # colunas = [
-    #     'cod_ficha',
-    #     'numero_ficha',
-    #     'nome_paciente',
-    #     'nome_formulario',
-    #     'cod_formulario',
-    #     'setor',
-    #     'nome_notificante',
-    #     'dt_notificacao',
-    #     'quant_obs'
-    # ]
-
     query = f"""
         SELECT F.codigo     AS COD_FICHA,
                F.prontuario AS PRONTUARIO,
@@ -396,7 +457,7 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                MAX(CASE
                        WHEN (C.cod_tipo_campo = 1) THEN VC.valor_string
                        WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
-                       WHEN (C.cod_tipo_campo = 3) THEN VC.valor_data
+                       WHEN (C.cod_tipo_campo = 3) THEN DATE_FORMAT(VC.valor_data, '%d/%m/%Y')
                    END)     AS VALOR_CAMPO,
                OBS.quant    AS QUANT_OBS
         FROM ficha AS F
@@ -430,28 +491,22 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
 
     fichas = []
     for resultado in resultados:
-        ficha_id = resultado['COD_FICHA']
-        ficha_existente = next((ficha for ficha in fichas if ficha['codigo'] == ficha_id), None)
-
-        print(resultado)
+        ficha_id = resultado[0]
+        ficha_existente = next((ficha for ficha in fichas if ficha.get('cod_ficha', None) == ficha_id), None)
 
         if ficha_existente:
-            nome_campo = resultado['CAMPO']
-            valor_campo = resultado['VALOR_CAMPO']
-            ficha_existente['campos'].append({
-                nome_campo: valor_campo
-            })
+            nome_campo = resultado[5]
+            valor_campo = resultado[6]
+            ficha_existente[nome_campo] = valor_campo
         else:
             ficha = {
                 'cod_ficha': ficha_id,
-                'prontuario': resultado['PRONTUARIO'],
-                'nome_tipo_ficha': resultado['TIPO_FICHA'],
-                'cod_tipo_ficha': resultado['COD_TIPO_FICHA'],
-                'setor': resultado['SETOR'],
-                'quant_obs': resultado['QUANT_OBS'],
-                'campos': [{
-                    resultado['CAMPO']: resultado['VALOR_CAMPO']
-                }]
+                'prontuario': resultado[1],
+                'nome_tipo_ficha': resultado[2],
+                'cod_tipo_ficha': resultado[3],
+                'setor': resultado[4],
+                'quant_obs': resultado[7],
+                resultado[5]: resultado[6]
             }
 
             fichas.append(ficha)

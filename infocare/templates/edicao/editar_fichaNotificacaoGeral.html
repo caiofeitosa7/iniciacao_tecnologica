@@ -1263,14 +1263,14 @@
                 VOLTAR
             </button>
 
-            {% if status_ficha_aberta == 'preliminar' %}
+            {% if status_ficha_aberta == 1 %}
             <button class="btnCorPrincipal btn mx-4"
-                    onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' cod_ficha=ficha.codigo %}')">
+                    onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' ficha.codigo %}')">
                 TUDO CERTO
             </button>
             {% endif %}
 
-            {% if status_ficha_aberta == 'pendente' %}
+            {% if status_ficha_aberta == 4 %}
             <button class="btnCorPrincipal btn mx-4"
                     onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
                 ATUALIZAR
@@ -1279,7 +1279,7 @@
 
         </div>
         <button class="btnAbrirObservacoes btn"
-                onclick="requisicaoGetPadrao('{% url 'observacoes' cod_ficha=ficha.codigo %}')">
+                onclick="requisicaoGetPadrao('{% url 'observacoes' ficha.codigo %}')">
             <i class="mx-1 bi bi-chat-right-text-fill"></i>
             {% if quant_obs %}
             <span id="possuiObservacoes" class="rounded-circle"></span>

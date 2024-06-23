@@ -89,7 +89,7 @@
         </div>
     </div>
     {% endfor %}
-    {% if status_ficha_aberta == 'pendente' %}
+    {% if status_ficha_aberta == 4 %}
     <div class="d-flex justify-content-center mt-4">
         <button class="btn btnTudoPronto"
                 onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_preliminar' cod_ficha=cod_ficha %}')">
@@ -99,7 +99,9 @@
     {% endif %}
     {% else %}
     <div class="d-flex justify-content-center pt-3">
-        <span class="negrito font-xlarge">Não há pendências para esta ficha!</span>
+        <span class="negrito font-xlarge">
+            Não há pendências para esta ficha!
+        </span>
     </div>
     {% endif %}
 </div>
