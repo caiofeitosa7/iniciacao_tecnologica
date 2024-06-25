@@ -28,7 +28,7 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
 
     dicionario['setor'] = setor;
     dicionario['prontuario'] = parseInt(prontuario, 10);
-    dicionario['cod_formulario'] = parseInt(cod_formulario, 10);
+    dicionario['cod_tipo_ficha'] = parseInt(cod_formulario, 10);
 
     if (!dicionario['campo-dt-notificacao']) {
         let dataAtual = new Date();
@@ -49,11 +49,12 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         .then(
             function (json) {
                 if (json["status"] === 'success') {
-                    let uploadForm = document.getElementById('uploadForm');
-                    uploadForm.action.replace('0', parseInt(json["cod_ficha"]));
+                    console.log('deu certo')
+                    // let uploadForm = document.getElementById('uploadForm');
+                    // uploadForm.action.replace('0', parseInt(json["cod_ficha"]));
 
-                    console.log(uploadForm.action);
-                    uploadForm.submit();
+                    // console.log(uploadForm.action);
+                    // uploadForm.submit();
 
                     // $('#conteudo')[0].innerHTML = json.html[0];
                     // $('#mensagem-retorno .modal-title').html("Sucesso!");

@@ -13,8 +13,6 @@ function toggleModalTiposDeFormulario() {
 }
 
 function abrirOpcaoColorida(url) {
-    console.log(url)
-
     if (url.includes('fichas_preliminares')) {
         localStorage['opcaoSelecionada'] = 97;
         requisicaoGetPadrao(url);

@@ -114,7 +114,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         contexto = {
             'ficha': dados,
             'status_ficha_aberta': request.session.get('status_ficha_aberta'),
-            'quant_obs': models.get_quant_obs_abertas(cod_ficha),
+            # 'quant_obs': models.get_quant_obs_abertas(cod_ficha),
         }
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],
@@ -130,18 +130,26 @@ def registrar_ficha_notificacao(request):
             if dados.get('codigo', False):
                 args = {
                     'cod_ficha': dados['codigo'],
-                    'cod_formulario': dados['cod_formulario'],
+                    'cod_formulario': dados['cod_tipo_ficha'],
                 }
 
                 models.alterar_ficha(dados)
                 return redirect(reverse('visualizar_ficha', kwargs=args))
             else:
-                cod_ficha = models.set_ficha_notificacao(dados)
+                cod_ficha = models.set_ficha(dados)
+
+                if cod_ficha:
+                    return JsonResponse({
+                        'cod_ficha': cod_ficha,
+                        'status': 'success'
+                    })
+
                 return JsonResponse({
-                    'cod_ficha': cod_ficha,
-                    'status': 'success'
+                    'status': 'error'
                 })
+
         except Exception as e:
+            print(e)
             return redirect(reverse('pagina_inicial'))
 
 
