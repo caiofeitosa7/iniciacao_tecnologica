@@ -1,6 +1,5 @@
 function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     let csrfToken = getCookie("csrftoken");
-    let ficha = document.getElementById("fichaNotificacao");
     let cod_formulario = document.getElementById("cod_formulario").value;
     let prontuario = document.getElementById("prontuario").value;
     let setor = document.getElementById("setor").value;
@@ -11,19 +10,25 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
             campo.value = 0;
     });
 
+    let fichas = document.getElementsByClassName("ficha");
     let dicionario = {};
-    let camposInput = ficha.querySelectorAll("input");
-    camposInput.forEach(function (campo) {
-        if (campo.id) {   // exclui o campo do csrf_token
-            if (campo.type === 'number')
-                dicionario[campo.id] = parseInt(campo.value, 10);
-            else {
-                if (campo.type === 'date' && campo.value === '')
-                    dicionario[campo.id] = null;
-                else
-                    dicionario[campo.id] = campo.value;
+
+    Array.from(fichas).forEach(function(ficha) {
+        let camposInput = ficha.querySelectorAll("input");
+
+        camposInput.forEach(function(campo) {
+            if (campo.id) { // Exclui o campo do csrf_token
+                if (campo.type === 'number') {
+                    dicionario[campo.id] = parseInt(campo.value, 10);
+                } else {
+                    if (campo.type === 'date' && campo.value === '') {
+                        dicionario[campo.id] = null;
+                    } else {
+                        dicionario[campo.id] = campo.value;
+                    }
+                }
             }
-        }
+        });
     });
 
     dicionario['setor'] = setor;

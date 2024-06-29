@@ -331,15 +331,12 @@ def set_ficha(campos: dict):
             cod_ficha = int(cursor.fetchone()[0])
 
             inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-            fechar_conexao(conexao)
 
-            return cod_ficha
+        return cod_ficha
 
     except Exception as e:
         conexao.rollback()
         print(e)
-
-        fechar_conexao(conexao)
         return None
 
     finally:
@@ -371,14 +368,11 @@ def alterar_ficha(campos: dict):
 
             inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
 
-            fechar_conexao(conexao)
-            return cod_ficha
+        return cod_ficha
 
     except Exception as e:
         conexao.rollback()
         print(e)
-
-        fechar_conexao(conexao)
         return None
 
     finally:

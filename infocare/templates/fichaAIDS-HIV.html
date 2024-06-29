@@ -523,7 +523,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-logradouro-residencia"
-                                    type="text"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -536,7 +535,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-codigo-residencia"
-                                    type="text"
+                                    type="number"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
                             />
@@ -1361,7 +1360,7 @@
                             <label for="campo-nome-paciente2">Nome do Paciente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
+                            <input id="campo-nome-paciente2" class="input-dado form-control" aria-label="">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1551,10 +1550,12 @@
                     <div class="col-7 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">21</span>
-                            <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
+                            <label for="campo-logradouro-residencia2">
+                                Logradouro (rua, avenida, ...)
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1562,7 +1563,7 @@
                             <label for="campo-codigo-residencia2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-codigo-residencia2" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2040,138 +2041,136 @@
                             </ul>
                         </div>
                     </div>
-                    </div>
-
-                    <div class="linha-dados">
-                        <div class="col-12 div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">42</span>
-                                <label>
-                                    <b>Critério CDC adaptado</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </label>
-                                <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    9 - Ignorado
-                                </span>
-                            </div>
-                            <div class="d-flex justify-content-evenly align-items-center mb-1">
-                                <ul class="col-6">
-                                    <div class="d-flex align-items-center">
-                                        <input id="ca-cervical" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Câncer cervical invasivo</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="candidose-eso" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Candidose de esôfago</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="candidose-traqueia" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Candidose de traquéia, brônquios ou pulmão</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="citomegalovirose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Citomegalovirose (exceto fígado, baço ou linfonodos)</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="criptococose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Criptococose extrapulmonar</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="criptosporidiose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Criptosporidiose intestinal crônica > 1 mês</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="herpes-simples" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Herpes simples mucocutâneo > 1 mês</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="histoplasmose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Histoplasmose disseminada</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="isosporidiose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Isosporidiose intestinal crônica > 1 mês</span>
-                                    </div>
-                                </ul>
-                                <ul class="col-6">
-                                    <div class="d-flex align-items-center">
-                                        <input id="leucoencefalopatia" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Leucoencefalopatia multifocal progressiva</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="linfoma-nao-hod" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Linfoma não Hodgkin e outros linfomas</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="linfoma-cerebro" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Linfoma primário do cérebro</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="micobacteriose-disse" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Micobacteriose disseminada exceto tuberculose e hanseníase</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="pneumo-pneumoc" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Pneumonia por Pneumocystis carinii</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="reat-chagas" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Reativação de doença de Chagas (meningoencefalite e/ou miocardite)</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="salmonelose" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Salmonelose (sepse recorrente não-tifóide)</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="toxo-cere" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Toxoplasmose cerebral</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <input id="cd4-baix" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Contagem de linfócitos T CD4+ menor que 350 cel/mm3</span>
-                                    </div>
-                                </ul>
-                            </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">42</span>
+                            <label>
+                                <b>Critério CDC adaptado</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                    </div>
-                    <div class="linha-dados">
-                        <div class="div-input col-12">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">43</span>
-                                    <label for="puncao-lombar"><b>Critério óbito -</b>Declaração de óbito com menção de aids, ou HIV e causa de morte associada à
-                                        imunodeficiência, sem classificação por outro critério após investigação</label>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <input id="ca-cervical" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Câncer cervical invasivo</span>
                                 </div>
-                                <input id="puncao-lombar" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                            </div>
-                            <div class="container-input-dado descricao-tipos-meia-altura">
-                                <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    9 - Ignorado
-                                </span>
-                            </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="candidose-eso" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Candidose de esôfago</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="candidose-traqueia" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Candidose de traquéia, brônquios ou pulmão</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="citomegalovirose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Citomegalovirose (exceto fígado, baço ou linfonodos)</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="criptococose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Criptococose extrapulmonar</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="criptosporidiose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Criptosporidiose intestinal crônica > 1 mês</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="herpes-simples" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Herpes simples mucocutâneo > 1 mês</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="histoplasmose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Histoplasmose disseminada</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="isosporidiose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Isosporidiose intestinal crônica > 1 mês</span>
+                                </div>
+                            </ul>
+                            <ul class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <input id="leucoencefalopatia" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Leucoencefalopatia multifocal progressiva</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="linfoma-nao-hod" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Linfoma não Hodgkin e outros linfomas</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="linfoma-cerebro" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Linfoma primário do cérebro</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="micobacteriose-disse" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Micobacteriose disseminada exceto tuberculose e hanseníase</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="pneumo-pneumoc" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Pneumonia por Pneumocystis carinii</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="reat-chagas" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Reativação de doença de Chagas (meningoencefalite e/ou miocardite)</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="salmonelose" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Salmonelose (sepse recorrente não-tifóide)</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="toxo-cere" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Toxoplasmose cerebral</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="cd4-baix" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Contagem de linfócitos T CD4+ menor que 350 cel/mm3</span>
+                                </div>
+                            </ul>
                         </div>
-                        
                     </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="div-input col-12">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">43</span>
+                                <label for="puncao-lombar"><b>Critério óbito -</b>Declaração de óbito com menção de aids, ou HIV e causa de morte associada à
+                                    imunodeficiência, sem classificação por outro critério após investigação</label>
+                            </div>
+                            <input id="puncao-lombar" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="bloco-dados">
@@ -2180,49 +2179,49 @@
             </div>
             <div class="conteudo-bloco">
                 <div class="linha-dados">
-                        <div class="col-1 div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">44</span>
-                                <label for="campo-uf-trat">UF</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="campo-uf-trat" class="input-dado form-control" maxlength="2">
-                            </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">44</span>
+                            <label for="campo-uf-trat">UF</label>
                         </div>
-                        <div class="col-4 div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">45</span>
-                                <label for="campo-municipio-trat">Município onde se realiza o tratamento</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="campo-municipio-trat" class="input-dado form-control">
-                            </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-trat" class="input-dado form-control" maxlength="2">
                         </div>
-                        <div class="col-1 div-input">
-                            <div class="info-elevada-sem-numeracao">
-                                <label for="campo-cod-ibge-trat">Código (IBGE)</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="campo-cod-ibge-trat" type="number" class="input-dado form-control">
-                            </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">45</span>
+                            <label for="campo-municipio-trat">Município onde se realiza o tratamento</label>
                         </div>
-                        <div class="col-5 div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">46</span>
-                                <label for="campo-unid-saud-trat">Unidade de saúde onde se realiza o tratamento</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="campo--unid-saud-trat" class="input-dado form-control">
-                            </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-trat" class="input-dado form-control">
                         </div>
-                        <div class="col-1 div-input">
-                            <div class="info-elevada-sem-numeracao">
-                                <label for="campo-cod-ibge-unid-trat">Código (IBGE)</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="campo-cod-ibge-unid-trat" type="number" class="input-dado form-control">
-                            </div>
+                    </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-trat">Código (IBGE)</label>
                         </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-trat" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-5 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">46</span>
+                            <label for="campo-unid-saud-trat">Unidade de saúde onde se realiza o tratamento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo--unid-saud-trat" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-unid-trat">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-unid-trat" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2233,34 +2232,34 @@
             <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-9 div-input">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">47</span>
-                                    <label for="campo-evolucao-caso">
-                                        Evolução do Caso
-                                    </label>
-                                </div>
-                                <input id="campo-evolucao-caso" type="number" min="1" max="9"
-                                    class="input-dado-quadrado form-control">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">47</span>
+                                <label for="campo-evolucao-caso">
+                                    Evolução do Caso
+                                </label>
                             </div>
-                            <div class="container-input-dado">
-                                <div class="container-input-dado descricao-tipos-meia-altura">
-                                    1 - Vivo&nbsp;&nbsp;&nbsp;&nbsp;
-                                    2 - Óbito por Aids&nbsp;&nbsp;&nbsp;&nbsp; 
-                                    3 - Óbito por outras causas&nbsp;&nbsp;&nbsp;&nbsp; 
-                                    9 - Ignorado
-                                   
-                                </div>
+                            <input id="campo-evolucao-caso" type="number" min="1" max="9"
+                                class="input-dado-quadrado form-control">
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="container-input-dado descricao-tipos-meia-altura">
+                                1 - Vivo&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Óbito por Aids&nbsp;&nbsp;&nbsp;&nbsp; 
+                                3 - Óbito por outras causas&nbsp;&nbsp;&nbsp;&nbsp; 
+                                9 - Ignorado
                             </div>
+                        </div>
                     </div>
                     <div class="col-3 div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">48</span>
-                                <label for="dt-obito">Data do Óbito</label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input id="dt-obito" type="date" class="input-dado form-control">
-                            </div>
+                        <div class="info-elevada">
+                            <span class="numeracao">48</span>
+                            <label for="dt-obito">Data do Óbito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-obito" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2277,7 +2276,7 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-5 div-input">
@@ -2285,10 +2284,9 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control">
                         </div>
                     </div>
-                    
                 </div>
                 <div>
                     <div class="col-12 div-input">
@@ -2296,7 +2294,7 @@
                             <label for="campo-assinatura-investigador"><br>Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2338,7 +2336,7 @@
             CANCELAR
         </button>
         <button class="btnCorPrincipal btn mx-4"
-                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
             CADASTRAR
         </button>
     </div>

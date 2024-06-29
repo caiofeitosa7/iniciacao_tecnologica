@@ -531,6 +531,7 @@
                                     id="campo-codigo-residencia"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
+                                    type="number"
                             />
                         </div>
                     </div>
@@ -1545,7 +1546,7 @@
                             <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1553,7 +1554,7 @@
                             <label for="campo-codigo-residencia2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-codigo-residencia2" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2366,7 +2367,7 @@
             CANCELAR
         </button>
         <button class="btnCorPrincipal btn mx-4"
-                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+                onclick="cadastrarFichaNotificaca('{% url 'registrar_ficha' %}')">
             CADASTRAR
         </button>
     </div>

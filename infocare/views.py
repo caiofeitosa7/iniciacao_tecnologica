@@ -122,9 +122,11 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         })
 
 
-def registrar_ficha_notificacao(request):
+def registrar_ficha(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
+
+        print(dados)
 
         try:
             if dados.get('codigo', False):
