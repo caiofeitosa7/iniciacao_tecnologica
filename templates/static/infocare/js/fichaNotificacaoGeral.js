@@ -14,7 +14,7 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     let dicionario = {};
 
     Array.from(fichas).forEach(function(ficha) {
-        let camposInput = ficha.querySelectorAll("input");
+        let camposInput = ficha.querySelectorAll("input, textarea");
 
         camposInput.forEach(function(campo) {
             if (campo.id) { // Exclui o campo do csrf_token
