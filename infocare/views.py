@@ -141,10 +141,12 @@ def registrar_ficha(request):
                 cod_ficha = models.set_ficha(dados)
 
                 if cod_ficha:
-                    return JsonResponse({
-                        'cod_ficha': cod_ficha,
-                        'status': 'success'
-                    })
+                    # return JsonResponse({
+                    #     'cod_ficha': cod_ficha,
+                    #     'status': 'success'
+                    # })
+
+                    return redirect('pagina_inicial')
 
                 return JsonResponse({
                     'status': 'error'

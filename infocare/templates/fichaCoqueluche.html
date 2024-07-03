@@ -152,6 +152,7 @@
                                     id="campo-dt-sintomas"
                                     type="date"
                                     class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -531,6 +532,7 @@
                                     id="campo-codigo-residencia"
                                     class="input-dado form-control"
                                     oninput="atribuirValor(this.id)"
+                                    type="number"
                             />
                         </div>
                     </div>
@@ -1318,10 +1320,10 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">7</span>
-                            <label for="campo-dt-prim-sint">Data dos Primeiros Sintomas</label>
+                            <label for="campo-dt-sintomas2">Data dos Primeiros Sintomas</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-prim-sint" type="date" class="input-dado form-control">
+                            <input id="campo-dt-sintomas2" type="date" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1339,7 +1341,7 @@
                             <label for="campo-nome-paciente2">Nome do Paciente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
+                            <input id="campo-nome-paciente2" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1348,7 +1350,7 @@
                             <label for="campo-dt-nascimento2">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control" aria-label="">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1364,7 +1366,7 @@
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
-                                       min="1" max="4" aria-label="">
+                                       min="1" max="4">
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
                                     <li>2 - Dia</li>
@@ -1380,7 +1382,7 @@
                                 <span class="numeracao">11</span>
                                 <label for="campo-sexo2">Sexo</label>
                             </div>
-                            <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
+                            <input id="campo-sexo2" class="input-dado-quadrado form-control" maxlength="1">
                         </div>
                         <div class="container-input-dado letra-miuda">
                             <ul>
@@ -1467,7 +1469,7 @@
                             <label for="campo-nome-mae2">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-mae2" type="text" class="input-dado form-control">
+                            <input id="campo-nome-mae2" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1532,7 +1534,7 @@
                             <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1540,7 +1542,7 @@
                             <label for="campo-codigo-residencia2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-codigo-residencia2" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1687,12 +1689,14 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">34</span>
-                                <label for="cont-cas-susp-coque">Contato Com Caso Suspeito ou Confirmado de Coqueluche (até 14 dias antes do início dos sinais e sintomas)</label>
+                                <label for="cont-cas-susp-coque">
+                                    Contato Com Caso Suspeito ou Confirmado de Coqueluche (até 14 dias antes do início dos sinais e sintomas)
+                                </label>
                             </div>
                             <input id="cont-cas-susp-coque" type="number" class="input-dado-quadrado form-control" min="1"
                                    max="9">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra justify-content-evenly">
+                        <div class="container-input-dado justify-content-evenly">
                             <ul>
                                 <li>1 - Domicílio</li>
                                 <li>6 - Outro Estado/Município</li>
@@ -1700,7 +1704,7 @@
                             <ul>
                                 <li>2 - Vizinhança</li>
                                 <div class="d-flex align-items-center">
-                                    <span>7 - Outro:</span>
+                                    <span class="label-nowrap me-1">7 - Outro:</span>
                                     <input id="cont-cas-susp-coque-outr" class="form-control input-dado">
                                 </div>
                             </ul>
@@ -1726,7 +1730,7 @@
                             <label for="campo-nome-cont">Nome do Contato</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-cont" type="text" class="input-dado form-control">
+                            <input id="campo-nome-cont" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1734,10 +1738,12 @@
                     <div class="col-12 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">36</span>
-                            <label for="campo-ender-cont">Endereço do contato (Rua, Av., Apto., Bairro, Localidade, etc)</label>
+                            <label for="campo-ender-cont">
+                                Endereço do contato (Rua, Av., Apto., Bairro, Localidade, etc)
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ender-cont" type="text" class="input-dado form-control">
+                            <input id="campo-ender-cont" class="input-dado form-control">
                         </div>
                     </div>
                 </div>                            
@@ -1746,10 +1752,11 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">37</span>
-                                <label for="dos-tri-tetra">Nº de Doses da Vacina Tríplice (DTP)ou Tetravalente (DTP+Hib)</label>
+                                <label for="dos-tri-tetra">
+                                    Nº de Doses da Vacina Tríplice (DTP)ou Tetravalente (DTP+Hib)
+                                </label>
                             </div>
-                            <input id="dos-tri-tetra" type="number" class="input-dado-quadrado form-control" min="1"
-                                   max="9">
+                            <input id="dos-tri-tetra" type="number" class="input-dado-quadrado form-control" min="1" max="9">
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra justify-content-evenly">
                             <ul>
@@ -1915,7 +1922,7 @@
                                     <input id="compl-outro" type="number" class="form-control input-dado-quadrado mx-1"
                                         min="1" max="9">
                                     <span>Outros</span>
-                                    <input id="campo-doen-outr" class="form-control input-dado">
+                                    <input id="comp-outro-descricao" class="form-control input-dado">
                                 </div>
                             </ul>
                         </div>
@@ -1959,27 +1966,27 @@
                     <div class="col-1 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">44</span>
-                            <label for="campo-uf-hospital">UF</label>
+                            <label for="campo-uf-atendimento">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-hospital" class="input-dado form-control" maxlength="2">
+                            <input id="campo-uf-atendimento" class="input-dado form-control" maxlength="2">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">45</span>
-                            <label for="campo-municipio-hospital">Município de hospitalização</label>
+                            <label for="campo-municipio-atendimento">Município de hospitalização</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-hospital" class="input-dado form-control">
+                            <input id="campo-municipio-atendimento" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-2 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
+                            <label for="campo-cod-ibge-atendimento">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-ibge-hospital" type="number" class="input-dado form-control">
+                            <input id="campo-cod-ibge-atendimento" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -1987,18 +1994,18 @@
                     <div class="col-9 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">46</span>
-                            <label for="campo-nome-hospital">Nome do Hospital</label>
+                            <label for="nome-hosp-atendimento">Nome do Hospital</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-hospital" class="input-dado form-control">
+                            <input id="nome-hosp-atendimento" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
+                            <label for="cod-ibge-hosp-atendimento">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-ibge-hospital" type="number" class="input-dado form-control">
+                            <input id="cod-ibge-hosp-atendimento" type="number" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2006,7 +2013,7 @@
         </div>
         <div class="bloco-dados">
             <div class="titulo-bloco">
-                    <span>Trata-<br>mento</span>
+                <span>Trata-<br>mento</span>
             </div>
                 <div class="conteudo-bloco">
                     <div class="linha-dados">
@@ -2065,12 +2072,12 @@
                             <div class="col-3 div-input">
                                     <div class="info-elevada">
                                         <span class="numeracao">50</span>
-                                        <label for="campo-dt-internacao">
+                                        <label for="dt-coleta-nasofaringe">
                                             Data da Coleta de Material
                                         </label>
                                     </div>
                                     <div class="container-input-dado">
-                                        <input id="campo-dt-internacao" type="date" class="input-dado form-control">
+                                        <input id="dt-coleta-nasofaringe" type="date" class="input-dado form-control">
                                     </div>
                             </div>
                             <div class="col-5 div-input">
@@ -2122,7 +2129,7 @@
                                 </div>
                                 <div class="container-input-dado">
                                     <div class="col-2">
-                                        <input id="comun-sim" type="number" class="input-dado form-control">
+                                        <input id="comun-sim" type="number" class="input-dado-quadrado form-control">
                                     </div>
                                 </div>
                             </div>
@@ -2167,7 +2174,7 @@
                                 </div>
                                 <div class="container-input-dado">
                                     <div class="col-2">
-                                        <input id="col-comun-sim" type="number" class="input-dado form-control">
+                                        <input id="col-comun-sim" type="number" class="input-dado-quadrado form-control">
                                     </div>
                                 </div>
                             </div>
@@ -2391,6 +2398,9 @@
         </div>
     </div>
 </div>
+
+
+
 <div class="rodape-ficha">
     <form id="uploadForm" class="py-4" enctype="multipart/form-data"
         method="POST" action="{% url 'upload' 0 %}">
@@ -2413,7 +2423,7 @@
             CANCELAR
         </button>
         <button class="btnCorPrincipal btn mx-4"
-                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
+                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
             CADASTRAR
         </button>
     </div>
