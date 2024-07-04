@@ -1259,33 +1259,9 @@
                 <span>17/07/2006</span>
             </div>
         </div>
-        <div id="containerBtnAcao" class="d-flex justify-content-center align-items-center my-3">
-            <button class="btnCancelar btn mx-4" onclick="retornoListaFichas()">
-                VOLTAR
-            </button>
-
-            {% if status_ficha_aberta == 1 %}
-            <button class="btnCorPrincipal btn mx-4"
-                    onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' ficha.codigo %}')">
-                TUDO CERTO
-            </button>
-            {% endif %}
-
-            {% if status_ficha_aberta == 4 %}
-            <button class="btnCorPrincipal btn mx-4"
-                    onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
-                ATUALIZAR
-            </button>
-            {% endif %}
-
-        </div>
-        <button class="btnAbrirObservacoes btn"
-                onclick="requisicaoGetPadrao('{% url 'observacoes' ficha.codigo %}')">
-            <i class="mx-1 bi bi-chat-right-text-fill"></i>
-
-            {% if ficha.quant_obs %}
-                <span id="possuiObservacoes" class="rounded-circle"></span>
-            {% endif %}
-        </button>
     </section>
 </div>
+
+{% block rodape_ficha %}
+    {% include 'rodape_edicao_ficha.html' %}
+{% endblock %}

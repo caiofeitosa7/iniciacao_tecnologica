@@ -263,3 +263,18 @@ ul {
     margin-bottom: 0;
   }
 }
+
+#anexos {
+  a, i {
+    color: var(--dark-color);
+
+    &:hover {
+      color: #0b1921;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+}

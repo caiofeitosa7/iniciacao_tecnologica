@@ -24,6 +24,6 @@ urlpatterns = [
     path('home/fichas/observacoes/registrar_observacao/', views.registrar_observacao, name='registrar_observacao'),
     path('home/fichas/observacoes/fechar_obervacao/<int:cod_ficha>/<int:cod_obs>', views.fechar_observacao, name='fechar_observacao'),
     # path('home/fichas/observacoes/apagar_obervacao/<int:codigo>', views.apagar_observacao, name='apagar_observacao'),
-    path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
     path('upload/<int:cod_ficha>', views.upload_arquivos, name='upload'),
+    path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -205,29 +205,6 @@ def get_tipos_ficha_ativos():
     return formularios
 
 
-def get_tabela_formulario(cod_formulario: int) -> str:
-    """
-    Retorna a tabela do formulário de acordo com o código do formulário.
-
-    :param cod_formulario: int - Código do formulário.
-    :type cod_formulario: int
-
-    :return: str - Nome da tabela.
-    :rtype: str
-
-    :Example:
-
-    >>> get_tabela_formulario(1)
-    'ficha_1'
-    """
-
-    conexao, cursor = abrir_conexao()
-    cursor.execute("SELECT tabela FROM formulario WHERE codigo = %s", (cod_formulario,))
-    tabela = cursor.fetchone()[0]
-    fechar_conexao(conexao, False)
-    return tabela
-
-
 def get_html_tipo_ficha(codigo: int):
     """
     Retorna o template HTML do tipo de ficha de acordo com o código do tipo de ficha.
@@ -288,15 +265,15 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
         cod_campo = res[0]
         tipo_campo = res[1]
 
-        if tipo_campo == 1:         # Se for do tipo string
+        if tipo_campo == 1:  # Se for do tipo string
             registro.append(str(valores[i]))
             registro.append(None)
             registro.append(None)
-        elif tipo_campo == 2:       # Se for do tipo numérico
+        elif tipo_campo == 2:  # Se for do tipo numérico
             registro.append(None)
             registro.append(int(valores[i]))
             registro.append(None)
-        else:                       # Campo do tipo data
+        else:  # Campo do tipo data
             registro.append(None)
             registro.append(None)
             registro.append(valores[i])
@@ -447,7 +424,10 @@ def get_ficha(cod_ficha: int):
 
             fichas.append(ficha)
 
-    return fichas[0]
+    ficha = fichas[0]
+    ficha['arquivos'] = listar_arquivos_ficha(cod_ficha)
+
+    return ficha
 
 
 def get_quantidade_fichas(status: int):
@@ -579,20 +559,6 @@ def deletar_observacao(cod_observacao: int):
     apagar_registro_tabela('observacao', cod_observacao)
 
 
-# def get_quant_obs_abertas(cod_ficha: int):
-#     conexao, cursor = abrir_conexao()
-#     cursor.execute(f"""
-#         SELECT COUNT(codigo)
-#         FROM observacao
-#         WHERE cod_ficha = %s
-#             AND concluida <> 1
-#     """, (cod_ficha,))
-#     quant_obs = cursor.fetchone()[0]
-#     fechar_conexao(conexao, False)
-#
-#     return quant_obs
-
-
 def fechar_observacao(dados: dict):
     valores = (
         dados['dataHora_concluida'],
@@ -626,3 +592,39 @@ def set_ficha_preliminar(cod_ficha: int):
 
 def set_ficha_descartada(cod_ficha: int):
     alterar_registro_tabela(cod_ficha, 3)
+
+
+def set_arquivos_ficha(registros):
+    print('chegou no model do arquivo')
+
+    try:
+        conexao, cursor = abrir_conexao()
+        cursor.executemany("""
+            INSERT INTO arquivo (nome_original, nome_armazenado, extensao, url, data_cadastro, data_deletado, deletado, cod_ficha)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, registros)
+        fechar_conexao(conexao)
+    except Exception as e:
+        print(e)
+
+
+def listar_arquivos_ficha(cod_ficha: int):
+    conexao, cursor = abrir_conexao()
+    colunas = ['codigo', 'nome', 'url']
+    cursor.execute("""
+        SELECT
+            codigo,
+            CONCAT(nome_original, extensao),
+            url
+        FROM arquivo
+        WHERE cod_ficha = %s
+            AND deletado = 0
+        ORDER BY nome_original;
+    """, (cod_ficha,))
+
+    resultados = cursor.fetchall()
+    fechar_conexao(conexao, False)
+
+    return [criar_dicionario(colunas, list(resultado)) for resultado in resultados] \
+        if resultados \
+        else []

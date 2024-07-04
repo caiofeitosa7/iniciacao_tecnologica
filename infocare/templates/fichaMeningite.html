@@ -2568,50 +2568,7 @@
         </div>
     </div>
 </div>
-<div class="rodape-ficha">
-    <form id="uploadForm" class="py-4" enctype="multipart/form-data"
-        method="POST" action="{% url 'upload' 0 %}">
-        {% csrf_token %}
-        <div class="d-flex justify-content-center py-4">
-            <span class="negrito">Anexar Arquivos PDF</span>
-        </div>
-        <div id="containerInputsPDF">
-            <div class="d-flex align-items-center">
-                <input id="file" name="file" type="file" accept=".pdf" class="form-control">
-                <div class="btnCorPrincipal btn mx-2 px-2 py-1" onclick="addInputFile()">
-                    <i class="bi bi-file-earmark-plus"></i>
-                    PDF
-                </div>
-            </div>
-        </div>
-    </form>
-    <div id="containerBtnAcao" class="d-flex justify-content-center my-3">
-        <button class="btnCancelar btn mx-4" onclick="abrirOpcaoPaginaInicial()">
-            CANCELAR
-        </button>
-        <button class="btnCorPrincipal btn mx-4"
-                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
-            CADASTRAR
-        </button>
-    </div>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% block rodape_ficha %}
+    {% include 'rodape_ficha.html' %}
+{% endblock %}

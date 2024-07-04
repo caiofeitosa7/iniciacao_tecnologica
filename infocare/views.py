@@ -1,13 +1,11 @@
-import json, string, os
-from datetime import datetime
-
-from django.http import HttpResponse
-from django.http import FileResponse, JsonResponse
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
+from django.http import FileResponse, JsonResponse
+from datetime import datetime, timedelta
 from . import models
-
-from django.core.files.storage import FileSystemStorage
+import json
+import os
 
 
 def login(request):
@@ -113,8 +111,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         arquivo_html = os.path.join('edicao', 'editar_' + html)
         contexto = {
             'ficha': dados,
-            'status_ficha_aberta': request.session.get('status_ficha_aberta'),
-            # 'quant_obs': models.get_quant_obs_abertas(cod_ficha),
+            'status_ficha_aberta': request.session.get('status_ficha_aberta')
         }
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],
@@ -135,18 +132,18 @@ def registrar_ficha(request):
                     'cod_formulario': dados['cod_tipo_ficha'],
                 }
 
-                models.alterar_ficha(dados)
+                cod_ficha = models.alterar_ficha(dados)
                 return redirect(reverse('visualizar_ficha', kwargs=args))
             else:
                 cod_ficha = models.set_ficha(dados)
 
-                if cod_ficha:
-                    # return JsonResponse({
-                    #     'cod_ficha': cod_ficha,
-                    #     'status': 'success'
-                    # })
+                print('ficha criada:', cod_ficha)
 
-                    return redirect('pagina_inicial')
+                if cod_ficha:
+                    return JsonResponse({
+                        'cod_ficha': cod_ficha,
+                        'status': 'success'
+                    })
 
                 return JsonResponse({
                     'status': 'error'
@@ -220,15 +217,36 @@ def marcar_ficha_descartada(request, cod_ficha):
 
 def upload_arquivos(request, cod_ficha):
     if request.method == 'POST':
-        print('chegou aqui:', request.FILES.keys())
 
+        print('Codigo da ficha:', cod_ficha, '\n', request.FILES.keys())
+
+        registros = []
         for key in request.FILES.keys():
-            f = request.FILES[key]
-            fs = FileSystemStorage()
-            filename = fs.save(str(f.name), f)
-            uploaded_file_url = fs.url(filename)
-            print(uploaded_file_url)
+            diretorio = 'arquivos'
+            arquivo = request.FILES[key]
+            nome_original = arquivo.name.split('.')[0]
+            nome_armazenado = datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+            extensao = '.' + arquivo.name.split('.')[-1]
+            data_cadastro = datetime.now().strftime('%Y-%m-%d')
+            data_deletado = None
+            deletado = 0
 
+            fs = FileSystemStorage()
+            filename = fs.save(os.path.join(diretorio, nome_armazenado+extensao), arquivo)
+            url_arquivo = fs.url(filename)
+
+            registros.append((
+                nome_original,
+                nome_armazenado,
+                extensao,
+                url_arquivo,
+                data_cadastro,
+                data_deletado,
+                deletado,
+                cod_ficha,
+            ))
+
+        models.set_arquivos_ficha(registros)
         return redirect('home')
 
 

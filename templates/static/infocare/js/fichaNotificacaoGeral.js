@@ -54,12 +54,16 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         .then(
             function (json) {
                 if (json["status"] === 'success') {
-                    console.log('deu certo')
-                    // let uploadForm = document.getElementById('uploadForm');
-                    // uploadForm.action.replace('0', parseInt(json["cod_ficha"]));
+                    let uploadForm = document.getElementById('uploadForm');
+                    let parts = uploadForm.action.split('/');
+                    
+                    parts[parts.length - 1] = json["cod_ficha"];
+                    uploadForm.action = parts.join('/');
 
-                    // console.log(uploadForm.action);
-                    // uploadForm.submit();
+                    localStorage.setItem('cod_ficha_retornada', json['cod_ficha']);
+                    localStorage.setItem('url_form', uploadForm.action);
+
+                    uploadForm.submit();
 
                     // $('#conteudo')[0].innerHTML = json.html[0];
                     // $('#mensagem-retorno .modal-title').html("Sucesso!");
