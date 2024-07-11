@@ -1,0 +1,21 @@
+codigo,nome,arquivoHTML,ativo
+1,Ficha de Notificação,fichaNotificacaoGeral.html,1
+2,Acidente de Trabalho Grave,fichaAcidenteTrabalho.html,1
+3,Violência Interpessoal/Autoprovocada,fichaViolenciaInterpessoal.html,1
+4,Atendimento Anti-Rábico Humano,fichaAntiRabica.html,1
+5,Óbito Mulher em Idade Fértil - MIF,fichaObitoMulherIdadeFertil.html,1
+6,Leptospirose,fichaLeptospirose.html,1
+7,Óbito Tuberculose,fichaObitoTuberculose.html,1
+8,Sífilis Adquirida,fichaSifilisAdquirida.html,1
+9,Meningite,fichaMeningite.html,1
+10,Óbito Fetal e Infantil – Hospitalar,fichaObitoFetalInfantil.html,1
+11,AIDS/HIV,fichaAIDS-HIV.html,1
+12,Acid. de Trab. com Exposição à Material Biológico,fichaAcidTrabExpMatBio.html,1
+13,Coqueluche,fichaCoqueluche.html,1
+14,Acidente por Animais Peçonhentos,fichaAcidAnimalPeconhento.html,1
+15,Dengue e Febre de Chikungunya,fichaDengueChikungunya.html,1
+16,Doença de Chagas Aguda,fichaDoencaChagasAguda.html,1
+17,Intoxicação,fichaIntoxicacao.html,1
+18,Hepatites Virais,fichaHepatites.html,1
+19,Paralisia Flácida Aguda / Poliomelite,fichaParalisiaFlacidaAguda.html,1
+20,Síndrome Neuroinvasiva,fichaSindrNeuroinvasiva.html,1

@@ -1,0 +1,313 @@
+codigo,nome,descricao,cod_tipo_campo
+1,numero_ficha,Número da Ficha de Notificação - FG,2
+2,tipo_notificacao,Tipo de Notificação - FG,2
+3,agravoDoenca,Agravo/doença,1
+4,dt_notificacao,Data da Notificação - FG,3
+5,uf_notificacao,UF da Notificacao - FG,1
+6,municipio_notificacao,Município de Notificação - FG,1
+7,cod_ibge_notificacao,Código (IBGE) Notificacao - FG,2
+8,unidade_saude,Unidade de Saúde (ou outra fonte notificadora) - FG,1
+9,cod_unidade_saude,Código da Un. de Saúde - FG,2
+10,dt_sintomas,Data dos Primeiros Sintomas - FG,3
+11,nome_paciente,Nome do Paciente - FG,1
+12,dt_nascimento,Data de Nascimento do Paciente - FG,3
+13,idade,Idade do Paciente - FG,2
+14,tipo_idade,"Tipo da Idade do Paciente (hora, dia, mes, ano) - FG",2
+15,sexo,Sexo do Paciente - FG,1
+16,gestante,Paciente Gestante - FG,2
+17,raca,Raça/Cor do Paciente - FG,2
+18,escolaridade,Escolaridade do Paciente - FG,2
+19,numero_sus,Número do Cartão SUS do Paciente - FG,2
+20,nome_mae,Nome da mãe do Paciente - FG,1
+21,dt_primeiro_sintoma,Data dos 1° Sintomas do 1° Caso Suspeito,3
+22,numero_casos_suspeitos,N° de Casos Suspeitos / Expostos,2
+23,local_inicial_ocorrencia,Local inicial de Ocorrência do Surto,2
+24,local_inicial_ocorrencia_outro,Local inicial de Ocorrência do Surto (Descrição opção 'Outro'),1
+25,uf_residencia,UF de Residência - FG,1
+26,municipio_residencia,Município de Residência - FG,1
+27,cod_ibge_residencia,Código (IBGE) - FG,2
+28,distrito_residencia,Distrito de Residência - FG,1
+29,bairro_residencia,Bairro de Residência - FG,1
+30,logradouro_residencia,"Logradouro Residência (rua, avenida, ...) - FG",1
+31,codigo_residencia,Código de Residência - FG,2
+32,numero_residencia,Número da Residência - FG,2
+33,complemento_residencia,"Complemento Residência (apto, casa, ...) - FG",1
+34,geo_campo1,Geo campo 1 Residência - FG,1
+35,geo_campo2,Geo campo 2 Residência - FG,1
+36,ponto_ref_residencia,Ponto de Referência da Residência - FG,1
+37,cep_residencia,CEP da Residência - FG,1
+38,telefone_residencia,(DDD) Telefone Residência - FG,1
+39,zona_residencia,Zona de Residência - FG,2
+40,pais_residencia,País de Residência - FG,1
+41,municipio_us_notificante,Município/Unidade de Saúde do Notificante,1
+42,nome_notificante,Nome do Notificante,1
+43,funcao_notificante,Função do Notificante,1
+44,assinatura_notificante,Assinatura do Notificante,1
+45,dt_amostra_sorologia,Data da coleta da 1° amostra da sorologia,3
+46,dt_outra_amostra,Data da coleta da 1° amostra de outra amostra,3
+47,tipo_exame,Especificação do tipo de exame,1
+48,obito,Óbito?,2
+49,caso_semelhante,Contato com caso semelhante ?,2
+50,exantema,Presença de exantema ?,2
+51,dt_inicio_exantema,Data do início do exatema,3
+52,petequiaSufusao,Presença de petéquias ou sufusões hemorrágicas?,2
+53,liquor,Foi realizado líquor ?,2
+54,bacterioscopia,Resultado da bacterioscopia,1
+55,tomou_vacina,O paciente tomou vacina contra agravo notificado neste impresso?,2
+56,dt_ultima_dose_tomada,Data da última dose tomada,3
+57,hospitalizacao,Ocorreu hospitalização ? - FG,2
+58,dt_hospitalizacao,Data da hospitalização,3
+59,uf_hospital,UF do Hospital,1
+60,municipio_hospital,Município do Hospital,1
+61,cod_ibge_hospital,Código (IBGE) do Hospital,2
+62,nome_hospital,Nome do Hospital,1
+63,cod_hospital,Código do Hospital,2
+64,hipotese_diagnostica1,1° Hipótese Diagnóstica - CID 10,1
+65,hipotese_diagnostica2,2° Hipótese Diagnóstica - CID 10,1
+66,pais_infeccao,País de Infecção,1
+67,distrito_infeccao,Distrito de Infecção,1
+68,uf_infeccao,UF de Infecção,1
+69,municipio_infeccao,Município de Infecção,1
+70,bairro_infeccao,Bairro de Infecção,1
+71,numero_ficha2,Número da Ficha de Notificação - FE,2
+72,dt_notificacao2,Data da Notificação - FE,3
+73,uf_notificacao2,UF da Notificacao - FE,1
+74,municipio_notificacao2,Município de Notificação - FE,1
+75,cod_ibge_notificacao2,Código (IBGE) Notificacao - FE,2
+76,unidade_saude2,Unidade de Saúde (ou outra fonte notificadora) - FE,1
+77,cod_unidade_saude2,Código da Un. de Saúde - FE,2
+78,dt_sintomas2,Data dos Primeiros Sintomas - FE,3
+79,nome_paciente2,Nome do Paciente - FE,1
+80,dt_nascimento2,Data de Nascimento do Paciente - FE,3
+81,idade2,Idade do Paciente - FE,2
+82,tipo_idade2,"Tipo da Idade do Paciente (hora, dia, mes, ano) - FE",2
+83,sexo2,Sexo do Paciente - FE,1
+84,gestante2,Paciente Gestante - FE,2
+85,raca2,Raça/Cor do Paciente - FE,2
+86,escolaridade2,Escolaridade do Paciente - FE,2
+87,numero_sus2,Número do Cartão SUS do Paciente - FE,2
+88,nome_mae2,Nome da mãe do Paciente - FE,1
+89,uf_residencia2,UF de Residência - FE,1
+90,municipio_residencia2,Município de Residência - FE,1
+91,cod_ibge_residencia2,Código (IBGE) - FE,2
+92,distrito_residencia2,Distrito de Residência - FE,1
+93,bairro_residencia2,Bairro de Residência - FE,1
+94,logradouro_residencia2,"Logradouro Residência (rua, avenida, ...) - FE",1
+95,codigo_residencia2,Código de Residência - FE,2
+96,numero_residencia2,Número da Residência - FE,2
+97,complemento_residencia2,"Complemento Residência (apto, casa, ...) - FE",1
+98,geo_campo1_2,Geo campo 1 Residência - FE,1
+99,geo_campo2_2,Geo campo 2 Residência - FE,1
+100,ponto_ref_residencia2,Ponto de Referência da Residência - FE,1
+101,cep_residencia2,CEP da Residência - FE,1
+102,telefone_residencia2,(DDD) Telefone Residência - FE,1
+103,zona_residencia2,Zona de Residência - FE,2
+104,pais_residencia2,País de Residência - FE,1
+105,ocupacao,Ocupação,1
+106,trans_vertical,Transmissão vertical,2
+107,trans_sexual,Transmissão sexual,2
+108,trans_droga_injetavel,Transmissão por uso de drogas injetáveis,2
+109,trans_hemotransfusao,Transmissão por tratamento/hemotransfusão para hemofilia,2
+110,trans_transfusao,Transmissão por transfusão sanguínea,2
+111,trans_mat_biologico,Transmissão por acidente com material biológico com posterior soroconversão até 6 meses,2
+112,dt_transfusao,Data da transfusão/acidente,3
+113,uf_transfusao,UF de Transfusão,1
+114,municipio_transfusao,Município onde ocorreu a transfusão/acidente,1
+115,cod_ibge_transfusao,Código (IBGE) da transfusão,2
+116,instituicao_transfusao,Instituição onde ocorreu a transfusão/acidente,1
+117,cod_instit_transfusao,Código da Instituição de transfusão,2
+118,causa_infeccao,A transfusão/acidente com material biológico foi considerada causa?,2
+119,test_triagem_hiv,Evidência laboratorial de infecção pelo HIV (Teste de Triagem para HIV),2
+120,dt_coleta_triagem,Data da coleta para teste de triagem,3
+121,test_confirmatorio,Evidência laboratorial de infecção pelo HIV (Teste Confirmatorio),2
+122,dt_coleta_confirm,Data da coleta para teste confirmatório,3
+123,test_rapido1,Evidência laboratorial de infecção pelo HIV (Teste rápido 1),2
+124,test_rapido2,Evidência laboratorial de infecção pelo HIV (Teste rápido 2),2
+125,test_rapido3,Evidência laboratorial de infecção pelo HIV (Teste rápido 3),2
+126,dt_coleta_rapida,Data da coleta para teste rápido,3
+127,crit_kaposi,Critério Rio de Janeiro/Caracas (Sarcoma de Kaposi (10)),2
+128,crit_tb_disseminada,Critério Rio de Janeiro/Caracas (Tuberculose disseminada/extra-pulmonar/não cavitária (10)),2
+129,crit_candidose,Critério Rio de Janeiro/Caracas (Candidose oral ou leucoplasia pilosa (5)),2
+130,crit_tb_pulmonar,Critério Rio de Janeiro/Caracas (Tuberculose pulmonar cavitária ou não especificada (5)),2
+131,crit_herpes_zoster,Critério Rio de Janeiro/Caracas (Herpes zoster em indivíduo menor ou igual a 60 anos (5)),2
+132,crit_disf_snc,Critério Rio de Janeiro/Caracas (Disfunção do sistema nervoso central (5)),2
+133,crit_diarreia,Critério Rio de Janeiro/Caracas (Diarréia igual ou maior a 1 mês (2)),2
+134,crit_febre,Critério Rio de Janeiro/Caracas (Febre maior ou igual a 38ºC por tempo maior ou igual a 1 mês (2)),2
+135,crit_caquexia,Critério Rio de Janeiro/Caracas (Caquexia ou perda de peso maior que 10% (2)),2
+136,crit_astenia,Critério Rio de Janeiro/Caracas (Astenia maior ou igual a 1 mês (2)),2
+137,crit_dermatite,Critério Rio de Janeiro/Caracas (Dermatite persistente (2)),2
+138,crit_anemia,Critério Rio de Janeiro/Caracas (Anemia e/ou linfopenia e/ou trombocitopenia (2)),2
+139,crit_tosse,Critério Rio de Janeiro/Caracas (Tosse persistente ou qualquer pneumonia (2)),2
+140,crit_linfadeno,Critério Rio de Janeiro/Caracas (Linfadenopatia maior ou igual a 1cm...),2
+141,crit_cdc_ca_cervical,Critério CDC adaptado (Câncer cervical invasivo),2
+142,crit_cdc_candidose_eso,Critério CDC adaptado (Candidose de esôfago),2
+143,crit_cdc_candidose_traq,"Critério CDC adaptado (Candidose de traquéia, brônquios ou pulmão)",2
+144,crit_cdc_citomegalovirose,"Critério CDC adaptado (Citomegalovirose (exceto fígado, baço ou linfonodos))",2
+145,crit_cdc_criptococose,Critério CDC adaptado (Criptococose extrapulmonar),2
+146,crit_cdc_criptosporidiose,Critério CDC adaptado (Criptosporidiose intestinal crônica > 1 mês),2
+147,crit_cdc_herpes,Critério CDC adaptado (Herpes simples mucocutâneo > 1 mês),2
+148,crit_cdc_histoplasmose,Critério CDC adaptado (Histoplasmose disseminada),2
+149,crit_cdc_isosporidiose,Critério CDC adaptado (Isosporidiose intestinal crônica > 1 mês),2
+150,crit_cdc_leucoencefalopatia,Critério CDC adaptado (Leucoencefalopatia multifocal progressiva),2
+151,crit_cdc_linf_nao_hodgkin,Critério CDC adaptado (Linfoma não Hodgkin e outros linfomas),2
+152,crit_cdc_linf_cerebro,Critério CDC adaptado (Linfoma primário do cérebro),2
+153,crit_cdc_micobacteriose,Critério CDC adaptado (Micobacteriose disseminada exceto tuberculose e hanseníase),2
+154,crit_cdc_pneumonia,Critério CDC adaptado (Pneumonia por Pneumocystis carinii),2
+155,crit_cdc_chagas,Critério CDC adaptado (Reativação de doença de Chagas (meningoencefalite e/ou miocardite)),2
+156,crit_cdc_salmonelose,Critério CDC adaptado (Salmonelose (sepse recorrente não-tifóide)),2
+157,crit_cdc_toxoplasmose,Critério CDC adaptado (Toxoplasmose cerebral),2
+158,crit_cdc_linfocito,Critério CDC adaptado (Contagem de linfócitos T CD4+ menor que 350 cel/mm3),2
+159,criterio_obito,"Critério óbito - Declaração de óbito com menção de aids, ou HIV e causa de morte associada à imunodeficiência...",2
+160,uf_tratamento,UF onde foi realizado o tratamento,1
+161,municipio_tratamento,Município onde foi realizado o tratamento,1
+162,cod_ibge_tratamento,Código (IBGE) onde foi realizado o tratamento,2
+163,us_tratamento,Unidade de saúde onde se realiza o tratamento,1
+164,cod_ibge_us_tratamento,Código (IBGE) da unidade de saúde de onde foi realizado o tratamento,2
+165,evolucao_caso,Evolução do Caso,2
+166,dt_obito,Data do Óbito,3
+167,municipio_us_investigador,Município/Unidade de Saúde do Investigador,1
+168,cod_us_investigador,Cód. da Unid. de Saúde do Investigador,2
+169,nome_investigador,Nome do Investigador,1
+170,funcao_investigador,Função do Investigador,1
+171,assinatura_investigador,Assinatura do Investigador,1
+172,dt_diagnostico,Data do Diagnóstico,3
+173,dt_acidente,Data do Acidente,3
+174,antecedente_sifilis,Antecedente de sífilis,2
+175,trat_realizado_sifilis,"Se sim, o tratamento foi realizado?",2
+176,comportamento_sexual,Comportamento Sexual,2
+177,teste_nao_treponemico,Teste não treponêmico,2
+178,titulo_laboratorial,Resultados dos Exames (Titulo),1
+179,dt_laboratorial,Resultados dos Exames (Data),3
+180,teste_treponemico,Teste treponêmico,2
+181,classif_clinica,Classificação Clínica,2
+182,trat_realizado,Esquema de tratamento realizado,2
+183,dt_inicio_trat,Data do início do tratamento,3
+184,classif_final,Classificação Final do caso,2
+185,classif_final_descricao,Classificação Final do caso (descrição),1
+186,obs_adicionais,Observações adicionais,1
+187,agravoDoenca_num,Agravo/doença com múltiplas opções,2
+188,agravoDoenca_outro,Agravo/doença com múltiplas opções (Outro),1
+189,serv_vigilancia,Serviço de vigilância sentinela (hospital),1
+190,cod_serv_vigilancia,Código - serviço de vigilância (hopital),2
+191,dt_investigacao,Data da Investigação,3
+192,viagem_recente,Viajou nos últimos 15 dias?,2
+193,destino_viagem,Destino da viagem,1
+194,vac_febre_amarela,Vacinado contra febre amarela (a qualquer tempo)?,2
+195,loc_ave_equina,Esteve em locais onde houve morte de aves ou equinos?,2
+196,caso_semelhante,Houve casos semelhantes na família ou vizinhança?,2
+197,infec_gripe,Houve infecção precedente (Gripe/resfriado),2
+198,infec_diarreia,Houve infecção precedente (Diarreia),2
+199,infec_dengue,"Houve infecção precedente (Dengue, Zica ou Chikungunya)",2
+200,infec_outro,Houve infecção precedente (Outro),2
+201,infec_outro_descricao,Houve infecção precedente (Descricao do campo 'Outro'),1
+202,dt_adoecimento,Data do início do adoecimento,3
+203,imunodepressao,Há imunodepressão conhecida ou presumida?,2
+204,vacinacao_recente,Houve vacinação recente? (há < 60 dias),2
+205,dados_vacinacao,"Especificação de tipo(s), dose(s), lote (s) e fabricante (s) da vacina",1
+206,imunoglobulina,Houve administração de imunoglobulina humana hiperimune ou realização de plasmaférese?,2
+207,dt_infusao,Data de início da infusão,3
+208,ex_hemograma,Exames e procedimentos realizados (Hemograma),2
+209,ex_liquor,Exames e procedimentos realizados (Líquor),2
+210,ex_tomografia,Exames e procedimentos realizados (Tomografia computadorizada),2
+211,ex_ressonancia,Exames e procedimentos realizados (Ressonância magnética),2
+212,ex_enm,Exames e procedimentos realizados (Eletroneuromiografia),2
+213,ex_eeg,Exames e procedimentos realizados (Eletroencefalograma),2
+214,ex_biopsia,Exames e procedimentos realizados (Biópsia),2
+215,ex_necropsia,Exames e procedimentos realizados (Necrópsia),2
+216,desf_hospitalar,Desfecho intra-hospitalar,2
+217,diag_alta,Diagnóstico de alta / óbito,1
+218,dt_alta_obito,Data da alta ou óbito,3
+219,dt_encerramento,Data do encerramento,3
+220,diag_etiologico,Diagnóstico etiológico,2
+221,diag_etiol_outro_descricao,Diagnóstico etiológico (Descrição do campo Outro),1
+222,classif_caso,Classificação do caso,2
+223,criterio_classif,Critério de classificação,2
+224,telefone_investigador,Telefone do Investigador,1
+225,tipo_notificacao2,Tipo de Notificação - FE,2
+226,notif_sentinela,A Unidade Notificante é Sentinela?,2
+227,contat_caso_susp,Contato Com Caso Suspeito...,2
+228,contat_caso_susp_outro,Contato Com Caso Suspeito... (campo Outro),1
+229,nome_contato,Nome do Contato,1
+230,endereco_contato,"Endereço do contato (Rua, Av., Apto., Bairro, Localidade, etc)",1
+231,doses_tri_treta,Nº de Doses da Vacina Tríplice (DTP)ou Tetravalente (DTP+Hib),2
+232,dt_ult_dose_tri_treta,Data da Última Dose (Vacina Tríplice (DTP)ou Tetravalente (DTP+Hib)),3
+233,dt_tosse,Data do Início da Tosse,3
+234,sint_tosse,Sinais e Sintomas (Tosse),2
+235,sint_tosse_parox,Sinais e Sintomas (Tosse Paroxística),2
+236,sint_resp_ruidosa,Sinais e Sintomas (Respiração Ruidosa),2
+237,sint_cianose,Sinais e Sintomas (Cianose),2
+238,sint_vomito,Sinais e Sintomas (Vômito),2
+239,sint_apneia,Sinais e Sintomas (Apneia),2
+240,sint_temp_inferior38,Sinais e Sintomas (Temperatura < 38ºC),2
+241,sint_temp_superior38,Sinais e Sintomas (Temperatura > ou = a 38ºC),2
+242,sint_outro,Sinais e Sintomas (Outro),2
+243,sint_outro_descricao,Sinais e Sintomas (descrição campo Outro),1
+244,comp_pneumonia,Complicações (Pneumonia ou Broncopneumonia),2
+245,comp_encefalopatia,Complicações (Encefalopatia),2
+246,comp_desidratacao,Complicações (Desidratação),2
+247,comp_otite,Complicações (Otite),2
+248,comp_desnutricao,Complicações (Desnutrição),2
+249,comp_outro,Complicações (Outros),2
+250,comp_outro_descricao,Complicações (descrição campo Outro),1
+251,hospitalizacao2,Ocorreu Hospitalização - FE,2
+252,dt_internacao,Data da Internacao,3
+253,uf_atendimento,UF de Atendimento,1
+254,municipio_atendimento,Município de Atendimento,1
+255,cod_ibge_atendimento,Código (IBGE) de Atendimento,2
+256,nome_hosp_atendimento,Nome do hospital de atendimento,1
+257,cod_ibge_hosp_atendimento,Código (IBGE) do Hospital de Atendimento,2
+258,utilizou_antibiotico,Utilizou Antibiótico,2
+259,dt_adm_antibiotico,Data de Adm. do Antibiótico,3
+260,nasofaringe,Coleta de Material da Nasofaringe,2
+261,dt_nasofaringe,Data da Coleta de Material,3
+262,resultado_cultura,Resultado da Cultura,2
+263,identif_comun,Realizada Identificação dos Comunicantes Íntimos?,2
+264,quant_comunicantes,Quantidade dos Comunicantes Íntimos,2
+265,caso_secundario,Quantos Casos Secundários Foram Confirmados entre os Comunicantes,2
+266,coleta_naso,Realizada Coleta Mater. Naso dos Comunicantes?,2
+267,quant_coleta_naso,Quantas Coletas Mater. Naso dos Comunicantes Realizadas?,2
+268,quant_coleta_posit,Qts comunicante resultado cult. positivo?,2
+269,medida_controle,Medidas de prevenção/controle,2
+270,crit_confimacao,Critério de Confirmação/Descarte,2
+271,doenca_rel_trab,Doença Relacionada ao Trabalho,2
+273,sit_merc_trabalho,Situação no Mercado de Trabalho,2
+274,tempo_trabalho,Tempo de Trabalho na Ocupação,2
+275,tipo_tempo_trabalho,Tipo de Tempo de Trabalho na Ocupação,2
+276,local_acidente,Local Onde Ocorreu o Acidente,2
+277,cnpj_contratante,Registro / CNPJ ou CPF do Contratante,1
+278,nome_contratante,Nome da empresa ou Empregador,1
+279,ativ_contratante,Atividade Econômica (CNAE) do Contratante,1
+280,uf_contratante,UF do Contratante,1
+281,municipio_contratante,Município do Contratante,1
+282,cod_ibge_contratante,Código (IBGE) do Contratante,2
+283,distrito_contratante,Distrito do Contratante,1
+284,bairro_contratante,Bairro do Contratante,1
+285,endereco_contratante,Endereço do Contratante,1
+286,numero_contratante,Número de Endereço do Contratante,2
+287,ponto_ref_contratante,Ponto de Referência,1
+288,telefone_contratante,(DDD) Telefone do Contratante,1
+289,empresa_terceirizada,O Empregador é Empresa Terceirizada,2
+290,cnae_emp_principal,"Se empresa Terceirizada, Qual o CNAE da empresa Principal",1
+291,cnpj_emp_principal,CNPJ da Empresa Principal,1
+292,rz_social_emp_principal,Razão Social (Nome da Empresa),1
+293,hr_acidente,Hora do Acidente (hora),2
+294,min_acidente,Hora do Acidente (minutos),2
+295,hr_apos_inicio_jornada,Hora Após o Início da Jornada (hora),2
+296,min_apos_inicio_jornada,Hora Após o Início da Jornada (minutos),2
+297,uf_acidente,UF do Acidente,1
+298,municipio_acidente,Município de Ocorrência do Acidente,1
+299,cod_ibge_acidente,Código (IBGE) do Acidente,2
+300,cod_causa_acidente,Código da causa do Acidente CID 10 (de V01 a Y98),1
+301,tipo_acidente,Tipo de Acidente,2
+302,outros_atingidos,Houve Outros Trabalhadores Atingidos,2
+303,quant_trab_atingidos,Quantos Trabalhadores Atingidos?,2
+304,ocorreu_atendimento,Ocorreu Atendimento Médico?,2
+305,dt_atendimento,Data do Atendimento,3
+306,cod_us_atendimento,Código da Unidade de Saúde de Atendimento,2
+307,parte_corpo_atend1,Partes do Corpo Atingidas (Campo 1),2
+308,parte_corpo_atend2,Partes do Corpo Atingidas (Campo 2),2
+309,parte_corpo_atend3,Partes do Corpo Atingidas (Campo 3),2
+310,diag_lesao,Diagnóstico da Lesão,1
+311,regime_tratamento,Regime de Tratamento,2
+312,comun_acid_trab,Foi Emitida a Comunicação de acidente no Trabalho - CAT,2
+313,outras_informacoes,Outras informações (campo livre),1
