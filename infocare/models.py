@@ -1,5 +1,6 @@
 from django.db import connections, transaction
 from datetime import datetime
+import pandas as pd
 
 
 def abrir_conexao():
@@ -239,19 +240,21 @@ def alterar_estado_ficha(codigo: int, status: int):
     fechar_conexao(conexao)
 
 
-def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list):
+def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list, ids: list):
     """
         Insere os valores das colunas do tipo de ficha na tabela valorcampo.
         :param cursor: Cursor da conexão com o banco de dados.
         :param cod_ficha: Código da ficha.
         :param tipo_ficha: Código do tipo de ficha.
         :param valores: Lista com os valores das colunas do tipo de ficha.
+        :param ids: Lista com os nomes das colunas do tipo de ficha.
         :return: None.
     """
     cursor.execute("""
         SELECT
             C.codigo,
-            C.cod_tipo_campo
+            C.cod_tipo_campo,
+            C.nome
         FROM campo AS C
             INNER JOIN campo_tipo_ficha AS CTF
                 ON CTF.cod_campo = C.codigo
@@ -264,6 +267,23 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
         registro = []
         cod_campo = res[0]
         tipo_campo = res[1]
+        nome_campo = res[2]
+
+        if type(valores[i]) in (int, float):
+            tp_input = 2
+        elif type(valores[i]) == str:
+            tp_input = 1
+        else:
+            tp_input = 3
+
+        print('\ncod_campo:', cod_campo,
+              '; nome_banco:', nome_campo,
+              '; nome_input:', ids[i],
+              '; tp_banco:', tipo_campo,
+              '; tp_input:', tp_input,
+              '; tipo_diferente:', 0 if tipo_campo == tp_input else 1,
+              '; valor_input:', valores[i],
+        )
 
         if tipo_campo == 1:  # Se for do tipo string
             registro.append(str(valores[i]))
@@ -288,6 +308,58 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
     """, novos_registros)
 
 
+def averiguar_campos(cursor, tipo_ficha: int, campos: dict):
+    sql = """
+        SELECT
+            C.codigo        AS cod_campo,
+            C.nome          AS nome_campo,
+            C.descricao     AS descricao_campo,
+            TC.nome         AS nome_tipo_campo,
+            TF.nome         AS tipo_ficha
+        FROM campo_tipo_ficha AS CTF
+            INNER JOIN campo AS C
+                ON C.codigo = cod_campo
+            INNER JOIN tipo_campo AS TC
+                ON TC.codigo = C.cod_tipo_campo
+            INNER JOIN tipo_ficha AS TF
+                ON TF.codigo = CTF.cod_tipo_ficha
+        WHERE CTF.cod_tipo_ficha = %s
+    """
+
+    cursor.execute(sql, (tipo_ficha,))
+    results = cursor.fetchall()
+
+    registros = []
+    keys = list(campos.keys())
+    for i, row in enumerate(results):
+        valor_campo = campos.get(keys[i])
+
+        if type(valor_campo) in (int, float):
+            tp_campo = 'INT'
+        elif type(valor_campo) == str:
+            tp_campo = 'STRING'
+        else:
+            tp_campo = 'DATE'
+
+        registro = {
+            'cod_campo': row[0],
+            'nome_campo': row[1],
+            'id_campo_input': keys[i],
+            'valor_campo_input': valor_campo,
+            'tipo_campo_bd': row[3],
+            'tipo_campo_input': type(valor_campo),
+            'tipo_diferente': 0 if tp_campo == row[3] else 1,
+            'descricao_campo': row[2],
+            'tipo_ficha': row[4]
+        }
+
+        registros.append(registro)
+
+    df = pd.DataFrame(registros)
+    df.to_excel('output.xlsx', index=False)
+    print('\n\nArquivo salvo.\n\n')
+
+
 def set_ficha(campos: dict):
     conexao, cursor = abrir_conexao()
     tipo_ficha = campos.pop('cod_tipo_ficha')
@@ -307,7 +379,10 @@ def set_ficha(campos: dict):
             cursor.execute("SELECT LAST_INSERT_ID()")
             cod_ficha = int(cursor.fetchone()[0])
 
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+            averiguar_campos(cursor, tipo_ficha, campos)
+
+            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
         return cod_ficha
 
@@ -343,7 +418,7 @@ def alterar_ficha(campos: dict):
                 WHERE cod_ficha = %s
             """, (cod_ficha,))
 
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
         return cod_ficha
 

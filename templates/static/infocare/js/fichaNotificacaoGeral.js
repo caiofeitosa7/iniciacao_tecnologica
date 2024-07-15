@@ -60,8 +60,8 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
                     parts[parts.length - 1] = json["cod_ficha"];
                     uploadForm.action = parts.join('/');
 
-                    localStorage.setItem('cod_ficha_retornada', json['cod_ficha']);
-                    localStorage.setItem('url_form', uploadForm.action);
+                    // localStorage.setItem('cod_ficha_retornada', json['cod_ficha']);
+                    // localStorage.setItem('url_form', uploadForm.action);
 
                     uploadForm.submit();
 

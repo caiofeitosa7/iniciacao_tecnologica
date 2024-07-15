@@ -137,8 +137,6 @@ def registrar_ficha(request):
             else:
                 cod_ficha = models.set_ficha(dados)
 
-                print('ficha criada:', cod_ficha)
-
                 if cod_ficha:
                     return JsonResponse({
                         'cod_ficha': cod_ficha,
@@ -217,8 +215,6 @@ def marcar_ficha_descartada(request, cod_ficha):
 
 def upload_arquivos(request, cod_ficha):
     if request.method == 'POST':
-
-        print('Codigo da ficha:', cod_ficha, '\n', request.FILES.keys())
 
         registros = []
         for key in request.FILES.keys():
