@@ -1,24 +1,26 @@
 <div class="linha-dados justify-content-between">
     <div class="col-1">
         <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-           onclick="requisicaoGetPadrao('pagina_inicial')">
+           onclick="retornoListaFichas()">
         </i>
     </div>
     <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-            <input id="prontuario" type="number" class="form-control"/>
+            <input id="prontuario" type="number" class="form-control"
+                   value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"/>
         </div>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="setor">Setor</label>
-            <input id="setor" class="form-control"/>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
         </div>
     </div>
     <div class="col-1"></div>
 </div>
 <div class="ficha pb-5">
     {% csrf_token %}
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -32,7 +34,9 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha" oninput="atribuirValor(this.id)"/>
+                <input type="number" class="form-control" id="numero-ficha"
+                    value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
+                />
             </div>
         </div>
     </div>
@@ -50,7 +54,9 @@
                                 <label for="campo-tipo-notificacao">Tipo de Notificação</label>
                             </div>
                             <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                    type="number" min="1" max="4"/>
+                                   value="{% if ficha.tipo_notificacao %}{{ ficha.tipo_notificacao }}{% endif %}"
+                                   type="number" min="1" max="4"
+                            />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                             <span class="mb-1">
@@ -68,8 +74,8 @@
                             <label for="campo-agravoDoenca">Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-agravoDoenca" class="input-dado form-control negrito"
-                                value="ACIDENTES POR ANIMAIS PEÇONHENTOS"/>
+                            <input id="campo-agravoDoenca" value="{{ ficha.agravoDoenca }}"
+                                   class="input-dado form-control negrito"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -78,7 +84,8 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}" type="date"
+                                   class="input-dado form-control"/>
                         </div>
                     </div>
                 </div>
@@ -89,7 +96,8 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-uf-notificacao" value="{{ ficha.uf_notificacao }}"
+                                   class="input-dado form-control" maxlength="2"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -98,7 +106,8 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-municipio-notificacao" value="{{ ficha.municipio_notificacao }}"
+                                   class="input-dado form-control"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -110,7 +119,7 @@
                                     id="campo-cod-ibge-notificacao"
                                     type="number"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                    value="{% if ficha.cod_ibge_notificacao %}{{ ficha.cod_ibge_notificacao }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -124,19 +133,23 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                    id="campo-unidade-saude"
+                                    class="input-dado form-control"
+                                    value="{{ ficha.unidade_saude }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-unidade-saude">Código</label>
+                            <label for="campo-cod-unidade-saude">Código</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-codigo-unidade-saude"
+                                    id="campo-cod-unidade-saude"
                                     type="number"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                    value="{% if ficha.cod_unidade_saude %}{{ ficha.cod_unidade_saude }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -152,6 +165,7 @@
                                     id="campo-dt-sintomas"
                                     type="date"
                                     class="input-dado form-control"
+                                    value="{{ ficha.dt_sintomas }}"
                             />
                         </div>
                     </div>
@@ -173,7 +187,7 @@
                             <input
                                     id="campo-nome-paciente"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                    value="{{ ficha.nome_paciente }}"
                             />
                         </div>
                     </div>
@@ -183,7 +197,12 @@
                             <label for="campo-dt-nascimento">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                    id="campo-dt-nascimento"
+                                    type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_nascimento %}{{ ficha.dt_nascimento }}{% endif %}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -195,17 +214,22 @@
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3" oninput="atribuirValor(this.id)"/>
+                                <input
+                                        id="campo-idade"
+                                        type="number"
+                                        value="{% if ficha.idade %}{{ ficha.idade }}{% endif %}"
+                                        class="input-dado form-control"
+                                        maxlength="3"
+                                />
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input
                                         type="number"
                                         id="campo-tipo-idade"
                                         class="input-dado-quadrado form-control"
+                                        value="{% if ficha.tipo_idade %}{{ ficha.tipo_idade }}{% endif %}"
                                         min="1"
                                         max="4"
-                                        aria-label=""
-                                        oninput="atribuirValor(this.id)"
                                 />
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
@@ -224,9 +248,9 @@
                             </div>
                             <input
                                     id="campo-sexo"
+                                    value="{{ ficha.sexo }}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado letra-miuda">
@@ -246,10 +270,10 @@
                             <input
                                     id="campo-gestante"
                                     type="number"
+                                    value="{% if ficha.gestante %}{{ ficha.gestante }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     min="1"
                                     max="9"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -270,9 +294,9 @@
                                     id="campo-raca"
                                     type="number"
                                     class="input-dado-quadrado form-control"
+                                    value="{% if ficha.raca %}{{ ficha.raca }}{% endif %}"
                                     min="1"
                                     max="9"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -294,9 +318,9 @@
                             <input
                                     id="campo-escolaridade"
                                     type="number"
+                                    value="{% if ficha.escolaridade %}{{ ficha.escolaridade }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="2"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
@@ -323,7 +347,12 @@
                             <label for="campo-numero-sus">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-numero-sus" type="number" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                    id="campo-numero-sus"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.numero_sus %}{{ ficha.numero_sus }}{% endif %}"
+                            />
                         </div>
                     </div>
                     <div class="col-8 div-input">
@@ -332,7 +361,11 @@
                             <label for="campo-nome-mae">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-mae" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                    id="campo-nome-mae"
+                                    value="{{ ficha.nome_mae }}"
+                                    class="input-dado form-control"
+                            />
                         </div>
                     </div>
                 </div>
@@ -356,6 +389,7 @@
                                 <input
                                         id="campo-dt-primeiro-sintoma"
                                         type="date"
+                                        value="{{ ficha.dt_primeiro_sintoma }}"
                                         class="input-dado form-control"
                                 />
                             </div>
@@ -371,6 +405,7 @@
                                 <input
                                         id="campo-numero-casos-suspeitos"
                                         type="number"
+                                        value="{% if ficha.numero_casos_suspeitos %}{{ ficha.numero_casos_suspeitos }}{% endif %}"
                                         class="input-dado form-control"
                                 />
                             </div>
@@ -388,6 +423,7 @@
                                     id="campo-local-inicial-ocorrencia"
                                     type="number"
                                     class="input-dado-quadrado form-control"
+                                    value="{% if ficha.local_inicial_ocorrencia %}{{ ficha.local_inicial_ocorrencia }}{% endif %}"
                                     min="1"
                                     max="11"
                             />
@@ -422,6 +458,7 @@
                                                 id="campo-local-especificar-ocorrencia"
                                                 class="input-dado form-control"
                                                 aria-label=""
+                                                value="{{ ficha.local_inicial_ocorrencia_outro }}"
                                         />
                                     </li>
                                 </ul>
@@ -445,9 +482,9 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-residencia"
+                                    value="{{ ficha.uf_residencia }}"
                                     class="input-dado form-control"
                                     maxlength="2"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -460,9 +497,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-municipio-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-municipio-residencia"
+                                    value="{{ ficha.municipio_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -472,10 +509,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-cod-ibge-residencia"
-                                type="number"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-cod-ibge-residencia"
+                                    type="number"
+                                    value="{% if ficha.cod_ibge_residencia %}{{ ficha.cod_ibge_residencia }}{% endif %}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -486,9 +523,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-distrito-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-distrito-residencia"
+                                    value="{{ ficha.distrito_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -501,9 +538,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-bairro-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-bairro-residencia"
+                                    value="{{ ficha.bairro_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -518,7 +555,7 @@
                             <input
                                     id="campo-logradouro-residencia"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                    value="{{ ficha.logradouro_residencia }}"
                             />
                         </div>
                     </div>
@@ -529,9 +566,9 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-codigo-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                                     type="number"
+                                    value="{% if ficha.codigo_residencia %}{{ ficha.codigo_residencia }}{% endif %}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -546,8 +583,8 @@
                             <input
                                     id="campo-numero-residencia"
                                     type="number"
+                                    value="{% if ficha.numero_residencia %}{{ ficha.numero_residencia }}{% endif %}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -561,8 +598,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-complemento-residencia"
+                                    value="{{ ficha.complemento_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -574,8 +611,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo1"
+                                    value="{{ ficha.geo_campo1 }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -589,8 +626,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-geo-campo2"
+                                    value="{{ ficha.geo_campo2 }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -604,8 +641,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-ponto-ref-residencia"
+                                    value="{{ ficha.ponto_ref_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -617,9 +654,9 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-cep-residencia"
+                                    value="{{ ficha.cep_residencia }}"
                                     class="input-dado form-control"
                                     maxlength="9"
-                                    onblur="pesquisaCepComReplicacao(this)"
                             />
                         </div>
                     </div>
@@ -633,8 +670,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-telefone-residencia"
+                                    value="{{ ficha.telefone_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -647,9 +684,9 @@
                             <input
                                     id="campo-zona-residencia"
                                     type="number"
+                                    value="{% if ficha.zona_residencia %}{{ ficha.zona_residencia }}{% endif %}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
@@ -667,8 +704,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-pais-residencia"
+                                    value="{{ ficha.pais_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -690,6 +727,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-us-notificante"
+                                    value="{{ ficha.municipio_us_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -703,6 +741,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
+                                    value="{{ ficha.nome_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -714,6 +753,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
+                                    value="{{ ficha.funcao_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -725,6 +765,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
+                                    value="{{ ficha.assinatura_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -763,6 +804,7 @@
                             <input
                                     id="campo-dt-amostra-sorologia"
                                     type="date"
+                                    value="{{ ficha.dt_amostra_sorologia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -778,6 +820,7 @@
                             <input
                                     id="campo-dt-outra-amostra"
                                     type="date"
+                                    value="{{ ficha.dt_outra_amostra }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -790,6 +833,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-tipo-exame"
+                                    value="{{ ficha.tipo_exame }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -806,6 +850,7 @@
                                     id="campo-obito"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.obito %}{{ ficha.obito }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -829,6 +874,7 @@
                                     id="campo-caso-semelhante"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.caso_semelhante %}{{ ficha.caso_semelhante }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -852,6 +898,7 @@
                                     id="campo-exantema"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.exantema %}{{ ficha.exantema }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -874,6 +921,7 @@
                             <input
                                     id="campo-dt-inicio-exatema"
                                     type="date"
+                                    value="{{ ficha.dt_inicio_exantema }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -890,6 +938,7 @@
                                     id="campo-petequiaSufusao"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.petequiaSufusao %}{{ ficha.petequiaSufusao }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -913,6 +962,7 @@
                                     id="campo-liquor"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.liquor %}{{ ficha.liquor }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -933,6 +983,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-bacterioscopia"
+                                    value="{{ ficha.bacterioscopia }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -952,6 +1003,7 @@
                                     id="campo-tomou-vacina"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.tomou_vacina %}{{ ficha.tomou_vacina }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -973,6 +1025,7 @@
                             <input
                                     id="campo-dt-ultima-dose-tomada"
                                     type="date"
+                                    value="{{ ficha.dt_ultima_dose_tomada }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -989,6 +1042,7 @@
                                     id="campo-hospitalizacao"
                                     class="input-dado-quadrado form-control"
                                     type="number"
+                                    value="{% if ficha.hospitalizacao %}{{ ficha.hospitalizacao }}{% endif %}"
                                     min="1"
                                     max="9"
                             />
@@ -1010,6 +1064,7 @@
                             <input
                                     id="campo-dt-hospitalizacao"
                                     type="date"
+                                    value="{{ ficha.dt_hospitalizacao }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1024,6 +1079,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-hospital"
+                                    value="{{ ficha.uf_hospital }}"
                                     class="input-dado form-control"
                                     maxlength="2"
                             />
@@ -1039,6 +1095,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-hospital"
+                                    value="{{ ficha.municipio_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1051,6 +1108,7 @@
                             <input
                                     id="campo-cod-ibge-hospital"
                                     type="number"
+                                    value="{% if ficha.cod_ibge_hospital %}{{ ficha.cod_ibge_hospital }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1063,6 +1121,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-hospital"
+                                    value="{{ ficha.nome_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1075,6 +1134,7 @@
                             <input
                                     id="campo-cod-hospital"
                                     type="number"
+                                    value="{% if ficha.cod_hospital %}{{ ficha.cod_hospital }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1099,8 +1159,9 @@
                                     1° Hipótese Diagnóstica - CID 10:
                                 </label>
                                 <input
-                                    id="campo-hipotese-diagnostica1"
-                                    class="input-dado form-control mx-2"
+                                        id="campo-hipotese-diagnostica1"
+                                        class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica1 }}"
                                 />
                             </div>
                             <div class="pb-3 d-flex align-items-center">
@@ -1108,8 +1169,9 @@
                                     2° Hipótese Diagnóstica - CID 10:
                                 </label>
                                 <input
-                                    id="campo-hipotese-diagnostica2"
-                                    class="input-dado form-control mx-2"
+                                        id="campo-hipotese-diagnostica2"
+                                        class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica2 }}"
                                 />
                             </div>
                         </div>
@@ -1135,8 +1197,9 @@
                                         País:
                                     </label>
                                     <input
-                                        id="campo-pais-infeccao"
-                                        class="input-dado form-control mx-2"
+                                            id="campo-pais-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.pais_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1144,8 +1207,9 @@
                                         Distrito:
                                     </label>
                                     <input
-                                        id="campo-distrito-infeccao"
-                                        class="input-dado form-control mx-2"
+                                            id="campo-distrito-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.distrito_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1157,6 +1221,7 @@
                                     <input
                                             id="campo-uf-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.uf_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1168,6 +1233,7 @@
                                     <input
                                             id="campo-municipio-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.municipio_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1177,6 +1243,7 @@
                                     <input
                                             id="campo-bairro-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.bairro_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1185,7 +1252,7 @@
                 </div>
             </div>
         </div>
-        <div class="linha-dados footer-ficha mb-3">
+        <div class="linha-dados footer-ficha">
             <span class="col-9">Dados Complementares/ Notificação</span>
             <div class="col-3 d-flex justify-content-evenly">
                 <span>SVS</span>
@@ -1196,7 +1263,7 @@
 </div>
 <div class="d-flex flex-column align-items-center my-3 negrito">
     <span>FICHA DE INVESTIGAÇÃO</span>
-    <span>ACIDENTES POR ANIMAIS PEÇONHENTOS</span>
+    <span>LEISHMANIOSE VISCERAL</span>
 </div>
 <div class="ficha pt-5">
     <div class="mt-2 container-cabecalho">
@@ -1207,18 +1274,28 @@
         <div class="col-6 center-div">
             <label class="negrito">SINAN</label>
             <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
-            <label>FICHA DE INVESTIGAÇÃO <br> <label class="negrito">ACIDENTES POR ANIMAIS PEÇONHENTOS</label></label>
+            <label>FICHA DE INVESTIGAÇÃO 
+                <label class="negrito">LEISHMANIOSE VISCERAL</label>
+            </label>
         </div>
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha2">N°</label>
-                <input type="number" class="form-control" id="numero-ficha2">
+                <input type="number" class="form-control" id="numero-ficha2"
+                    value="{% if ficha.numero_ficha2 %}{{ ficha.numero_ficha2 }}{% endif %}">
             </div>
         </div>
     </div>
-    <div class="mt-2 descricao-acidenteTrabalho">
-        <span class="letra">
-            <b>CASO CONFIRMADO:</b> Paciente com evidências clínicas de envenenamento, específicas para cada tipo de animal, independentemente do animal causador do acidente ter sido identificado ou não. Não há necessidade de preenchimento da ficha para casos suspeitos.
+    <div class="mt-2 descricao-caso-supeito">
+        <span>
+            <strong>CASO SUSPEITO:</strong>
+            <br>
+            Todo indivíduo proveniente de área com ocorrência de transmissão, 
+            com febre e esplenomegalia.
+            <br>
+            Todo indivíduo proveniente de área sem ocorrência de 
+            transmissão, com febre e esplenomegalia, desde que descartado os diagnósticos 
+            diferenciais mais frequentes na região.                        
         </span>
     </div>
     <section>
@@ -1245,7 +1322,7 @@
                             <label>Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <span class="negrito">ACIDENTES POR ANIMAIS PEÇONHENTOS
+                            <span class="negrito"> <b>AIDS/HIV</b></span>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1253,7 +1330,7 @@
                             <label>Código (CID10)</label>
                         </div>
                         <div class="container-input-dado">
-                            <span class="negrito">X 29 </span>
+                            <span class="negrito">B 24</span>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1262,7 +1339,8 @@
                             <label for="campo-dt-notificacao2">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao2" type="date" class="input-dado form-control">
+                            <input id="campo-dt-notificacao2" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_notificacao2 %}{{ ficha.dt_notificacao2 }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -1273,7 +1351,8 @@
                             <label for="campo-uf-notificacao2">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao2" type="text" class="input-dado form-control" maxlength="2">
+                            <input id="campo-uf-notificacao2" class="input-dado form-control" maxlength="2"
+                            value="{{ ficha.uf_notificacao2 }}">
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -1282,7 +1361,8 @@
                             <label for="campo-municipio-notificacao2">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao2" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-notificacao2" class="input-dado form-control"
+                            value="{{ ficha.municipio_notificacao2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1290,7 +1370,8 @@
                             <label for="campo-cod-ibge-notificacao2">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-ibge-notificacao2" type="number" class="input-dado form-control">
+                            <input id="campo-cod-ibge-notificacao2" type="number" class="input-dado form-control"
+                            value="{% if ficha.cod_ibge_notificacao2 %}{{ ficha.cod_ibge_notificacao2 }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -1298,10 +1379,13 @@
                     <div class="col-6 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">6</span>
-                            <label for="campo-unidade-saude2">Unidade de Saúde (ou outra fonte notificadora)</label>
+                            <label for="campo-unidade-saude2">
+                                Unidade de Saúde (ou outra fonte notificadora)
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude2" type="text" class="input-dado form-control">
+                            <input id="campo-unidade-saude2" class="input-dado form-control"
+                            value="{{ ficha.unidade_saude2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1309,16 +1393,20 @@
                             <label for="campo-codigo-unidade-saude2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
+                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control"
+                            value="{% if ficha.cod_unidade_saude2 %}{{ ficha.cod_unidade_saude2 }}{% endif %}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">7</span>
-                            <label for="campo-dt-sintomas2">Data dos Primeiros Sintomas</label>
+                            <label for="campo-dt-sintomas2">
+                                Data dos Primeiros Sintomas
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-sintomas2" type="date" class="input-dado form-control">
+                            <input id="campo-dt-sintomas2" type="date" class="input-dado form-control"
+                            value="{% if ficha.dt_sintomas2 %}{{ ficha.dt_sintomas2 }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -1336,7 +1424,8 @@
                             <label for="campo-nome-paciente2">Nome do Paciente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
+                            <input id="campo-nome-paciente2" class="input-dado form-control"
+                            value="{{ ficha.nome_paciente2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1345,7 +1434,8 @@
                             <label for="campo-dt-nascimento2">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control" aria-label="">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control"
+                            value="{% if ficha.dt_nascimento2 %}{{ ficha.dt_nascimento2 }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -1357,11 +1447,12 @@
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade2" type="number" class="input-dado form-control" maxlength="3">
+                                <input id="campo-idade2" type="number" class="input-dado form-control" maxlength="3"
+                                value="{% if ficha.idade2 %}{{ ficha.idade2 }}{% endif %}">
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
-                                       min="1" max="4" aria-label="">
+                                       min="1" max="4" value="{% if ficha.tipo_idade2 %}{{ ficha.tipo_idade2 }}{% endif %}">
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
                                     <li>2 - Dia</li>
@@ -1377,7 +1468,8 @@
                                 <span class="numeracao">11</span>
                                 <label for="campo-sexo2">Sexo</label>
                             </div>
-                            <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
+                            <input id="campo-sexo2" class="input-dado-quadrado form-control" maxlength="1"
+                            value="{{ ficha.sexo2 }}">
                         </div>
                         <div class="container-input-dado letra-miuda">
                             <ul>
@@ -1393,7 +1485,8 @@
                                 <span class="numeracao">12</span>
                                 <label for="campo-gestante2">Gestante</label>
                             </div>
-                            <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9"
+                            value="{% if ficha.gestante2 %}{{ ficha.gestante2 }}{% endif %}">
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
                             1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1411,7 +1504,8 @@
                                 <span class="numeracao">13</span>
                                 <label for="campo-raca2">Raça/Cor</label>
                             </div>
-                            <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9"
+                            value="{% if ficha.raca2 %}{{ ficha.raca2 }}{% endif %}">
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
                             1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1431,7 +1525,7 @@
                                 <label for="campo-escolaridade2">Escolaridade</label>
                             </div>
                             <input id="campo-escolaridade2" type="number" class="input-dado-quadrado form-control"
-                                   maxlength="2">
+                                   maxlength="2" value="{% if ficha.escolaridade2 %}{{ ficha.escolaridade2 }}{% endif %}">
                         </div>
                         <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
                             0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série incompleta do EF (antigo
@@ -1455,7 +1549,8 @@
                             <label for="campo-numero-sus2">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-numero-sus2" type="number" class="input-dado form-control">
+                            <input id="campo-numero-sus2" type="number" class="input-dado form-control"
+                            value="{% if ficha.numero_sus2 %}{{ ficha.numero_sus2 }}{% endif %}">
                         </div>
                     </div>
                     <div class="col-8 div-input">
@@ -1464,7 +1559,8 @@
                             <label for="campo-nome-mae2">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-mae2" type="text" class="input-dado form-control">
+                            <input id="campo-nome-mae2" class="input-dado form-control"
+                            value="{{ ficha.nome_mae2 }}">
                         </div>
                     </div>
                 </div>
@@ -1482,8 +1578,8 @@
                             <label for="campo-uf-residencia2">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-residencia2" type="text" class="input-dado form-control"
-                                   maxlength="2">
+                            <input id="campo-uf-residencia2" class="input-dado form-control"
+                                   maxlength="2" value="{{ ficha.uf_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-6 div-input">
@@ -1492,7 +1588,8 @@
                             <label for="campo-municipio-residencia2">Município de Residência</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-residencia2" class="input-dado form-control"
+                            value="{{ ficha.municipio_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1500,7 +1597,8 @@
                             <label for="campo-cod-ibge-residencia2">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-ibge-residencia2" type="number" class="input-dado form-control">
+                            <input id="campo-cod-ibge-residencia2" type="number" class="input-dado form-control"
+                            value="{% if ficha.cod_ibge_residencia2 %}{{ ficha.cod_ibge_residencia2 }}{% endif %}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1509,7 +1607,8 @@
                             <label for="campo-distrito-residencia2">Distrito</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-distrito-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-distrito-residencia2" class="input-dado form-control"
+                            value="{{ ficha.distrito_residencia2 }}">
                         </div>
                     </div>
                 </div>
@@ -1520,7 +1619,8 @@
                             <label for="campo-bairro-residencia2">Bairro</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-bairro-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-bairro-residencia2" class="input-dado form-control"
+                            value="{{ ficha.bairro_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-7 div-input">
@@ -1531,7 +1631,8 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia2" class="input-dado form-control">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control"
+                            value="{{ ficha.logradouro_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1539,7 +1640,8 @@
                             <label for="campo-codigo-residencia2">Código</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-residencia2" type="number" class="input-dado form-control">
+                            <input id="campo-codigo-residencia2" type="number" class="input-dado form-control"
+                            value="{% if ficha.codigo_residencia2 %}{{ ficha.codigo_residencia2 }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -1550,7 +1652,8 @@
                             <label for="campo-numero-residencia2">Número</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-numero-residencia2" type="number" class="input-dado form-control">
+                            <input id="campo-numero-residencia2" type="number" class="input-dado form-control"
+                            value="{% if ficha.numero_residencia2 %}{{ ficha.numero_residencia2 }}{% endif %}">
                         </div>
                     </div>
                     <div class="col-7 div-input">
@@ -1559,7 +1662,8 @@
                             <label for="campo-complemento-residencia2">Complemento (apto, casa, ...)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-complemento-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-complemento-residencia2" class="input-dado form-control"
+                            value="{{ ficha.complemento_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1568,7 +1672,8 @@
                             <label for="campo-geo-campo12">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo12" type="text" class="input-dado form-control">
+                            <input id="campo-geo-campo12" class="input-dado form-control"
+                            value="{{ ficha.geo_campo1_2 }}">
                         </div>
                     </div>
                 </div>
@@ -1579,7 +1684,8 @@
                             <label for="campo-geo-campo22">Geo campo 2</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo22" type="text" class="input-dado form-control">
+                            <input id="campo-geo-campo22" class="input-dado form-control"
+                            value="{{ ficha.geo_campo2_2 }}">
                         </div>
                     </div>
                     <div class="col-6 div-input">
@@ -1588,7 +1694,8 @@
                             <label for="campo-ponto-ref-residencia2">Ponto de Referência</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ponto-ref-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-ponto-ref-residencia2" class="input-dado form-control"
+                            value="{{ ficha.ponto_ref_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -1597,8 +1704,8 @@
                             <label for="campo-cep-residencia2">CEP</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cep-residencia2" type="text" class="input-dado form-control"
-                                   maxlength="9">
+                            <input id="campo-cep-residencia2" class="input-dado form-control"
+                                   maxlength="9" value="{{ ficha.cep_residencia2 }}">
                         </div>
                     </div>
                 </div>
@@ -1609,7 +1716,8 @@
                             <label for="campo-telefone-residencia2">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-telefone-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-telefone-residencia2" class="input-dado form-control"
+                            value="{{ ficha.telefone_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input campo-zona-residencia">
@@ -1619,7 +1727,7 @@
                                 <label for="campo-zona-residencia2">Zona</label>
                             </div>
                             <input id="campo-zona-residencia2" type="number" class="input-dado-quadrado form-control"
-                                   maxlength="1">
+                                   maxlength="1" value="{% if ficha.zona_residencia2 %}{{ ficha.zona_residencia2 }}{% endif %}">
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
                             1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
@@ -1632,7 +1740,8 @@
                             <label for="campo-pais-residencia2">País (se residente fora do Brasil)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-pais-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-pais-residencia2" class="input-dado form-control"
+                            value="{{ ficha.pais_residencia2 }}">
                         </div>
                     </div>
                 </div>
@@ -1643,677 +1752,561 @@
         <span class="titulo-section negrito">Dados Complementares do Caso</span>
         <div class="bloco-dados">
             <div class="titulo-bloco">
-                <span>Antecedentes Epidemiológicos</span>
+                <span>Antec. <br>Epidemi.</span>
             </div>
             <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">31</span>
-                            <label for="campo-dt-investigacao">
-                                Data da Investigação
-                            </label>
+                            <label for="campo-dt-investigacao">Data da Investigação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-investigacao" type="date" class="input-dado form-control">
+                            <input id="campo-dt-investigacao" type="date" class="input-dado form-control"
+                            value="{% if ficha.dt_investigacao %}{{ ficha.dt_investigacao }}{% endif %}">
                         </div>
                     </div>
-                    <div class="col-6 div-input">
+
+                    <div class="col-9 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">32</span>
-                            <label for="campo-ocupacao">
-                                Ocupação
-                            </label>
+                            <label for="campo-ocupacao">Ocupação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ocupacao" class="input-dado form-control">
+                            <input id="campo-ocupacao" class="input-dado form-control"
+                            value="{{ ficha.ocupacao }}">
                         </div>
                     </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">33</span>
-                            <label for="campo-dt-acidente">Data do Acidente</label>
+                </div>                                                        
+            </div>
+        </div>
+
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Clínicos</span>
+            </div>
+
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada d-flex">
+                            <div>
+                                <span class="numeracao">33</span>
+                                <label for="sintoma-febre">Manifestações Clínicas (sinais e sintomas)</label>
+                            </div>
+                            <span class="mx-5">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Sem registro
+                            </span>
                         </div>
-                        <div class="container-input-dado">
-                            <input id="campo-dt-acidente" type="date" class="input-dado form-control">
+                        <div class="linha-dados">
+                            <div class="col-12 d-flex flex-column">
+                                <div class="d-flex justify-content-around">
+                                    <ul class="mx-1">
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-febre" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_febre %}{{ ficha.sintoma_febre }}{% endif %}">
+                                            <label for="sintoma-febre" class="mx-1">
+                                                Febre
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-fraqueza" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_fraqueza %}{{ ficha.sintoma_fraqueza }}{% endif %}">
+                                            <label for="sintoma-fraqueza" class="mx-1">
+                                                Fraqueza
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-edema" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_edema %}{{ ficha.sintoma_edema }}{% endif %}">
+                                            <label for="sintoma-edema" class="mx-1">
+                                                Edema
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <ul class="mx-1">                                                    
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-emagrecimento" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_emagrecimento %}{{ ficha.sintoma_emagrecimento }}{% endif %}">
+                                            <label for="sintoma-emagrecimento" class="mx-1">
+                                                Emagrecimento
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-tosse-diarreia" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_tosse %}{{ ficha.sintoma_tosse }}{% endif %}">
+                                            <label for="sintoma-tosse-diarreia" class="mx-1">
+                                                Tosse e/ou diarréia
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-palidez" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_palidez %}{{ ficha.sintoma_palidez }}{% endif %}">
+                                            <label for="sintoma-palidez" class="mx-1">
+                                                Palidez
+                                            </label>
+                                        </li>
+                                    </ul>                                                
+                                    <ul class="mx-1">
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-aumento-baco" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_baco %}{{ ficha.sintoma_baco }}{% endif %}">
+                                            <label for="sintoma-aumento-baco" class="mx-1" style="text-wrap: pretty;">
+                                                Aumento do Baço
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-quadro-infec" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" 
+                                                value="{% if ficha.sintoma_quadro_infec %}{{ ficha.sintoma_quadro_infec }}{% endif %}"
+                                            >
+                                            <label for="sintoma-quadro-infec" class="mx-1">
+                                                Quadro infeccioso
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-fen-hemorragicos" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_hemorragia %}{{ ficha.sintoma_hemorragia }}{% endif %}">
+                                            <label for="sintoma-fen-hemorragicos" class="mx-1">
+                                                Fenômenos hemorrágicos
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <ul class="mx-1">
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-aumento-figado" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_figado %}{{ ficha.sintoma_figado }}{% endif %}">
+                                            <label for="sintoma-aumento-figado" class="mx-1">
+                                                Aumento do Fígado
+                                            </label>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-ictericia" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_icteria %}{{ ficha.sintoma_icteria }}{% endif %}">
+                                            <label for="sintoma-ictericia" class="mx-1" style="text-wrap: pretty;">
+                                                Icterícia
+                                            </label>
+                                        </li>   
+                                        <li class="d-flex align-items-center">
+                                            <input id="sintoma-outro" type="number" class="form-control input-dado-quadrado"
+                                                min="1" max="9" value="{% if ficha.sintoma_outro %}{{ ficha.sintoma_outro }}{% endif %}">
+                                            <label for="sintoma-outro" class="label-nowrap mx-1">
+                                                Outros
+                                            </label>
+                                            <input id="campo-sintoma-outro-descricao" class="form-control"
+                                                value="{% if ficha.sintoma_outro_descricao %}{{ ficha.sintoma_outro_descricao }}{% endif %}" 
+                                                style="max-width: 250px;"
+                                            >
+                                        </li>                                                 
+                                    </ul>                                                
+                                </div>                                            
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="linha-dados">
-                    <div class="col-1 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">34</span>
-                            <label for="campo-uf-ocorren">UF</label>
+                <div class="linha-dados">                                
+                    <div class="col div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">34</span>
+                                <label for="campo-co-infeccao-hiv">Co - infecção HIV</label>
+                            </div>
+                            <input id="campo-co-infeccao-hiv" type="number" class="input-dado-quadrado form-control" 
+                                min="1" max="9" value="{% if ficha.co_infec_hiv %}{{ ficha.co_infec_hiv }}{% endif %}">
                         </div>
-                        <div class="container-input-dado">
-                            <input id="campo-uf-ocorren" type="text" class="input-dado form-control"
-                                   maxlength="2">
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">35</span>
-                            <label for="campo-municipio-ocorren">Município de Ocorrência do Acidente:</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-municipio-ocorren" type="text" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-estab">Código (IBGE)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-cod-ibge-estab" type="number" class="input-dado form-control">
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">36</span>
-                            <label for="campo-local-ocorren">Localidade de Ocorrência do Acidente:</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-local-ocorren" type="text" class="input-dado form-control">
+                        <div class="container-input-dado justify-content-evenly">
+                            <span>1 - Sim</span>
+                            <span>2 - Não</span>
+                            <span>9 - Ignorado</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Labor.<br>/Class. do caso</span>
+            </div>
+
+            <div class="conteudo-bloco">
                 <div class="linha-dados">
+                    <div class="col div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">35</span>
+                                <label for="diag-parasitologico">Diagnóstico Parasitológico</label>
+                            </div>
+                            <input id="diag-parasitologico" type="number" class="input-dado-quadrado form-control"
+                                   min="1" max="9" value="{% if ficha.diag_parasitologica %}{{ ficha.diag_parasitologica }}{% endif %}">
+                        </div>
+                        <div class="container-input-dado justify-content-evenly">
+                            <span>1 - Positivo</span>
+                            <span>2 - Negativo</span>
+                            <span>3 - Não Realizado</span>
+                        </div>
+                    </div>
+                    <div class="col div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">36</span>
+                                <label for="diag-imunologico-ifi">Diagnóstico Imunológico</label>
+                            </div>                                        
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            <div class="d-flex flex-column justify-content-around">
+                                <span>1 - Positivo</span>
+                                <span>2 - Negativo</span>
+                                <span>3 - Não Realizado</span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-around">
+                                <div class="d-flex flex-row">
+                                    <input id="diag-imunologico-ifi" type="number" class="input-dado-quadrado form-control"
+                                           min="1" max="9" value="{% if ficha.diag_imuno_ifi %}{{ ficha.diag_imuno_ifi }}{% endif %}">
+                                    <label class="form-label mb-0 align-self-center">
+                                        IFI
+                                    </label>
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <input id="diag-imunologico-outros" type="number"
+                                           class="input-dado-quadrado form-control" min="1" max="9"
+                                           value="{% if ficha.diag_imuno_outro %}{{ ficha.diag_imuno_outro }}{% endif %}"
+                                    >
+                                    <label for="diag-imunologico-outros" class="form-label mb-0 align-self-center">
+                                        Outros
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-4 div-input">
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">37</span>
-                                <label for="zona-ocorren">Zona de Ocorrência</label>
+                                <label for="tipo-entrada">Tipo de Entrada</label>
                             </div>
-                            <input id="zona-ocorren" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="tipo-entrada" type="number" class="input-dado-quadrado form-control"
+                                min="1" max="9" value="{% if ficha.tipo_entrada %}{{ ficha.tipo_entrada }}{% endif %}">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Urbana
-                                2 - Rural
-                                3 - Periurbana
-                                9 - Ignorado
-                            </span>
+                        <div class="d-flex justify-content-around">
+                            <div class="d-flex flex-column">
+                                <span>1 - Caso Novo</span>
+                                <span>3 - Transferência</span>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span>2 - Recidiva</span>
+                                <span>9 - Ignorado</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-8 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">38</span>
-                                <label for="temp-picada">Tempo Decorrido Picada/Atendimento</label>
-                            </div>
-                            <input id="temp-picada" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1)0-1h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2)1-3h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                3)3-6h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                4)6-12h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                5)12-24h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                6)24 e + h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9)Ignorado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">39</span>
-                                <label for="loc-pic">Local da Picada</label>
-                            </div>
-                            <input id="loc-pic" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                01 - Cabeça&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                02 - Braço&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                03 - Ante-Braço&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                04 - Mão&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                05 - Dedo da Mão&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                06 - Tronco&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-                                07 - Coxa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                08 - Perna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                09 - Pé&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                10 - Dedo do Pé&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                99 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                </div>                        
             </div>
         </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados Clinicos</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">40</span>
-                                <label for="manif-loca">Manifestações Locais</label>
-                            </div>
-                            <input id="manif-loca" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Sim
-                                2 - Não
-                                9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-8 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">41</span>
-                            <label>
-                                Se Manifestações Locais Sim, especificar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly align-items-center mb-1">
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-dor" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Dor</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-edema" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Edema</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-equi" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Equimose</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-necro" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Necrose</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="doen-outr" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Outro</span>
-                                    <input id="manifest-loc-outro-descricao" class="form-control input-dado">
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados div-input">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">42</span>
-                                <label for="manif-sist">Manifestações Sistêmicas</label>
-                            </div>
-                            <input id="manif-sist" type="number" class="input-dado-quadrado form-control">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            1 - Sim
-                            2 - Não
-                            9 - Ignorado
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">43</span>
-                            <label>
-                                Se Manifestações Sistêmicas Sim, especificar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly align-items-center mb-1">
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-neuroparal" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>neuroparalíticas (ptose palpebral, turvação visual)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-miolit" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>miolíticas/hemolíticas (mialgia, anemia, urina escura)</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-hemorrag" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>hemorrágicas (gengivorragia, outros sangramentos)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-renais" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>renais (oligúria/anúria)</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-vagais" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>vagais (vômitos, diarréias)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <input id="manif-local-outra" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Outras (Espec.)</span>
-                                    <input id="manifest-sistem-outra-descricao" class="form-control input-dado">
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">44</span>
-                                <label for="temp-coag">Tempo de Coagulação</label>
-                            </div>
-                            <input id="temp-coag" type="number" class="input-dado-quadrado form-control">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            1 - Sim
-                            2 - Não
-                            9 - Ignorado
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados do Acidente</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">45</span>
-                                <label for="tipo-acid">Tipo de Acidente</label>
-                            </div>
-                            <input id="tipo-acid" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <div class="col-4">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Serpente <br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 - Lagarta <br> 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado 
-                            </div>
-                            <div class="col-4">
-                                2 - Aranha <br>
-                                5 - Abelha 
-                            </div>
-                            <div class="col-4">
-                                &nbsp;&nbsp;&nbsp;3 - Escorpião
-                                
-                                <li class="d-flex align-items-baseline">
-                                    <label for="descricao-tipo-outro">&nbsp;&nbsp;&nbsp;6 - Outros</label>
-                                    <div class="col-7 d-flex justify-content-center">
-                                        <input id="descricao-tipo-outro" class="input-dado form-control" type="text">
-                                    </div>
-                                </li>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">46</span>
-                                <label for="serp-tipo-acid">Serpente - Tipo de Acidente</label>
-                            </div>
-                            <input id="serp-tipo-acid" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Botrópico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Crotálico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                3 - Elapídico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                4 - Laquético &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-                                5 -Serpente Não Peçonhenta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">47</span>
-                                <label for="aran-tipo-acid">Aranha - Tipo de Acidente</label>
-                            </div>
-                            <input id="aran-tipo-acid" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Foneutrismo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Loxoscelismo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                3 - Latrodectismo <br>
-                                4 - Outra Aranha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">48</span> 
-                                <label for="lagar-tipo-acid">Lagarta - Tipo de Acidente</label>
-                            </div>
-                            <input id="lagar-tipo-acid" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Lonomia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Outra lagarta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="bloco-dados">
             <div class="titulo-bloco">
                 <span>Tratamento</span>
             </div>
             <div class="conteudo-bloco">
-                    <div class="linha-dados">
-                        <div class="col-7 div-input">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">49</span>
-                                    <label for="class-caso">Classificação do Caso</label>
-                                </div>
-                                <input id="class-caso" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                            </div>
-                            <div class="container-input-dado descricao-tipos-meia-altura">
-                                <span>
-                                    1 - Leve&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    2 - Moderado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    3 - Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    9 - Ignorado
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-5 div-input">
-                            <div class="info-elevada-com-input">
-                                <div>
-                                    <span class="numeracao">50</span>
-                                    <label for="soroterapia">Soroterapia</label>
-                                </div>
-                                <input id="soroterapia" type="number" class="input-dado-quadrado form-control" min="1" max="9">
-                            </div>
-                            <div class="container-input-dado descricao-tipos-meia-altura">
-                                <span>
-                                    1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    9 - Ignorado
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="linha-dados">
-                        <span class="numeracao">51</span>
-                        <label for="se-soro-sim">&nbsp;Se Soroterapia Sim, especificar número de ampolas de soro:</label>
-                    </div>                
-                    <div class="linha-dados div-input">
-                        <div class="col-4">
-                            <div class="d-flex align-items-center">
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Antibotrópico (SAB)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="antibotro" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Antibotrópico-laquético (SABL)&nbsp;&nbsp;</span>
-                                <input id="antibotro-laque" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Antilbotrópico-crotálico (SABC)&nbsp;</span>
-                                <input id="antibotro-crota" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                        </div>
-                        <div class="col-4">
-                                <div class="d-flex align-items-center">
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anticrotálico (SAC)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    <input id="anticrot" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Antielapídico (SAE)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    <input id="antilapi" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Antiescorpiônico (SAEs)&nbsp;</span>
-                                    <input id="antiescorp" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                                </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="d-flex align-items-center">
-                                <span>Antiaracnídico (SAAr)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="antiarac" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <span>Antiloxoscélico (SALox)&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="antiloxo" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <span>Antilonômico (SALon)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="antilono" type="number" class="input-dado-quadrado form-control" min="1" max="100"> 
-                            </div>
-                        </div>
-                </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">52</span>
-                                <label for="compl-locais">Complicações Locais</label>
-                            </div>
-                            <input id="compl-locais" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        <div class="info-elevada">
+                            <span class="numeracao">38</span>
+                            <label for="campo-dt-ini-tratamento">Data do Início do Tratamento</label>
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-ini-tratamento" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_inicio_trat %}{{ ficha.dt_inicio_trat }}{% endif %}">
                         </div>
                     </div>
+
                     <div class="col-9 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">53</span>
-                            <label>
-                                Se Complicações Locais Sim, especificar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
-                        </div>
-                        <div class="d-flex justify-content-evenly align-items-center mb-1">
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="infec-sec" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Infecção Secundária</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="necr-exten" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Necrose Extensa</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="sindr-comp" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Síndrome Compartimental</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="def-func" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Déficit Funcional</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="amput" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Amputação</span>
-                                </div>
-                            </ul>
+                        <div class="info-elevada-com-input">
+                            <div class="d-flex col-2 align-items-start">
+                                <span class="numeracao align-self-start">39</span>
+                                <label for="campo-droga-ini-administrada">
+                                    Droga Inicial <br>Administrada
+                                </label>
+                            </div>
+                            <div class="d-flex col-8 mx-4 justify-content-around">
+                                <ul class="d-flex mb-2 flex-column">
+                                    <li>1 - Antimonial Pentavalente</li>
+                                    <li>2 - Anfotericina b</li>
+                                </ul>
+                                <ul class="d-flex flex-column">
+                                    <li>3 - Pentamidina</li>
+                                    <li>4 - Anfotericina b lipossomal</li>
+                                </ul>
+                                <ul class="d-flex flex-column">
+                                    <li>5 - Outras</li>
+                                    <li>6 - Não Utilizada</li>
+                                </ul>                                            
+                            </div>
+                            <input id="campo-droga-ini-administrada" type="number"
+                                class="input-dado-quadrado form-control" min="1" max="6"
+                                value="{% if ficha.droga_inicial_adm %}{{ ficha.droga_inicial_adm }}{% endif %}"
+                            >
                         </div>
                     </div>
                 </div>
+
                 <div class="linha-dados">
-                    <div class="col-3 div-input">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">40</span>
+                            <label for="campo-peso">Peso</label>
+                        </div>
+                        <div class="container-input-dado align-items-center">
+                            <input id="campo-peso"
+                                class="input-dado form-control mx-1"
+                                value="{{ ficha.peso }}"
+                            >
+                            <span class="mx-1">Kg</span>
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">54</span>
-                                <label for="compl-sistem">Complicações Sistêmicas</label>
+                                <span class="numeracao">41</span>
+                                <label for="campo-dose-prescrita">
+                                    Dose Prescrita em mg/kg/dia Sb &#8314;&#8309;
+                                </label>
                             </div>
-                            <input id="compl-sistem" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-dose-prescrita" type="number"
+                                   class="input-dado-quadrado form-control" min="1" max="3"
+                                   value="{% if ficha.dose_prescrita %}{{ ficha.dose_prescrita }}{% endif %}"
+                            >
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
+                        <div class="container-input-dado">
+                            <ul>
+                                <li>1 - Maior ou igual a 10 e menor que 15</li>
+                                <li>2 - Maior ou igual a 15 e menor que 20</li>
+                                <li>3 - Maior ou igual a 20</li>
+                            </ul>                                        
                         </div>
                     </div>
-                    <div class="col-9 div-input">
+                    <div class="col-4 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">55</span>
-                            <label>
-                                Se Complicações Sistêmicas Sim, especificar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </label>
-                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
+                            <span class="numeracao">42</span>
+                            <label for="campo-num-ampolas">Nº Total de Ampolas Prescritas</label>
                         </div>
-                        <div class="d-flex justify-content-evenly align-items-center mb-1">
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="insuf-ren" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Insuficiência Renal</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="insuf-resp" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Insuficiência Respiratório/ <br>Edema Agudo de Pulmão</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="septicem" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Septicemia</span>
-                                </div>
-                            </ul>
-                            <ul>
-                                <div class="d-flex align-items-center">
-                                    <input id="choque" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Choque</span>
-                                </div>
-                            </ul>
+                        <div class="container-input-dado align-items-center">
+                            <input id="campo-num-ampolas" class="input-dado form-control mx-1" type="number"
+                                value="{% if ficha.quant_ampolas %}{{ ficha.quant_ampolas }}{% endif %}">
+                            <span class="mx-1">Ampolas</span>
                         </div>
                     </div>
+                </div>
+                <div class="linha-dados">                                
+                    <div class="col div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">43</span>
+                                <label for="campo-droga-falencia-tratamento-ini">
+                                    Outra Droga Utilizada, na Falência do Tratamento Inicial
+                                </label>
+                            </div>
+                            <input id="campo-droga-falencia-tratamento-ini" type="number"
+                                class="input-dado-quadrado form-control" min="1" max="4"
+                                value="{% if ficha.droga_falencia_trat %}{{ ficha.droga_falencia_trat }}{% endif %}"
+                            >
+                        </div>
+                        <div class="d-flex flex-row justify-content-evenly">
+                            <span>1 - Anfotericina b</span>  
+                            <span>2 - Anfotericina b lipossomal</span>                                   
+                            <span>3 - Outras</span>
+                            <span>4 - Não se Aplica</span>                                     
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-        </div>                
+        </div>
+
         <div class="bloco-dados">
             <div class="titulo-bloco">
                 <span>Conclusão</span>
             </div>
             <div class="conteudo-bloco">
                 <div class="linha-dados">
-                    <div class="col-4 div-input">
+                    <div class="col-6 div-input">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">56</span>
-                                <label for="acd-rel-trab">Acidente Relacionado ao Trabalho</label>
+                                <span class="numeracao">44</span>
+                                <label for="campo-class-final">Classificação Final</label>
                             </div>
-                            <input id="acd-rel-trab" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-class-final" type="number" 
+                                class="input-dado-quadrado form-control" min="1" max="2"
+                                value="{% if ficha.classif_final %}{{ ficha.classif_final }}{% endif %}"
+                            >
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
-                            </span>
+                        <div class="container-input-dado descricao-class-final justify-content-evenly">
+                            <span>1 - Confirmado</span>
+                            <span>2 - Descartado</span>
                         </div>
                     </div>
-                    <div class="col-4 div-input">
+                    <div class="col-6 div-input">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">57</span>
-                                <label for="evol-caso">Evolução do Caso</label>
+                                <span class="numeracao">45</span>
+                                <label for="campo-criterio-confirmacao">Criterio de Confirmação</label>
                             </div>
-                            <input id="evol-caso" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-criterio-confirmacao" type="number"
+                                class="input-dado-quadrado form-control" min="1" max="2"
+                                value="{% if ficha.criterio_confirm %}{{ ficha.criterio_confirm }}{% endif %}"
+                            >
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span>
-                                &nbsp;&nbsp;&nbsp;1-Cura <br>
-                                &nbsp;&nbsp;&nbsp;2-Óbito por acidentes por animais peçonhentos <br>
-                                &nbsp;&nbsp;&nbsp;3-Óbito por outras causas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9-Ignorado
-                            </span>
+                        <div class="container-input-dado descricao-criterio-confirmacao justify-content-evenly">
+                            <span>1 - Laboratorial</span>
+                            <span>2 - Clinico-Epidemiologico</span>
+                        </div>                                  
+                    </div>                                
+                </div>
+
+                <span class="fs-6 negrito">Local Provável da Fonte de Infecção</span>
+
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">46</span>
+                                <label for="campo-caso-autoctone">
+                                    O caso é autóctone do município de residência?
+                                </label>
+                            </div>
+                            <input id="campo-caso-autoctone" type="number"
+                                   class="input-dado-quadrado form-control" min="1" max="9"
+                                   value="{% if ficha.caso_autoctone %}{{ ficha.caso_autoctone }}{% endif %}">
+                        </div>
+                        <div class="container-input-dado descricao-caso-autoctone justify-content-evenly">
+                            <span>1 - Sim</span>
+                            <span>2 - Não</span>
+                            <span>9 - Ignorado</span>
                         </div>
                     </div>
-                    <div class="col-2 div-input">
+                    <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">58</span>
-                            <label for="campo-dt-ob">
-                                Data do Óbito
-                            </label>
+                            <span class="numeracao">47</span>
+                            <label for="campo-uf-conclusao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-ob" type="date" class="input-dado form-control">
+                            <input id="campo-uf-conclusao" class="input-dado form-control" maxlength="2"
+                                value="{{ ficha.uf_conclusao }}">
                         </div>
                     </div>
-                    <div class="col-2 div-input">
+                    <div class="col-5 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">59</span>
-                            <label for="campo-dt-encer">
-                                Data do Encerram.
-                            </label>
+                            <span class="numeracao">48</span>
+                            <label for="campo-pais-conclusao">País</label>                                                                          
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-encer" type="date" class="input-dado form-control">
+                            <input id="campo-pais-conclusao" class="input-dado form-control"
+                            value="{{ ficha.pais_conclusao }}">                                                                               
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">49</span>
+                            <label for="campo-municipio-conclusao">Município</label>                                                                          
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-conclusao" class="input-dado form-control"
+                            value="{{ ficha.municipio_conclusao }}">                                                                               
+                        </div>                                    
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label>Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-conclusao" class="input-dado form-control" type="number"
+                                value="{% if ficha.cod_ibge_conclusao %}{{ ficha.cod_ibge_conclusao }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">50</span>
+                            <label for="campo-destrito-conclusao">Distrito</label>                                                                          
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-destrito-conclusao" class="input-dado form-control"
+                                value="{{ ficha.distrito_conclusao }}">
+                        </div>                                    
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">51</span>
+                            <label for="campo-bairro-conclusao">Bairro</label>                                                                          
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-conclusao" class="input-dado form-control"
+                            value="{{ ficha.bairro_conclusao }}">                                                                               
+                        </div>                                    
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">52</span>
+                                <label for="campo-doenca-rel-trabalho">
+                                    Doença Relacionada ao Trabalho
+                                </label>
+                            </div>
+                            <input id="campo-doenca-rel-trabalho" type="number"
+                                class="input-dado-quadrado form-control" min="1" max="9"
+                                value="{% if ficha.doenca_rel_trab %}{{ ficha.doenca_rel_trab }}{% endif %}">
+                        </div>
+                        <div class="container-input-dado descricao-doenca-rel-trabalho justify-content-evenly">
+                            <span>1 - Sim</span>
+                            <span>2 - Não</span>
+                            <span>9 - Ignorado</span>
+                        </div>
+                    </div>
+                
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">53</span>
+                                <label for="campo-evolucao-caso">Evolução do Caso</label>
+                            </div>
+                            <input id="campo-evolucao-caso" type="number"
+                                   class="input-dado-quadrado form-control" min="1" max="5"
+                                   value="{% if ficha.evolucao_caso %}{{ ficha.evolucao_caso }}{% endif %}">
+                        </div>
+                        <div class="d-flex flex-row justify-content-center flex-wrap">
+                            <span class="col-3">1 - Cura</span>
+                            <span class="col-3">2 - Abandono</span>
+                            <span class="col-3">3 - Óbito por LV</span>
+                            <span class="col-6">4 - Óbito por outras causas</span>
+                            <span class="col-3">5 - Transferência</span>                                        
+                        </div>
+                    </div>                                                        
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">54</span>
+                            <label for="campo-dt-obito">Data do Óbito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-obito" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_obito %}{{ ficha.dt_obito }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">55</span>
+                            <label for="campo-dt-encerramento">Data do Encerramento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-encerramento" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_encerramento %}{{ ficha.dt_encerramento }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -2322,11 +2315,103 @@
     </section>
     <section class="mt-3 container-observacoes">
         <span class="titulo-section negrito">Informações complementares e observações</span>
-        <div class="bloco-dados">
-            <div class="conteudo-bloco">
+        <div class="mt-2">                                                
+            <div class="infos-complementares-tabela">
+                <div>
+                    <span>
+                        Deslocamento (datas e locais frequentados no período de seis meses 
+                        anterior ao início dos sinais e sintomas)
+                    </span>
+                </div>
+                
+                <div class="tabela mt-2">                                
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-2">Data</th>
+                                <th class="col-1">UF</th>
+                                <th class="col-4">Município</th>
+                                <th class="col-3">País</th>
+                                <th class="col-2">Meio de Transporte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="date" class="form-control" id="info-complementar-data1"
+                                    value="{% if ficha.dt_desloc1 %}{{ ficha.dt_desloc1 }}{% endif %}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-uf1"
+                                        value="{{ ficha.uf_desloc1 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-municipio1"
+                                    value="{{ ficha.municipio_desloc1 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-pais1"
+                                    value="{{ ficha.pais_desloc1 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-meio-tranporte1"
+                                    value="{{ ficha.transporte_desloc1 }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" class="form-control" id="info-complementar-data2"
+                                        value="{% if ficha.dt_desloc2 %}{{ ficha.dt_desloc2 }}{% endif %}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-uf2"
+                                        value="{{ ficha.uf_desloc2 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-municipio2"
+                                        value="{{ ficha.municipio_desloc2 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-pais2"
+                                        value="{{ ficha.pais_desloc2 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-meio-tranporte2"
+                                        value="{{ ficha.transporte_desloc2 }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" class="form-control" id="info-complementar-data3"
+                                        value="{% if ficha.dt_desloc3 %}{{ ficha.dt_desloc3 }}{% endif %}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-uf3"
+                                        value="{{ ficha.uf_desloc3 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-municipio3"
+                                        value="{{ ficha.municipio_desloc3 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-pais3"
+                                        value="{{ ficha.pais_desloc3 }}">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="info-complementar-meio-tranporte3"
+                                        value="{{ ficha.transporte_desloc3 }}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                                                     
+                </div>
                 <div class="mt-2 textArea">
-                    <span>Observações: (Anotar todas as informações consideradas importantes e que não estão na ficha (ex: outros dados clínicos, dados laboratoriais, laudos de outros exames e necrópsia, etc.))</span>
-                    <textarea id="campo-observacoes" class="form-control" rows="6" aria-label=""></textarea>
+                    <span>
+                        Anotar todas as informações consideradas importantes e que não 
+                        estão na ficha (ex: outros dados clínicos, dados laboratoriais, 
+                        laudos de outros exames e necrópsia, etc.)
+                    </span>
+                    <textarea id="obs-adicionais" class="form-control" rows="22">{{ ficha.obs_adicionais }}</textarea>
                 </div>
             </div>
         </div>
@@ -2338,18 +2423,24 @@
                 <div class="linha-dados">
                     <div class="col-9 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-municipio-us-investigador">Município/Unidade de Saúde</label>
+                            <label for="campo-municipio-us-investigador">
+                                Município/Unidade de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-us-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-us-investigador" class="input-dado form-control"
+                            value="{{ ficha.municipio_us_investigador }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-us-investigador">Cód. da Unid. de Saúde</label>
+                            <label for="campo-cod-us-investigador">
+                                Cód. da Unid. de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-us-investigador" type="number" class="input-dado form-control">
+                            <input id="campo-cod-us-investigador" type="number" class="input-dado form-control"
+                            {% if ficha.cod_us_investigador != '0' %} value="{{ ficha.cod_us_investigador }}" {% endif %}>
                         </div>
                     </div>
                 </div>
@@ -2359,7 +2450,8 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                            value="{{ ficha.nome_investigador }}">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2367,7 +2459,8 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control"
+                            value="{{ ficha.funcao_investigador }}">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2375,23 +2468,25 @@
                             <label for="campo-assinatura-investigador">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control"
+                            value="{{ ficha.assinatura_investigador }}">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <div class="linha-dados footer-ficha mb-3">
-        <span class="col-5">Animais Peçonhentos</span>
-        <span class="col-2 d-flex justify-content-center">Sinan NET</span>
+        <span class="col-5">Leishmaniose Visceral</span>
+        <span class="col-2 d-flex justify-content-center">Sinan Net</span>
         <div class="col-5 d-flex justify-content-evenly">
             <span>SVS</span>
-            <span>19/01/2006</span>
+            <span>27/09/2005</span>
         </div>
     </div>
 </div>
 
 {% block rodape_ficha %}
-    {% include 'rodape_ficha.html' %}
+    {% include 'rodape_edicao_ficha.html' %}
 {% endblock %}

@@ -60,15 +60,12 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
                     parts[parts.length - 1] = json["cod_ficha"];
                     uploadForm.action = parts.join('/');
 
-                    // localStorage.setItem('cod_ficha_retornada', json['cod_ficha']);
-                    // localStorage.setItem('url_form', uploadForm.action);
-
                     uploadForm.submit();
 
-                    // $('#conteudo')[0].innerHTML = json.html[0];
-                    // $('#mensagem-retorno .modal-title').html("Sucesso!");
-                    // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
-                    // $('#mensagem-retorno').modal("toggle");
+                    $('#conteudo')[0].innerHTML = json.html[0];
+                    $('#mensagem-retorno .modal-title').html("Sucesso!");
+                    $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                    $('#mensagem-retorno').modal("toggle");
                 } else {
                     $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
                     $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
