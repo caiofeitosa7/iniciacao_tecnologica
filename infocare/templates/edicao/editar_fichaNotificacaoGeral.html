@@ -9,7 +9,10 @@
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="prontuario">Prontuário</label>
             <input id="prontuario" type="number" class="form-control"
-                   value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"/>
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
         </div>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="setor">Setor</label>
@@ -119,7 +122,9 @@
                                     id="campo-cod-ibge-notificacao"
                                     type="number"
                                     class="input-dado form-control"
-                                    value="{% if ficha.cod_ibge_notificacao %}{{ ficha.cod_ibge_notificacao }}{% endif %}"
+                                    {% if ficha.cod_ibge_notificacao != "0" %}
+                                        value="{{ ficha.cod_ibge_notificacao }}"
+                                    {% endif %}
                             />
                         </div>
                     </div>

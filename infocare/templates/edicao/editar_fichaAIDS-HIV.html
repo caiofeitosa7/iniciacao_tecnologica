@@ -116,10 +116,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cod-ibge-notificacao"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    value="{% if ficha.cod_ibge_notificacao %}{{ ficha.cod_ibge_notificacao }}{% endif %}"
+                                id="campo-cod-ibge-notificacao"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_notificacao != "0" %} value="{{ ficha.cod_ibge_notificacao }}" {% endif %}
                             />
                         </div>
                     </div>
