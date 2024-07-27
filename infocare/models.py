@@ -35,10 +35,10 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
 
     dados = dict()
     for i, coluna in enumerate(colunas):
-        if 'dt' in coluna.lower() and valores[i]:
-            data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
-            valores[i] = data_obj.strftime('%d/%m/%Y')
-        elif 'dataHora' in coluna.lower() and valores[i]:
+        # if 'dt' in coluna.lower() and valores[i]:
+        #     data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
+        #     valores[i] = data_obj.strftime('%d/%m/%Y')
+        if 'dataHora' in coluna.lower() and valores[i]:
             data_hora = datetime.strptime(str(valores[i]), '%Y-%m-%d %H:%M:%S')
             valores[i] = data_hora.strftime('%d/%m/%Y %H:%M')
         dados[coluna] = valores[i]
