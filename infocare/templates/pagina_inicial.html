@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalTiposFormulario" tabindex="-1" aria-modal="true" role="dialog">
+<div id="modalTiposFormulario" class="modal fade" tabindex="-1" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body d-flex flex-column">
                 {% for formulario in formularios %}
-                    <label class="clicavel my-1" onclick="abrirFormularioEscolhido('{% url 'abrir_formulario' codigo=formulario.codigo %}')">
+                    <label class="clicavel py-2 px-2" onclick="abrirFormularioEscolhido('{% url 'abrir_formulario' formulario.codigo %}')">
                         {{ formulario.nome }}
                     </label>
                 {% endfor %}

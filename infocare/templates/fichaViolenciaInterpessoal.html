@@ -31,7 +31,8 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha" oninput="atribuirValor(this.id)"/>
+                <input type="number" class="form-control" id="numero-ficha"
+                    oninput="atribuirValor(this.id)"/>
             </div>
         </div>
     </div>
@@ -77,7 +78,8 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                 </div>
@@ -88,7 +90,8 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-uf-notificacao" class="input-dado form-control"    
+                                maxlength="2" oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -97,7 +100,8 @@
                             <label for="campo-municipio-notificacao">Município de Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-municipio-notificacao" class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -123,7 +127,8 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-unidade-saude" class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -183,7 +188,8 @@
                             <label for="campo-dt-nascimento">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"/>
                         </div>
                     </div>
                 </div>
@@ -195,7 +201,8 @@
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3" oninput="atribuirValor(this.id)"/>
+                                <input id="campo-idade" type="number" class="input-dado form-control"
+                                    maxlength="3" oninput="atribuirValor(this.id)"/>
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input
@@ -224,7 +231,6 @@
                             </div>
                             <input
                                     id="campo-sexo"
-                                    type="text"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
                                     oninput="atribuirValor(this.id)"
@@ -1756,10 +1762,11 @@
                                 <span class="numeracao">36</span>
                                 <label for="campo-orientacao-sexual">Orientação Sexual</label>
                             </div>
-                            <input id="campo-orientacao-sexual" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
+                            <input id="campo-orientacao-sexual" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9">
                         </div>
-                        <div class="container-input-dado letra-miuda descricao-tipos justify-content-evenly align-items-end">
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly align-items-end">
                             <ul>
                                 <li>1-Heterosexual</li>
                                 <li>2-Homosexual (gay/lésbica)</li>
@@ -1777,10 +1784,11 @@
                                 <span class="numeracao">37</span>
                                 <label for="campo-identidade-genero">Identidade de gênero:</label>
                             </div>
-                            <input id="campo-identidade-genero" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
+                            <input id="campo-identidade-genero" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9">
                         </div>
-                        <div class="container-input-dado letra-miuda descricao-tipos justify-content-evenly align-items-end">
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly align-items-end">
                             <ul>
                                 <li>1-Travesti</li>
                                 <li>2-Mulher Transexual</li>
@@ -1802,94 +1810,91 @@
                                     Possui algum tipo de <br>deficiência / transtorno?
                                 </label>
                             </div>
-                            <input id="campo-possui-deficiencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="9">
+                            <input id="campo-possui-deficiencia" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9">
                         </div>
-                        <div class="container-input-dado mb-1 justify-content-evenly">
+                        <div class="container-input-dado justify-content-evenly mb-1">
                             <span>1 - Sim</span>
                             <span>2 - Não</span>
                             <span>9 - Ignorado</span>
                         </div>
                     </div>
                     <div class="col-8 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">39</span>
-                            <span>Se sim, qual tipo de deficiência / transtorno?</span>
+                        <div class="d-flex flex-wrap justify-content-between me-2">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">39</span>
+                                <span>Se sim, qual tipo de deficiência /transtorno?</span>
+                            </div>
+                            <span>
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                8 - Não se aplica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
                         <div class="container-input-dado flex-column px-2">
                             <div class="d-flex">
                                 <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-fisica">
-                                            <label class="form-check-label" for="opcao-deficiencia-fisica">
-                                                Deficiência Física
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-fisica">
+                                        <label for="opcao-deficiencia-fisica">
+                                            Deficiência Física
+                                        </label>
                                     </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-intelectual">
-                                            <label class="form-check-label" for="opcao-deficiencia-intelectual">
-                                                Deficiência Intelectual
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-intelectual">
+                                        <label for="opcao-deficiencia-intelectual">
+                                            Deficiência Intelectual
+                                        </label>
                                     </li>
                                 </ul>
                                 <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-visual">
-                                            <label class="form-check-label" for="opcao-deficiencia-visual">
-                                                Deficiência Visual
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-visual">
+                                        <label for="opcao-deficiencia-visual">
+                                            Deficiência Visual
+                                        </label>
                                     </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-auditiva">
-                                            <label class="form-check-label" for="opcao-deficiencia-auditiva">
-                                                Deficiência auditiva
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-auditiva">
+                                        <label for="opcao-deficiencia-auditiva">
+                                            Deficiência auditiva
+                                        </label>
                                     </li>
                                 </ul>
                                 <ul class="col-4">
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-mental">
-                                            <label class="form-check-label" for="opcao-deficiencia-mental">
-                                                Transtorno mental
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-mental">
+                                        <label for="opcao-deficiencia-mental">
+                                            Transtorno mental
+                                        </label>
                                     </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                   id="opcao-deficiencia-comportamento">
-                                            <label class="form-check-label" for="opcao-deficiencia-comportamento">
-                                                Transtorno de comportamento
-                                            </label>
-                                        </div>
+                                    <li class="d-flex align-items-center">
+                                        <input class="form-control input-dado-quadrado" type="number" 
+                                            id="opcao-deficiencia-comportamento">
+                                        <label for="opcao-deficiencia-comportamento">
+                                            Transtorno de comportamento
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
                             <div class="d-flex align-items-baseline">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-deficiencia-outro">
-                                    <label class="form-check-label" for="opcao-deficiencia-outro">
-                                        Outro
+                                <div class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number" 
+                                        id="opcao-deficiencia-outro">
+                                    <label for="opcao-deficiencia-outro">
+                                        Outras
                                     </label>
                                 </div>
                                 <div class="col-5 mx-2">
                                     <input id="descricao-deficiencia-outro" class="input-dado form-control"
-                                           aria-label="">
+                                        aria-label="">
                                 </div>
                             </div>
                         </div>
@@ -2022,8 +2027,9 @@
                                 <span class="numeracao">50</span>
                                 <label for="campo-zona-ocorrencia">Zona</label>
                             </div>
-                            <input id="campo-zona-ocorrencia" type="number" class="input-dado-quadrado form-control"
-                                   maxlength="1">
+                            <input id="campo-zona-ocorrencia" type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="1">
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
                             1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
@@ -2033,10 +2039,12 @@
                     <div class="col-5 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">51</span>
-                            <label for="campo-hora-ocorrencia">Hora da ocorrência (00:00 - 23:59)</label>
+                            <label for="campo-hora-ocorrencia">
+                                Hora da ocorrência (00:00 - 23:59)
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-hora-ocorrencia" type="text" class="input-dado form-control">
+                            <input id="campo-hora-ocorrencia" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2045,10 +2053,13 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">52</span>
-                                <label for="campo-local-ocorrencia">Local de ocorrência</label>
+                                <label for="campo-local-ocorrencia">
+                                    Local de ocorrência
+                                </label>
                             </div>
-                            <input id="campo-local-ocorrencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="99">
+                            <input id="campo-local-ocorrencia" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="99">
                         </div>
                         <div class="container-input-dado justify-content-evenly px-2">
                             <ul>
@@ -2067,7 +2078,7 @@
                                 <li class="d-flex align-items-baseline">
                                     <label for="descricao-local-outro">9- Outro</label>
                                     <div class="col-7 d-flex justify-content-center">
-                                        <input id="descricao-local-outro" class="input-dado form-control" type="text">
+                                        <input id="descricao-local-outro" class="input-dado form-control">
                                     </div>
                                 </li>
                                 <li>99- Ignorado</li>
@@ -2119,19 +2130,24 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">55</span>
-                                <label for="campo-motivacao-violencia">Essa violência foi motivada por:</label>
+                                <label for="campo-motivacao-violencia">
+                                    Essa violência foi motivada por:
+                                </label>
                             </div>
-                            <input id="campo-motivacao-violencia" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="99">
+                            <input id="campo-motivacao-violencia" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="99">
                         </div>
-                        <div class="container-input-dado letra-miuda justify-content-evenly">
+                        <div class="container-input-dado justify-content-evenly">
                             <ul class="mx-1">
                                 <li class="mb-2">1-Sexismo</li>
                                 <li>2-Conflito geracional</li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="mb-2">2-Homofobia/Lesbofobia/Bifobia/Transfobia</li>
-                                <ul class="d-flex justify-content-evenly">
+                                <li class="mb-2">
+                                    2-Homofobia/Lesbofobia/Bifobia/Transfobia
+                                </li>
+                                <ul class="d-flex justify-content-between">
                                     <li>7-Situação de rua</li>
                                     <li>8-Deficiência</li>
                                 </ul>
@@ -2142,7 +2158,7 @@
                                     <span>9-Outros</span>
                                     <div class="col-6 d-flex justify-content-end">
                                         <input id="descricao-violencia-outro" class="input-dado form-control"
-                                               aria-label="">
+                                            aria-label="">
                                     </div>
                                 </li>
                             </ul>
@@ -2159,116 +2175,130 @@
                 </div>
                 <div class="linha-dados">
                     <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">56</span>
-                            <span>Tipo de violência</span>
+                        <div class="d-flex flex-wrap justify-content-between me-2">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">56</span>
+                                <span>Tipo de violência</span>
+                            </div>
+                            <span>
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado justify-content-evenly px-2 font-xsmall">
+                        <div class="container-input-dado justify-content-evenly px-2 my-1">
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-fisica">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number" 
+                                        id="opcao-violencia-fisica">
                                     <label class="form-check-label" for="opcao-violencia-fisica">
                                         Física
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-psicologica">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number" 
+                                        id="opcao-violencia-psicologica">
                                     <label class="form-check-label" for="opcao-violencia-psicologica">
                                         Psicológica/Moral
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-tortura">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number" 
+                                        id="opcao-violencia-tortura">
                                     <label class="form-check-label" for="opcao-violencia-tortura">
                                         Tortura
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-sexual">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-sexual">
                                     <label class="form-check-label" for="opcao-violencia-sexual">
                                         Sexual
                                     </label>
                                 </li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-trafico-humano">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-trafico-humano">
                                     <label class="form-check-label" for="opcao-violencia-trafico-humano">
                                         Tráfico de seres humanos
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-financeira">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-financeira">
                                     <label class="form-check-label" for="opcao-violencia-financeira">
                                         Financeira/Econômica
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-abandono">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-abandono">
                                     <label class="form-check-label" for="opcao-violencia-abandono">
                                         Negligência/Abandono
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-trabalho-infantil">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-trabalho-infantil">
                                     <label class="form-check-label" for="opcao-violencia-trabalho-infantil">
                                         Trabalho infantil
                                     </label>
                                 </li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-intervencao-legal">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-intervencao-legal">
                                     <label class="form-check-label" for="opcao-violencia-intervencao-legal">
                                         Intervenção legal
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-outros">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-outros">
                                     <label class="form-check-label" for="opcao-violencia-outros">
                                         Outros
                                     </label>
                                 </li>
                                 <li class="col-7">
                                     <input id="descricao-violencia-outros" class="input-dado form-control"
-                                           aria-label="">
+                                        aria-label="">
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-5 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">57</span>
-                            <span>Meio de agressão</span>
+                        <div class="d-flex flex-wrap justify-content-between me-2">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">57</span>
+                                <span>Meio de agressão</span>
+                            </div>
+                            <span>
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado justify-content-evenly px-2 font-xsmall">
+                        <div class="container-input-dado justify-content-evenly px-2 my-1">
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-espancamento">
                                     <label class="form-check-label" for="opcao-meio-agressao-espancamento">
                                         Força corporal/<br>espancamento
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-enforcamento">
                                     <label class="form-check-label" for="opcao-meio-agressao-enforcamento">
                                         Enforcamento
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-objContundente">
                                     <label class="form-check-label" for="opcao-meio-agressao-objContundente">
                                         Obj. contundente
@@ -2276,22 +2306,22 @@
                                 </li>
                             </ul>
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-objPerfurocortante">
                                     <label class="form-check-label" for="opcao-meio-agressao-objPerfurocortante">
                                         Obj. pérfuro-<br>cortante
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-objQuente">
                                     <label class="form-check-label" for="opcao-meio-agressao-objQuente">
                                         Substância/<br>Obj. quente
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-envenenamento">
                                     <label class="form-check-label" for="opcao-meio-agressao-envenenamento">
                                         Envenenamento,<br>intoxicação
@@ -2299,22 +2329,22 @@
                                 </li>
                             </ul>
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-armaFogo">
                                     <label class="form-check-label" for="opcao-meio-agressao-armaFogo">
                                         Arma de fogo
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-ameaca">
                                     <label class="form-check-label" for="opcao-meio-agressao-ameaca">
                                         Ameaça
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
                                            id="opcao-meio-agressao-outro">
                                     <label class="form-check-label" for="opcao-meio-agressao-outro">
                                         Outro
@@ -2322,7 +2352,7 @@
                                 </li>
                                 <li class="col-9">
                                     <input id="descricao-meio-agressao-outro" class="input-dado form-control"
-                                           aria-label="">
+                                        aria-label="">
                                 </li>
                             </ul>
                         </div>
@@ -2337,50 +2367,58 @@
             <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">58</span>
-                            <span>Se ocorreu violência sexual, qual o tipo?</span>
+                        <div class="d-flex flex-wrap">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">58</span>
+                                <span>Se ocorreu violência sexual, qual o tipo?</span>
+                            </div>
+                            <span>
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                8 - Não se aplica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado align-items-end justify-content-evenly px-1">
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-assedio">
+                        <div class="container-input-dado align-items-end justify-content-evenly px-1 pb-1">
+                            <div class="d-flex align-items-center mx-1">
+                                <input class="form-control input-dado-quadrado" type="number"
+                                    id="opcao-violencia-sexual-assedio">
                                 <label class="form-check-label" for="opcao-violencia-sexual-assedio">
                                     Assédio sexual
                                 </label>
                             </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-estupro">
+                            <div class="d-flex align-items-center mx-1">
+                                <input class="form-control input-dado-quadrado" type="number"
+                                    id="opcao-violencia-sexual-estupro">
                                 <label class="form-check-label" for="opcao-violencia-sexual-estupro">
                                     Estupro
                                 </label>
                             </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-pornInfatil">
+                            <div class="d-flex align-items-center mx-1">
+                                <input class="form-control input-dado-quadrado" type="number"
+                                    id="opcao-violencia-sexual-pornInfatil">
                                 <label class="form-check-label" for="opcao-violencia-sexual-pornInfatil">
                                     Pornografia infantil
                                 </label>
                             </div>
-                            <div class="form-check mx-1">
-                                <input class="form-check-input" type="checkbox" value=""
-                                       id="opcao-violencia-sexual-exploracaoSexual">
+                            <div class="d-flex align-items-center mx-1">
+                                <input class="form-control input-dado-quadrado" type="number"
+                                    id="opcao-violencia-sexual-exploracaoSexual">
                                 <label class="form-check-label" for="opcao-violencia-sexual-exploracaoSexual">
                                     Exploração sexual
                                 </label>
                             </div>
                             <div class="d-flex col-2 mx-1 align-items-baseline">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-violencia-sexual-outros">
+                                <div class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-violencia-sexual-outros">
                                     <label class="form-check-label" for="opcao-violencia-sexual-outros">
-                                        Outro
+                                        Outros
                                     </label>
                                 </div>
                                 <div class="col-8 px-1">
                                     <input id="descricao-violencia-sexual-outros" class="input-dado form-control"
-                                           aria-label="">
+                                        aria-label="">
                                 </div>
                             </div>
                         </div>
@@ -2388,70 +2426,77 @@
                 </div>
                 <div class="linha-dados">
                     <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">59</span>
-                            <span>Procedimento realizado</span>
+                        <div class="d-flex flex-wrap">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">59</span>
+                                <span>Procedimento realizado</span>
+                            </div>
+                            <span class="ms-4">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                8 - Não se aplica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado justify-content-evenly px-1">
+                        <div class="container-input-dado justify-content-evenly px-1 pb-1">
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-dst">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-dst">
                                     <label class="form-check-label" for="opcao-procedimento-dst">
                                         Profilaxia DST
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-hiv">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-hiv">
                                     <label class="form-check-label" for="opcao-procedimento-hiv">
                                         Profilaxia HIV
                                     </label>
                                 </li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-hepatiteB">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-hepatiteB">
                                     <label class="form-check-label" for="opcao-procedimento-hepatiteB">
                                         Profilaxia Hepatite B
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-sangue">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-sangue">
                                     <label class="form-check-label" for="opcao-procedimento-sangue">
                                         Coleta de sangue
                                     </label>
                                 </li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-semen">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-semen">
                                     <label class="form-check-label" for="opcao-procedimento-semen">
                                         Coleta de sêmen
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-secrecaoVaginal">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-secrecaoVaginal">
                                     <label class="form-check-label" for="opcao-procedimento-secrecaoVaginal">
                                         Coleta de secreção vaginal
                                     </label>
                                 </li>
                             </ul>
                             <ul class="mx-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-contracepcao">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-contracepcao">
                                     <label class="form-check-label" for="opcao-procedimento-contracepcao">
                                         Contracepção de emergência
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-procedimento-aborto">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number" id="opcao-procedimento-aborto">
                                     <label class="form-check-label" for="opcao-procedimento-aborto">
                                         Aborto previsto em lei
                                     </label>
@@ -2471,11 +2516,16 @@
                     <div class="col-2 div-input">
                         <div class="info-elevada d-flex align-items-start">
                             <span class="numeracao">60</span>
-                            <label class="mx-1" for="campo-numero-envolvidos">Número de<br>Envolvidos</label>
+                            <label class="mx-1" for="campo-numero-envolvidos">
+                                Número de<br>Envolvidos
+                            </label>
                         </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
-                            <input id="campo-numero-envolvidos" class="input-dado-quadrado form-control mb-2"
-                                   type="number" min="1" max="9">
+                        <div class="container-input-dado flex-column align-items-center pb-2">
+                            <input
+                                id="campo-numero-envolvidos"
+                                class="input-dado-quadrado form-control mb-2"
+                                type="number" min="1" max="9"
+                            >
                             <ul>
                                 <li>1 - Um</li>
                                 <li>2 - Dois ou mais</li>
@@ -2484,147 +2534,156 @@
                         </div>
                     </div>
                     <div class="col-6 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">61</span>
-                            <span class="mx-1">Vínculo/grau de parentesco com a pessoa atendida</span>
+                        <div class="d-flex flex-wrap justify-content-between me-2">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">61</span>
+                                <span class="mx-1">
+                                    Vínculo/grau de parentesco com a pessoa atendida
+                                </span>
+                            </div>
+                            <span class="ms-2 mb-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado font-xsmall justify-content-evenly pb-2 px-1">
+                        <div class="container-input-dado justify-content-evenly pb-2 px-1">
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-pai">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-pai">
                                     <label class="form-check-label" for="opcao-vinculo-pai">
                                         Pai
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-mae">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-mae">
                                     <label class="form-check-label" for="opcao-vinculo-mae">
                                         Mãe
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-padrasto">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-padrasto">
                                     <label class="form-check-label" for="opcao-vinculo-padrasto">
                                         Padrasto
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-madrasta">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-madrasta">
                                     <label class="form-check-label" for="opcao-vinculo-madrasta">
                                         Madrasta
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-conjuge">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-conjuge">
                                     <label class="form-check-label" for="opcao-vinculo-conjuge">
                                         Cônjuge
                                     </label>
                                 </li>
                             </ul>
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-ex-conjuge">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-ex-conjuge">
                                     <label class="form-check-label" for="opcao-vinculo-ex-conjuge">
                                         Ex-Cônjuge
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-namorado">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-namorado">
                                     <label class="form-check-label" for="opcao-vinculo-namorado">
                                         Namorado(a)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-ex-namorado">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-ex-namorado">
                                     <label class="form-check-label" for="opcao-vinculo-ex-namorado">
                                         Ex-Namorado(a)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-filho">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-filho">
                                     <label class="form-check-label" for="opcao-vinculo-filho">
                                         Filho(a)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-irmao">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-irmao">
                                     <label class="form-check-label" for="opcao-vinculo-irmao">
                                         Irmão(ã)
                                     </label>
                                 </li>
                             </ul>
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-amigos">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-amigos">
                                     <label class="form-check-label" for="opcao-vinculo-amigos">
                                         Amigos/conhecidos
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-desconhecido">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-desconhecido">
                                     <label class="form-check-label" for="opcao-vinculo-desconhecido">
                                         Desconhecido(a)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-cuidador">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-cuidador">
                                     <label class="form-check-label" for="opcao-vinculo-cuidador">
                                         Cuidador(a)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-patrao">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-patrao">
                                     <label class="form-check-label" for="opcao-vinculo-patrao">
                                         Patrão/chefe
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-relacao-institucional">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-relacao-institucional">
                                     <label class="form-check-label" for="opcao-vinculo-relacao-institucional">
                                         Pessoa com relação<br>institucional
                                     </label>
                                 </li>
                             </ul>
                             <ul class="px-1">
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-policial">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-policial">
                                     <label class="form-check-label" for="opcao-vinculo-policial">
                                         Policial/agente da lei
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-propria-pessoa">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-propria-pessoa">
                                     <label class="form-check-label" for="opcao-vinculo-propria-pessoa">
                                         Própria pessoa
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-vinculo-outros">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-vinculo-outros">
                                     <label class="form-check-label" for="opcao-vinculo-outros">
                                         Outros
                                     </label>
                                 </li>
                                 <li class="col-7">
                                     <input id="descricao-vinculo-outros" class="input-dado form-control"
-                                           aria-label="">
+                                        aria-label="">
                                 </li>
                             </ul>
                         </div>
@@ -2632,11 +2691,13 @@
                     <div class="col-2 div-input">
                         <div class="info-elevada d-flex align-items-start">
                             <span class="numeracao">62</span>
-                            <label class="mx-1" for="campo-sexo-autor">Sexo do provável<br>autor da violência</label>
+                            <label class="mx-1" for="campo-sexo-autor">
+                                Sexo do provável<br>autor da violência
+                            </label>
                         </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
+                        <div class="container-input-dado flex-column align-items-center pb-2">
                             <input id="campo-sexo-autor" class="input-dado-quadrado form-control mb-2" type="number"
-                                   min="1" max="9">
+                                min="1" max="9">
                             <ul>
                                 <li>1 - Masculino</li>
                                 <li>2 - Feminino</li>
@@ -2648,11 +2709,17 @@
                     <div class="col-2 div-input">
                         <div class="info-elevada d-flex align-items-start">
                             <span class="numeracao">63</span>
-                            <label class="mx-1" for="campo-alcool-autor">Suspeita de<br>uso de álcool</label>
+                            <label class="mx-1" for="campo-alcool-autor">
+                                Suspeita de<br>uso de álcool
+                            </label>
                         </div>
-                        <div class="container-input-dado flex-column align-items-center pb-2 letra-miuda">
-                            <input id="campo-alcool-autor" class="input-dado-quadrado form-control mb-2" type="number"
-                                   min="1" max="9">
+                        <div class="container-input-dado flex-column align-items-center pb-2">
+                            <input
+                                id="campo-alcool-autor"
+                                class="input-dado-quadrado form-control mb-2"
+                                type="number"
+                                min="1" max="9"
+                            />
                             <ul>
                                 <li>1 - Sim</li>
                                 <li>2 - Não</li>
@@ -2697,111 +2764,118 @@
             <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">65</span>
+                        <div class="d-flex flex-wrap me-2">
+                            <div class="info-elevada me-5 mb-1">
+                                <span class="numeracao">65</span>
                             <span>Encaminhamento</span>
+                            </div>
+                            <span>
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
                         </div>
-                        <div class="container-input-dado font-xsmall justify-content-evenly px-2 pb-1">
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeSaude">
+                        <div class="container-input-dado justify-content-evenly px-2 pb-1">
+                            <ul class="mx-1">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-redeSaude">
                                     <label class="form-check-label" for="opcao-encaminhamento-redeSaude">
                                         Rede da Saúde (Unidade Báisca de Saúde, hospital, outras)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeAssistencial">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-redeAssistencial">
                                     <label class="form-check-label" for="opcao-encaminhamento-redeAssistencial">
                                         Rede da Assistência Social (CRAS, CREAS, outras)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-redeEducacao">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-redeEducacao">
                                     <label class="form-check-label" for="opcao-encaminhamento-redeEducacao">
                                         Rede da Educação (Creche, escola, outras)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-atendimentoMulher">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-atendimentoMulher">
                                     <label class="form-check-label" for="opcao-encaminhamento-atendimentoMulher">
                                         Rede de Atendimento à Mulher (Centro Especializado de<br>
                                         Atendimento à Mulher, Casa da Mulher Brasileria, outras)
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-conselhoTutelar">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-conselhoTutelar">
                                     <label class="form-check-label" for="opcao-encaminhamento-conselhoTutelar">
                                         Conselho Tutelar
                                     </label>
                                 </li>
                             </ul>
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-conselhoIdoso">
+                            <ul class="mx-1">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-conselhoIdoso">
                                     <label class="form-check-label" for="opcao-encaminhamento-conselhoIdoso">
                                         Conselho do Idoso
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaIdoso">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-delegaciaIdoso">
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaIdoso">
                                         Delegacia de Atendimento ao Idoso
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-direitosHumanos">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-direitosHumanos">
                                     <label class="form-check-label" for="opcao-encaminhamento-direitosHumanos">
                                         Centro de referência dos Direitos Humanos
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-ministerioPublico">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-ministerioPublico">
                                     <label class="form-check-label" for="opcao-encaminhamento-ministerioPublico">
                                         Ministério Público
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaCrianca">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-delegaciaCrianca">
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaCrianca">
                                         Delegacia Especializada de Proteção à<br>Criança e Adolescente
                                     </label>
                                 </li>
                             </ul>
-                            <ul>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-delegaciaMulher">
+                            <ul class="mx-1">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-delegaciaMulher">
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaMulher">
                                         Delegacia de Atendimento à<br>Mulher
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-outrasDelegacias">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-outrasDelegacias">
                                     <label class="form-check-label" for="opcao-encaminhamento-outrasDelegacias">
                                         Outras delegacias
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-justicaInfancia">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-justicaInfancia">
                                     <label class="form-check-label" for="opcao-encaminhamento-justicaInfancia">
                                         Justiça da Infância e da<br>Juventude
                                     </label>
                                 </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           id="opcao-encaminhamento-defensoriaPublica">
+                                <li class="d-flex align-items-center">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-encaminhamento-defensoriaPublica">
                                     <label class="form-check-label" for="opcao-encaminhamento-defensoriaPublica">
                                         Defensoria Pública
                                     </label>
@@ -2884,24 +2958,30 @@
         </div>
     </section>
     <section class="mt-3 container-observacoes">
-        <span class="titulo-section negrito">Informações complementares e observações</span>
+        <span class="titulo-section negrito">
+            Informações complementares e observações
+        </span>
         <div class="bloco-dados">
             <div class="conteudo-bloco">
                 <div class="linha-dados">
                     <div class="col-5 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-nome-acompanhante">Nome do acompanhante</label>
+                            <label for="campo-nome-acompanhante">
+                                Nome do acompanhante
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-acompanhante" type="text" class="input-dado form-control">
+                            <input id="campo-nome-acompanhante" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-grau-parentesco">Vínculo/grau de parentesco</label>
+                            <label for="campo-grau-parentesco">
+                                Vínculo/grau de parentesco
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-grau-parentesco" type="text" class="input-dado form-control">
+                            <input id="campo-grau-parentesco" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -2909,19 +2989,20 @@
                             <label for="campo-telefone-acompanhate">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-telefone-acompanhate" type="text" class="input-dado form-control">
+                            <input id="campo-telefone-acompanhate" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-12 textArea">
                         <span class="negrito">Obsercações Adicionais:</span>
-                        <textarea class="form-control" rows="6" aria-label=""></textarea>
+                        <textarea id="observacoes" class="form-control" rows="6"></textarea>
                     </div>
                 </div>
                 <div class="linha-dados negrito telefones-uteis justify-content-around align-items-center">
                     <div class="d-flex flex-column align-items-center mx-2">
-                        <span class="text-center">Disque Saúde - Ouvidoria geral do SUS</span>
+                        <span class="text-center">
+                            Disque Saúde - Ouvidoria geral</span>
                         <span>136</span>
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -2944,15 +3025,19 @@
                 <div class="linha-dados">
                     <div class="col-9 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-municipio-us-investigador">Município/Unidade de Saúde</label>
+                            <label for="campo-municipio-us-investigador">
+                                Município/Unidade de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-us-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-us-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-us-investigador">Cód. da Unid. de Saúde</label>
+                            <label for="campo-cod-us-investigador">
+                                Cód. da Unid. de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-cod-us-investigador" type="number" class="input-dado form-control">
@@ -2965,7 +3050,7 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2973,7 +3058,7 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2981,7 +3066,7 @@
                             <label for="campo-assinatura-investigador">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control">
                         </div>
                     </div>
                 </div>
@@ -2998,22 +3083,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% block rodape_ficha %}
+    {% include 'rodape_ficha.html' %}
+{% endblock %}

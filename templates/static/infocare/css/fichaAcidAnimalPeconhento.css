@@ -1,0 +1,17 @@
+.campo-circun-centralizado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+}
+
+#tabAcidAnimalPeconhento .titulo-secao {
+    writing-mode: vertical-rl;
+    transform: rotate(360deg);
+    width: 30px;
+}
+
+#tabAcidAnimalPeconhento .span-conteudo {
+    height: inherit;
+    padding: 0 10px;
+}

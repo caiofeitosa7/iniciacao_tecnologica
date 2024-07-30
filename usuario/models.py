@@ -6,7 +6,6 @@ import sqlite3
 
 def abrir_conexao():
     conexao = connections['default']
-    # conexao = sqlite3.connect('..\db.sqlite3')
     cursor = conexao.cursor()
     return conexao, cursor
 
@@ -45,24 +44,23 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
     return dados
 
 
-def get_colunas_tabela(nome_tabela: str, indentificacao: bool = False) -> list:
+def get_colunas_tabela(cursor, nome_tabela: str, indentificacao: bool = False) -> list:
     """
     Retorna uma lista com os nomes das colunas de uma tabela.
 
+    :param cursor: Cursor do banco de dados.
     :param nome_tabela: Nome da tabela.
-    :param indentificacao: Se True, adiciona uma identificação ao nome da coluna.
+    :param indentificacao: Se True, adiciona o nome da tabela ao final do nome da coluna. Exemplo: coluna_tabela.
     :return: Lista com os nomes das colunas.
     """
 
-    conexao, cursor = abrir_conexao()
-    cursor.execute(f"PRAGMA table_info({nome_tabela});")
+    cursor.execute(f"SHOW COLUMNS FROM {nome_tabela};")
     resultados = cursor.fetchall()
-    fechar_conexao(conexao)
 
     if indentificacao:
-        return [f'{resultado[1]}_{nome_tabela}' for resultado in resultados]
+        return [f'{resultado[0]}_{nome_tabela}' for resultado in resultados]
     else:
-        return [resultado[1] for resultado in resultados]
+        return [resultado[0] for resultado in resultados]
 
 
 def get_placeholders(colunas: list, usa_colunas: bool) -> str:
@@ -71,54 +69,16 @@ def get_placeholders(colunas: list, usa_colunas: bool) -> str:
     return ', '.join(['?' for _ in range(len(colunas))])
 
 
-def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
-    clausura_where = ''
-    for filtro in lista_filtros:
-        if filtro:
-            if clausura_where:
-                clausura_where += " AND "
-            clausura_where += filtro
-
-    query = f"SELECT * FROM {nome_tabela}"
-    query += f" WHERE {clausura_where}" if clausura_where else ""
-
-    return query
-
-
-def inserir_registro_tabela(nome_tabela: str, dados: dict):
-    colunas = get_colunas_tabela(nome_tabela)
-    conexao, cursor = abrir_conexao()
-    valores = tuple(dados.values())
-    query = f"""INSERT INTO {nome_tabela} (
-                    {get_placeholders(colunas[1:], True)}
-                ) VALUES (
-                    {get_placeholders(colunas[1:], False)}
-                )
-            """
-
-    try:
-        cursor.execute(query, valores)
-    except Exception as e:
-        print(e)
-
-    fechar_conexao(conexao)
-
-
 def alterar_registro_tabela(nome_tabela: str, dados: dict):
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
     valores = tuple(dados.values())[1:]
-
-    lista = list()
-    for i, coluna in enumerate(colunas[1:]):
-        lista.append(f"{coluna} = ?")
-
+    colunas = get_colunas_tabela(cursor, nome_tabela)
+    lista = [f"{coluna} = ?" for coluna in colunas[1:]]
     query = f"""
-            UPDATE {nome_tabela}
-            SET 
-                {get_placeholders(lista, True)}
-            WHERE codigo = {dados['codigo']};
-        """
+        UPDATE {nome_tabela}
+        SET {get_placeholders(lista, True)}
+        WHERE codigo = {dados['codigo']};
+    """
 
     try:
         cursor.execute(query, valores)
@@ -130,19 +90,20 @@ def alterar_registro_tabela(nome_tabela: str, dados: dict):
 
 def listar_usuarios():
     nome_tabela = 'usuario'
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     cursor.execute(f"SELECT * FROM {nome_tabela}")
     resultados = cursor.fetchall()
     fechar_conexao(conexao)
+
     return [criar_dicionario(colunas, list(res)) for res in resultados]
 
 
 def set_usuario(dados: dict):
     nome_tabela = 'usuario'
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
     valores = tuple(dados.values())
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     query = f"""INSERT INTO {nome_tabela} (
                     {get_placeholders(colunas[1:], True)}
                 ) VALUES (
@@ -160,11 +121,12 @@ def set_usuario(dados: dict):
 
 def get_usuario(codigo: int):
     nome_tabela = 'usuario'
-    colunas = get_colunas_tabela(nome_tabela)
     conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
     cursor.execute(f"SELECT * FROM {nome_tabela} WHERE codigo = ?", (codigo,))
     resultado = cursor.fetchone()
     fechar_conexao(conexao)
+
     return criar_dicionario(colunas, list(resultado)) if resultado else {}
 
 
@@ -173,9 +135,8 @@ def alterar_usuario(dados: dict):
 
 
 def apagar_usuario(codigo: int):
-    nome_tabela = 'usuario'
     conexao, cursor = abrir_conexao()
-    cursor.execute(f"DELETE FROM {nome_tabela} WHERE codigo = ?", (codigo,))
+    cursor.execute("DELETE FROM usuario WHERE codigo = ?", (codigo,))
     fechar_conexao(conexao)
 
 

@@ -26,7 +26,6 @@ Criar um ambiente virtual para instalar as dependências do projeto.
 
 ### Executar o projeto:
 
-- `python manage.py migrate` (para criar o banco de dados)
 - `python manage.py runserver` (para executar o projeto)
 
 ### Acessar o projeto:

@@ -6,7 +6,7 @@ function enviarFichaParaConclusao(url) {
 
     if (quantObsAbertas > 0) {
         $('#mensagem-retorno .modal-title').html("Erro!");
-        $('#mensagem-retorno .modal-body').html("Para enviar a ficha para análise, você precisa terminar todas as observações.");
+        $('#mensagem-retorno .modal-body').html("Para enviar a ficha para análise, você precisa concluir todas as pendências.");
         $('#mensagem-retorno').modal("toggle");
     } else {
         requisicaoGetPadrao(url)

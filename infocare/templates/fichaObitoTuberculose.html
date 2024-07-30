@@ -1,0 +1,1166 @@
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+        onclick="requisicaoGetPadrao('pagina_inicial')">
+        </i>
+    </div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" class="form-control"/>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="ficha">
+    {% csrf_token %}
+    <div class="d-flex flex-column my-2">
+        <label>REPÚBLICA FEDERATIVA DO BRASIL</label>
+        <label>MINISTÉRIO DA SAÚDE</label>
+        <label class="negrito fs-5 mt-4">
+            Ficha de investigação do óbito com menção de tuberculose
+        </label>
+        <label class="fs-6">
+            Unidade Hospitalar, Unidade de Urgência e Emergência
+        </label>
+    </div>
+    <div class="d-flex justify-content-end">
+        <div class="col-2" style="min-width: 130px;">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha">N°</label>
+                <input type="number" class="form-control" id="numero-ficha"/>
+            </div>
+        </div>
+    </div>
+    <div class="container-sections mt-2">
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-2">A</span>
+                <span class="negrito mx-2">IDENTIFICAÇÃO</span>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza">
+                    <span>Uso exclusivo do PCT</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-8 d-flex border-right p-2">
+                            <label for="notif-antes-morrer">
+                                Foi notificado no Sinan antes de morrer?
+                            </label>
+                            <div class="d-flex align-items-center">
+                                <input id="notif-antes-morrer" type="number" class="form-control input-dado-quadrado mx-3">
+                                <span>
+                                    1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Não
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-4 p-2">
+                            <label for="num-notificaoes-sinan" class="mb-1">
+                                Nº de notificações no Sinan-TB:
+                            </label>
+                            <input id="num-notificaoes-sinan" type="number" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 d-flex align-items-center border-right p-2">
+                            <label for="dt-ultima-notificacao" class="label-nowrap mb-1">
+                                Data da última notificação:
+                            </label>
+                            <input id="dt-ultima-notificacao" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="num-ficha-sinan" class="label-nowrap mb-1">
+                                Nº da ficha do Sinan:
+                            </label>
+                            <input id="num-ficha-sinan" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 d-flex p-2">
+                            <label for="situacao-caso-SIM" class="label-nowrap mb-1">
+                                Situação do caso no SIM:
+                            </label>
+                            <input id="situacao-caso-SIM" type="number" class="form-control input-dado-quadrado mx-3">
+                            <span>
+                                1 - Tuberculose causa básica &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Tuberculose causa associada 
+                                <br>3 - Consta no SIM sem menção de tuberculose &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                4 - Sem registro do caso no SIM
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza-claro">
+                    <span>Dados do paciente</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-6 d-flex align-items-center border-right p-2">
+                            <label for="dt-obito" class="label-nowrap mb-1">
+                                Data do óbito:
+                            </label>
+                            <input id="dt-obito" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="num-declaracao-obito" class="label-nowrap mb-1">
+                                Nº da declaração de óbito:
+                            </label>
+                            <input id="num-declaracao-obito" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-paciente" class="mb-1">
+                                Nome do paciente:
+                            </label>
+                            <input id="nome-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-mae" class="mb-1">
+                                Nome da mãe:
+                            </label>
+                            <input id="nome-mae" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-5 d-flex align-items-center border-right p-2">
+                            <label for="dt-nascimento-paciente" class="label-nowrap mb-1">
+                                Data de nascimento:
+                            </label>
+                            <input id="dt-nascimento-paciente" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                        <div class="col-3 d-flex align-items-center border-right p-2">
+                            <label for="idade-paciente" class="label-nowrap mb-1">
+                                Idade:
+                            </label>
+                            <input id="idade-paciente" type="number" class="form-control input-dado mx-1"
+                                style="max-width: 100px;">
+                        </div>
+                        <div class="col-4 d-flex p-2">
+                            <label for="sexo-paciente">
+                                Sexo:
+                            </label>
+                            <div class="d-flex align-items-center">
+                                <input id="sexo-paciente" type="number" class="form-control input-dado-quadrado mx-3">
+                                <span class="label-wrap-pretty">
+                                    1 - Masculino &nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Feminino
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="endereco-paciente" class="mb-1">
+                                Endereço:
+                            </label>
+                            <input id="endereco-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-5 border-right p-2">
+                            <label for="bairro-paciente" class="mb-1">
+                                Bairro:
+                            </label>
+                            <input id="bairro-paciente" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 border-right p-2">
+                            <label for="municipio-paciente" class="mb-1">
+                                Município de residência:
+                            </label>
+                            <input id="municipio-paciente" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-1 p-2">
+                            <label for="uf-paciente" class="mb-1">
+                                UF:
+                            </label>
+                            <input id="uf-paciente" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-2">B</span>
+                <span class="negrito mx-2">
+                    INVESTIGAÇÃO EM ÂMBITO HOSPITALAR, DE EMERGÊNCIA E URGÊNCIA
+                </span>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza">
+                    <span>Geral</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-hospital" class="mb-1">
+                                Nome do hospital:
+                            </label>
+                            <input id="nome-hospital" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 border-right p-2">
+                            <label for="numero-prontuario" class="mb-1">
+                                Nº do prontuário:
+                            </label>
+                            <input id="numero-prontuario" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="dt-admissao" class="label-nowrap mb-1">
+                                Data da admissão:
+                            </label>
+                            <input id="dt-admissao" type="date" class="form-control input-dado mx-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="motivo-internacao" class="mb-1">
+                                Motivo da internação ou hipótese diagnóstica:
+                            </label>
+                            <textarea id="motivo-internacao" class="form-control input-dado mx-1"></textarea>
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="nome-contato" class="mb-1">
+                                Nome de um contato da pessoa falecida:
+                            </label>
+                            <input id="nome-contato" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-6 border-right p-2">
+                            <label for="telefone" class="mb-1">
+                                Telefone:
+                            </label>
+                            <input id="telefone" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-6 p-2">
+                            <label for="parentesco" class="mb-1">
+                                Parentesco:
+                            </label>
+                            <input id="parentesco" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bloco-dados">
+                <div class="titulo-bloco fundo-cinza-claro">
+                    <span>História clínica do paciente</span>
+                </div>
+                <div class="conteudo-bloco">
+                    <div class="d-flex justify-content-between p-2" style="background: #e7e7e8;">
+                        <span class="negrito">
+                            Sinais e sintomas descritos no prontuário
+                        </span>
+                        <span>
+                            <b>1</b> - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>2</b> - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>9</b> - Sem registro
+                        </span>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <div class="d-flex align-items-center">
+                                <input id="sinal-tosse" type="number" class="form-control input-dado-quadrado">
+                                <span class="mx-2">Tosse. Por quanto tempo? (em dias):</span>
+                                <input id="tempo-tosse" type="number" class="form-control input-dado-quadrado">
+                            </div>
+                            <div class="d-flex mt-1">
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-febre" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-febre" class="mx-1">Febre</label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-desnutricao" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-desnutricao" class="label-wrap-pretty mx-1">
+                                        Emagrecimento/ caquexia/ desnutrição
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-sudorese" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-sudorese" class="mx-1">Sudorese</label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-catarro" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-catarro" class="mx-1">
+                                        Catarro
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-dispneia" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-dispneia" class="mx-1">
+                                        Dispneia
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center" style="margin-left: 10px;">
+                                    <input id="sinal-dor-toracica" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-dor-toracica" class="mx-1">
+                                        Dor torácica
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="sinal-catarro-sangue" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-catarro-sangue" class="label-nowrap mx-1">
+                                        Catarro com sangue
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <input id="sinal-outro" type="number" class="form-control input-dado-quadrado">
+                                    <label for="sinal-outro" class="label-nowrap mx-1">
+                                        Outros sinais e sintomas. Quais?
+                                    </label>
+                                </div>
+                                <input id="sinal-outro-descricao" class="form-control input-dado">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between p-2" style="background: #e7e7e8;">
+                        <span class="negrito">
+                            Doenças e agravos associados
+                        </span>
+                        <span>
+                            <b>1</b> - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>2</b> - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <b>9</b> - Sem registro
+                        </span>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 d-flex flex-column p-2">
+                            <div class="d-flex justify-content-between">
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-aids" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-aids" class="mx-1">
+                                            Aids
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-neoplasia" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-neoplasia" class="mx-1">
+                                            Neoplasia
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-alcoolismo" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-alcoolismo" class="mx-1">
+                                            Alcoolismo
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-DPOC" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-DPOC" class="mx-1">
+                                            DPOC
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-diabetes" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-diabetes" class="mx-1">
+                                            Diabetes
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-asma" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-asma" class="mx-1">
+                                            Asma
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-mental" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-mental" class="mx-1" style="text-wrap: pretty;">
+                                            Doença mental
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-pneumonia" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-pneumonia" class="mx-1">
+                                            Pneumonia
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-tabagismo" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-tabagismo" class="mx-1">
+                                            Tabagismo
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-nefropatia" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-nefropatia" class="mx-1">
+                                            Nefropatia
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="mx-1">
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-drogas" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-drogas" class="mx-1" style="text-wrap: pretty;">
+                                            Uso de drogas ilícitas
+                                        </label>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <input id="doenca-hepatopatia" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="9">
+                                        <label for="doenca-hepatopatia" class="mx-1">
+                                            Hepatopatia
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="d-flex align-items-center m-1">
+                                <input id="doenca-outro" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="9">
+                                <label for="doenca-outro" class="label-nowrap mx-1">
+                                    Outras condições. Quais?
+                                </label>
+                                <input id="doenca-outro-descricao" class="form-control input-dado"
+                                    style="max-width: 500px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-1">B.1</span>
+                <span class="negrito mx-2">
+                    EXAMES LABORATORIAIS E DE IMAGEM
+                </span>
+            </div>
+            <div class="bloco-dados">
+                <div class="conteudo-bloco">
+                    <div class="linha-dados p-2">
+                        <div class="col-3">
+                            <span class="negrito label-wrap-pretty">
+                                Baciloscopia de escarro
+                            </span>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center align-items-center">
+                            <input id="exame-baciloscopia" type="number" class="form-control input-dado-quadrado"
+                                min="1" max="3">
+                            <label for="exame-baciloscopia" class="label-nowrap mx-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;
+                                3 - Não Realizado
+                            </label>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-exame-baciloscopia" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-exame-baciloscopia" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <span class="negrito mb-2">
+                                Teste rápido molecular para tuberculose (TRM-TB)
+                            </span>
+                            <div class="d-flex align-items-center mb-2">
+                                <input id="teste-molecular" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="5">
+                                <label for="teste-molecular" class="label-nowrap mx-1">
+                                    1 - Detectável sensível à rifampicina&nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Detectável resistente à rifampicina<br>
+                                    3 - Detectável indeterminado à rifampicina&nbsp;&nbsp;&nbsp;&nbsp;
+                                    4 - Não detectável&nbsp;&nbsp;&nbsp;&nbsp;
+                                    5 - Não realizado
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="material-utilizado-molecular" class="label-nowrap mx-1">
+                                    Material utilizado:
+                                </label>
+                                <input id="material-utilizado-molecular" class="form-control input-dado" style="max-width: 500px;">
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-admissao-molecular" class="label-wrap-pretty mb-1">
+                                Data da admissão:
+                            </label>
+                            <input id="dt-admissao-molecular" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <span class="negrito mb-2">
+                                Baciloscopia de outro material
+                            </span>
+                            <div class="d-flex align-items-center mb-2">
+                                <input id="baciloscopia-outro-material" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="3">
+                                <label for="baciloscopia-outro-material" class="label-wrap-pretty mx-1">
+                                    1 - Positivo &nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Negativo &nbsp;&nbsp;&nbsp;&nbsp;
+                                    3 - Não Realizado
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="material-utilizado-baciloscopia" class="label-nowrap mx-1">
+                                    Material utilizado:
+                                </label>
+                                <input id="material-utilizado-baciloscopia" class="form-control input-dado" style="max-width: 500px;">
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-baciloscopia-outro-material" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-baciloscopia-outro-material" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="col-9 d-flex flex-column">
+                                    <span class="negrito mb-2">
+                                        Cultura de escarro
+                                    </span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input id="cultura-escarro" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="3">
+                                        <label for="cultura-escarro" class="label-wrap-pretty mx-1">
+                                            1 - Positivo &nbsp;&nbsp;&nbsp;&nbsp;
+                                            2 - Negativo &nbsp;&nbsp;&nbsp;&nbsp;
+                                            3 - Não Realizado
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+                                    <label for="dt-cultura-escarro" class="label-wrap-pretty mb-1">
+                                        Data do resultado:
+                                    </label>
+                                    <input id="dt-cultura-escarro" type="date" class="form-control input-dado">
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="indentificacao-especie" class="label-wrap-pretty mx-1">
+                                    Houve identificação de espécie?
+                                </label>
+                                <input id="indentificacao-especie" type="number" class="form-control input-dado-quadrado me-3"
+                                    min="1" max="2">
+                                <label for="especie-microbacteria" class="label-wrap-pretty mx-1">
+                                    1 - Sim 2 - Não | Se sim, qual espécie de micobactéria?
+                                </label>
+                                <input id="especie-microbacteria" class="form-control input-dado" style="max-width: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="col-9 d-flex flex-column">
+                                    <span class="negrito mb-2">
+                                        Cultura de outro material
+                                    </span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input id="cultura-outro-material" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="3">
+                                        <label for="cultura-outro-material" class="label-wrap-pretty mx-1">
+                                            1 - Positivo &nbsp;&nbsp;&nbsp;&nbsp;
+                                            2 - Negativo &nbsp;&nbsp;&nbsp;&nbsp;
+                                            3 - Não Realizado
+                                        </label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <label for="material-utilizado-outra-cultura" class="label-nowrap mx-1">
+                                            Material utilizado:
+                                        </label>
+                                        <input id="material-utilizado-outra-cultura" class="form-control input-dado" style="max-width: 500px;">
+                                    </div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+                                    <label for="dt-cultura-outro-material" class="label-wrap-pretty mb-1">
+                                        Data do resultado:
+                                    </label>
+                                    <input id="dt-cultura-outro-material" type="date" class="form-control input-dado">
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="indentificacao-especie-outra-cultura" class="label-wrap-pretty mx-1">
+                                    Houve identificação de espécie?
+                                </label>
+                                <input id="indentificacao-especie-outra-cultura" type="number" class="form-control input-dado-quadrado me-3"
+                                    min="1" max="2">
+                                <label for="especie-microbacteria-outra-cultura" class="label-wrap-pretty mx-1">
+                                    1 - Sim 2 - Não | Se sim, qual espécie de micobactéria?
+                                </label>
+                                <input id="especie-microbacteria-outra-cultura" class="form-control input-dado" style="max-width: 300px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <div class="d-flex align-items-center mb-2">
+                                <label for="sensibilidade-antimicrobiana" class="negrito me-2">
+                                    Teste de sensibilidade antimicrobiana
+                                </label>
+                                <input id="sensibilidade-antimicrobiana" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="8">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="baciloscopia-outro-material" class="label-wrap-pretty mx-1">
+                                    1 - Resistente somente à isoniazida &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Resistente somente à rifampicina<br>
+                                    3 - Resistente à isoniazida e rifampicina &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    4 - Resistente a outras drogas de 1ª linha<br>
+                                    5 - Sensível &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    6 - Em andamento &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    7 - Não realizado &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    8 - Amostra imprópria
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-antimicrobiana" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-antimicrobiana" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <div class="d-flex align-items-center mb-2">
+                                <label for="raioX-torax" class="negrito me-2">
+                                    Raio-X de tórax
+                                </label>
+                                <input id="raioX-torax" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="6">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="label-wrap-pretty mb-2">
+                                    1 - Suspeito &nbsp;&nbsp;&nbsp;&nbsp;
+                                    2 - Normal &nbsp;&nbsp;&nbsp;&nbsp;
+                                    3 - Sequela de tuberculose/ Lesões crônicas
+                                </span>
+                                <div class="d-flex align-items-center mb-1">
+                                    <label for="raioX-outra-doenca-descricao" class="label-wrap-pretty me-2">
+                                        4 - Outra doença. Se outra doença, qual?
+                                    </label>
+                                    <input id="raioX-outra-doenca-descricao" class="form-control input-dado"
+                                        style="max-width: 300px;">
+                                </div>
+                                <span class="label-wrap-pretty">
+                                    5 - Não realizado &nbsp;&nbsp;&nbsp;&nbsp;
+                                    6 - Foi realizado, mas não há laudo no prontuário
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-raioX-torax" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-raioX-torax" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <div class="d-flex align-items-center mb-2">
+                                <label for="histopatologico" class="negrito me-2">
+                                    Histopatológico
+                                </label>
+                                <input id="histopatologico" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="3">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="label-wrap-pretty">
+                                    1 - Confirmado
+                                </span>
+                                <div class="d-flex align-items-center">
+                                    <label for="histopatologico-outra-doenca-descricao" class="label-wrap-pretty me-2">
+                                        2 - Outra doença. Se outra doença, qual?
+                                    </label>
+                                    <input id="histopatologico-outra-doenca-descricao" class="form-control input-dado"
+                                        style="max-width: 300px;">
+                                </div>
+                                <span class="label-wrap-pretty">
+                                    3 - Não realizado
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-histopatologico" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-histopatologico" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <label for="teste-hiv" class="negrito me-2">
+                                Teste para HIV
+                            </label>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <input id="teste-hiv" type="number" class="form-control input-dado-quadrado me-2"
+                                    min="1" max="3">
+                                <label for="teste-hiv" class="label-wrap-pretty">
+                                    1 - Positivo &nbsp;&nbsp;&nbsp;
+                                    2 - Negativo &nbsp;&nbsp;&nbsp;
+                                    3 - Não realizado
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-teste-hiv" class="label-wrap-pretty mb-1">
+                                Data do resultado:
+                            </label>
+                            <input id="dt-teste-hiv" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="col-9 d-flex flex-column">
+                                    <span class="negrito mb-2">
+                                        Tomografia computadorizada
+                                    </span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input id="tomografia" type="number" class="form-control input-dado-quadrado"
+                                            min="1" max="3">
+                                        <label for="tomografia" class="label-wrap-pretty mx-1">
+                                            1 - Realizada &nbsp;&nbsp;&nbsp;&nbsp;
+                                            2 - Não realizada
+                                        </label>
+                                    </div>
+                                    <span class="my-3">
+                                        <b>Laudo</b> (assinalar os resultados relacionados à tuberculose):
+                                    </span>
+                                    <div class="form-check m-0">
+                                        <input id="op-lesoes-escavadas" class="form-check-input" type="checkbox" name="laudo-tuberculose">
+                                        <label class="form-check-label" for="op-lesoes-escavadas">
+                                            Lesões escavadas associadas a padrão de árvore em brotamento
+                                        </label>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="form-check m-0 me-3">
+                                            <input id="op-nodulos" class="form-check-input" type="checkbox" name="laudo-tuberculose">
+                                            <label class="form-check-label" for="op-nodulos">
+                                                Nódulos de espaço aéreo (consolidação)*
+                                            </label>
+                                        </div>
+                                        <div class="form-check m-0">
+                                            <input id="op-lesoes-cronicas" class="form-check-input" type="checkbox" name="laudo-tuberculose">
+                                            <label class="form-check-label" for="op-lesoes-cronicas">
+                                                Sequela de tuberculose/Lesões crônicas
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check m-0">
+                                            <input id="op-laudo-outro" class="form-check-input" type="checkbox" name="laudo-tuberculose">
+                                            <label class="form-check-label" for="op-laudo-outro">
+                                                Outros. Quais:
+                                            </label>
+                                        </div>
+                                        <input id="laudo-outro-descricao" class="form-control input-dado mx-1" style="max-width: 500px;">
+                                    </div>
+                                </div>
+                                <div class="col-3 d-flex flex-column">
+                                    <label for="dt-tomografia" class="label-wrap-pretty mb-1">
+                                        Data:
+                                    </label>
+                                    <input id="dt-tomografia" type="date" class="form-control input-dado">
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-2">
+                                <span class="label-wrap-pretty">
+                                    *Locais mais frequentes: segmento apical e posterior de lobos superiores; segmento superior de lobo inferior.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-9 d-flex flex-column">
+                            <label for="broncoscopia" class="negrito me-2">
+                                Broncoscopia
+                            </label>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <input id="broncoscopia" type="number" class="form-control input-dado-quadrado me-2"
+                                    min="1" max="2">
+                                <span class="label-wrap-pretty">
+                                    1 - Realizada &nbsp;&nbsp;&nbsp;
+                                    2 - Não realizada
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex flex-column">
+                            <label for="dt-broncoscopia" class="label-wrap-pretty mb-1">
+                                Data:
+                            </label>
+                            <input id="dt-broncoscopia" type="date" class="form-control input-dado">
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <label for="outros-exames" class="negrito">
+                                Outros exames
+                            </label>
+                            <span class="label-wrap-pretty my-2">
+                                Elencar resultados relacionados às comorbidades apontadas nesta ficha: 
+                                hemograma, creatinina, enzimas hepáticas.<br>
+                                Usar o verso da página, caso necessário.
+                            </span>
+                            <div class="textArea">
+                                <textarea id="outros-exames" class="form-control" rows="6" aria-label=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-4 d-flex flex-column">
+                            <span class="label-wrap-pretty negrito mb-2">
+                                Foi encaminhado para necropsia
+                            </span>
+                            <div class="d-flex align-items-center fs-6">
+                                <div class="form-check m-0 mx-3">
+                                    <input id="op-necropsia-sim" class="form-check-input" type="radio" name="necropsia">
+                                    <label class="form-check-label" for="op-necropsia-sim">
+                                        Sim
+                                    </label>
+                                </div>
+                                <div class="form-check m-0">
+                                    <input id="op-necropsia-nao" class="form-check-input" type="radio" name="necropsia">
+                                    <label class="form-check-label" for="op-necropsia-nao">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8 d-flex flex-column">
+                            <div class="d-flex mt-2">
+                                <span class="label-wrap-pretty">
+                                    Se sim, qual serviço?
+                                </span>
+                                <div class="form-check m-0 mx-3">
+                                    <input id="op-necropsia-servico-iml" class="form-check-input" type="radio" name="necropsia-servico">
+                                    <label class="form-check-label" for="op-necropsia-servico-iml">
+                                        IML
+                                    </label>
+                                </div>
+                                <div class="form-check m-0">
+                                    <input id="op-necropsia-servico-svo" class="form-check-input" type="radio" name="necropsia-servico">
+                                    <label class="form-check-label" for="op-necropsia-servico-svo">
+                                        SVO
+                                    </label>
+                                </div>
+                                <div class="form-check m-0 ms-3">
+                                    <input id="op-necropsia-servico-hospital" class="form-check-input" type="radio" name="necropsia-servico">
+                                    <label class="form-check-label" for="op-necropsia-servico-hospital">
+                                        Hospital
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-1">
+                                <span class="label-wrap-pretty">
+                                    Se sim, nos achados de necropsia, há menção de tuberculose?
+                                </span>
+                                <div class="form-check m-0 mx-3">
+                                    <input id="op-achados-necropsia-sim" class="form-check-input" type="radio" name="achados-necropsia">
+                                    <label class="form-check-label" for="op-achados-necropsia-sim">
+                                        Sim
+                                    </label>
+                                </div>
+                                <div class="form-check m-0">
+                                    <input id="op-achados-necropsia-nao" class="form-check-input" type="radio" name="achados-necropsia">
+                                    <label class="form-check-label" for="op-achados-necropsia-nao">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-1">B.2</span>
+                <span class="negrito ms-2">
+                    HISTÓRIA DA TUBERCULOSE
+                </span>
+            </div>
+            <div class="bloco-dados">
+                <div class="conteudo-bloco">
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <div class="d-flex align-items-center mb-2">
+                                <label for="momento-diagnostico" class="negrito me-2">
+                                    Em qual momento ocorreu o diagnóstico da tuberculose
+                                </label>
+                                <input id="momento-diagnostico" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="5">
+                            </div>
+                            <div class="d-flex">
+                                <span class="label-wrap-pretty">
+                                    1 - Antes da última hospitalização/atendimento de emergência/urgência &nbsp;&nbsp;&nbsp;
+                                    2 - Durante a última hospitalização/atendimento de emergência/urgência &nbsp;&nbsp;&nbsp;
+                                    <br>3 - Após a última hospitalização &nbsp;&nbsp;&nbsp;
+                                    4 - Não houve diagnóstico de tuberculose &nbsp;&nbsp;&nbsp;
+                                    5 - Ignorado
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-4">
+                            <span class="negrito label-wrap-pretty">
+                                Iniciou o tratamento para tuberculose?
+                            </span>
+                        </div>
+                        <div class="col-8 d-flex flex-column ps-2">
+                            <div class="d-flex align-items-center">
+                                <input id="iniciou-tratamento" type="number" class="form-control input-dado-quadrado me-2"
+                                    min="1" max="3">
+                                <label for="iniciou-tratamento" class="label-wrap-pretty">
+                                    1 - Sim &nbsp;&nbsp;&nbsp;
+                                    2 - Não &nbsp;&nbsp;&nbsp;
+                                    3 - Sem registro
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <label for="dt-iniciou-tratamento" class="label-wrap-pretty">
+                                    Se sim, data do início do tratamento
+                                </label>
+                                <input id="dt-iniciou-tratamento" type="date" class="form-control input-dado ms-2 mt-1"
+                                    style="max-width: 200px;">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-2 d-flex flex-column">
+                            <span class="negrito label-wrap-pretty">
+                                Forma clínica:
+                            </span>
+                            <span class="negrito label-wrap-pretty mt-4">
+                                Se extrapulmonar:
+                            </span>
+                        </div>
+                        <div class="col-10 d-flex flex-column ps-2">
+                            <div class="d-flex align-items-center">
+                                <input id="forma-clinica" type="number" class="form-control input-dado-quadrado me-2"
+                                    min="1" max="3">
+                                <label for="forma-clinica" class="label-wrap-pretty">
+                                    1 - Pulmonar &nbsp;&nbsp;&nbsp;
+                                    2 - Extrapulmonar &nbsp;&nbsp;&nbsp;
+                                    3 - Pulmonar + extrapulmonar
+                                </label>
+                            </div>
+                            <div class="d-flex mt-2">
+                                <input id="extrapulmonar" type="number" class="form-control input-dado-quadrado"
+                                    min="1" max="10">
+                                <div class="d-flex flex-column ms-1">
+                                    <label for="extrapulmonar" class="label-wrap-pretty">
+                                        1 - Pleural &nbsp;&nbsp;&nbsp;
+                                        2 - Ganglionar &nbsp;&nbsp;&nbsp;
+                                        3 - Geniturinária &nbsp;&nbsp;&nbsp;
+                                        4 - Óssea &nbsp;&nbsp;&nbsp;
+                                        5 - Ocular &nbsp;&nbsp;&nbsp;
+                                        6 - Miliar &nbsp;&nbsp;&nbsp;
+                                        7 - Meningoencefálica
+                                    </label>
+                                    <div class="d-flex mt-1">
+                                        <label for="extrapulmonar-outro-descricao" class="label-wrap-pretty me-2">
+                                            8 - Cutânea &nbsp;&nbsp;&nbsp;
+                                            9 - Ignorado &nbsp;&nbsp;&nbsp;
+                                            10 - Outros. Qual?
+                                        </label>
+                                        <input id="extrapulmonar-outro-descricao" class="form-control input-dado"
+                                            style="max-width: 300px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <span class="negrito">
+                                    Confirmado óbito por tuberculose (causa básica ou associada)?
+                                </span>
+                                <div class="d-flex align-items-center ms-3">
+                                    <input id="confirmado-obito" type="number" class="form-control input-dado-quadrado"
+                                        min="1" max="2">
+                                    <label for="confirmado-obito" class="label-wrap-pretty ms-1">
+                                        1 - Sim &nbsp;&nbsp;&nbsp;
+                                        2 - Não
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="negrito">
+                                    Continuar a investigação?
+                                </span>
+                                <div class="d-flex align-items-center ms-3">
+                                    <input id="continuar-investigacao" type="number" class="form-control input-dado-quadrado"
+                                        min="1" max="2">
+                                    <label for="continuar-investigacao" class="label-wrap-pretty ms-1">
+                                        1 - Sim &nbsp;&nbsp;&nbsp;
+                                        2 - Não
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-2">
+                                <span class="negrito">
+                                    Se sim, quais os motivos?
+                                </span>
+                                <div class="d-flex flex-column ms-3">
+                                    <div class="form-check fs-6 m-0">
+                                        <input id="op-tuberculose-outras-unidades" class="form-check-input" type="radio" name="motivo-continuacao">
+                                        <label class="form-check-label label-wrap-pretty" for="op-tuberculose-outras-unidades">
+                                            Confirmar caso de tuberculose em outras unidades de saúde/laboratório/outras fontes
+                                        </label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check fs-6 m-0 me-3">
+                                            <input id="op-investigacao-contatos" class="form-check-input" type="radio" name="motivo-continuacao">
+                                            <label class="form-check-label label-nowrap" for="op-investigacao-contatos">
+                                                Investigação de contatos
+                                            </label>
+                                        </div>
+                                        <div class="form-check fs-6 m-0 me-3">
+                                            <input id="op-motivo-continuacao-outro" class="form-check-input" type="radio" name="motivo-continuacao">
+                                            <label class="form-check-label label-nowrap" for="op-motivo-continuacao-outro">
+                                                Outros. Quais?
+                                            </label>
+                                        </div>
+                                        <input id="motivo-continuacao-outro-descricao" class="form-control input-dado" 
+                                            style="max-width: 300px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                            
+                    <div class="linha-dados p-2">
+                        <div class="col-12 d-flex flex-column">
+                            <label for="observacoes-gerais" class="negrito">
+                                Observações gerais
+                            </label>
+                            <span class="label-wrap-pretty my-2">
+                                Sinais e sintomas de outras doenças; diagnóstico laboratorial de outras doenças; 
+                                relatos de diagnóstico inoportuno da tuberculose; perda de continuidade de 
+                                tratamento; uso ou não de Tarv; notificação no SITETB; vulnerabilidades; 
+                                falhas no preenchimento do prontuário e outros pontos que o investigador 
+                                julgar importantes. Usar o verso da página, caso necessário..
+                            </span>
+                            <div class="textArea">
+                                <textarea id="observacoes-gerais" class="form-control" rows="6" aria-label=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-tuberculose">
+            <div class="titulo py-2">
+                <span class="letra negrito px-1">B.3</span>
+                <span class="negrito ms-2">
+                    RESPONSÁVEL PELA INVESTIGAÇÃO
+                </span>
+            </div>
+            <div class="bloco-dados">
+                <div class="conteudo-bloco">
+                    <div class="linha-dados">
+                        <div class="col-6 d-flex border-right p-2">
+                            <span>
+                                Informações em folhas anexas:
+                            </span>
+                            <div class="d-flex align-items-center">
+                                <div class="form-check m-0 mx-3">
+                                    <input id="op-info-anexa-sim" class="form-check-input" type="radio" name="informacao-anexa">
+                                    <label class="form-check-label" for="op-info-anexa-sim">
+                                        Sim
+                                    </label>
+                                </div>
+                                <div class="form-check m-0">
+                                    <input id="op-info-anexa-nao" class="form-check-input" type="radio" name="informacao-anexa">
+                                    <label class="form-check-label" for="op-info-anexa-nao">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex align-items-center p-2">
+                            <label for="dt-investigacao" class="label-wrap-pretty">
+                                Data da investigação:
+                            </label>
+                            <input id="dt-investigacao" type="date" class="form-control input-dado ms-1"
+                                style="max-width: 200px;">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-9 border-right p-2">
+                            <label for="nome-notificante" class="mb-1">
+                                Nome do responsável:
+                            </label>
+                            <input id="nome-notificante" class="form-control input-dado mx-1">
+                        </div>
+                        <div class="col-3 p-2">
+                            <label for="telefone-notificante" class="mb-1">
+                                Telefone:
+                            </label>
+                            <input id="telefone-notificante" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                    <div class="linha-dados">
+                        <div class="col-12 p-2">
+                            <label for="local-trabalho-notificante" class="label-wrap-pretty mb-1">
+                                Local de trabalho do responsável pela investigação:
+                            </label>
+                            <input id="local-trabalho-notificante" class="form-control input-dado mx-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="d-flex justify-content-end mt-2">
+        <span class="letra-miuda">
+            Ficha de investigação do óbito com menção de tuberculose – Unidade hospitalar, 
+            Unidade de urgência e emergência
+        </span>
+    </div>
+</div>
+
+{% block rodape_ficha %}
+    {% include 'rodape_ficha.html' %}
+{% endblock %}

@@ -1,30 +1,39 @@
 function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     let csrfToken = getCookie("csrftoken");
-    let ficha = document.getElementById("fichaNotificacao");
     let cod_formulario = document.getElementById("cod_formulario").value;
     let prontuario = document.getElementById("prontuario").value;
     let setor = document.getElementById("setor").value;
 
-    let camposNumeros = document.querySelectorAll('input[type="number"]');
-    camposNumeros.forEach(function (campo) {
+    let camposNumericos = document.querySelectorAll('input[type="number"]');
+    camposNumericos.forEach(function (campo) {
         if (campo.value === "")
             campo.value = 0;
     });
 
+    let fichas = document.getElementsByClassName("ficha");
     let dicionario = {};
-    let camposInput = ficha.querySelectorAll("input");
-    camposInput.forEach(function (campo) {
-        if (campo.id) {   // exclui o campo do csrf_token
-            if (campo.type === 'number')
-                dicionario[campo.id] = parseInt(campo.value, 10);
-            else
-                dicionario[campo.id] = campo.value;
-        }
+
+    Array.from(fichas).forEach(function(ficha) {
+        let camposInput = ficha.querySelectorAll("input, textarea");
+
+        camposInput.forEach(function(campo) {
+            if (campo.id) { // Exclui o campo do csrf_token
+                if (campo.type === 'number') {
+                    dicionario[campo.id] = parseInt(campo.value, 10);
+                } else {
+                    if (campo.type === 'date' && campo.value === '') {
+                        dicionario[campo.id] = null;
+                    } else {
+                        dicionario[campo.id] = campo.value;
+                    }
+                }
+            }
+        });
     });
 
     dicionario['setor'] = setor;
     dicionario['prontuario'] = parseInt(prontuario, 10);
-    dicionario['cod_formulario'] = parseInt(cod_formulario, 10);
+    dicionario['cod_tipo_ficha'] = parseInt(cod_formulario, 10);
 
     if (!dicionario['campo-dt-notificacao']) {
         let dataAtual = new Date();
@@ -46,15 +55,17 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
             function (json) {
                 if (json["status"] === 'success') {
                     let uploadForm = document.getElementById('uploadForm');
-                    uploadForm.action.replace('0', parseInt(json["cod_ficha"]));
+                    let parts = uploadForm.action.split('/');
+                    
+                    parts[parts.length - 1] = json["cod_ficha"];
+                    uploadForm.action = parts.join('/');
 
-                    console.log(uploadForm.action);
                     uploadForm.submit();
 
-                    // $('#conteudo')[0].innerHTML = json.html[0];
-                    // $('#mensagem-retorno .modal-title').html("Sucesso!");
-                    // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
-                    // $('#mensagem-retorno').modal("toggle");
+                    $('#conteudo')[0].innerHTML = json.html[0];
+                    $('#mensagem-retorno .modal-title').html("Sucesso!");
+                    $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                    $('#mensagem-retorno').modal("toggle");
                 } else {
                     $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
                     $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");

@@ -1,0 +1,3360 @@
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="retornoListaFichas()">
+        </i>
+    </div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="ficha pb-5">
+    {% csrf_token %}
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
+    <div class="mt-2 container-cabecalho">
+        <div class="col-3 left-div negrito">
+            <label>República Federativa do Brasil</label>
+            <label>Ministério do Saúde</label>
+        </div>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
+            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
+            <label class="negrito">FICHA DE NOTIFICAÇÃO</label>
+        </div>
+        <div class="col-3 right-div">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha">N°</label>
+                <input type="number" class="form-control" id="numero-ficha"
+                    {% if ficha.numero_ficha != "0" %} 
+                        value="{{ ficha.numero_ficha }}"
+                    {% endif %}
+                />
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Gerais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">1</span>
+                                <label for="campo-tipo-notificacao">Tipo de Notificação</label>
+                            </div>
+                            <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
+                                   type="number" min="1" max="4"
+                                    {% if ficha.tipo_notificacao != "0" %}
+                                        value="{{ ficha.tipo_notificacao }}"
+                                    {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Negativa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 -
+                                Surto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 - Inquérito Tracoma
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">2</span>
+                            <label for="campo-agravoDoenca">Agravo/doença</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-agravoDoenca" value="{{ ficha.agravoDoenca }}"
+                                   class="input-dado form-control negrito"/>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">3</span>
+                            <label for="campo-dt-notificacao">Data da Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}" type="date"
+                                   class="input-dado form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">4</span>
+                            <label for="campo-uf-notificacao">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-notificacao" value="{{ ficha.uf_notificacao }}"
+                                   class="input-dado form-control" maxlength="2"/>
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">5</span>
+                            <label for="campo-municipio-notificacao">Município de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-notificacao" value="{{ ficha.municipio_notificacao }}"
+                                   class="input-dado form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-notificacao">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-ibge-notificacao"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_notificacao != "0" %}
+                                    value="{{ ficha.cod_ibge_notificacao }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">6</span>
+                            <label for="campo-unidade-saude">
+                                Unidade de Saúde (ou outra fonte notificadora)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-unidade-saude"
+                                class="input-dado form-control"
+                                value="{{ ficha.unidade_saude }}"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-unidade-saude">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-unidade-saude"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_unidade_saude != "0" %}
+                                    value="{{ ficha.cod_unidade_saude }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-sintomas">
+                                Data dos Primeiros Sintomas
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-sintomas"
+                                    type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_sintomas %}{{ ficha.dt_sintomas }}{% endif %}"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente">Nome do Paciente</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-paciente"
+                                    class="input-dado form-control"
+                                    value="{{ ficha.nome_paciente }}"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">9</span>
+                            <label for="campo-dt-nascimento">Data de Nascimento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-nascimento"
+                                    type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_nascimento %}{{ ficha.dt_nascimento }}{% endif %}"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-idade">(ou) Idade</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-4">
+                                <input
+                                    id="campo-idade"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    maxlength="3"
+                                    {% if ficha.idade != "0" %}
+                                        value="{{ ficha.idade }}"
+                                    {% endif %}
+                                />
+                            </div>
+                            <div class="col-7 container-tipo-idade">
+                                <input
+                                    type="number"
+                                    id="campo-tipo-idade"
+                                    class="input-dado-quadrado form-control"
+                                    min="1"
+                                    max="4"
+                                    {% if ficha.tipo_idade != "0" %}
+                                        value="{{ ficha.tipo_idade }}"
+                                    {% endif %}
+                                />
+                                <ul class="letra-miuda">
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input campo-sexo">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">11</span>
+                                <label for="campo-sexo">Sexo</label>
+                            </div>
+                            <input
+                                    id="campo-sexo"
+                                    value="{{ ficha.sexo }}"
+                                    class="input-dado-quadrado form-control"
+                                    maxlength="1"
+                            />
+                        </div>
+                        <div class="container-input-dado letra-miuda">
+                            <ul>
+                                <li>M - Masculino</li>
+                                <li>F - Feminino</li>
+                                <li>I - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input campo-gestante">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">12</span>
+                                <label for="campo-gestante">Gestante</label>
+                            </div>
+                            <input
+                                id="campo-gestante"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="9"
+                                {% if ficha.gestante != "0" %}
+                                    value="{{ ficha.gestante }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3-3°Trimestre<br/>
+                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6-Não se aplica<br/>
+                            9-Ignorado
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-raca">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-raca">Raça/Cor</label>
+                            </div>
+                            <input
+                                id="campo-raca"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="9"
+                                {% if ficha.raca != "0" %}
+                                    value="{{ ficha.raca }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-Amarela<br/>
+                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9-Ignorado
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-escolaridade">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">14</span>
+                                <label for="campo-escolaridade">Escolaridade</label>
+                            </div>
+                            <input
+                                id="campo-escolaridade"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="2"
+                                {% if ficha.escolaridade != "0" %}
+                                    value="{{ ficha.escolaridade }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
+                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série
+                            incompleta do EF (antigo primário ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo
+                            primário ou 1° grau)<br/>
+                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo
+                            (antigo ginásio ou 1° grau) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino
+                            médio incompleto (antigo colegial ou 2° grau)<br/>
+                            6-Ensino médio completo (antigo colegial ou 2° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-numero-sus">Número do Cartão SUS</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-numero-sus"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_sus != "0" %}
+                                    value="{{ ficha.numero_sus }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-nome-mae">Nome da mãe</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-nome-mae"
+                                value="{{ ficha.nome_mae }}"
+                                class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação de Surto</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-4 d-flex flex-column justify-content-between">
+                        <div class="div-input mb-3">
+                            <div class="info-elevada">
+                                <span class="numeracao">17</span>
+                                <label for="campo-dt-primeiro-sintoma">
+                                    Data dos 1° Sintomas do 1° Caso Suspeito
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input
+                                    id="campo-dt-primeiro-sintoma"
+                                    type="date"
+                                    value="{% if dt_primeiro_sintoma %}{{ ficha.dt_primeiro_sintoma }}{% endif %}"
+                                    class="input-dado form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">18</span>
+                                <label for="campo-numero-casos-suspeitos">
+                                    N° de Casos Suspeitos / Expostos
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input
+                                    id="campo-numero-casos-suspeitos"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    {% if ficha.numero_casos_suspeitos != "0" %}
+                                        value="{{ ficha.numero_casos_suspeitos }}"
+                                    {% endif %}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">19</span>
+                                <label for="campo-local-inicial-ocorrencia">
+                                    Local inicial de Ocorrência do Surto
+                                </label>
+                            </div>
+                            <input
+                                id="campo-local-inicial-ocorrencia"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="11"
+                                {% if ficha.local_inicial_ocorrencia != "0" %}
+                                    value="{{ ficha.local_inicial_ocorrencia }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado flex-column">
+                            <div class="d-flex justify-content-evenly px-1">
+                                <ul class="px-2">
+                                    <li class="label-nowrap">1 - Residência</li>
+                                    <li>4 - Asilo</li>
+                                    <li>7 - Eventos</li>
+                                </ul>
+                                <ul class="px-2">
+                                    <li>2 - Hospital / Unidade de Saúde</li>
+                                    <li>5 - Outras Instituições (alojamento, trabalho)</li>
+                                    <li>8 - Casos Dispersos no Bairro</li>
+                                </ul>
+                                <ul class="px-2">
+                                    <li>3 - Creche / Escola</li>
+                                    <li>6 - Restaurante/ Padaria</li>
+                                    <li>9 - Casos Dispersos Pelo Município</li>
+                                </ul>
+                            </div>
+                            <div class="my-2">
+                                <ul class="d-flex align-items-center">
+                                    <li class="px-2">
+                                        10 - Casos Dispersos em ais de um Município
+                                    </li>
+                                    <li class="px-2 label-nowrap">11 - Outros</li>
+                                    <li class="px-2">Especificar</li>
+                                    <li>
+                                        <input
+                                            id="campo-local-especificar-ocorrencia"
+                                            class="input-dado form-control"
+                                            aria-label=""
+                                            value="{{ ficha.local_inicial_ocorrencia_outro }}"
+                                        />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados de Residência</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">20</span>
+                            <label for="campo-uf-residencia">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-uf-residencia"
+                                    value="{{ ficha.uf_residencia }}"
+                                    class="input-dado form-control"
+                                    maxlength="2"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">21</span>
+                            <label for="campo-municipio-residencia">
+                                Município de Residência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-municipio-residencia"
+                                    value="{{ ficha.municipio_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-residencia">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-ibge-residencia"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_residencia != "0" %}
+                                    value="{{ ficha.cod_ibge_residencia }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">22</span>
+                            <label for="campo-distrito-residencia">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-distrito-residencia"
+                                    value="{{ ficha.distrito_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">23</span>
+                            <label for="campo-bairro-residencia">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-bairro-residencia"
+                                    value="{{ ficha.bairro_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">24</span>
+                            <label for="campo-logradouro-residencia">
+                                Logradouro (rua, avenida, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-logradouro-residencia"
+                                    class="input-dado form-control"
+                                    value="{{ ficha.logradouro_residencia }}"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-residencia">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-codigo-residencia"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.codigo_residencia != "0" %}
+                                    value="{{ ficha.codigo_residencia }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">25</span>
+                            <label for="campo-numero-residencia">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-numero-residencia"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_residencia != "0" %}
+                                    value="{{ ficha.numero_residencia }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">26</span>
+                            <label for="campo-complemento-residencia">
+                                Complemento (apto, casa, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-complemento-residencia"
+                                    value="{{ ficha.complemento_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">27</span>
+                            <label for="campo-geo-campo1">Geo campo 1</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-geo-campo1"
+                                    value="{{ ficha.geo_campo1 }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">28</span>
+                            <label for="campo-geo-campo2">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-geo-campo2"
+                                    value="{{ ficha.geo_campo2 }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">29</span>
+                            <label for="campo-ponto-ref-residencia">
+                                Ponto de Referência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-ponto-ref-residencia"
+                                    value="{{ ficha.ponto_ref_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-cep-residencia">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cep-residencia"
+                                    value="{{ ficha.cep_residencia }}"
+                                    class="input-dado form-control"
+                                    maxlength="9"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
+                            <label for="campo-telefone-residencia">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-telefone-residencia"
+                                    value="{{ ficha.telefone_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-zona-residencia">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">32</span>
+                                <label for="campo-zona-residencia">Zona</label>
+                            </div>
+                            <input
+                                id="campo-zona-residencia"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="1"
+                                {% if ficha.zona_residencia != "0" %}
+                                    value="{{ ficha.zona_residencia }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br/>
+                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label for="campo-pais-residencia">
+                                País (se residente fora do Brasil)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-pais-residencia"
+                                    value="{{ ficha.pais_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificante</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-municipio-us-notificante">
+                                Município/Unidade de Saúde
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-municipio-us-notificante"
+                                    value="{{ ficha.municipio_us_notificante }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-nome-notificante">Nome</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-notificante"
+                                    value="{{ ficha.nome_notificante }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-funcao-notificante">Função</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-funcao-notificante"
+                                    value="{{ ficha.funcao_notificante }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-assinatura-notificante">Assinatura</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-assinatura-notificante"
+                                    value="{{ ficha.assinatura_notificante }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <span class="col-3">Notificação</span>
+                    <span class="col-6 d-flex justify-content-center">Sinan NET</span>
+                    <div class="col-3 d-flex justify-content-evenly">
+                        <span>SVS</span>
+                        <span>17/07/2006</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="conteiner-dadosComplementares">
+        <div class="d-flex flex-column align-items-center my-5">
+            <span class="negrito">DADOS COMPLEMENTARES</span>
+            <span>(ANOTAR TODOS OS DADOS DISPONÍVEIS NO MOMENTO DA NOTIFICAÇÃO)</span>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada d-flex align-items-start">
+                            <span class="numeracao">01</span>
+                            <label class="mx-1" for="campo-dt-amostra-sorologia">
+                                Data da coleta da 1°<br/>amostra da sorologia
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-amostra-sorologia"
+                                    type="date"
+                                    value="{% if ficha.dt_amostra_sorologia %}{{ ficha.dt_amostra_sorologia }}{% endif %}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada d-flex align-items-start">
+                            <span class="numeracao">02</span>
+                            <label class="mx-1" for="campo-dt-outra-amostra">
+                                Data da coleta da 1°<br/>amostra de outra amostra
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-outra-amostra"
+                                    type="date"
+                                    value="{% if ficha.dt_outra_amostra %}{{ ficha.dt_outra_amostra }}{% endif %}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">03</span>
+                            <label for="campo-tipo-exame"> Especificar tipo de exame: </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-tipo-exame"
+                                    value="{{ ficha.tipo_exame }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">04</span>
+                                <label for="campo-obito">Óbito ?</label>
+                            </div>
+                            <input
+                                id="campo-obito"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.obito != "0" %}
+                                    value="{{ ficha.obito }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">05</span>
+                                <label for="campo-caso-semelhante">
+                                    Contato com caso semelhante ?
+                                </label>
+                            </div>
+                            <input
+                                id="campo-caso-semelhante"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.caso_semelhante != "0" %}
+                                    value="{{ ficha.caso_semelhante }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                        <span class="mb-1">
+                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">06</span>
+                                <label for="campo-exantema"> Presença de exantema ? </label>
+                            </div>
+                            <input
+                                id="campo-exantema"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.exantema != "0" %}
+                                    value="{{ ficha.exantema }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                        <span class="mb-1">
+                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">07</span>
+                            <label for="campo-dt-inicio-exatema">
+                                Data do início do exatema
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-dt-inicio-exatema"
+                                type="date"
+                                value="{% if ficha.dt_inicio_exantema %}{{ ficha.dt_inicio_exantema }}{% endif %}"
+                                class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-5 div-input">
+                        <div class="info-elevada-com-input">
+                            <div class="d-flex align-items-start">
+                                <span class="numeracao">08</span>
+                                <label class="mx-1 pb-2" for="campo-petequiaSufusao">
+                                    Presença de petéquias ou sufusões hemorrágicas?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-petequiaSufusao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.petequiaSufusao != "0" %}
+                                        value="{{ ficha.petequiaSufusao }}"
+                                    {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">09</span>
+                                <label for="campo-liquor"> Foi realizado líquor ? </label>
+                            </div>
+                            <input
+                                id="campo-liquor"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.liquor != "0" %}
+                                    value="{{ ficha.liquor }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-bacterioscopia"
+                            >Resultado da bacterioscopia:</label
+                            >
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-bacterioscopia"
+                                    value="{{ ficha.bacterioscopia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div class="d-flex align-items-start">
+                                <span class="numeracao">11</span>
+                                <label class="mx-1 pb-2" for="campo-tomou-vacina">
+                                    O paciente tomou vacina contra agravo notificado neste
+                                    impresso?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-tomou-vacina"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.tomou_vacina != "0" %}
+                                        value="{{ ficha.tomou_vacina }}"
+                                    {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">12</span>
+                            <label for="campo-dt-ultima-dose-tomada">
+                                Data da última dose tomada
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-ultima-dose-tomada"
+                                    type="date"
+                                    value="{% if ficha.dt_ultima_dose_tomada %}{{ ficha.dt_ultima_dose_tomada }}{% endif %}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-hospitalizacao">
+                                    Ocorreu hospitalização ?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-hospitalizacao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.hospitalizacao != "0" %}
+                                        value="{{ ficha.hospitalizacao }}"
+                                    {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">14</span>
+                            <label for="campo-dt-hospitalizacao">
+                                Data da hospitalização
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-dt-hospitalizacao"
+                                type="date"
+                                value="{% if ficha.dt_hospitalizacao %}{{ ficha.dt_hospitalizacao }}{% endif %}"
+                                class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-uf-hospital">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-uf-hospital"
+                                    value="{{ ficha.uf_hospital }}"
+                                    class="input-dado form-control"
+                                    maxlength="2"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-municipio-hospital">
+                                Município do hospital
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-municipio-hospital"
+                                    value="{{ ficha.municipio_hospital }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-ibge-hospital"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_hospital != "0" %}
+                                    value="{{ ficha.cod_ibge_hospital }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-nome-hospital">Nome do hospital</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-hospital"
+                                    value="{{ ficha.nome_hospital }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-hospital">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-hospital"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_hospital != "0" %}
+                                    value="{{ ficha.cod_hospital }}"
+                                {% endif %}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Surto</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <span>Hipóteses diagnósticas no momento da notificação</span>
+                        </div>
+                        <div class="container-input-dado flex-column px-2">
+                            <div class="pt-2 pb-3 d-flex align-items-center">
+                                <label for="campo-hipotese-diagnostica1" class="label-nowrap">
+                                    1° Hipótese Diagnóstica - CID 10:
+                                </label>
+                                <input
+                                        id="campo-hipotese-diagnostica1"
+                                        class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica1 }}"
+                                />
+                            </div>
+                            <div class="pb-3 d-flex align-items-center">
+                                <label for="campo-hipotese-diagnostica2" class="label-nowrap">
+                                    2° Hipótese Diagnóstica - CID 10:
+                                </label>
+                                <input
+                                        id="campo-hipotese-diagnostica2"
+                                        class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica2 }}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Local prov. infecção</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <span>Local provável de infecção (classificação provisória)</span>
+                        </div>
+                        <div class="container-input-dado px-2">
+                            <div class="col-5 d-flex flex-column px-1">
+                                <div class="pt-3 pb-4 d-flex align-items-center">
+                                    <label for="campo-pais-infeccao" class="label-nowrap">
+                                        País:
+                                    </label>
+                                    <input
+                                            id="campo-pais-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.pais_infeccao }}"
+                                    />
+                                </div>
+                                <div class="pb-3 d-flex align-items-center">
+                                    <label for="campo-distrito-infeccao" class="label-nowrap">
+                                        Distrito:
+                                    </label>
+                                    <input
+                                            id="campo-distrito-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.distrito_infeccao }}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-2 px-1">
+                                <div class="py-3 d-flex align-items-center">
+                                    <label for="campo-uf-infeccao" class="label-nowrap">
+                                        UF
+                                    </label>
+                                    <input
+                                            id="campo-uf-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.uf_infeccao }}"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-5 d-flex flex-column px-1">
+                                <div class="pt-3 pb-4 d-flex align-items-center">
+                                    <label for="campo-municipio-infeccao" class="label-nowrap">
+                                        Município:
+                                    </label>
+                                    <input
+                                            id="campo-municipio-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.municipio_infeccao }}"
+                                    />
+                                </div>
+                                <div class="pb-3 d-flex align-items-center">
+                                    <label for="campo-bairro-infeccao" class="label-nowrap">
+                                        Bairro:
+                                    </label>
+                                    <input
+                                            id="campo-bairro-infeccao"
+                                            class="input-dado form-control mx-2"
+                                            value="{{ ficha.bairro_infeccao }}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="linha-dados footer-ficha">
+            <span class="col-9">Dados Complementares/ Notificação</span>
+            <div class="col-3 d-flex justify-content-evenly">
+                <span>SVS</span>
+                <span>17/07/2006</span>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="d-flex flex-column align-items-center my-3 negrito">
+    <span>FICHA DE INVESTIGAÇÃO</span>
+    <span>DENGUE E FEBRE DE CHIKUNGUNYA</span>
+</div>
+<div class="ficha pt-5">
+    <div class="mt-2 container-cabecalho">
+        <div class="col-3 left-div negrito">
+            <label>República Federativa do Brasil</label>
+            <label>Ministério do Saúde</label>
+        </div>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
+            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
+            <label>
+                FICHA DE INVESTIGAÇÃO
+                <label class="negrito ms-2">
+                    DENGUE E FEBRE DE CHIKUNGUNYA
+                </label>
+            </label>
+        </div>
+        <div class="col-3 right-div">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha2">N°</label>
+                <input type="number" class="form-control" id="numero-ficha2"
+                    {% if ficha.numero_ficha2 != "0" %}
+                        value="{{ ficha.numero_ficha2 }}"
+                    {% endif %}
+                >
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 descricao-acidenteTrabalho">
+        <span>
+            <b>Caso suspeito de dengue:</b> pessoa que viva ou tenha viajado nos últimos 14 dias para área onde esteja ocorrendo
+            transmissão de dengue ou tenha presença de Ae.aegypti que apresente febre, usualmente entre 2 e 7 dias, e
+            apresente duas ou mais das seguintes manifestações: náuseas, vômitos, exantema, mialgias, cefaléia, dor
+            retroorbital, petéquias ou prova do laço positiva e leucopenia.
+        </span>
+    </div>
+    <div class="mt-2 descricao-acidenteTrabalho">
+        <span>
+            <b>Caso suspeito de Chikungunya:</b> febre de início súbito e artralgia ou artrite intensa com inicio agudo, não explicado
+            por outras condições, que resida ou tenha viajado para áreas endêmicas ou epidêmicas até 14 dias antes do
+            início dos sintomas, ou que tenha vínculo epidemiológico com um caso importado confirmado.
+        </span>
+    </div>
+    <section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Gerais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">1</span>
+                            <label>Tipo de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="mb-1">2 - Individual</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-7 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">2</span>
+                                <label for="campo-agravoDoenca-dengue">Agravo/doença</label>
+                            </div>
+                            <input
+                                id="campo-agravoDoenca-dengue"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="2"
+                                {% if ficha.agravoDoenca_num != "0" %}
+                                    value="{{ ficha.agravoDoenca_num }}"
+                                {% endif %}
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="negrito">
+                                1- DENGUE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2- CHIKUNGUNYA
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label>Código (CID10)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="negrito">A90 / A92</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">3</span>
+                            <label for="campo-dt-notificacao2">Data da Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-notificacao2" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_notificacao2 %}{{ ficha.dt_notificacao2 }}{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">4</span>
+                            <label for="campo-uf-notificacao2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-notificacao2" class="input-dado form-control" maxlength="2"
+                                value="{{ ficha.uf_notificacao2 }}">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">5</span>
+                            <label for="campo-municipio-notificacao2">Município de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-notificacao2" class="input-dado form-control"
+                                value="{{ ficha.municipio_notificacao2 }}">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-notificacao2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-notificacao2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_notificacao2 != "0" %}
+                                    value="{{ ficha.cod_ibge_notificacao2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">6</span>
+                            <label for="campo-unidade-saude2">
+                                Unidade de Saúde (ou outra fonte notificadora)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-unidade-saude2" class="input-dado form-control"
+                                value="{{ ficha.unidade_saude2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-unidade-saude2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-unidade-saude2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_unidade_saude2 != "0" %}
+                                    value="{{ ficha.cod_unidade_saude2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-sintomas2">
+                                Data dos Primeiros Sintomas
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-diagnostico" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_sintomas2 %}{{ ficha.dt_sintomas2 }}{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente2">Nome do Paciente</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-paciente2" class="input-dado form-control"
+                                value="{{ ficha.nome_paciente2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">9</span>
+                            <label for="campo-dt-nascimento2">Data de Nascimento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_nascimento2 %}{{ ficha.dt_nascimento2 }}{% endif %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-idade2">(ou) Idade</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-4">
+                                <input id="campo-idade2" type="number"
+                                    class="input-dado form-control" maxlength="3"
+                                    {% if ficha.idade2 != "0" %}
+                                        value="{{ ficha.idade2 }}"
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="col-7 container-tipo-idade">
+                                <input type="number" id="campo-tipo-idade2"
+                                    class="input-dado-quadrado form-control"
+                                    min="1" max="4"
+                                    {% if ficha.tipo_idade2 != "0" %}
+                                        value="{{ ficha.tipo_idade2 }}"
+                                    {% endif %}
+                                >
+                                <ul class="letra-miuda">
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input campo-sexo">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">11</span>
+                                <label for="campo-sexo2">Sexo</label>
+                            </div>
+                            <input id="campo-sexo2" class="input-dado-quadrado form-control" maxlength="1"
+                                value="{{ ficha.sexo2 }}">
+                        </div>
+                        <div class="container-input-dado letra-miuda">
+                            <ul>
+                                <li>M - Masculino</li>
+                                <li>F - Feminino</li>
+                                <li>I - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input campo-gestante">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">12</span>
+                                <label for="campo-gestante2">Gestante</label>
+                            </div>
+                            <input id="campo-gestante2" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.gestante2 != "0" %}
+                                    value="{{ ficha.gestante2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-3°Trimestre<br>
+                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            6-Não se aplica<br>
+                            9-Ignorado
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-raca">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-raca2">Raça/Cor</label>
+                            </div>
+                            <input id="campo-raca2" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.raca2 != "0" %}
+                                    value="{{ ficha.raca2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-Amarela<br>
+                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            9-Ignorado
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-escolaridade">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">14</span>
+                                <label for="campo-escolaridade2">Escolaridade</label>
+                            </div>
+                            <input id="campo-escolaridade2" type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="2"
+                                {% if ficha.escolaridade2 != "0" %}
+                                    value="{{ ficha.escolaridade2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
+                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série incompleta do EF (antigo
+                            primário ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo primário ou 1° grau)<br>
+                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino médio incompleto (antigo colegial ou 2° grau)<br>
+                            6-Ensino médio completo (antigo colegial ou 2° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-numero-sus2">Número do Cartão SUS</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-sus2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_sus2 != "0" %}
+                                    value="{{ ficha.numero_sus2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-nome-mae2">Nome da mãe</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-mae2" class="input-dado form-control"
+                                value="{{ ficha.nome_mae2 }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados de Residência</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-uf-residencia2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-residencia2" class="input-dado form-control"
+                                maxlength="2" value="{{ ficha.uf_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <label for="campo-municipio-residencia2">Município de Residência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-residencia2" class="input-dado form-control"
+                                value="{{ ficha.municipio_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-residencia2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-residencia2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_residencia2 != "0" %}
+                                    value="{{ ficha.cod_ibge_residencia2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <label for="campo-distrito-residencia2">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-residencia2" class="input-dado form-control"
+                                value="{{ ficha.distrito_residencia2 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">20</span>
+                            <label for="campo-bairro-residencia2">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-residencia2" class="input-dado form-control"
+                                value="{{ ficha.bairro_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">21</span>
+                            <label for="campo-logradouro-residencia2">
+                                Logradouro (rua, avenida, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control"
+                                value="{{ ficha.logradouro_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-residencia2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-residencia2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.codigo_residencia2 != "0" %}
+                                    value="{{ ficha.codigo_residencia2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">22</span>
+                            <label for="campo-numero-residencia2">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-residencia2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_residencia2 != "0" %}
+                                    value="{{ ficha.numero_residencia2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">23</span>
+                            <label for="campo-complemento-residencia2">
+                                Complemento (apto, casa, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-complemento-residencia2" class="input-dado form-control"
+                                value="{{ ficha.complemento_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">24</span>
+                            <label for="campo-geo-campo12">Geo campo 1</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo12" class="input-dado form-control"
+                                value="{{ ficha.geo_campo1_2 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">25</span>
+                            <label for="campo-geo-campo22">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo22" class="input-dado form-control"
+                                value="{{ ficha.geo_campo2_2 }}">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">26</span>
+                            <label for="campo-ponto-ref-residencia2">
+                                Ponto de Referência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ponto-ref-residencia2" class="input-dado form-control"
+                                value="{{ ficha.ponto_ref_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">27</span>
+                            <label for="campo-cep-residencia2">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cep-residencia2" class="input-dado form-control"
+                                maxlength="9" value="{{ ficha.cep_residencia2 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">28</span>
+                            <label for="campo-telefone-residencia2">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-residencia2" class="input-dado form-control"
+                                value="{{ ficha.telefone_residencia2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-zona-residencia">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">29</span>
+                                <label for="campo-zona-residencia2">Zona</label>
+                            </div>
+                            <input id="campo-zona-residencia2" type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="1"
+                                {% if ficha.zona_residencia2 != "0" %}
+                                    value="{{ ficha.zona_residencia2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
+                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-pais-residencia2">
+                                País (se residente fora do Brasil)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-pais-residencia2" class="input-dado form-control"
+                                value="{{ ficha.pais_residencia2 }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-3 container-dadosComplementares">
+        <span class="titulo-section negrito">Dados clínicos e laboratoriais</span>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Inv.</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
+                            <label for="campo-dt-investigacao">
+                                Data da Investigação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-investigacao" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_investigacao %}{{ ficha.dt_investigacao }}{% endif %}">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">32</span>
+                            <label for="campo-ocupacao">
+                                Ocupação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ocupacao" class="input-dado form-control"
+                                value="{{ ficha.ocupacao }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados clínicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label>
+                                Sinais clínicos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-febre" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_febre != "0" %}
+                                            value="{{ ficha.sinal_febre }}"
+                                        {% endif %}
+                                    >
+                                    <span>Febre</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-mialgia" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_mialgia != "0" %}
+                                            value="{{ ficha.sinal_mialgia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Mialgia</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-cefaleia" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_cefaleia != "0" %}
+                                            value="{{ ficha.sinal_cefaleia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Cefaleia</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-exantema" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_exantema != "0" %}
+                                            value="{{ ficha.sinal_exantema }}"
+                                        {% endif %}
+                                    >
+                                    <span>Exantema</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-vomito" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_vomito != "0" %}
+                                            value="{{ ficha.sinal_vomito }}"
+                                        {% endif %}
+                                    >
+                                    <span>Vômito</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-nauseas" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_nausea != "0" %}
+                                            value="{{ ficha.sinal_nausea }}"
+                                        {% endif %}
+                                    >
+                                    <span>Náuseas</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-dor-costa" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_dor_costas != "0" %}
+                                            value="{{ ficha.sinal_dor_costas }}"
+                                        {% endif %}
+                                    >
+                                    <span>Dor nas costas</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-conjunt" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_conjuntivite != "0" %}
+                                            value="{{ ficha.sinal_conjuntivite }}"
+                                        {% endif %}
+                                    >
+                                    <span>Conjuntivite</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-artrite" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_artrite != "0" %}
+                                            value="{{ ficha.sinal_artrite }}"
+                                        {% endif %}
+                                    >
+                                    <span>Artrite</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-artralgia" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_artralgia != "0" %}
+                                            value="{{ ficha.sinal_artralgia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Artralgia intensa</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-peteq" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_petequias != "0" %}
+                                            value="{{ ficha.sinal_petequias }}"
+                                        {% endif %}
+                                    >
+                                    <span>Petéquias</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-leucope" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_leucopenia != "0" %}
+                                            value="{{ ficha.sinal_leucopenia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Leucopenia</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-laco-posit" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_prova_laco != "0" %}
+                                            value="{{ ficha.sinal_prova_laco }}"
+                                        {% endif %}
+                                    >
+                                    <span>Prova do laço positiva</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ssvv-dor-retro" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.sinal_dor_retroorbital != "0" %}
+                                            value="{{ ficha.sinal_dor_retroorbital }}"
+                                        {% endif %}
+                                    >
+                                    <span>Dor retroorbital</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">34</span>
+                            <label>
+                                Doenças pré-existentes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-diab" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_diabete != "0" %}
+                                            value="{{ ficha.doenca_diabete }}"
+                                        {% endif %}
+                                    >
+                                    <span>Diabetes</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-hemato" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_hemato != "0" %}
+                                            value="{{ ficha.doenca_hemato }}"
+                                        {% endif %}
+                                    >
+                                    <span>Doenças hematológicas</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-hepato" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_hepato != "0" %}
+                                            value="{{ ficha.doenca_hepato }}"
+                                        {% endif %}
+                                    >
+                                    <span>Hepatopatias</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-drc" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_renal != "0" %}
+                                            value="{{ ficha.doenca_renal }}"
+                                        {% endif %}
+                                    >
+                                    <span>Doença renal crônica</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-hipert" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_hipertensao != "0" %}
+                                            value="{{ ficha.doenca_hipertensao }}"
+                                        {% endif %}
+                                    >
+                                    <span>Hipertensão arterial</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-ac-pept" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_peptica != "0" %}
+                                            value="{{ ficha.doenca_peptica }}"
+                                        {% endif %}
+                                    >
+                                    <span>Doença ácido-péptica</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-auto-imun" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.doenca_auto_imune != "0" %}
+                                            value="{{ ficha.doenca_auto_imune }}"
+                                        {% endif %}
+                                    >
+                                    <span>Doenças auto-imunes</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados laboratoriais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados mb-3 fs-6">
+                    <div class="col-6 negrito">
+                        Sorologia (IgM) Chikungunya
+                    </div>
+                    <div class="col-6 ps-5 negrito">
+                        Exame PRNT
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">35</span>
+                            <label for="dt-igm-s1-ck">
+                                Data da Coleta da 1ª Amostra(S1)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-igm-s1-ck" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_s1_ck %}{{ ficha.dt_coleta_s1_ck }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">36</span>
+                            <label for="dt-igm-s2-ck">
+                                Data da Coleta da 1ª Amostra(S2)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-igm-s2-ck" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_s2_ck %}{{ ficha.dt_coleta_s2_ck }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">37</span>
+                            <label for="dt-col-prnt">
+                                Data da Coleta
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-col-prnt" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_prnt %}{{ ficha.dt_coleta_prnt }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">38</span>
+                            <label>
+                                Resultado
+                            </label>
+                            <span> 
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Reagente
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Não Reagente
+                                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 - Inconclusivo
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 - Não Realizado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="res-s1-ck" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.resultado_s1_ck != "0" %}
+                                            value="{{ ficha.resultado_s1_ck }}"
+                                        {% endif %}
+                                    >
+                                    <span>S1</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="res-s2-ck" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.resultado_s2_ck != "0" %}
+                                            value="{{ ficha.resultado_s2_ck }}"
+                                        {% endif %}
+                                    >
+                                    <span>S2</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="res-prnt-ck" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.resultado_prnt != "0" %}
+                                            value="{{ ficha.resultado_prnt }}"
+                                        {% endif %}
+                                    >
+                                    <span>PRNT</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados mb-3 fs-6">
+                    <div class="col-6 negrito">
+                        Sorologia (IgM) Dengue
+                    </div>
+                    <div class="col-6 ps-5 negrito">
+                        Exame NS1
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">39</span>
+                            <label for="dt-igm-den">
+                                Data da Coleta
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-igm-den" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_dengue %}{{ ficha.dt_coleta_dengue }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">40</span>
+                                <label for="res-igm-den">Resultado</label>
+                            </div>
+                            <input id="res-igm-den" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.resultado_dengue != "0" %}
+                                    value="{{ ficha.resultado_dengue }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Positivo</li>
+                                <li>3- Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2- Negativo</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">41</span>
+                            <label for="dt-col-ns1">
+                                Data da Coleta
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-col-ns1" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_ns1 %}{{ ficha.dt_coleta_ns1 }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">42</span>
+                                <label for="res-ns1-den">Resultado</label>
+                            </div>
+                            <input id="res-ns1-den" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.resultado_ns1 != "0" %}
+                                    value="{{ ficha.resultado_ns1 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Positivo</li>
+                                <li>3- Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2- Negativo</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados mb-3 fs-6">
+                    <div class="col-6 negrito">
+                        Isolamento
+                    </div>
+                    <div class="col-6 ps-5 negrito">
+                        RT-PCR
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">43</span>
+                            <label for="dt-isol-den">
+                                Data da Coleta
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-isol-den" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_isol_dengue %}{{ ficha.dt_isol_dengue }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">44</span>
+                                <label for="res-isol-den">Resultado</label>
+                            </div>
+                            <input id="res-isol-den" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.resultado_isol_dengue != "0" %}
+                                    value="{{ ficha.resultado_isol_dengue }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Positivo</li>
+                                <li>3- Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2- Negativo</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">45</span>
+                            <label for="dt-col-pcr">
+                                Data da Coleta
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="dt-col-pcr" type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_coleta_pcr %}{{ ficha.dt_coleta_pcr }}{% endif %}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">46</span>
+                                <label for="res-pcr-den">Resultado</label>
+                            </div>
+                            <input id="res-pcr-den" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.resultado_pcr != "0" %}
+                                    value="{{ ficha.resultado_pcr }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Positivo</li>
+                                <li>3- Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2- Negativo</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">47</span>
+                                <label for="sorotipo">Sorotipo</label>
+                            </div>
+                            <input id="sorotipo" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.sorotipo != "0" %}
+                                    value="{{ ficha.sorotipo }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- DENV 1</li>
+                                <li>3- DENV 3</li>
+                            </ul>
+                            <ul>
+                                <li>2- DENV 2</li>
+                                <li>4- DENV 4</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">48</span>
+                                <label for="histop" class="negrito">
+                                    Histopatologia
+                                </label>
+                            </div>
+                            <input id="histop" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.histopatologia != "0" %}
+                                    value="{{ ficha.histopatologia }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1 - Compatível</li>
+                                <li>3 - Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2 - Incompatível</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">49</span>
+                                <label for="imunohistoquimica" class="negrito">
+                                    Imunohistoquímica
+                                </label>
+                            </div>
+                            <input id="imunohistoquimica" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="4"
+                                {% if ficha.imunohistoq != "0" %}
+                                    value="{{ ficha.imunohistoq }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Positivo</li>
+                                <li>3- Inconclusivo</li>
+                            </ul>
+                            <ul>
+                                <li>2- Negativo</li>
+                                <li>4 - Não realizado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Hospitalização</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">50</span>
+                                <label for="hospitalizacao2">Ocorreu Hospitalização</label>
+                            </div>
+                            <input id="hospitalizacao2" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.hospitalizacao2 != "0" %}
+                                    value="{{ ficha.hospitalizacao2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">51</span>
+                                <label for="campo-dt-internacao">
+                                    Data da Internacao
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-internacao" type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_internacao %}{{ ficha.dt_internacao }}{% endif %}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">52</span>
+                            <label for="campo-uf-hospital2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-hospital2" class="input-dado form-control"
+                                value="{{ ficha.uf_hospital2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">53</span>
+                            <label for="campo-municipio-hospital2">Município do Hospital</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-hospital2" class="input-dado form-control"
+                                value="{{ ficha.municipio_hospital2 }}">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-hospital2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-hospital2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_hospital2 != "0" %}
+                                    value="{{ ficha.cod_ibge_hospital2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">54</span>
+                            <label for="campo-nome-hospital2">Nome do Hospital</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-hospital2" class="input-dado form-control"
+                                value="{{ ficha.nome_hospital2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-hospital2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-hospital2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_hospital2 != "0" %}
+                                    value="{{ ficha.cod_hospital2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">55</span>
+                            <label for="campo-telefone-hospital2">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-hospital2" class="input-dado form-control"
+                                value="{{ ficha.telefone_hospital2 }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Conclusão</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados negrito mb-3 fs-6">
+                    Local Provável de Infecção (no período de 15 dias)
+                </div>
+                <div class="linha-dados">
+                    <div class="col-8 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">56</span>
+                                <label for="autoc-mun-res">
+                                    O caso é autóctone do município de residência?
+                                </label>
+                            </div>
+                            <input id="autoc-mun-res" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="3"
+                                {% if ficha.caso_autoctone != "0" %}
+                                    value="{{ ficha.caso_autoctone }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1-Sim</li>
+                            </ul>
+                            <ul>
+                                <li>2-Não</li>
+                            </ul>
+                            <ul>
+                                <li>3-Indeterminado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">57</span>
+                            <label for="campo-uf-caso">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-caso" class="input-dado form-control" maxlength="2"
+                                value="{{ ficha.uf_infeccao2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">58</span>
+                            <label for="campo-pais-caso">País</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-pais-caso" class="input-dado form-control"
+                                value="{{ ficha.pais_infeccao2 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">59</span>
+                            <label for="campo-municipio-caso">Município</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-caso" class="input-dado form-control"
+                                value="{{ ficha.municipio_infeccao2 }}">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-caso">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-caso" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_infeccao2 != "0" %}
+                                    value="{{ ficha.cod_ibge_infeccao2 }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">60</span>
+                            <label for="campo-distrito-caso">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-caso" class="input-dado form-control"
+                                value="{{ ficha.distrito_infeccao2 }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">61</span>
+                            <label for="campo-bairro-caso">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-caso" class="input-dado form-control"
+                                value="{{ ficha.bairro_infeccao2 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-5 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">62</span>
+                                <label for="classif-caso">Classificação</label>
+                            </div>
+                            <input id="classif-caso" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="13"
+                                {% if ficha.classif_caso != "0" %}
+                                    value="{{ ficha.classif_caso }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>5- Descartado</li>
+                                <li>12- Dengue Grave</li>
+                            </ul>
+                            <ul>
+                                <li>10- Dengue</li>
+                                <li>13- Chikungunya</li>
+                            </ul>
+                            <ul>
+                                <li><br>11- Dengue com Sinais de Alarme</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">63</span>
+                                <label for="crit-conf-desc">
+                                    Critério de Confirmação/Descarte
+                                </label>
+                            </div>
+                            <input id="crit-conf-desc" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="3"
+                                {% if ficha.criterio_confirm != "0" %}
+                                    value="{{ ficha.criterio_confirm }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1 - Laboratório</li>
+                                <li>3-Em investigação</li>
+                            </ul>
+                            <ul>
+                                <li>2 - Clínico-Epidemiológico</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">64</span>
+                                <label for="apres-clin">Apresentação clínica</label>
+                            </div>
+                            <input id="apres-clin" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="2"
+                                {% if ficha.apresentacao_clinica != "0" %}
+                                    value="{{ ficha.apresentacao_clinica }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1- Aguda</li>
+                                <li>2- Crônica</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">65</span>
+                                <label for="evol-caso">Evolução do Caso</label>
+                            </div>
+                            <input id="evol-caso" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.evolucao_caso != "0" %}
+                                    value="{{ ficha.evolucao_caso }}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                            <ul>
+                                <li>1-Cura</li>
+                                <li>4-Óbito em investigação</li>
+                            </ul>
+                            <ul>
+                                <li>2- Óbito pelo agravo</li>
+                                <li>9-Ignorado</li>
+                            </ul>
+                            <ul>
+                                <li><br>3- Óbito por outras causas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">66</span>
+                                <label for="campo-dt-obito">
+                                    Data do Óbito
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-obito" type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_obito %}{{ ficha.dt_obito }}{% endif %}"
+                                >
+                            </div>
+                    </div>
+                    <div class="col-3 div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">67</span>
+                                <label for="campo-dt-encerramento">
+                                    Data do Encerramento
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-encerramento" type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_encerramento %}{{ ficha.dt_encerramento }}{% endif %}"
+                                >
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="mt-2 container-observacoes">
+            <span class="titulo-section negrito">
+                Preencher os sinais clínicos para Dengue com Sinais de Alarme e Dengue Grave
+            </span>
+        </section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Clínicos - Dengue Sinais de Alarme e Grave</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">68</span>
+                            <label>
+                                Dengue com sinais de alarme
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-hipo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_hipotensao != "0" %}
+                                            value="{{ ficha.alarme_hipotensao }}"
+                                        {% endif %}
+                                    >
+                                    <span>Hipotensão postural e/ou lipotímia</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-plaq" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_plaqueta != "0" %}
+                                            value="{{ ficha.alarme_plaqueta }}"
+                                        {% endif %}
+                                    >
+                                    <span>Queda abrupta de plaquetas</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-vom" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_vomito != "0" %}
+                                            value="{{ ficha.alarme_vomito }}"
+                                        {% endif %}
+                                    >
+                                    <span>Vômitos persistentes</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-abdom" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_abdomem != "0" %}
+                                            value="{{ ficha.alarme_abdomem }}"
+                                        {% endif %}
+                                    >
+                                    <span>Dor abdominal intensa e contínua</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-letarg" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_letargia != "0" %}
+                                            value="{{ ficha.alarme_letargia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Letargia ou irritabilidade</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-sangram" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_sangramento != "0" %}
+                                            value="{{ ficha.alarme_sangramento }}"
+                                        {% endif %}
+                                    >
+                                    <span>Sangramento de mucosa/outras hemorragias</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-hemat" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_hematocito != "0" %}
+                                            value="{{ ficha.alarme_hematocito }}"
+                                        {% endif %}
+                                    >
+                                    <span>Aumento progressivo do hematócrito</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-hepato" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_hepatomeglagia != "0" %}
+                                            value="{{ ficha.alarme_hepatomeglagia }}"
+                                        {% endif %}
+                                    >
+                                    <span>Hepatomegalia >= 2cm</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-alarm-acum-liq" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.alarme_liquido != "0" %}
+                                            value="{{ ficha.alarme_liquido }}"
+                                        {% endif %}
+                                    >
+                                    <span>Acúmulo de líquidos</span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">69</span>
+                                <label for="campo-dt-sin-alarm">
+                                    Data de início dos sinais de alarme:
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-sin-alarm" type="date" class="input-dado form-control"
+                                    value="{% if ficha.dt_sinal_alarme %}{{ ficha.dt_sinal_alarme }}{% endif %}">
+                            </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">70</span>
+                            <label>
+                                Dengue grave
+                            </label>
+                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul>
+                                <div class="ms-3 mt-1 mb-1 negrito">
+                                    Extravasamento grave de plasma:
+                                </div>
+                                <ul>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-pul-deb" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_pulso != "0" %}
+                                                value="{{ ficha.deng_grav_pulso }}"
+                                            {% endif %}
+                                        >
+                                        <span>Pulso débil ou indetectáve</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-pa-conv" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_pa_conv != "0" %}
+                                                value="{{ ficha.deng_grav_pa_conv }}"
+                                            {% endif %}
+                                        >
+                                        <span>PA convergente <= 20 mmHg</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-temp-preen" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_capilar != "0" %}
+                                                value="{{ ficha.deng_grav_capilar }}"
+                                            {% endif %}
+                                        >
+                                        <span>Tempo de enchimento capilar</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-acum-liq" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_liquido != "0" %}
+                                                value="{{ ficha.deng_grav_liquido }}"
+                                            {% endif %}
+                                        >
+                                        <span>Acúmulo de líquidos com insuficiência respiratória</span>
+                                    </div>
+                                </ul>
+                            </ul>
+                            <ul>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-grav-taqui" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.deng_grav_taqui != "0" %}
+                                            value="{{ ficha.deng_grav_taqui }}"
+                                        {% endif %}
+                                    >
+                                    <span>Taquicardia</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-grav-extrem" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.deng_grav_extrem != "0" %}
+                                            value="{{ ficha.deng_grav_extrem }}"
+                                        {% endif %}
+                                    >
+                                    <span>Extremidades frias</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="deng-grav-hipo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                        {% if ficha.deng_grav_hipo != "0" %}
+                                            value="{{ ficha.deng_grav_hipo }}"
+                                        {% endif %}
+                                    >
+                                    <span>Hipotensão arterial em fase tardia</span>
+                                </div>
+                            </ul>
+                            <ul>
+                                <div class="col-12 mt-1 mb-1 negrito">
+                                    Sangramento grave:
+                                </div>
+                                <ul>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-hemat" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_hemat != "0" %}
+                                                value="{{ ficha.deng_grav_hemat }}"
+                                            {% endif %}
+                                        >
+                                        <span>Hematêmese</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-melen" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_melena != "0" %}
+                                                value="{{ ficha.deng_grav_melena }}"
+                                            {% endif %}
+                                        >
+                                        <span>Melena</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-metror" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_metror != "0" %}
+                                                value="{{ ficha.deng_grav_metror }}"
+                                            {% endif %}
+                                        >
+                                        <span>Metrorragia volumosa</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-snc" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_snc != "0" %}
+                                                value="{{ ficha.deng_grav_snc }}"
+                                            {% endif %}
+                                        >
+                                        <span>Sangramento do SNC</span>
+                                    </div>
+                                </ul>
+                            </ul>
+                            <ul>
+                                <div class="col-12 mt-1 mb-1 negrito">
+                                    Compromentimento grave de órgãos:
+                                </div>
+                                <ul>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-ast" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_ast != "0" %}
+                                                value="{{ ficha.deng_grav_ast }}"
+                                            {% endif %}
+                                        >
+                                        <span>AST/ALT > 1.000</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-miocar" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grave_miocardite != "0" %}
+                                                value="{{ ficha.deng_grave_miocardite }}"
+                                            {% endif %}
+                                        >
+                                        <span>Miocardite</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-consc" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_consc != "0" %}
+                                                value="{{ ficha.deng_grav_consc }}"
+                                            {% endif %}
+                                        >
+                                        <span>Alteração da consciência</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input id="deng-grav-outro" type="number"
+                                            class="form-control input-dado-quadrado mx-1"
+                                            min="1" max="9"
+                                            {% if ficha.deng_grav_outro != "0" %}
+                                                value="{{ ficha.deng_grav_outro }}"
+                                            {% endif %}
+                                        >
+                                        <span>Outros órgãos, especificar:</span>
+                                        <input id="deng-grav-outro-descricao" class="form-control input-dado"
+                                            value="{{ ficha.deng_grav_outro_descricao }}">
+                                    </div>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">71</span>
+                            <label for="campo-dt-sin-grav">
+                                Data de início dos sinais de gravidade:
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-sin-grav" type="date" class="input-dado form-control"
+                                value="{% if ficha.dt_sinal_gravidade %}{{ ficha.dt_sinal_gravidade }}{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-3 container-observacoes">
+        <span class="titulo-section negrito">
+            Informações complementares e observações
+        </span>
+        <div class="bloco-dados">
+            <div class="conteudo-bloco">
+                <label for="obs-adicionais" class="negrito mb-2">
+                    Observações Adicionais
+                </label>
+                <div class="textArea">
+                    <textarea id="obs-adicionais" class="form-control" rows="8">{{ ficha.obs_adicionais }}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Investigador</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-municipio-us-investigador">
+                                Município/Unidade de Saúde
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-us-investigador" class="input-dado form-control"
+                                value="{{ ficha.municipio_us_investigador }}">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-us-investigador">
+                                Cód. da Unid. de Saúde
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-us-investigador"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_us_investigador != "0" %}
+                                    value="{{ ficha.cod_us_investigador }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-nome-investigador">
+                                Nome
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                                value="{{ ficha.nome_investigador }}">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-funcao-investigador">
+                                Função
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-funcao-investigador" class="input-dado form-control"
+                                value="{{ ficha.funcao_investigador }}">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-assinatura-investigador">
+                                Assinatura
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control"
+                                value="{{ ficha.assinatura_investigador }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="linha-dados footer-ficha mb-3">
+        <span class="col-5">Chikungunya/Dengue</span>
+        <span class="col-2 d-flex justify-content-center">Sinan Online</span>
+        <div class="col-5 d-flex justify-content-evenly">
+            <span>SVS</span>
+            <span>14/03/2016</span>
+        </div>
+    </div>
+</div>
+
+{% block rodape_ficha %}
+    {% include 'rodape_edicao_ficha.html' %}
+{% endblock %}

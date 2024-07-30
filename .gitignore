@@ -1,3 +1,5 @@
 env-infocare
-\infocare\__pycache__
-\usuario\__pycache__
+infocare/__pycache__
+/usuario/__pycache__
+media/arquivos
+output.xlsx

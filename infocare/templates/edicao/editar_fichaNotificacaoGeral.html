@@ -5,11 +5,14 @@
         </i>
     </div>
     <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" value="{{ ficha.cod_formulario }}" aria-label="" hidden>
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="prontuario">Prontuário</label>
             <input id="prontuario" type="number" class="form-control"
-                   value="{% if ficha.prontuario %}{{ ficha.prontuario }}{% endif %}"/>
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
         </div>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="setor">Setor</label>
@@ -19,6 +22,7 @@
     <div class="col-1"></div>
 </div>
 <div id="fichaNotificacao" class="ficha">
+    {% csrf_token %}
     <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
@@ -118,7 +122,9 @@
                                     id="campo-cod-ibge-notificacao"
                                     type="number"
                                     class="input-dado form-control"
-                                    value="{% if ficha.cod_ibge_notificacao %}{{ ficha.cod_ibge_notificacao }}{% endif %}"
+                                    {% if ficha.cod_ibge_notificacao != "0" %}
+                                        value="{{ ficha.cod_ibge_notificacao }}"
+                                    {% endif %}
                             />
                         </div>
                     </div>
@@ -475,7 +481,7 @@
                 <div class="linha-dados">
                     <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">17</span>
+                            <span class="numeracao">20</span>
                             <label for="campo-uf-residencia">UF</label>
                         </div>
                         <div class="container-input-dado">
@@ -489,7 +495,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">18</span>
+                            <span class="numeracao">21</span>
                             <label for="campo-municipio-residencia">
                                 Município de Residência
                             </label>
@@ -517,7 +523,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">19</span>
+                            <span class="numeracao">22</span>
                             <label for="campo-distrito-residencia">Distrito</label>
                         </div>
                         <div class="container-input-dado">
@@ -532,7 +538,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">20</span>
+                            <span class="numeracao">23</span>
                             <label for="campo-bairro-residencia">Bairro</label>
                         </div>
                         <div class="container-input-dado">
@@ -545,7 +551,7 @@
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">21</span>
+                            <span class="numeracao">24</span>
                             <label for="campo-logradouro-residencia">
                                 Logradouro (rua, avenida, ...)
                             </label>
@@ -575,7 +581,7 @@
                 <div class="linha-dados">
                     <div class="col-2 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">22</span>
+                            <span class="numeracao">25</span>
                             <label for="campo-numero-residencia">Número</label>
                         </div>
                         <div class="container-input-dado">
@@ -589,7 +595,7 @@
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">23</span>
+                            <span class="numeracao">26</span>
                             <label for="campo-complemento-residencia">
                                 Complemento (apto, casa, ...)
                             </label>
@@ -604,7 +610,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">24</span>
+                            <span class="numeracao">27</span>
                             <label for="campo-geo-campo1">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
@@ -619,7 +625,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">25</span>
+                            <span class="numeracao">28</span>
                             <label for="campo-geo-campo2">Geo campo 2</label>
                         </div>
                         <div class="container-input-dado">
@@ -632,7 +638,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">26</span>
+                            <span class="numeracao">29</span>
                             <label for="campo-ponto-ref-residencia">
                                 Ponto de Referência
                             </label>
@@ -647,7 +653,7 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">27</span>
+                            <span class="numeracao">30</span>
                             <label for="campo-cep-residencia">CEP</label>
                         </div>
                         <div class="container-input-dado">
@@ -663,7 +669,7 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">28</span>
+                            <span class="numeracao">31</span>
                             <label for="campo-telefone-residencia">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
@@ -677,7 +683,7 @@
                     <div class="col-3 div-input campo-zona-residencia">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">29</span>
+                                <span class="numeracao">32</span>
                                 <label for="campo-zona-residencia">Zona</label>
                             </div>
                             <input
@@ -695,7 +701,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">30</span>
+                            <span class="numeracao">33</span>
                             <label for="campo-pais-residencia">
                                 País (se residente fora do Brasil)
                             </label>
@@ -1258,32 +1264,9 @@
                 <span>17/07/2006</span>
             </div>
         </div>
-        <div id="containerBtnAcao" class="d-flex justify-content-center align-items-center my-3">
-            <button class="btnCancelar btn mx-4" onclick="retornoListaFichas()">
-                VOLTAR
-            </button>
-
-            {% if status_ficha_aberta == 'preliminar' %}
-            <button class="btnCorPrincipal btn mx-4"
-                    onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' cod_ficha=ficha.codigo %}')">
-                TUDO CERTO
-            </button>
-            {% endif %}
-
-            {% if status_ficha_aberta == 'pendente' %}
-            <button class="btnCorPrincipal btn mx-4"
-                    onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha_notificacao' %}')">
-                ATUALIZAR
-            </button>
-            {% endif %}
-
-        </div>
-        <button class="btnAbrirObservacoes btn"
-                onclick="requisicaoGetPadrao('{% url 'observacoes' cod_ficha=ficha.codigo %}')">
-            <i class="mx-1 bi bi-chat-right-text-fill"></i>
-            {% if quant_obs %}
-            <span id="possuiObservacoes" class="rounded-circle"></span>
-            {% endif %}
-        </button>
     </section>
 </div>
+
+{% block rodape_ficha %}
+    {% include 'rodape_edicao_ficha.html' %}
+{% endblock %}

@@ -59,6 +59,25 @@
     color: #245B10;
 }
 
+#modalTiposFormulario label:hover {
+    background-color: var(--light-color);
+}
+
+#modalTiposFormulario .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+#modalTiposFormulario .modal-body::-webkit-scrollbar {
+    width: 7px;
+    background-color: var(--light-color);
+}
+
+#modalTiposFormulario .modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--dark-color); /* cor do botão de rolagem */
+    border-radius: 10px;
+}
+
 @media screen and (max-width:480px) {
     .row-cards {
         display: flex;

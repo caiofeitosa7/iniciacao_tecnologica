@@ -5,7 +5,7 @@
 <head>
     <title>Infocare</title>
     <meta charset="UTF-8">
-	<meta name="robots" content="noindex, follow">
+    <meta name="robots" content="noindex, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,11 +16,15 @@
     <link rel="stylesheet" href="{% static 'infocare/css/observacoes.css' %}">
     <link rel="stylesheet" href="{% static 'infocare/css/pagina_inicial.css' %}">
     <link rel="stylesheet" href="{% static 'infocare/css/listagem_fichas.css' %}">
-    <link rel="stylesheet" href="{% static 'infocare/css/fichaMulherIdadeFertil.css' %}">
 
     <link rel="stylesheet" href="{% static 'infocare/css/cssGeralFichas.css' %}">
+    <link rel="stylesheet" href="{% static 'infocare/css/fichaLeichVisceral.css' %}">
     <link rel="stylesheet" href="{% static 'infocare/css/fichaAcidenteTrabalho.css' %}">
+    <link rel="stylesheet" href="{% static 'infocare/css/fichaObitoTuberculose.css' %}">
+    <link rel="stylesheet" href="{% static 'infocare/css/fichaMulherIdadeFertil.css' %}">
+    <link rel="stylesheet" href="{% static 'infocare/css/fichaAcidAnimalPeconhento.css' %}">
     <link rel="stylesheet" href="{% static 'infocare/css/fichaViolenciaInterpessoal.css' %}">
+    <link rel="stylesheet" href="{# static 'infocare/css/fichaNotificacaoEventosAdvPosVac.css' %}">
 </head>
 
 <body>
@@ -55,16 +59,16 @@
                 </li>
                 <li>
                     <a class="opcao-menu-lateral" href="#" onclick="abrirOpcaoUsuarios()">
-                        <i class='bx bx-chat'></i>
+                        <i class='bx bx-group'></i>
                         <span class="links_name">Usuários</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a class="opcao-menu-lateral" href="#" onclick="abreFechaMenu()">
                         <i class='bx bx-cog'></i>
                         <span class="links_name">Configurações</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <!--            <div>-->
@@ -87,10 +91,9 @@
     </section>
 
     <script src="{% static 'geral/js/base.js' %}"></script>
+    <script src="{% static 'infocare/js/ficha.js' %}"></script>
     <script src="{% static 'infocare/js/observacoes.js' %}"></script>
     <script src="{% static 'infocare/js/pagina_inicial.js' %}"></script>
-    <script src="{% static 'infocare/js/fichaAntiRabica.js' %}"></script>
-    <script src="{% static 'infocare/js/fichaNotificacaoGeral.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

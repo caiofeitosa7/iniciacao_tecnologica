@@ -1,0 +1,44 @@
+.descricao-caso-supeito{
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 2px 10px 2px 10px;
+}
+
+.tabela table{
+    border-collapse: separate;
+    width: 100%;
+    border-spacing: 0;
+}
+
+.tabela table th, .tabela table td {
+    text-align: center;    
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    background-color: white;
+}
+
+.tabela table tr:last-child td{
+    border-bottom: 1px solid black;
+}
+
+.tabela table td:last-child, .tabela table th:last-child{
+    border-right: 1px solid black;
+}
+
+.tabela table thead th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.tabela table thead th:last-child {
+    border-top-right-radius: 10px; 
+}
+
+.tabela table tbody tr:last-child td:first-child, 
+.tabela table tbody tr td input {
+    border-bottom-left-radius: 10px; 
+}
+
+.tabela table tbody tr:last-child td:last-child, 
+.tabela table tbody tr td input{
+    border-bottom-right-radius: 10px; 
+}

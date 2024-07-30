@@ -1,0 +1,2674 @@
+<div class="linha-dados justify-content-between">
+    <div class="col-1">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
+           onclick="requisicaoGetPadrao('pagina_inicial')">
+        </i>
+    </div>
+    <div class="d-flex justify-content-around pb-3">
+        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
+            <input id="prontuario" type="number" class="form-control"/>
+        </div>
+        <div class="input-group flex-nowrap campo-hut">
+            <label class="input-group-text negrito" for="setor">Setor</label>
+            <input id="setor" class="form-control"/>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<div class="ficha pb-5">
+    {% csrf_token %}
+    <div class="mt-2 container-cabecalho">
+        <div class="col-3 left-div negrito">
+            <label>República Federativa do Brasil</label>
+            <label>Ministério do Saúde</label>
+        </div>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
+            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
+            <label class="negrito">FICHA DE NOTIFICAÇÃO</label>
+        </div>
+        <div class="col-3 right-div">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha">N°</label>
+                <input type="number" class="form-control" id="numero-ficha" oninput="atribuirValor(this.id)"/>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Gerais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">1</span>
+                                <label for="campo-tipo-notificacao">Tipo de Notificação</label>
+                            </div>
+                            <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
+                                    type="number" min="1" max="4"/>
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Negativa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 -
+                                Surto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 - Inquérito Tracoma
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">2</span>
+                            <label for="campo-agravoDoenca">Agravo/doença</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-agravoDoenca" class="input-dado form-control negrito"/>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">3</span>
+                            <label for="campo-dt-notificacao">Data da Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">4</span>
+                            <label for="campo-uf-notificacao">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-notificacao" type="text" class="input-dado form-control" maxlength="2" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">5</span>
+                            <label for="campo-municipio-notificacao">Município de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-notificacao" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-notificacao">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cod-ibge-notificacao"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">6</span>
+                            <label for="campo-unidade-saude">
+                                Unidade de Saúde (ou outra fonte notificadora)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-unidade-saude" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-unidade-saude">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-codigo-unidade-saude"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-sintomas">
+                                Data dos Primeiros Sintomas
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-sintomas"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente">Nome do Paciente</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-paciente"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">9</span>
+                            <label for="campo-dt-nascimento">Data de Nascimento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-idade">(ou) Idade</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-4">
+                                <input id="campo-idade" type="number" class="input-dado form-control" maxlength="3" oninput="atribuirValor(this.id)"/>
+                            </div>
+                            <div class="col-7 container-tipo-idade">
+                                <input
+                                        type="number"
+                                        id="campo-tipo-idade"
+                                        class="input-dado-quadrado form-control"
+                                        min="1"
+                                        max="4"
+                                        aria-label=""
+                                        oninput="atribuirValor(this.id)"
+                                />
+                                <ul class="letra-miuda">
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input campo-sexo">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">11</span>
+                                <label for="campo-sexo">Sexo</label>
+                            </div>
+                            <input
+                                    id="campo-sexo"
+                                    type="text"
+                                    class="input-dado-quadrado form-control"
+                                    maxlength="1"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                        <div class="container-input-dado letra-miuda">
+                            <ul>
+                                <li>M - Masculino</li>
+                                <li>F - Feminino</li>
+                                <li>I - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input campo-gestante">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">12</span>
+                                <label for="campo-gestante">Gestante</label>
+                            </div>
+                            <input
+                                    id="campo-gestante"
+                                    type="number"
+                                    class="input-dado-quadrado form-control"
+                                    min="1"
+                                    max="9"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3-3°Trimestre<br/>
+                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6-Não se aplica<br/>
+                            9-Ignorado
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-raca">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-raca">Raça/Cor</label>
+                            </div>
+                            <input
+                                    id="campo-raca"
+                                    type="number"
+                                    class="input-dado-quadrado form-control"
+                                    min="1"
+                                    max="9"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-Amarela<br/>
+                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9-Ignorado
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-escolaridade">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">14</span>
+                                <label for="campo-escolaridade">Escolaridade</label>
+                            </div>
+                            <input
+                                    id="campo-escolaridade"
+                                    type="number"
+                                    class="input-dado-quadrado form-control"
+                                    maxlength="2"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
+                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série
+                            incompleta do EF (antigo primário ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo
+                            primário ou 1° grau)<br/>
+                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo
+                            (antigo ginásio ou 1° grau) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino
+                            médio incompleto (antigo colegial ou 2° grau)<br/>
+                            6-Ensino médio completo (antigo colegial ou 2° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-numero-sus">Número do Cartão SUS</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-sus" type="number" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-nome-mae">Nome da mãe</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-mae" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação de Surto</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-4 d-flex flex-column justify-content-between">
+                        <div class="div-input mb-3">
+                            <div class="info-elevada">
+                                <span class="numeracao">17</span>
+                                <label for="campo-dt-primeiro-sintoma">
+                                    Data dos 1° Sintomas do 1° Caso Suspeito
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input
+                                        id="campo-dt-primeiro-sintoma"
+                                        type="date"
+                                        class="input-dado form-control"
+                                />
+                            </div>
+                        </div>
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">18</span>
+                                <label for="campo-numero-casos-suspeitos">
+                                    N° de Casos Suspeitos / Expostos
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input
+                                        id="campo-numero-casos-suspeitos"
+                                        type="number"
+                                        class="input-dado form-control"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">19</span>
+                                <label for="campo-local-inicial-ocorrencia">
+                                    Local inicial de Ocorrência do Surto
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-local-inicial-ocorrencia"
+                                    type="number"
+                                    class="input-dado-quadrado form-control"
+                                    min="1"
+                                    max="11"
+                            />
+                        </div>
+                        <div class="container-input-dado flex-column">
+                            <div class="d-flex justify-content-evenly px-1">
+                                <ul class="px-2">
+                                    <li class="label-nowrap">1 - Residência</li>
+                                    <li>4 - Asilo</li>
+                                    <li>7 - Eventos</li>
+                                </ul>
+                                <ul class="px-2">
+                                    <li>2 - Hospital / Unidade de Saúde</li>
+                                    <li>5 - Outras Instituições (alojamento, trabalho)</li>
+                                    <li>8 - Casos Dispersos no Bairro</li>
+                                </ul>
+                                <ul class="px-2">
+                                    <li>3 - Creche / Escola</li>
+                                    <li>6 - Restaurante/ Padaria</li>
+                                    <li>9 - Casos Dispersos Pelo Município</li>
+                                </ul>
+                            </div>
+                            <div class="my-2">
+                                <ul class="d-flex align-items-center">
+                                    <li class="px-2">
+                                        10 - Casos Dispersos em ais de um Município
+                                    </li>
+                                    <li class="px-2 label-nowrap">11 - Outros</li>
+                                    <li class="px-2">Especificar</li>
+                                    <li>
+                                        <input
+                                                id="campo-local-especificar-ocorrencia"
+                                                class="input-dado form-control"
+                                                aria-label=""
+                                        />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados de Residência</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-uf-residencia">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-uf-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    maxlength="2"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <label for="campo-municipio-residencia">
+                                Município de Residência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-municipio-residencia"
+                                type="text"
+                                class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-residencia">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-cod-ibge-residencia"
+                                type="number"
+                                class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <label for="campo-distrito-residencia">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-distrito-residencia"
+                                type="text"
+                                class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">20</span>
+                            <label for="campo-bairro-residencia">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                id="campo-bairro-residencia"
+                                type="text"
+                                class="input-dado form-control"
+                                oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">21</span>
+                            <label for="campo-logradouro-residencia">
+                                Logradouro (rua, avenida, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-logradouro-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-residencia">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-codigo-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">22</span>
+                            <label for="campo-numero-residencia">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-numero-residencia"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">23</span>
+                            <label for="campo-complemento-residencia">
+                                Complemento (apto, casa, ...)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-complemento-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">24</span>
+                            <label for="campo-geo-campo1">Geo campo 1</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-geo-campo1"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">25</span>
+                            <label for="campo-geo-campo2">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-geo-campo2"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">26</span>
+                            <label for="campo-ponto-ref-residencia">
+                                Ponto de Referência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-ponto-ref-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">27</span>
+                            <label for="campo-cep-residencia">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cep-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    maxlength="9"
+                                    onblur="pesquisaCepComReplicacao(this)"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">28</span>
+                            <label for="campo-telefone-residencia">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-telefone-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-zona-residencia">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">29</span>
+                                <label for="campo-zona-residencia">Zona</label>
+                            </div>
+                            <input
+                                    id="campo-zona-residencia"
+                                    type="number"
+                                    class="input-dado-quadrado form-control"
+                                    maxlength="1"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br/>
+                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-pais-residencia">
+                                País (se residente fora do Brasil)
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-pais-residencia"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    oninput="atribuirValor(this.id)"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificante</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-municipio-us-notificante">
+                                Município/Unidade de Saúde
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-municipio-us-notificante"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-nome-notificante">Nome</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-notificante"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-funcao-notificante">Função</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-funcao-notificante"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-assinatura-notificante">Assinatura</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-assinatura-notificante"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <span class="col-3">Notificação</span>
+                    <span class="col-6 d-flex justify-content-center">Sinan NET</span>
+                    <div class="col-3 d-flex justify-content-evenly">
+                        <span>SVS</span>
+                        <span>17/07/2006</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="conteiner-dadosComplementares">
+        <div class="d-flex flex-column align-items-center my-5">
+            <span class="negrito">DADOS COMPLEMENTARES</span>
+            <span>(ANOTAR TODOS OS DADOS DISPONÍVEIS NO MOMENTO DA NOTIFICAÇÃO)</span>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada d-flex align-items-start">
+                            <span class="numeracao">01</span>
+                            <label class="mx-1" for="campo-dt-amostra-sorologia">
+                                Data da coleta da 1°<br/>amostra da sorologia
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-amostra-sorologia"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada d-flex align-items-start">
+                            <span class="numeracao">02</span>
+                            <label class="mx-1" for="campo-dt-outra-amostra">
+                                Data da coleta da 1°<br/>amostra de outra amostra
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-outra-amostra"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">03</span>
+                            <label for="campo-tipo-exame"> Especificar tipo de exame: </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-tipo-exame"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">04</span>
+                                <label for="campo-obito">Óbito ?</label>
+                            </div>
+                            <input
+                                    id="campo-obito"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">05</span>
+                                <label for="campo-caso-semelhante">
+                                    Contato com caso semelhante ?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-caso-semelhante"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                        <span class="mb-1">
+                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">06</span>
+                                <label for="campo-exantema"> Presença de exantema ? </label>
+                            </div>
+                            <input
+                                    id="campo-exantema"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                        <span class="mb-1">
+                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">07</span>
+                            <label for="campo-dt-inicio-exatema">
+                                Data do início do exatema
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-inicio-exatema"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-5 div-input">
+                        <div class="info-elevada-com-input">
+                            <div class="d-flex align-items-start">
+                                <span class="numeracao">08</span>
+                                <label class="mx-1 pb-2" for="campo-petequiaSufusao">
+                                    Presença de petéquias ou sufusões hemorrágicas?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-petequiaSufusao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span class="mb-1">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">09</span>
+                                <label for="campo-liquor"> Foi realizado líquor ? </label>
+                            </div>
+                            <input
+                                    id="campo-liquor"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-bacterioscopia"
+                            >Resultado da bacterioscopia:</label
+                            >
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-bacterioscopia"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div class="d-flex align-items-start">
+                                <span class="numeracao">11</span>
+                                <label class="mx-1 pb-2" for="campo-tomou-vacina">
+                                    O paciente tomou vacina contra agravo notificado neste
+                                    impresso?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-tomou-vacina"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">12</span>
+                            <label for="campo-dt-ultima-dose-tomada">
+                                Data da última dose tomada
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-ultima-dose-tomada"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-hospitalizacao">
+                                    Ocorreu hospitalização ?
+                                </label>
+                            </div>
+                            <input
+                                    id="campo-hospitalizacao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                            />
+                        </div>
+                        <div class="container-input-dado justify-content-evenly px-1">
+                            <span class="mx-1">1 - Sim</span>
+                            <span class="mx-1">2 - Não</span>
+                            <span class="mx-1">9 - Ignorado</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">14</span>
+                            <label for="campo-dt-hospitalizacao">
+                                Data da hospitalização
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-dt-hospitalizacao"
+                                    type="date"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-uf-hospital">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-uf-hospital"
+                                    type="text"
+                                    class="input-dado form-control"
+                                    maxlength="2"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-municipio-hospital">
+                                Município do hospital
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-municipio-hospital"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cod-ibge-hospital"
+                                    type="number"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-nome-hospital">Nome do hospital</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-nome-hospital"
+                                    type="text"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-hospital">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cod-hospital"
+                                    type="number"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Surto</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <span>Hipóteses diagnósticas no momento da notificação</span>
+                        </div>
+                        <div class="container-input-dado flex-column px-2">
+                            <div class="pt-2 pb-3 d-flex align-items-center">
+                                <label for="campo-hipotese-diagnostica1" class="label-nowrap">
+                                    1° Hipótese Diagnóstica - CID 10:
+                                </label>
+                                <input
+                                        id="campo-hipotese-diagnostica1"
+                                        class="input-dado form-control mx-2"
+                                />
+                            </div>
+                            <div class="pb-3 d-flex align-items-center">
+                                <label for="campo-hipotese-diagnostica2" class="label-nowrap">
+                                    2° Hipótese Diagnóstica - CID 10:
+                                </label>
+                                <input
+                                        id="campo-hipotese-diagnostica2"
+                                        class="input-dado form-control mx-2"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Local prov. infecção</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <span>Local provável de infecção (classificação provisória)</span>
+                        </div>
+                        <div class="container-input-dado px-2">
+                            <div class="col-5 d-flex flex-column px-1">
+                                <div class="pt-3 pb-4 d-flex align-items-center">
+                                    <label for="campo-pais-infeccao" class="label-nowrap">
+                                        País:
+                                    </label>
+                                    <input
+                                            id="campo-pais-infeccao"
+                                            class="input-dado form-control mx-2"
+                                    />
+                                </div>
+                                <div class="pb-3 d-flex align-items-center">
+                                    <label for="campo-distrito-infeccao" class="label-nowrap">
+                                        Distrito:
+                                    </label>
+                                    <input
+                                            id="campo-distrito-infeccao"
+                                            class="input-dado form-control mx-2"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-2 px-1">
+                                <div class="py-3 d-flex align-items-center">
+                                    <label for="campo-uf-infeccao" class="label-nowrap">
+                                        UF
+                                    </label>
+                                    <input
+                                            id="campo-uf-infeccao"
+                                            class="input-dado form-control mx-2"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-5 d-flex flex-column px-1">
+                                <div class="pt-3 pb-4 d-flex align-items-center">
+                                    <label for="campo-municipio-infeccao" class="label-nowrap">
+                                        Município:
+                                    </label>
+                                    <input
+                                            id="campo-municipio-infeccao"
+                                            class="input-dado form-control mx-2"
+                                    />
+                                </div>
+                                <div class="pb-3 d-flex align-items-center">
+                                    <label for="campo-bairro-infeccao" class="label-nowrap">
+                                        Bairro:
+                                    </label>
+                                    <input
+                                            id="campo-bairro-infeccao"
+                                            class="input-dado form-control mx-2"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="linha-dados footer-ficha mb-3">
+            <span class="col-9">Dados Complementares/ Notificação</span>
+            <div class="col-3 d-flex justify-content-evenly">
+                <span>SVS</span>
+                <span>17/07/2006</span>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="d-flex flex-column align-items-center my-3 negrito">
+    <span>FICHA DE INVESTIGAÇÃO</span>
+    <span>MENINGITE</span>
+</div>
+<div class="ficha pt-5">
+    <div class="mt-2 container-cabecalho">
+        <div class="col-3 left-div negrito">
+            <label>República Federativa do Brasil</label>
+            <label>Ministério do Saúde</label>
+        </div>
+        <div class="col-6 center-div">
+            <label class="negrito">SINAN</label>
+            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
+            <label>FICHA DE INVESTIGAÇÃO <label class="negrito">MENINGITE</label></label>
+        </div>
+        <div class="col-3 right-div">
+            <div class="input-group flex-nowrap">
+                <label class="input-group-text negrito" for="numero-ficha2">N°</label>
+                <input type="number" class="form-control" id="numero-ficha2">
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 descricao-acidenteTrabalho">
+        <span class="letra-miuda">
+            <b>CASO SUSPEITO:</b> Criança acima de nove meses e/ou adulto com febre, cefaléia, vômitos, rigidez de nuca, outros sinais de
+            irritação meníngea (Kernig e Brudzinski), convulsão, sufusões hemorrágicas (petéquias) e torpor. <br>
+            Crianças abaixo de nove meses observar também irritabilidade (choro persistente) ou abaulamento de fontanela.
+        </span>
+    </div>
+    <section>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Gerais</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">1</span>
+                            <label>Tipo de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="mb-1">2 - Individual</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">2</span>
+                            <label>Agravo/doença</label>
+                        </div>
+                        <div class="container-input-dado pb-2">
+                            <span class="negrito me-5">MENINGITE  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                1 - DOENÇA MENINGOCÓCIA <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - OUTRAS MENINGITES
+                            </span>
+                            <input id="campo-tipo-menin2" type="number" class="input-dado-quadrado form-control" min="1" max="2">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label>Código (CID10)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <span class="negrito">G 03.9</span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">3</span>
+                            <label for="campo-dt-notificacao2">Data da Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-notificacao2" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">4</span>
+                            <label for="campo-uf-notificacao2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-notificacao2" type="text" class="input-dado form-control" maxlength="2">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">5</span>
+                            <label for="campo-municipio-notificacao2">Município de Notificação</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-notificacao2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-notificacao2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-notificacao2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">6</span>
+                            <label for="campo-unidade-saude2">Unidade de Saúde (ou outra fonte notificadora)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-unidade-saude2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-unidade-saude2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">7</span>
+                            <label for="campo-dt-sintomas2">Data dos Primeiros Sintomas</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-sintomas2" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Notificação Individual</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente2">Nome do Paciente</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-paciente2" type="text" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">9</span>
+                            <label for="campo-dt-nascimento2">Data de Nascimento</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">10</span>
+                            <label for="campo-idade2">(ou) Idade</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <div class="col-4">
+                                <input id="campo-idade2" type="number" class="input-dado form-control" maxlength="3">
+                            </div>
+                            <div class="col-7 container-tipo-idade">
+                                <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
+                                       min="1" max="4" aria-label="">
+                                <ul class="letra-miuda">
+                                    <li>1 - Hora</li>
+                                    <li>2 - Dia</li>
+                                    <li>3 - Mês</li>
+                                    <li>4 - Ano</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 div-input campo-sexo">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">11</span>
+                                <label for="campo-sexo2">Sexo</label>
+                            </div>
+                            <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
+                        </div>
+                        <div class="container-input-dado letra-miuda">
+                            <ul>
+                                <li>M - Masculino</li>
+                                <li>F - Feminino</li>
+                                <li>I - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input campo-gestante">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">12</span>
+                                <label for="campo-gestante2">Gestante</label>
+                            </div>
+                            <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-3°Trimestre<br>
+                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            6-Não se aplica<br>
+                            9-Ignorado
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-raca">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">13</span>
+                                <label for="campo-raca2">Raça/Cor</label>
+                            </div>
+                            <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
+                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
+                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            3-Amarela<br>
+                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            9-Ignorado
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input campo-escolaridade">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">14</span>
+                                <label for="campo-escolaridade2">Escolaridade</label>
+                            </div>
+                            <input id="campo-escolaridade2" type="number" class="input-dado-quadrado form-control"
+                                   maxlength="2">
+                        </div>
+                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
+                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série incompleta do EF (antigo
+                            primário ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo primário ou 1° grau)<br>
+                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo (antigo ginásio ou 1° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino médio incompleto (antigo colegial ou 2° grau)<br>
+                            6-Ensino médio completo (antigo colegial ou 2° grau)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">15</span>
+                            <label for="campo-numero-sus2">Número do Cartão SUS</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-sus2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-8 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">16</span>
+                            <label for="campo-nome-mae2">Nome da mãe</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-mae2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados de Residência</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-1 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">17</span>
+                            <label for="campo-uf-residencia2">UF</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-uf-residencia2" type="text" class="input-dado form-control"
+                                   maxlength="2">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">18</span>
+                            <label for="campo-municipio-residencia2">Município de Residência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-ibge-residencia2">Código (IBGE)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-ibge-residencia2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">19</span>
+                            <label for="campo-distrito-residencia2">Distrito</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-distrito-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">20</span>
+                            <label for="campo-bairro-residencia2">Bairro</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-bairro-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">21</span>
+                            <label for="campo-logradouro-residencia2">Logradouro (rua, avenida, ...)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-logradouro-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-2 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-codigo-residencia2">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-codigo-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">22</span>
+                            <label for="campo-numero-residencia2">Número</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-numero-residencia2" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-7 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">23</span>
+                            <label for="campo-complemento-residencia2">Complemento (apto, casa, ...)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-complemento-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">24</span>
+                            <label for="campo-geo-campo12">Geo campo 1</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo12" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">25</span>
+                            <label for="campo-geo-campo22">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-geo-campo22" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">26</span>
+                            <label for="campo-ponto-ref-residencia2">Ponto de Referência</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ponto-ref-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">27</span>
+                            <label for="campo-cep-residencia2">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cep-residencia2" type="text" class="input-dado form-control"
+                                   maxlength="9">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">28</span>
+                            <label for="campo-telefone-residencia2">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input campo-zona-residencia">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">29</span>
+                                <label for="campo-zona-residencia2">Zona</label>
+                            </div>
+                            <input id="campo-zona-residencia2" type="number" class="input-dado-quadrado form-control"
+                                   maxlength="1">
+                        </div>
+                        <div class="container-input-dado descricao-tipos letra-miuda">
+                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
+                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-pais-residencia2">País (se residente fora do Brasil)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-pais-residencia2" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-3 container-dadosComplementares">
+        <span class="titulo-section negrito">Dados Complementares do Caso</span>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Antecedentes Epidemiológicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
+                            <label for="campo-dt-investigacao">
+                                Data da Investigação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-dt-investigacao" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">32</span>
+                            <label for="campo-ocupacao">
+                                Ocupação
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-ocupacao" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">33</span>
+                            <label>Vacinação</label>
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            <ul class="col-1 mt-5">
+                                <span>
+                                    1 - Sim <br>
+                                    2 - Não <br>
+                                    9 - Ignorado
+                                </span>
+                            </ul>
+                            <ul class="col-5">
+                                <div class="d-flex mb-2">
+                                    <span class="label-nowrap" style="margin-left: 8.1rem;">
+                                        N° Doses
+                                    </span>
+                                    <span class="ms-4 label-nowrap">
+                                        Data da Última Dose
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-poli-ac" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Polissacarídica <br> A/C</span>
+                                    <input id="quant-poli-ac" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-poli-ac" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-poli-bc" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Polissacarídica <br> B/C</span>
+                                    <input id="quant-poli-bc" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-poli-bc" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-conju" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span class="me-4">
+                                        Conjugada <br> meningo C
+                                    </span>
+                                    <input id="quant-conju" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-conju" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-bcg" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 4.33rem;">
+                                        BCG
+                                    </span>
+                                    <input id="quant-bcg" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-bcg" type="date" class="form-control me-2">
+                                </div>
+                            </ul>
+                            <ul class="col-5">
+                                <div class="d-flex mb-2">
+                                    <span style="margin-left: 7.5rem;">
+                                        N° Doses
+                                    </span>
+                                    <span class="ms-4 label-nowrap">
+                                        Data da Última Dose
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-triplice" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 2.6rem;">
+                                        Tríplice
+                                    </span>
+                                    <input id="quant-triplice" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-triplice" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-hemo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Hemófilo <br> (Tetravalente <br> ou HIB)</span>
+                                    <input id="quant-hemofilo" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-hemofilo" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-pneumo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 0.1rem;">
+                                        Pneumococo
+                                    </span>
+                                    <input id="quant-pneumo" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-pneumo" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center my-1">
+                                    <input id="vac-outras" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 3.2rem;">
+                                        Outra
+                                    </span>
+                                    <input id="quant-outra" class="form-control input-dado-quadrado mx-2"/>
+                                    <input id="dt-outra" type="date" class="form-control me-2">
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">34</span>
+                            <label>
+                                Doenças Pré-existentes
+                            </label>
+                            <span class="ms-5 ps-5">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <ul class="col-3">
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-aids" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>AIDS/HIV+</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-traum" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Traumatismo</span>
+                                </div>
+                            </ul>
+                            <ul class="col-3">
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-imuno" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Outras Doenças Imunossupressoras</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-inf-hosp" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Infecção Hospitalar</span>
+                                </div>
+                            </ul>
+                            <ul class="col-3">
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-ira" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>IRA</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-tub" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Tuberculose</span>
+                                </div>
+                            </ul>
+                            <ul class="col-3">
+                                <div class="d-flex align-items-center">
+                                    <input id="doen-outr" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Outro</span>
+                                    <input id="campo-doen-outr" class="form-control input-dado">
+                                </div>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">35</span>
+                                <label for="cont-cas-susp">
+                                    Contato com Caso Suspeito ou Confirmado de Meningite 
+                                    (até 15 dias antes do início dos sintomas)
+                                </label>
+                            </div>
+                            <input id="cont-cas-susp" type="number"
+                                class="input-dado-quadrado form-control">
+                        </div>
+                        <div class="container-input-dado justify-content-evenly flex-wrap mb-2">
+                            <ul class="mx-1">
+                                <li>1 - Domicílio</li>
+                                <li>5 - Posto de Saúde/Hospital</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>2 - Vizinhança</li>
+                                <li>6 - Outro Estado/Município</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>3 - Trabalho</li>
+                                <li>7 - Sem História de Contato</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>4 - Creche/Escola</li>
+                                <li>8 - Outro País</li>
+                            </ul>
+                            <ul class="mx-1 mt-4">
+                                <li>9 - Ignorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">36</span>
+                            <label for="campo-nome-contato">Nome do Contato</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-contato" type="text" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">37</span>
+                            <label for="campo-telefone-contato">(DDD) Telefone</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-telefone-contato" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">38</span>
+                            <label for="endereco-contato">Endereço do contato (Rua, Av., Apto., Bairro, Localidade, etc)</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="endereco-contato" type="text" class="input-dado form-control" aria-label="">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">39</span>
+                                <label for="caso-secundario">Caso Secundário</label>
+                            </div>
+                            <input id="caso-secundario" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados Clinicos</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">40</span>
+                            <label>
+                                Sinais e Sintomas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="d-flex justify-content-evenly align-items-center mb-1">
+                            <div class="col-1">
+                                <span> 
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Não <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                                </span>
+                            </div>
+                            <ul class="col-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-cefa" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Cefaléia</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-febre" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Febre</span>
+                                </div>
+                            </ul>
+                            <ul class="col-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-vomito" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Vômito</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-convul" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Convulsões</span>
+                                </div>
+                            </ul>
+                            <ul class="col-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-rigidez" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Rigidez de Nuca</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-kern-brud" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Kernig/Brudzinski</span>
+                                </div>
+                            </ul>
+                            <ul class="col-2">
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-abaulamen" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Abaulamento <br> de Fontanela</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-coma" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Coma</span>
+                                </div>
+                            </ul>
+                            <ul class="col-3">
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-petequias" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Petequias/Sufusões Hemorrágicas</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="ss-outr" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9">
+                                    <span>Outras</span>
+                                    <input id="campo-ss-outr" class="form-control input-dado">
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Atendimento</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">41</span>
+                                <label for="hospitalizacao">Ocorreu Hospitalização</label>
+                            </div>
+                            <input id="hospitalizacao" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">42</span>
+                                <label for="campo-dt-internacao">
+                                    Data da Internacao
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-internacao" type="date" class="input-dado form-control">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-1 div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">43</span>
+                                <label for="campo-uf-hospital">UF</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-uf-hospital" class="input-dado form-control" maxlength="2">
+                            </div>
+                        </div>
+                        <div class="col-3 div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">44</span>
+                                <label for="campo-municipio-hospital">Município do Hospital</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-municipio-hospital" class="input-dado form-control">
+                            </div>
+                        </div>
+                        <div class="col-2 div-input">
+                            <div class="info-elevada-sem-numeracao">
+                                <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-cod-ibge-hospital" type="number" class="input-dado form-control">
+                            </div>
+                        </div>
+                    </div>
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">45</span>
+                            <label for="campo-nome-hospital">Nome do Hospital</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-hospital" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-hospital">Código</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-hospital" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Dados do Laboratório</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">46</span>
+                                <label for="puncao-lombar">Punção Lombar</label>
+                            </div>
+                            <input id="puncao-lombar" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                                <span class="numeracao">47</span>
+                                <label for="campo-dt-puncao">
+                                    Data da Punção
+                                </label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-puncao" type="date" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">48</span>
+                                <label for="aspec-liq">Aspecto do Líquor</label>
+                            </div>
+                            <input id="aspec-liq" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                        </div>
+                        <div class="container-input-dado descricao-tipos-meia-altura">
+                            <span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Límpido&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                2 - Purulento&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                3 - Hemorrágico <br>
+                                4 - Turvo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                5 - Xantocrômico&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                6 - Outros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                9 - Ignorado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <span class="numeracao">49</span>
+                    <label for="campo-micro-1-amostra">
+                        &nbsp;Resultados Laboratoriais
+                    </label>
+                </div>                
+                <div class="linha-dados">
+                    <div class="col-4">
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                Cultura
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="cult-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>Lesão Petequial&nbsp;&nbsp;&nbsp;</span>
+                                <input id="cult-les" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>Sangue/Soro&nbsp;&nbsp;</span>
+                                <input id="cult-san" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>Escarro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="cult-esc" class="form-control input-dado">
+                            </div>
+                        </div>
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                Bacterioscopia
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="bac-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>Lesão Petequial&nbsp;&nbsp;&nbsp;</span>
+                                <input id="bac-les" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>Sangue/Soro&nbsp;&nbsp;</span>
+                                <input id="bac-san" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>Escarro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="bac-esc" class="form-control input-dado">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                CIE
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="cie-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Sangue/Soro&nbsp;</span>
+                                <input id="cie-san" class="form-control input-dado">
+                            </div>
+                        </div>
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                Aglutinação pelo Látex
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="agl-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Sangue/Soro&nbsp;</span>
+                                <input id="agl-san" class="form-control input-dado">
+                            </div>
+                        </div>
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                Isolamento Viral
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="iv-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Fezes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="iv-fezes" class="form-control input-dado">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="div-input">
+                            <div class="negrito my-3">
+                                PCR
+                            </div>   
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Líquor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="pcr-liq" class="form-control input-dado">
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Lesão Petequial&nbsp;&nbsp;&nbsp;</span>
+                                <input id="pcr-les" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Sangue/Soro&nbsp;</span>
+                                <input id="pcr-san" class="form-control input-dado">
+                            </div><div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Escarro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="pcr-esc" class="form-control input-dado">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Classificação do Caso/ Etiologia</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-3">
+                        <div class="div-input">
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">50</span>
+                                    <label for="classif-caso">
+                                        Classificação do Caso
+                                    </label>
+                                </div>
+                                <input id="classif-caso" type="number" min="1" max="2"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Confirmado <br>
+                                    2 - Descartado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="div-input">
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">51</span>
+                                    <label for="tipo-men-confirmacao">
+                                        Se Confirmado, Especifique
+                                    </label>
+                                </div>
+                                <input id="tipo-men-confirmacao" type="number" min="1" max="2"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Meningococcemia <br>
+                                    2 - Meningite Meningocócica <br>
+                                    3 - Meningite Meningocócica com Meningococemia <br>
+                                    4 - Meningite Tuberculosa <br>
+                                    5 - Meningite por outras bactérias <br>
+                                </div>
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 - Meningite não especificada <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7 - Meningite Asséptica <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8 - Meningite de outra etiologia <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Meningite por Hemófilo <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 - Meningite por Pneumococos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-8">
+                        <div class="div-input">
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">52</span>
+                                    <label for="crit-conf">
+                                        Critério de Confirmação
+                                    </label>
+                                </div>
+                                <input id="crit-conf" type="number" min="1" max="3"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Cultura <br>
+                                    2 - CIE <br>
+                                    3 - Ag. Látex 
+                                 </div>
+                                 <div class="container-input-dado descricao-tipos-meia-altura">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 - Clínico <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 - Bacterioscopia <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 - Quimiocitológico <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do líquor
+                                 </div>
+                                 <div class="container-input-dado descricao-tipos-meia-altura">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7 - Clínico-epidemiológico <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8 - Isolamento Viral <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - PCR <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 - Outros
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">53</span>
+                            <label for="n-mening">Se N. meningiditis especificar sorogrupo</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="n-mening" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-2">
+                      <div class="div-input">
+                        <div class="info-elevada-com-input">
+                            <span class="numeracao">54</span>
+                            <label for="n-comunican">Nº de Comunicantes</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="n-comunican" type="number" min="0" max="100"
+                            class="input-dado-quadrado form-control">
+                        </div>
+                      </div>  
+                    </div>
+                    <div class="col-4">
+                        <div class="div-input">
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">55</span>
+                                    <label for="quimio-comun">
+                                        Quimioprofilaxia dos Comunicantes?
+                                    </label>
+                                </div>
+                                <input id="quimio-comun" type="number" min="1" max="9"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Sim&nbsp;&nbsp;&nbsp;
+                                    2 - Não &nbsp;&nbsp;&nbsp;
+                                    9 - Ignorado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="div-input">
+                            <div class="info-elevada">
+                                <span class="numeracao">56</span>
+                                <label for="dt-profilaxia">Se sim, Data</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="dt-profilaxia" type="date" class="input-dado form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-4">
+                       <div class="div-input">
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">57</span>
+                                    <label for="doen-relac-trab">
+                                        Doença Relacionada ao Trabalho
+                                    </label>
+                                </div>
+                                <input id="doen-relac-trab" type="number" min="1" max="9"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Sim&nbsp;&nbsp;&nbsp;
+                                    2 - Não&nbsp;&nbsp;&nbsp;
+                                    9 - Ignorado
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Conclusão</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-6 div-input">
+                        
+                            <div class="info-elevada-com-input">
+                                <div>
+                                    <span class="numeracao">58</span>
+                                    <label for="campo-evolucao-caso">
+                                        Evolução do Caso
+                                    </label>
+                                </div>
+                                <input id="campo-evolucao-caso" type="number" min="1" max="9"
+                                    class="input-dado-quadrado form-control">
+                            </div>
+                            <div class="container-input-dado">
+                                <div class="container-input-dado descricao-tipos-meia-altura">
+                                    1 - Alta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Óbito por meningite <br>
+                                    3 - Óbito por outra causa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <div class="col-3 div-input">
+                        
+                            <div class="info-elevada">
+                                <span class="numeracao">59</span>
+                                <label for="dt-evolucao">Data da Evolução</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="dt-evolucao" type="date" class="input-dado form-control">
+                            </div>
+                        
+                    </div>
+                    <div class="col-3 div-input">
+                        
+                            <div class="info-elevada">
+                                <span class="numeracao">60</span>
+                                <label for="campo-dt-encerramento">Data do Encerramento</label>
+                            </div>
+                            <div class="container-input-dado">
+                                <input id="campo-dt-encerramento" type="date" class="input-dado form-control">
+                            </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-3 container-observacoes">
+        <span class="titulo-section negrito">Informações complementares e observações</span>
+        <div class="bloco-dados">
+            <div class="conteudo-bloco">
+                <div class="mb-1">
+                    Exame Quimiocitológico
+                </div>
+                <div class="linha-dados div-input">
+                    <div class="col-4">
+                       
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Hemáceas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-hema" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;mm3&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Neutrófilos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-neutro" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Glicose&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-gli" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;mg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Leucócitos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="lcr-leuco" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;mm3&nbsp;&nbsp;</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Eosinófilos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="lcr-eosi" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span>&nbsp;&nbsp;Proteínas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <input id="lcr-prot" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;mg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Monócitos&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-mono" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Linfócitos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-linfo" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>&nbsp;&nbsp;Cloreto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <input id="lcr-cloreto" class="form-control input-dado"> <span>&nbsp;&nbsp;&nbsp;mg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                    </div>
+            </div>
+                <div class="mt-2 textArea">
+                    <span>Observações:</span>
+                    <textarea id="campo-observacoes" class="form-control" rows="6" aria-label=""></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="bloco-dados">
+            <div class="titulo-bloco">
+                <span>Investigador</span>
+            </div>
+            <div class="conteudo-bloco">
+                <div class="linha-dados">
+                    <div class="col-9 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-municipio-us-investigador">Município/Unidade de Saúde</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-municipio-us-investigador" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-cod-us-investigador">Cód. da Unid. de Saúde</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-cod-us-investigador" type="number" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-nome-investigador">Nome</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-funcao-investigador">Função</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                    <div class="col-4 div-input">
+                        <div class="info-elevada-sem-numeracao">
+                            <label for="campo-assinatura-investigador">Assinatura</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input id="campo-assinatura-investigador" type="text" class="input-dado form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="linha-dados footer-ficha mb-3">
+        <span class="col-5">Meningite</span>
+        <span class="col-2 d-flex justify-content-center">Sinan NET</span>
+        <div class="col-5 d-flex justify-content-evenly">
+            <span>SVS</span>
+            <span>15/10/2007</span>
+        </div>
+    </div>
+</div>
+
+{% block rodape_ficha %}
+    {% include 'rodape_ficha.html' %}
+{% endblock %}

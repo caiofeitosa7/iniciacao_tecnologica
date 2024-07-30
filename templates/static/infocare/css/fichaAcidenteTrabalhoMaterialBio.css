@@ -1,0 +1,39 @@
+.avisoFicha {
+  border: 3px solid #000;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.descricao-aviso span {
+  font-size: 18px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.dadosComplementares-ficha {
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 4px;
+  text-align: center;
+}
+
+.coluna-adjust {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.disp-ruby {
+  display: flex;
+}
+
+.campo-input-tipo-virus {
+  border-radius: 8px;
+  width: 20%;
+}
+
+.info-complementar-observacoes {
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+}
