@@ -1701,59 +1701,130 @@
                     <div class="col-12 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">33</span>
-                            <label> Vacinação </label>
+                            <label>Vacinação</label>
                         </div>
                         <div class="d-flex justify-content-evenly">
-                            <ul class="col-1">
+                            <ul class="col-1 mt-5">
                                 <span>
                                     1 - Sim <br>
                                     2 - Não <br>
                                     9 - Ignorado
                                 </span>
                             </ul>
-<!-- AQUI NÃO CONSEGUI COLOCAR O NÚMERO DE DOSES E A DATA NA MESMA LINHA DE CADA VACINA-->
                             <ul class="col-5">
-                                <div class="d-flex align-items-center">
-                                        <input id="vac-poli1" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9">
-                                        <span>Polissacarídica <br> A/C</span>
+                                <div class="d-flex mb-2">
+                                    <span class="label-nowrap" style="margin-left: 8.1rem;">
+                                        N° Doses
+                                    </span>
+                                    <span class="ms-4 label-nowrap">
+                                        Data da Última Dose
+                                    </span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="vac-poli2" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="vac-poli-ac" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span>Polissacarídica <br> A/C</span>
+                                    <input id="quant-poli-ac" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-poli-ac" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-poli-bc" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Polissacarídica <br> B/C</span>
+                                    <input id="quant-poli-bc" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-poli-bc" type="date" class="form-control me-2">
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="vac-conju" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Conjugada <br> meningo C</span>
+                                    <input id="vac-conju" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span class="me-4">
+                                        Conjugada <br> meningo C
+                                    </span>
+                                    <input id="quant-conju" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-conju" type="date" class="form-control me-2">
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="vac-bcg" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>BCG</span>
+                                    <input id="vac-bcg" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 4.33rem;">
+                                        BCG
+                                    </span>
+                                    <input id="quant-bcg" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-bcg" type="date" class="form-control me-2">
                                 </div>
                             </ul>
-                            <ul class="col-5">    
-                                <div class="d-flex align-items-center">
-                                    <input id="vac-tríplice" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Tríplice </span>
+                            <ul class="col-5">
+                                <div class="d-flex mb-2">
+                                    <span style="margin-left: 7.5rem;">
+                                        N° Doses
+                                    </span>
+                                    <span class="ms-4 label-nowrap">
+                                        Data da Última Dose
+                                    </span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="vac-hemo" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="vac-triplice" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 2.6rem;">
+                                        Tríplice
+                                    </span>
+                                    <input id="quant-triplice" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-triplice" type="date" class="form-control me-2">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input id="vac-hemo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Hemófilo <br> (Tetravalente <br> ou HIB)</span>
+                                    <input id="quant-hemofilo" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-hemofilo" type="date" class="form-control me-2">
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="vac-pneumo" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Pneumococo </span>
+                                    <input id="vac-pneumo" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 0.1rem;">
+                                        Pneumococo
+                                    </span>
+                                    <input id="quant-pneumo" type="number"
+                                        class="form-control input-dado-quadrado mx-2"
+                                    />
+                                    <input id="dt-pneumo" type="date" class="form-control me-2">
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <input id="vac-outras" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
-                                    <span>Outras</span>
+                                <div class="d-flex align-items-center my-1">
+                                    <input id="vac-outras" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
+                                    <span style="margin-right: 3.2rem;">
+                                        Outra
+                                    </span>
+                                    <input id="quant-outra" class="form-control input-dado-quadrado mx-2"/>
+                                    <input id="dt-outra" type="date" class="form-control me-2">
                                 </div>
                             </ul>
                         </div>
@@ -1764,10 +1835,10 @@
                         <div class="info-elevada">
                             <span class="numeracao">34</span>
                             <label>
-                                Doenças Pré-existentes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Doenças Pré-existentes
                             </label>
-                            <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="ms-5 ps-5">
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 9 - Ignorado
                             </span>
@@ -1775,44 +1846,57 @@
                         <div class="d-flex justify-content-evenly align-items-center mb-1">
                             <ul class="col-3">
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-aids" type="number" class="form-control input-dado-quadrado mx-1"
+                                    <input id="doen-aids" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
                                         min="1" max="9">
                                     <span>AIDS/HIV+</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-traum" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-traum" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Traumatismo</span>
                                 </div>
                             </ul>
                             <ul class="col-3">
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-imuno" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-imuno" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Outras Doenças Imunossupressoras</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-inf-hosp" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-inf-hosp" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Infecção Hospitalar</span>
                                 </div>
                             </ul>
                             <ul class="col-3">
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-ira" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-ira" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>IRA</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-tub" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-tub" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Tuberculose</span>
                                 </div>
                             </ul>
                             <ul class="col-3">
                                 <div class="d-flex align-items-center">
-                                    <input id="doen-outr" type="number" class="form-control input-dado-quadrado mx-1"
-                                        min="1" max="9">
+                                    <input id="doen-outr" type="number"
+                                        class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9"
+                                    />
                                     <span>Outro</span>
                                     <input id="campo-doen-outr" class="form-control input-dado">
                                 </div>
@@ -1821,24 +1905,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 div-input">
-                    <div class="info-elevada-com-input">
-                        <div>
-                            <span class="numeracao">35</span>
-                            <label for="cont-cas-susp"><br> Contato com Caso Suspeito ou Confirmado de Meningite (até 15 dias antes do início dos sintomas)</label>
+                <div class="linha-dados">
+                    <div class="col-12 div-input">
+                        <div class="info-elevada-com-input">
+                            <div>
+                                <span class="numeracao">35</span>
+                                <label for="cont-cas-susp">
+                                    Contato com Caso Suspeito ou Confirmado de Meningite 
+                                    (até 15 dias antes do início dos sintomas)
+                                </label>
+                            </div>
+                            <input id="cont-cas-susp" type="number"
+                                class="input-dado-quadrado form-control">
                         </div>
-                        <input id="cont-cas-susp" type="number" class="input-dado-quadrado form-control">
-                    </div>
-                    <div class="container-input-dado descricao-tipos-meia-altura">
-                       <br> 1 - Domicílio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            2 - Vizinhança&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            3 - Trabalho&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            4 - Creche/Escola &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> 
-                            <br> 5 - Posto de Saúde/Hospital&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            6 - Outro Estado/Município&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            7 - Sem História de Contato&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            8 - Outro País&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            9 - Ignorado
+                        <div class="container-input-dado justify-content-evenly flex-wrap mb-2">
+                            <ul class="mx-1">
+                                <li>1 - Domicílio</li>
+                                <li>5 - Posto de Saúde/Hospital</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>2 - Vizinhança</li>
+                                <li>6 - Outro Estado/Município</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>3 - Trabalho</li>
+                                <li>7 - Sem História de Contato</li>
+                            </ul>
+                            <ul class="mx-1">
+                                <li>4 - Creche/Escola</li>
+                                <li>8 - Outro País</li>
+                            </ul>
+                            <ul class="mx-1 mt-4">
+                                <li>9 - Ignorado</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="linha-dados">
