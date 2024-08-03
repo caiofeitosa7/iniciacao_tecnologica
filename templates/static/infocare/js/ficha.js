@@ -16,16 +16,43 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     Array.from(fichas).forEach(function(ficha) {
         let camposInput = ficha.querySelectorAll("input, textarea");
 
+        // camposInput.forEach(function(campo) {
+        //     if (campo.id) { // Exclui o campo do csrf_token
+        //         if (campo.type === 'number') {
+        //             dicionario[campo.id] = parseInt(campo.value, 10);
+        //         } else {
+        //             if (campo.type === 'date' && campo.value === '') {
+        //                 dicionario[campo.id] = null;
+        //             } else {
+        //                 dicionario[campo.id] = campo.value;
+        //             }
+        //         }
+        //     }
+        // });
+
         camposInput.forEach(function(campo) {
-            if (campo.id) { // Exclui o campo do csrf_token
-                if (campo.type === 'number') {
-                    dicionario[campo.id] = parseInt(campo.value, 10);
-                } else {
-                    if (campo.type === 'date' && campo.value === '') {
-                        dicionario[campo.id] = null;
-                    } else {
+            if (campo.id) {    // Exclui o campo do csrf_token
+                switch (campo.type) {
+                    case 'number':
+                        dicionario[campo.id] = parseInt(campo.value, 10);
+                        break;
+                    case 'checkbox':
+                        dicionario[campo.id] = campo.checked ? 1 : 0;
+                        break;
+                    case 'radio':
+                        if (campo.checked) {
+                            dicionario[campo.name] = campo.value;
+                        } else {
+                            if (!dicionario.hasOwnProperty(campo.name))
+                                dicionario[campo.name] = "";
+                        }
+                        break;
+                    case 'date':
+                        dicionario[campo.id] = campo.value === "" ? null : campo.value;
+                        break;
+                    default:
                         dicionario[campo.id] = campo.value;
-                    }
+                        break;
                 }
             }
         });

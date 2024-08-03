@@ -530,17 +530,20 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                OBS.quant    AS QUANT_OBS
         FROM ficha AS F
                  INNER JOIN campo_tipo_ficha AS CTF
-                            ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
+                        ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
                  LEFT JOIN valorcampo AS VC
-                           ON VC.cod_ficha = F.codigo
+                        ON VC.cod_ficha = F.codigo
                  INNER JOIN tipo_ficha AS TF
-                            ON TF.codigo = F.cod_tipo_ficha
+                        ON TF.codigo = F.cod_tipo_ficha
                  INNER JOIN campo AS C
-                            ON C.codigo = VC.cod_campo
-                 LEFT JOIN (SELECT cod_ficha,
-                                   COUNT(codigo) AS quant
-                            FROM observacao
-                            GROUP BY cod_ficha) AS OBS ON OBS.cod_ficha = F.codigo
+                        ON C.codigo = VC.cod_campo
+                 LEFT JOIN (
+                    SELECT
+                        cod_ficha,
+                        COUNT(codigo) AS quant
+                    FROM observacao
+                    GROUP BY cod_ficha
+                 ) AS OBS ON OBS.cod_ficha = F.codigo
         WHERE
             F.cod_estado = {status}
         GROUP BY F.codigo,

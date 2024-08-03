@@ -106,7 +106,6 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
     if request.method == 'GET':
         request.session['ultimo_form_aberto'] = cod_formulario
         dados = models.get_ficha(cod_ficha)
-
         html = models.get_html_tipo_ficha(cod_formulario)
         arquivo_html = os.path.join('edicao', 'editar_' + html)
         contexto = {
@@ -122,8 +121,6 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
 def registrar_ficha(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
-
-        print(dados)
 
         try:
             if dados.get('codigo', False):

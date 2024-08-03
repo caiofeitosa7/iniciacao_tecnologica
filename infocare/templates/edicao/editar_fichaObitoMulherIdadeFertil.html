@@ -1,24 +1,29 @@
 <div class="linha-dados justify-content-between">
     <div class="col-1">
         <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-           onclick="requisicaoGetPadrao('pagina_inicial')">
+           onclick="retornoListaFichas()">
         </i>
     </div>
     <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" type="number" value="{{ cod_formulario }}" aria-label="" hidden>
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-            <input id="prontuario" class="form-control"/>
+            <input id="prontuario" type="number" class="form-control"
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
         </div>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="setor">Setor</label>
-            <input id="setor" class="form-control"/>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
         </div>
     </div>
     <div class="col-1"></div>
 </div>
 <div id="fichaMulherIdadeFertil" class="ficha fichaContornada mb-3">
     {% csrf_token %}
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="d-flex align-items-center justify-content-between">
         <div class="col-8 d-flex flex-column">
             <label>Fichas de investigação de óbito de <b>mulher em idade fértil - MIF</b></label>
@@ -29,6 +34,9 @@
                 <label for="ano">Ano:</label>
                 <input id="ano" type="number" class="form-control mx-2"
                     min="0" width="50px"
+                    {% if ficha.ano != "0" %}
+                        value="{{ ficha.ano }}"
+                    {% endif %}
                 />
             </div>
             <div class="divFundoVerde d-grid col-3 justify-content-center py-2">
@@ -47,7 +55,8 @@
                 <div class="col-12 d-flex align-items-center">
                     <span class="numeracao negrito">1</span>
                     <label for="nome" class="negrito mx-1">Nome</label>
-                    <input id="nome" class="form-control input-dado mx-1"/>
+                    <input id="nome" class="form-control input-dado mx-1"
+                        value="{{ ficha.nome_paciente }}"/>
                 </div>
             </div>
             <div class="linha-dados align-items-center">
@@ -56,13 +65,21 @@
                     <label for="num_DO" class="negrito label-nowrap mx-1">
                         N° da DO
                     </label>
-                    <input id="num_DO" class="form-control input-dado mx-1" type="number"/>
+                    <input id="num_DO" class="form-control input-dado mx-1"
+                        type="number" min="0"
+                        {% if ficha.num_DO != "0" %}
+                            value="{{ ficha.num_DO }}"
+                        {% endif %}
+                    />
                 </div>
                 <div class="col-6 d-flex align-items-center colADireita">
                     <span class="numeracao negrito">3</span>
                     <label for="idade" class="negrito mx-1">Idade</label>
                     <input id="idade" class="form-control input-dado mx-1"
-                        type="number" style="width: 50px;"
+                        type="number" min="0" style="width: 50px;"
+                        {% if ficha.idade != "0" %}
+                            value="{{ ficha.idade }}"
+                        {% endif %}
                     />
                     <span>anos</span>
                 </div>
@@ -73,7 +90,10 @@
                     <label for="dt_obito" class="negrito label-nowrap mx-1">
                         Data do óbito
                     </label>
-                    <input id="dt_obito" type="date" class="form-control input-dado mx-1"/>
+                    <input id="dt_obito" type="date"
+                        class="form-control input-dado mx-1"
+                        value="{{ ficha.dt_obito }}"
+                    />
                 </div>
                 <div class="col-6 d-flex align-items-center colADireita">
                     <span class="numeracao negrito">5</span>
@@ -82,6 +102,7 @@
                     </label>
                     <input id="hora_obito" class="form-control input-dado mx-1" 
                         style="width: 55px;" placeholder="00:00"
+                        value="{{ ficha.hr_obito }}"
                     />
                 </div>
             </div>
@@ -93,6 +114,7 @@
                     </label>
                     <input id="dt_nascimento" type="date"
                         class="form-control input-dado mx-1"
+                        value="{{ ficha.dt_nascimento }}"
                     />
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -107,6 +129,7 @@
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="raca" id="raca-branca" value="raca-branca"
+                                {% if ficha.btn_raca == "raca-branca" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="raca-branca">
                                 Branca
@@ -115,6 +138,7 @@
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="raca" id="raca-preta" value="raca-preta"
+                                {% if ficha.btn_raca == "raca-preta" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="raca-preta">
                                 Preta
@@ -123,6 +147,7 @@
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="raca" id="raca-amarela" value="raca-amarela"
+                                {% if ficha.btn_raca == "raca-amarela" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="raca-amarela">
                                 Amarela
@@ -131,6 +156,7 @@
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="raca" id="raca-parda" value="raca-parda"
+                                {% if ficha.btn_raca == "raca-parda" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="raca-parda">
                               Parda
@@ -139,6 +165,7 @@
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="raca" id="raca-indigena" value="raca-indigena"
+                                {% if ficha.btn_raca == "raca-indigena" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="raca-indigena">
                                 Indígena
@@ -160,7 +187,8 @@
                         <label for="etnia" class="negrito label-nowrap mx-1">
                             Informe a etnia:
                         </label>
-                        <input id="etnia" class="form-control input-dado mx-1"/>
+                        <input id="etnia" class="form-control input-dado mx-1"
+                            value="{{ ficha.etnia }}"/>
                     </div>
                 </div>
             </div>
@@ -172,12 +200,14 @@
                         <label for="aldeia" class="negrito label-nowrap mx-1">
                             Informe a aldeia:
                         </label>
-                        <input id="aldeia" class="form-control input-dado mx-1"/>
+                        <input id="aldeia" class="form-control input-dado mx-1"
+                            value="{{ ficha.aldeia }}"/>
                     </div>
                     <div class="col-3">
                         <div class="form-check m-0 mx-2">
                             <input id="radio-nao-aldeada" class="form-check-input"
                                 type="checkbox" name="aldeado"
+                                {% if ficha.nao_aldeado == "1" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="radio-nao-aldeada">
                                 Não aldeada
@@ -194,7 +224,8 @@
                             Endereço de Residência
                         </label>
                     </div>
-                    <input id="endereco" class="form-control input-dado mt-1 mx-1"/>
+                    <input id="endereco" class="form-control input-dado mt-1 mx-1"
+                        value="{{ ficha.endereco_residencia }}"/>
                 </div>
             </div>
             <div class="linha-dados align-items-center">
@@ -203,11 +234,13 @@
                     <label for="municipio" class="negrito label-nowrap mx-1">
                         Município de Residência
                     </label>
-                    <input id="municipio" class="form-control input-dado mx-1"/>
+                    <input id="municipio" class="form-control input-dado mx-1"
+                        value="{{ ficha.municipio_residencia }}"/>
                 </div>
                 <div class="d-flex align-items-center">
                     <label for="uf" class="negrito mx-1">UF</label>
-                    <input id="uf" class="form-control input-dado mx-1"/>
+                    <input id="uf" class="form-control input-dado mx-1"
+                        value="{{ ficha.uf_residencia }}"/>
                 </div>
             </div>
         </div>
@@ -230,13 +263,18 @@
                     <ul class="mx-1">
                         <li class="form-check">
                             <input class="form-check-input" type="checkbox"
-                                id="op-entrev-domiciliar"/>
+                                id="op-entrev-domiciliar"
+                                {% if ficha.fonte_entrev_domic == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-entrev-domiciliar">
                                 Entrevista domiciliar
                             </label>
                         </li>
                         <li class="form-check mt-1">
-                            <input class="form-check-input" type="checkbox" id="op-laudoSVO"/>
+                            <input class="form-check-input" type="checkbox"
+                                id="op-laudoSVO"
+                                {% if ficha.fonte_laudo_svo == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-laudoSVO">
                                 Laudo de SVO
                             </label>
@@ -245,14 +283,18 @@
                     <ul class="mx-2">
                         <li class="form-check">
                             <input class="form-check-input" type="checkbox"
-                                id="op-prontuario-hospitalar"/>
+                                id="op-prontuario-hospitalar"
+                                {% if ficha.fonte_pront_hosp == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-prontuario-hospitalar">
                                 Prontuário hospitalar
                             </label>
                         </li>
                         <li class="form-check mt-1">
                             <input class="form-check-input" type="checkbox"
-                                id="op-entrev-prof-saude"/>
+                                id="op-entrev-prof-saude"
+                                {% if ficha.fonte_entrev_prof == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-entrev-prof-saude">
                                 Entrevista com profissional de saúde
                             </label>
@@ -261,14 +303,18 @@
                     <ul class="mx-2">
                         <li class="form-check">
                             <input class="form-check-input" type="checkbox"
-                                id="op-prontuario-ambulatorial"/>
+                                id="op-prontuario-ambulatorial"
+                                {% if ficha.fonte_pront_ambul == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-prontuario-ambulatorial">
                                 Prontuário ambulatorial
                             </label>
                         </li>
                         <li class="form-check mt-1">
                             <input class="form-check-input" type="checkbox"
-                                id="op-sisprenatal"/>
+                                id="op-sisprenatal"
+                                {% if ficha.fonte_sisprenatal == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-sisprenatal">
                                 SISPRENATAL
                             </label>
@@ -277,14 +323,18 @@
                     <ul class="mx-2">
                         <li class="form-check">
                             <input class="form-check-input" type="checkbox"
-                                id="op-laudoIML"/>
+                                id="op-laudoIML"
+                                {% if ficha.fonte_laudo_iml == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-laudoIML">
                                 Laudo IML
                             </label>
                         </li>
                         <li class="form-check mt-1">
                             <input class="form-check-input" type="checkbox"
-                                id="op-fonte-info-outro"/>
+                                id="op-fonte-info-outro"
+                                {% if ficha.fonte_outro == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-fonte-info-outro">
                                 Outro (especifique):
                             </label>
@@ -292,13 +342,15 @@
                     </ul>
                     <ul class="mx-2">
                         <li class="form-check">
-                            <input class="form-check-input" type="checkbox"
-                                id="op-sinasc"/>
+                            <input class="form-check-input" type="checkbox" id="op-sinasc"
+                                {% if ficha.fonte_sinasc == "1" %} checked {% endif %}
+                            />
                             <label class="form-check-label" for="op-sinasc">
                                 Sinasc
                             </label>
                         </li>
-                        <input id="fonte-info-outro" class="form-control input-dado">
+                        <input id="fonte-info-outro" class="form-control input-dado"
+                            value="{{ ficha.fonte_outro_descricao }}">
                     </ul>
                 </div>
             </div>
@@ -314,6 +366,7 @@
                         <li class="form-check m-0 mx-2">
                             <input id="op-gestacao" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-gestacao"
+                                {% if ficha.momento_morte == "op-gestacao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-gestacao">
                                 1. Durante a gestação
@@ -322,6 +375,7 @@
                         <li class="form-check m-0 mx-2 mt-2">
                             <input id="op-abortamento" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-abortamento"
+                                {% if ficha.momento_morte == "op-abortamento" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-abortamento">
                                 2. Durante o abortamento
@@ -332,6 +386,7 @@
                         <li class="form-check m-0 mx-2">
                             <input id="op-apos-abortamento" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-apos-abortamento"
+                                {% if ficha.momento_morte == "op-apos-abortamento" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-apos-abortamento">
                                 3. Após o abortamento
@@ -340,6 +395,7 @@
                         <li class="form-check m-0 mx-2 mt-2">
                             <input id="op-parto" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-parto"
+                                {% if ficha.momento_morte == "op-parto" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-parto">
                                 4. No parto ou até 1 hora após o parto
@@ -350,6 +406,7 @@
                         <li class="form-check m-0 mx-2">
                             <input id="op-42d-parto" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-42d-parto"
+                                {% if ficha.momento_morte == "op-42d-parto" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-42d-parto">
                                 5. Até 42 dias após o parto
@@ -358,6 +415,7 @@
                         <li class="form-check m-0 mx-2 mt-2">
                             <input id="op-43d-1ano-parto" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-43d-1ano-parto"
+                                {% if ficha.momento_morte == "op-43d-1ano-parto" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-43d-1ano-parto">
                                 6. Até 43 dias a 1 ano após o parto
@@ -368,6 +426,7 @@
                         <li class="form-check m-0 mx-2">
                             <input id="op-NDA" class="form-check-input"
                                 type="radio" name="morte-ocorreu" value="op-NDA"
+                                {% if ficha.momento_morte == "op-NDA" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-NDA">
                                 7. Não ocorreu nestes períodos (
@@ -377,8 +436,9 @@
                             </label>
                         </li>
                         <li class="form-check m-0 mx-2 mt-2">
-                            <input id="op-nao-edentificado" class="form-check-input"
-                                type="radio" name="morte-ocorreu" value="op-nao-edentificado"
+                            <input id="op-nao-identificado" class="form-check-input"
+                                type="radio" name="morte-ocorreu" value="op-nao-identificado"
+                                {% if ficha.momento_morte == "op-nao-identificado" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-nao-edentificado">
                                 8. Momento do óbito não identificado
@@ -398,6 +458,7 @@
                             <input id="op-causa-externa-sim" class="form-check-input"
                                 type="radio" name="morte-causa-externa"
                                 value="op-causa-externa-sim"
+                                {% if ficha.morte_causa_ext == "op-causa-externa-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-causa-externa-sim">
                                 Sim (responda as questões 
@@ -409,6 +470,7 @@
                             <input id="op-causa-externa-nao" class="form-check-input"
                                 type="radio" name="morte-causa-externa"
                                 value="op-causa-externa-nao"
+                                {% if ficha.morte_causa_ext == "op-causa-externa-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-causa-externa-nao">
                                 Não (
@@ -431,6 +493,7 @@
                         <div class="form-check m-0 mx-1">
                             <input id="op-circuns-acidente" class="form-check-input"
                                 type="radio" name="circunstancia" value="op-circuns-acidente"
+                                {% if ficha.circunst_morte == "op-circuns-acidente" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-circuns-acidente">
                                 Acidente
@@ -439,6 +502,7 @@
                         <div class="form-check m-0 mx-1">
                             <input id="op-circuns-suicidio" class="form-check-input"
                                 type="radio" name="circunstancia" value="op-circuns-suicidio"
+                                {% if ficha.circunst_morte == "op-circuns-suicidio" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-circuns-suicidio">
                                 Suicídio
@@ -447,6 +511,7 @@
                         <div class="form-check m-0 mx-1">
                             <input id="op-circuns-homicidio" class="form-check-input"
                                 type="radio" name="circunstancia" value="op-circuns-homicidio"
+                                {% if ficha.circunst_morte == "op-circuns-homicidio" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-circuns-homicidio">
                                 Homicídio
@@ -455,12 +520,14 @@
                         <div class="form-check m-0 mx-1">
                             <input id="op-circuns-outro" class="form-check-input"
                                 type="radio" name="circunstancia" value="op-circuns-outro"
+                                {% if ficha.circunst_morte == "op-circuns-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-circuns-outro">
                                 Outro:
                             </label>
                         </div>
-                        <input id="circunstancia-outro" class="form-control input-dado mx-1">
+                        <input id="circunstancia-outro" class="form-control input-dado mx-1"
+                            value="{{ ficha.circunst_morte_outro }}"/>
                         <span class="spanLGN">lgn</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center py-1">
@@ -472,6 +539,7 @@
                             <div class="form-check m-0 mx-2 pt-1">
                                 <input id="op-estado-puerperal-sim" class="form-check-input"
                                     type="radio" name="estado-puerperal" value="op-estado-puerperal-sim"
+                                    {% if ficha.estado_puerperal == "op-estado-puerperal-sim" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="op-estado-puerperal-sim">
                                     Sim (<span class="fundo-cinza">vá para</span> 
@@ -481,6 +549,7 @@
                             <div class="form-check m-0 mx-2 pt-1">
                                 <input id="op-estado-puerperal-nao" class="form-check-input"
                                     type="radio" name="estado-puerperal" value="op-estado-puerperal-nao"
+                                    {% if ficha.estado_puerperal == "op-estado-puerperal-nao" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="op-estado-puerperal-nao">
                                     Não (<span class="fundo-cinza">vá para</span> 
@@ -505,6 +574,7 @@
                         <div class="form-check m-0">
                             <input id="op-seq-eventos" class="form-check-input"
                                 type="checkbox" name="sequencia-eventos"
+                                {% if ficha.seq_eventos == "1" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-seq-eventos">
                                 Sequência de eventos <b>é igual</b> a DO original (<span class="fundo-cinza">vá para</span> 
@@ -517,11 +587,13 @@
                             <label for="estado-morbido">
                                 a. Doença ou estado mórbido que causou diretamente a morte:
                             </label>
-                            <input id="estado-morbido" class="form-control input-dado mt-1">
+                            <input id="estado-morbido" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido }}"/>
                         </div>
                         <div class="col-2 d-flex flex-column align-items-center">
                             <label>CID-10</label>
-                            <input id="estado-morbido-cid10" class="form-control input-dado mt-1">
+                            <input id="estado-morbido-cid10" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_cid10 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -529,11 +601,13 @@
                             <label for="estado-morbido-conseq1">
                                 b. Devido ou como consequência de:
                             </label>
-                            <input id="estado-morbido-conseq1" class="form-control input-dado mt-1">
+                            <input id="estado-morbido-conseq1" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_conseq1 }}"/>
                         </div>
                         <div class="col-2 d-flex flex-column align-items-center">
                             <label>CID-10</label>
-                            <input id="conseq1-cid10" class="form-control input-dado mt-1">
+                            <input id="conseq1-cid10" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_cid1 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -541,11 +615,13 @@
                             <label for="estado-morbido-conseq2">
                                 c. Devido ou como consequência de:
                             </label>
-                            <input id="estado-morbido-conseq2" class="form-control input-dado mt-1">
+                            <input id="estado-morbido-conseq2" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_conseq2 }}"/>
                         </div>
                         <div class="col-2 d-flex flex-column align-items-center">
                             <label>CID-10</label>
-                            <input id="conseq2-cid10" class="form-control input-dado mt-1">
+                            <input id="conseq2-cid10" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_cid2 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -553,11 +629,13 @@
                             <label for="estado-morbido-conseq3">
                                 d. Devido ou como consequência de:
                             </label>
-                            <input id="estado-morbido-conseq3" class="form-control input-dado mt-1">
+                            <input id="estado-morbido-conseq3" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_conseq3 }}"/>
                         </div>
                         <div class="col-2 d-flex flex-column align-items-center">
                             <label>CID-10</label>
-                            <input id="conseq3-cid10" class="form-control input-dado mt-1">
+                            <input id="conseq3-cid10" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morbido_cid3 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -566,17 +644,17 @@
                                 II. Outras condições significativas que contribuiram para a morte, 
                                 e que não entraram, porém, na cadeia acima.
                             </label>
-                            <input id="outras-condicoes" class="form-control input-dado mt-1">
+                            <input id="outras-condicoes" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morb_outra_cond }}"/>
                         </div>
                         <div class="col-2 d-flex flex-column align-items-center justify-content-center">
                             <label>CID-10</label>
-                            <input id="outras-condicoes-cid10" class="form-control input-dado mt-1">
+                            <input id="outras-condicoes-cid10" class="form-control input-dado mt-1"
+                                value="{{ ficha.est_morb_outra_cond_cid }}"/>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <div class="linha-dados flex-column">
                 <div class="d-flex fundo-cinza justify-content-between align-items-center py-1">
                     <div class="d-flex align-items-center">
@@ -587,6 +665,7 @@
                         <div class="form-check m-0 mx-4 pt-1">
                             <input id="op-modif-DO-sim" class="form-check-input"
                                 type="radio" name="modificacao-DO" value="op-modif-DO-sim"
+                                {% if ficha.modif_do == "op-modif-DO-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-modif-DO-sim">
                                 Sim (indique as alterações)
@@ -595,6 +674,7 @@
                         <div class="form-check m-0 pt-1">
                             <input id="op-modif-DO-nao" class="form-check-input"
                                 type="radio" name="modificacao-DO" value="op-modif-DO-nao"
+                                {% if ficha.modif_do == "op-modif-DO-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="op-modif-DO-nao">
                                 Não
@@ -624,39 +704,54 @@
                         <div class="col-2">
                             <input id="num-campo1" type="number"
                                 class="form-control input-dado"
+                                {% if ficha.num_campo1 != "0" %}
+                                    value="{{ ficha.num_campo1 }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="col-5">
-                            <input id="info-original1" class="form-control input-dado">
+                            <input id="info-original1" class="form-control input-dado"
+                                value="{{ ficha.info_original1 }}"/>
                         </div>
                         <div class="col-5">
-                            <input id="info-nova1" class="form-control input-dado">
+                            <input id="info-nova1" class="form-control input-dado"
+                                value="{{ ficha.info_nova1 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
                         <div class="col-2">
                             <input id="num-campo2" type="number"
                                 class="form-control input-dado"
+                                {% if ficha.num_campo2 != "0" %}
+                                    value="{{ ficha.num_campo2 }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="col-5">
-                            <input id="info-original2" class="form-control input-dado">
+                            <input id="info-original2" class="form-control input-dado"
+                                value="{{ ficha.info_original2 }}"/>
                         </div>
                         <div class="col-5">
-                            <input id="info-nova2" class="form-control input-dado">
+                            <input id="info-nova2" class="form-control input-dado"
+                                value="{{ ficha.info_nova2 }}"/>
                         </div>
                     </div>
                     <div class="d-flex mt-2">
                         <div class="col-2">
                             <input id="num-campo3" type="number"
                                 class="form-control input-dado"
+                                {% if ficha.num_campo3 != "0" %}
+                                    value="{{ ficha.num_campo3 }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="col-5">
-                            <input id="info-original3" class="form-control input-dado">
+                            <input id="info-original3" class="form-control input-dado"
+                                value="{{ ficha.info_original3 }}"/>
                         </div>
                         <div class="col-5">
-                            <input id="info-nova3" class="form-control input-dado">
+                            <input id="info-nova3" class="form-control input-dado"
+                                value="{{ ficha.info_nova3 }}"/>
                         </div>
                     </div>
                 </div>
@@ -675,14 +770,16 @@
                 <label class="label-nowrap mx-1">
                     Nome do responsável pelo preenchimento
                 </label>
-                <input id="nome-responsavel" class="form-control input-dado">
+                <input id="nome-responsavel" class="form-control input-dado"
+                    value="{{ ficha.nome_notificante }}"/>
             </div>
             <div class="col-4 d-flex align-items-center mx-1">
                 <span class="numeracao negrito">16</span>
                 <label class="label-nowrap mx-1">
                     Telefone de contato:
                 </label>
-                <input id="fone-notificante" class="form-control input-dado mx-1">
+                <input id="fone-notificante" class="form-control input-dado mx-1"
+                    value="{{ ficha.telefone_notificante }}"/>
             </div>
         </div>
         <div class="d-flex mt-2">
@@ -694,6 +791,7 @@
                 <input id="campo-dt-notificacao" type="date"
                     class="form-control input-dado"
                     style="width: 60%;"
+                    value="{{ ficha.dt_notificacao }}"
                 />
             </div>
             <div class="col-4 d-flex align-items-center mx-1"
@@ -705,6 +803,7 @@
                 <div class="form-check m-0 mx-2">
                     <input id="op-info-anexa-sim" class="form-check-input"
                         type="radio" name="informacao-anexa" value="op-info-anexa-sim"
+                        {% if ficha.info_anexa == "op-info-anexa-sim" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="op-info-anexa-sim">
                         Sim
@@ -713,6 +812,7 @@
                 <div class="form-check m-0 mx-2">
                     <input id="op-info-anexa-nao" class="form-check-input"
                         type="radio" name="informacao-anexa" value="op-info-anexa-nao"
+                        {% if ficha.info_anexa == "op-info-anexa-nao" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="op-info-anexa-nao">
                         Não
@@ -730,6 +830,7 @@
                 <div class="form-check m-0 mx-4">
                     <input id="op-modulo-web" class="form-check-input"
                         type="checkbox" name="destino-mif" value="op-modulo-web"
+                        {% if ficha.destino_web == "1" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="op-modulo-web">
                         1. Enviada para elimentação do módulo Web.
@@ -738,6 +839,7 @@
                 <div class="form-check m-0">
                     <input id="op-integrar-fichas" class="form-check-input"
                         type="checkbox" name="destino-mif" value="op-integrar-fichas"
+                        {% if ficha.destino_integ == "1" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="op-integrar-fichas">
                         2. Integrar as demais fichas na investigação do óbito materno.
@@ -749,5 +851,5 @@
 </div>
 
 {% block rodape_ficha %}
-    {% include 'rodape_ficha.html' %}
+    {% include 'rodape_edicao_ficha.html' %}
 {% endblock %}
