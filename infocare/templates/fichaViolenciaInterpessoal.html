@@ -18,6 +18,7 @@
     <div class="col-1"></div>
 </div>
 <div class="ficha pb-5">
+    {% csrf_token %}
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -2138,7 +2139,7 @@
                                 class="input-dado-quadrado form-control"
                                 min="1" max="99">
                         </div>
-                        <div class="container-input-dado justify-content-evenly">
+                        <div class="container-input-dado justify-content-evenly flex-wrap">
                             <ul class="mx-1">
                                 <li class="mb-2">1-Sexismo</li>
                                 <li>2-Conflito geracional</li>
@@ -2281,26 +2282,29 @@
                                 9 - Ignorado
                             </span>
                         </div>
-                        <div class="container-input-dado justify-content-evenly px-2 my-1">
+                        <div class="container-input-dado justify-content-evenly flex-wrap px-2 my-1">
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-espancamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-espancamento">
+                                        id="op-meio-agress-espancamento"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-espancamento">
                                         Força corporal/<br>espancamento
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-enforcamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-enforcamento">
+                                        id="op-meio-agress-enforcamento"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-enforcamento">
                                         Enforcamento
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-objContundente">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objContundente">
+                                        id="op-meio-agress-objContundente"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-objContundente">
                                         Obj. contundente
                                     </label>
                                 </li>
@@ -2308,22 +2312,25 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-objPerfurocortante">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objPerfurocortante">
+                                        id="op-meio-agress-objPerfurocortante"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-objPerfurocortante">
                                         Obj. pérfuro-<br>cortante
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-objQuente">
-                                    <label class="form-check-label" for="opcao-meio-agressao-objQuente">
+                                        id="op-meio-agress-objQuente"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-objQuente">
                                         Substância/<br>Obj. quente
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-envenenamento">
-                                    <label class="form-check-label" for="opcao-meio-agressao-envenenamento">
+                                        id="op-meio-agress-envenenamento"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-envenenamento">
                                         Envenenamento,<br>intoxicação
                                     </label>
                                 </li>
@@ -2331,28 +2338,33 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-armaFogo">
-                                    <label class="form-check-label" for="opcao-meio-agressao-armaFogo">
+                                        id="op-meio-agress-armaFogo"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-armaFogo">
                                         Arma de fogo
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-ameaca">
-                                    <label class="form-check-label" for="opcao-meio-agressao-ameaca">
+                                        id="op-meio-agress-ameaca"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-ameaca">
                                         Ameaça
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                           id="opcao-meio-agressao-outro">
-                                    <label class="form-check-label" for="opcao-meio-agressao-outro">
+                                        id="op-meio-agress-outro"
+                                    />
+                                    <label class="form-check-label" for="op-meio-agress-outro">
                                         Outro
                                     </label>
                                 </li>
                                 <li class="col-9">
-                                    <input id="descricao-meio-agressao-outro" class="input-dado form-control"
-                                        aria-label="">
+                                    <input id="descricao-meio-agress-outro"
+                                        class="input-dado form-control"
+                                        aria-label=""
+                                    />
                                 </li>
                             </ul>
                         </div>
@@ -2379,46 +2391,54 @@
                                 9 - Ignorado
                             </span>
                         </div>
-                        <div class="container-input-dado align-items-end justify-content-evenly px-1 pb-1">
+                        <div class="container-input-dado align-items-end 
+                                justify-content-evenly flex-wrap px-1 pb-1">
                             <div class="d-flex align-items-center mx-1">
-                                <input class="form-control input-dado-quadrado" type="number"
-                                    id="opcao-violencia-sexual-assedio">
-                                <label class="form-check-label" for="opcao-violencia-sexual-assedio">
+                                <input class="form-control input-dado-quadrado"
+                                    type="number" id="op-vio-sex-assedio"
+                                />
+                                <label class="form-check-label" for="op-vio-sex-assedio">
                                     Assédio sexual
                                 </label>
                             </div>
                             <div class="d-flex align-items-center mx-1">
-                                <input class="form-control input-dado-quadrado" type="number"
-                                    id="opcao-violencia-sexual-estupro">
-                                <label class="form-check-label" for="opcao-violencia-sexual-estupro">
+                                <input class="form-control input-dado-quadrado"
+                                    type="number" id="op-vio-sex-estupro"
+                                />
+                                <label class="form-check-label" for="op-vio-sex-estupro">
                                     Estupro
                                 </label>
                             </div>
                             <div class="d-flex align-items-center mx-1">
-                                <input class="form-control input-dado-quadrado" type="number"
-                                    id="opcao-violencia-sexual-pornInfatil">
-                                <label class="form-check-label" for="opcao-violencia-sexual-pornInfatil">
+                                <input class="form-control input-dado-quadrado"
+                                    type="number" id="op-vio-sex-pornInfatil"
+                                />
+                                <label class="form-check-label" for="op-vio-sex-pornInfatil">
                                     Pornografia infantil
                                 </label>
                             </div>
                             <div class="d-flex align-items-center mx-1">
-                                <input class="form-control input-dado-quadrado" type="number"
-                                    id="opcao-violencia-sexual-exploracaoSexual">
-                                <label class="form-check-label" for="opcao-violencia-sexual-exploracaoSexual">
+                                <input class="form-control input-dado-quadrado"
+                                    type="number" id="op-vio-sex-exploracaoSexual"
+                                />
+                                <label class="form-check-label" for="op-vio-sex-exploracaoSexual">
                                     Exploração sexual
                                 </label>
                             </div>
                             <div class="d-flex col-2 mx-1 align-items-baseline">
                                 <div class="d-flex align-items-center">
-                                    <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-violencia-sexual-outros">
-                                    <label class="form-check-label" for="opcao-violencia-sexual-outros">
+                                    <input class="form-control input-dado-quadrado"
+                                        type="number" id="op-vio-sex-outros"
+                                    />
+                                    <label class="form-check-label" for="op-vio-sex-outros">
                                         Outros
                                     </label>
                                 </div>
                                 <div class="col-8 px-1">
-                                    <input id="descricao-violencia-sexual-outros" class="input-dado form-control"
-                                        aria-label="">
+                                    <input id="descricao-vio-sex-outros"
+                                        class="input-dado form-control"
+                                        aria-label=""
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -2547,7 +2567,7 @@
                                 9 - Ignorado
                             </span>
                         </div>
-                        <div class="container-input-dado justify-content-evenly pb-2 px-1">
+                        <div class="container-input-dado justify-content-evenly flex-wrap pb-2 px-1">
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"

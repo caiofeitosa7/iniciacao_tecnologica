@@ -221,7 +221,9 @@
                             <label for="numero-prontuario" class="mb-1">
                                 Nº do prontuário:
                             </label>
-                            <input id="numero-prontuario" class="form-control input-dado mx-1">
+                            <input id="numero-prontuario" type="number"
+                                class="form-control input-dado mx-1"
+                            />
                         </div>
                         <div class="col-6 d-flex align-items-center p-2">
                             <label for="dt-admissao" class="label-nowrap mb-1">
@@ -852,13 +854,23 @@
                             </span>
                             <div class="d-flex align-items-center fs-6">
                                 <div class="form-check m-0 mx-3">
-                                    <input id="op-necropsia-sim" class="form-check-input" type="radio" name="necropsia">
+                                    <input id="op-necropsia-sim"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="necropsia"
+                                        value="op-necropsia-sim"
+                                    />
                                     <label class="form-check-label" for="op-necropsia-sim">
                                         Sim
                                     </label>
                                 </div>
                                 <div class="form-check m-0">
-                                    <input id="op-necropsia-nao" class="form-check-input" type="radio" name="necropsia">
+                                    <input id="op-necropsia-nao"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="necropsia"
+                                        value="op-necropsia-nao"
+                                    />
                                     <label class="form-check-label" for="op-necropsia-nao">
                                         Não
                                     </label>
@@ -871,20 +883,35 @@
                                     Se sim, qual serviço?
                                 </span>
                                 <div class="form-check m-0 mx-3">
-                                    <input id="op-necropsia-servico-iml" class="form-check-input" type="radio" name="necropsia-servico">
-                                    <label class="form-check-label" for="op-necropsia-servico-iml">
+                                    <input id="op-necropsia-serv-iml"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="necropsia-servico"
+                                        value="op-necropsia-serv-iml"
+                                    />
+                                    <label class="form-check-label" for="op-necropsia-serv-iml">
                                         IML
                                     </label>
                                 </div>
                                 <div class="form-check m-0">
-                                    <input id="op-necropsia-servico-svo" class="form-check-input" type="radio" name="necropsia-servico">
-                                    <label class="form-check-label" for="op-necropsia-servico-svo">
+                                    <input id="op-necropsia-serv-svo"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="necropsia-servico"
+                                        value="op-necropsia-serv-svo"
+                                    />
+                                    <label class="form-check-label" for="op-necropsia-serv-svo">
                                         SVO
                                     </label>
                                 </div>
                                 <div class="form-check m-0 ms-3">
-                                    <input id="op-necropsia-servico-hospital" class="form-check-input" type="radio" name="necropsia-servico">
-                                    <label class="form-check-label" for="op-necropsia-servico-hospital">
+                                    <input id="op-necropsia-serv-hospital"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="necropsia-servico"
+                                        value="op-necropsia-serv-hospital"
+                                    />
+                                    <label class="form-check-label" for="op-necropsia-serv-hospital">
                                         Hospital
                                     </label>
                                 </div>
@@ -894,13 +921,23 @@
                                     Se sim, nos achados de necropsia, há menção de tuberculose?
                                 </span>
                                 <div class="form-check m-0 mx-3">
-                                    <input id="op-achados-necropsia-sim" class="form-check-input" type="radio" name="achados-necropsia">
+                                    <input id="op-achados-necropsia-sim"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="achados-necropsia"
+                                        value="op-achados-necropsia-sim"
+                                    />
                                     <label class="form-check-label" for="op-achados-necropsia-sim">
                                         Sim
                                     </label>
                                 </div>
                                 <div class="form-check m-0">
-                                    <input id="op-achados-necropsia-nao" class="form-check-input" type="radio" name="achados-necropsia">
+                                    <input id="op-achados-necropsia-nao"
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="achados-necropsia"
+                                        value="op-achados-necropsia-nao"
+                                    />
                                     <label class="form-check-label" for="op-achados-necropsia-nao">
                                         Não
                                     </label>
@@ -926,8 +963,11 @@
                                 <label for="momento-diagnostico" class="negrito me-2">
                                     Em qual momento ocorreu o diagnóstico da tuberculose
                                 </label>
-                                <input id="momento-diagnostico" type="number" class="form-control input-dado-quadrado"
-                                    min="1" max="5">
+                                <input id="momento-diagnostico"
+                                    class="form-control input-dado-quadrado"
+                                    min="1" max="5"
+                                    type="number"
+                                />
                             </div>
                             <div class="d-flex">
                                 <span class="label-wrap-pretty">
@@ -948,8 +988,10 @@
                         </div>
                         <div class="col-8 d-flex flex-column ps-2">
                             <div class="d-flex align-items-center">
-                                <input id="iniciou-tratamento" type="number" class="form-control input-dado-quadrado me-2"
-                                    min="1" max="3">
+                                <input id="iniciou-tratamento" type="number"
+                                    class="form-control input-dado-quadrado me-2"
+                                    min="1" max="3"
+                                />
                                 <label for="iniciou-tratamento" class="label-wrap-pretty">
                                     1 - Sim &nbsp;&nbsp;&nbsp;
                                     2 - Não &nbsp;&nbsp;&nbsp;
@@ -960,8 +1002,10 @@
                                 <label for="dt-iniciou-tratamento" class="label-wrap-pretty">
                                     Se sim, data do início do tratamento
                                 </label>
-                                <input id="dt-iniciou-tratamento" type="date" class="form-control input-dado ms-2 mt-1"
-                                    style="max-width: 200px;">
+                                <input id="dt-iniciou-tratamento" type="date"
+                                    class="form-control input-dado ms-2 mt-1"
+                                    style="max-width: 200px;"
+                                />
                                 
                             </div>
                         </div>
@@ -977,8 +1021,10 @@
                         </div>
                         <div class="col-10 d-flex flex-column ps-2">
                             <div class="d-flex align-items-center">
-                                <input id="forma-clinica" type="number" class="form-control input-dado-quadrado me-2"
-                                    min="1" max="3">
+                                <input id="forma-clinica" type="number"
+                                    class="form-control input-dado-quadrado me-2"
+                                    min="1" max="3"
+                                />
                                 <label for="forma-clinica" class="label-wrap-pretty">
                                     1 - Pulmonar &nbsp;&nbsp;&nbsp;
                                     2 - Extrapulmonar &nbsp;&nbsp;&nbsp;
@@ -986,8 +1032,10 @@
                                 </label>
                             </div>
                             <div class="d-flex mt-2">
-                                <input id="extrapulmonar" type="number" class="form-control input-dado-quadrado"
-                                    min="1" max="10">
+                                <input id="extrapulmonar" type="number"
+                                    class="form-control input-dado-quadrado"
+                                    min="1" max="10"
+                                />
                                 <div class="d-flex flex-column ms-1">
                                     <label for="extrapulmonar" class="label-wrap-pretty">
                                         1 - Pleural &nbsp;&nbsp;&nbsp;
@@ -1120,11 +1168,13 @@
                             </div>
                         </div>
                         <div class="col-6 d-flex align-items-center p-2">
-                            <label for="dt-investigacao" class="label-wrap-pretty">
+                            <label for="campo-dt-notificacao" class="label-wrap-pretty">
                                 Data da investigação:
                             </label>
-                            <input id="dt-investigacao" type="date" class="form-control input-dado ms-1"
-                                style="max-width: 200px;">
+                            <input id="campo-dt-notificacao" type="date"
+                                class="form-control input-dado ms-1"
+                                style="max-width: 200px;"
+                            />
                         </div>
                     </div>
                     <div class="linha-dados">
