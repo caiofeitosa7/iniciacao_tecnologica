@@ -130,6 +130,7 @@ ul {
 
 .numeracao {
   border: 1px solid #000;
+  height: fit-content;
   font-weight: bold;
   padding: 0 6px;
 }

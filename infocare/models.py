@@ -283,7 +283,7 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
               '; tp_input:', tp_input,
               '; tipo_diferente:', 0 if tipo_campo == tp_input else 1,
               '; valor_input:', valores[i],
-        )
+              )
 
         if tipo_campo == 1:  # Se for do tipo string
             registro.append(str(valores[i]))
@@ -364,35 +364,60 @@ def set_ficha(campos: dict):
     conexao, cursor = abrir_conexao()
     tipo_ficha = campos.pop('cod_tipo_ficha')
 
-    try:
-        with transaction.atomic():
-            cursor.execute(f"""
-                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
-                VALUES (%s, %s, %s, %s)
-            """, (
-                campos.pop('setor'),
-                campos.pop('prontuario'),
-                1,
-                tipo_ficha,
-            ))
+    averiguar_campos(cursor, tipo_ficha, campos)
 
-            cursor.execute("SELECT LAST_INSERT_ID()")
-            cod_ficha = int(cursor.fetchone()[0])
+    with transaction.atomic():
+        cursor.execute(f"""
+            INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
+            VALUES (%s, %s, %s, %s)
+        """, (
+            campos.pop('setor'),
+            campos.pop('prontuario'),
+            1,
+            tipo_ficha,
+        ))
 
-            averiguar_campos(cursor, tipo_ficha, campos)
+        cursor.execute("SELECT LAST_INSERT_ID()")
+        cod_ficha = int(cursor.fetchone()[0])
 
-            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+        averiguar_campos(cursor, tipo_ficha, campos)
 
-        return cod_ficha
+        # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-    except Exception as e:
-        conexao.rollback()
-        print(e)
-        return None
+    return cod_ficha
 
-    finally:
-        fechar_conexao(conexao)
+
+
+    # try:
+    #     with transaction.atomic():
+    #         cursor.execute(f"""
+    #             INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
+    #             VALUES (%s, %s, %s, %s)
+    #         """, (
+    #             campos.pop('setor'),
+    #             campos.pop('prontuario'),
+    #             1,
+    #             tipo_ficha,
+    #         ))
+    #
+    #         cursor.execute("SELECT LAST_INSERT_ID()")
+    #         cod_ficha = int(cursor.fetchone()[0])
+    #
+    #         averiguar_campos(cursor, tipo_ficha, campos)
+    #
+    #         # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+    #         inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+    #
+    #     return cod_ficha
+    #
+    # except Exception as e:
+    #     conexao.rollback()
+    #     print(e)
+    #     return None
+    #
+    # finally:
+    #     fechar_conexao(conexao)
 
 
 def alterar_ficha(campos: dict):
