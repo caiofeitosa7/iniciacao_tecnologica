@@ -2024,28 +2024,59 @@
                             >
                         </div>
                         <input
-                                id="campo-animal-agressor"
-                                type="number"
-                                class="input-dado-quadrado form-control"
-                                maxlength="2"
-                                value="{% if ficha.especie_animal %}{{ ficha.especie_animal }}{% endif %}"
+                            id="campo-animal-agressor"
+                            type="number"
+                            class="input-dado-quadrado form-control"
+                            maxlength="2"
+                            value="{% if ficha.especie_animal %}{{ ficha.especie_animal }}{% endif %}"
                         />
                     </div>
-                    <div class="container-input-dado descricao-tipos-meia-altura">
-                        <span>
-                            1- Canina &nbsp&nbsp&nbsp&nbsp 2-Felina &nbsp&nbsp&nbsp&nbsp
-                            3-Quiróptera(Morcego) &nbsp&nbsp&nbsp&nbsp 4- Primata(macaco)
-                            <br/>
-                            5- Raposa &nbsp&nbsp&nbsp&nbsp 6- Herbívoro doméstico (especificar)
-                            &nbsp&nbsp&nbsp&nbsp 7- Outra
-                        </span>
-                        <input
-                                name="animal-tipo"
-                                id="animal-agressor"
-                                class="form-control input-dado"
-                                style="width: 100px; margin: 20px 15px 0 20px;"
-                                value="{{ ficha.especie_animal_outro }}"
-                        />
+                    <div class="container-input-dado justify-content-evenly mb-2">
+                        <ul class="me-2">
+                            <li class="mb-1">
+                                1- Canina
+                            </li>
+                            <li>
+                                5- Raposa
+                            </li>
+                        </ul>
+                        <ul class="mx-1">
+                            <li class="d-flex justify-content-between mb-1">
+                                <span class="pe-2">
+                                    2- Felina
+                                </span>
+                                <span>
+                                    3- Quiróptera (Morcego)
+                                </span>
+                            </li>
+                            <li class="mb-1">
+                                6 - Herbívoro doméstico (especificar)
+                            </li>
+                            <li>
+                                <input
+                                    id="animal-agressor-herb"
+                                    class="form-control input-dado"
+                                    style="width: 280px;"
+                                    value="{{ ficha.especie_animal_herb_espec }}"
+                                />
+                            </li>
+                        </ul>
+                        <ul class="ms-2">
+                            <li class="mb-1">
+                                4- Primata(macaco)
+                            </li>
+                            <li class="mb-1">
+                                7- Outra
+                            </li>
+                            <li>
+                                <input
+                                    id="animal-agressor-outro"
+                                    class="form-control input-dado"
+                                    style="width: 140px;"
+                                    value="{{ ficha.especie_animal_outro }}"
+                                />
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -2159,7 +2190,7 @@
                                 name="laboratorio"
                                 id="lab-prod-vacina"
                                 class="form-control input-dado"
-                                style="width: 100px; margin: 0 15px 0 20px;"
+                                style="width: 150px; margin: 0 15px 0 20px;"
                                 value="{{ ficha.produtor_vacina_outro}}"
                         />
                     </div>

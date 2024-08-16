@@ -380,8 +380,6 @@ def set_ficha(campos: dict):
         cursor.execute("SELECT LAST_INSERT_ID()")
         cod_ficha = int(cursor.fetchone()[0])
 
-        averiguar_campos(cursor, tipo_ficha, campos)
-
         # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
         inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
