@@ -1,24 +1,33 @@
 <div class="linha-dados justify-content-between">
     <div class="col-1">
-        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-           onclick="requisicaoGetPadrao('pagina_inicial')">
+        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill"
+            style="color: var(--dark-color);" onclick="retornoListaFichas()">
         </i>
     </div>
     <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
-            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-            <input id="prontuario" type="number" class="form-control"/>
+            <label class="input-group-text negrito" for="prontuario">
+                Prontuário
+            </label>
+            <input id="prontuario" type="number" class="form-control"
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
         </div>
         <div class="input-group flex-nowrap campo-hut">
-            <label class="input-group-text negrito" for="setor">Setor</label>
-            <input id="setor" class="form-control"/>
+            <label class="input-group-text negrito" for="setor">
+                Setor
+            </label>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
         </div>
     </div>
     <div class="col-1"></div>
 </div>
 <div class="ficha pb-5">
     {% csrf_token %}
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="mt-2 container-cabecalho">
         <div class="col-3 left-div negrito">
             <label>República Federativa do Brasil</label>
@@ -33,7 +42,10 @@
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
                 <input type="number" class="form-control" id="numero-ficha"
-                    oninput="atribuirValor(this.id)"/>
+                    {% if ficha.numero_ficha != "0" %} 
+                        value="{{ ficha.numero_ficha }}"
+                    {% endif %}
+                />
             </div>
         </div>
     </div>
@@ -50,8 +62,13 @@
                                 <span class="numeracao">1</span>
                                 <label for="campo-tipo-notificacao">Tipo de Notificação</label>
                             </div>
-                            <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                    type="number" min="1" max="4"/>
+                            <input id="campo-tipo-notificacao"
+                                class="input-dado-quadrado form-control"
+                                type="number" min="1" max="4"
+                                {% if ficha.tipo_notificacao != "0" %}
+                                    value="{{ ficha.tipo_notificacao }}"
+                                {% endif %}
+                            />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                             <span class="mb-1">
@@ -69,8 +86,8 @@
                             <label for="campo-agravoDoenca">Agravo/doença</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-agravoDoenca" class="input-dado form-control negrito"
-                                value="VIOLÊNCIA INTERPESSOAL/AUTOPROVOCADA"/>
+                            <input id="campo-agravoDoenca" value="{{ ficha.agravoDoenca }}"
+                                class="input-dado form-control negrito"/>
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -79,10 +96,8 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
+                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}" type="date"
+                                class="input-dado form-control"/>
                         </div>
                     </div>
                 </div>
@@ -93,18 +108,22 @@
                             <label for="campo-uf-notificacao">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" class="input-dado form-control"    
-                                maxlength="2" oninput="atribuirValor(this.id)"/>
+                            <input id="campo-uf-notificacao" value="{{ ficha.uf_notificacao }}"
+                                   class="input-dado form-control" maxlength="2"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">5</span>
-                            <label for="campo-municipio-notificacao">Município de Notificação</label>
+                            <label for="campo-municipio-notificacao">
+                                Município de Notificação
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
+                            <input id="campo-municipio-notificacao"
+                                value="{{ ficha.municipio_notificacao }}"
+                                class="input-dado form-control"
+                            />
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -113,10 +132,12 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cod-ibge-notificacao"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-cod-ibge-notificacao"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_notificacao != "0" %}
+                                    value="{{ ficha.cod_ibge_notificacao }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -130,20 +151,25 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
+                            <input
+                                id="campo-unidade-saude"
+                                class="input-dado form-control"
+                                value="{{ ficha.unidade_saude }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-unidade-saude">Código</label>
+                            <label for="campo-cod-unidade-saude">Código</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-codigo-unidade-saude"
+                                id="campo-cod-unidade-saude"
                                 type="number"
                                 class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                {% if ficha.cod_unidade_saude != "0" %}
+                                    value="{{ ficha.cod_unidade_saude }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -159,6 +185,7 @@
                                     id="campo-dt-sintomas"
                                     type="date"
                                     class="input-dado form-control"
+                                    value="{% if ficha.dt_sintomas %}{{ ficha.dt_sintomas }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -179,9 +206,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-paciente"
-                                    type="text"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                    value="{{ ficha.nome_paciente }}"
                             />
                         </div>
                     </div>
@@ -191,8 +217,12 @@
                             <label for="campo-dt-nascimento">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento" type="date" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
+                            <input
+                                    id="campo-dt-nascimento"
+                                    type="date"
+                                    class="input-dado form-control"
+                                    value="{% if ficha.dt_nascimento %}{{ ficha.dt_nascimento }}{% endif %}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -204,18 +234,26 @@
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade" type="number" class="input-dado form-control"
-                                    maxlength="3" oninput="atribuirValor(this.id)"/>
+                                <input
+                                    id="campo-idade"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    maxlength="3"
+                                    {% if ficha.idade != "0" %}
+                                        value="{{ ficha.idade }}"
+                                    {% endif %}
+                                />
                             </div>
                             <div class="col-7 container-tipo-idade">
                                 <input
-                                        type="number"
-                                        id="campo-tipo-idade"
-                                        class="input-dado-quadrado form-control"
-                                        min="1"
-                                        max="4"
-                                        aria-label=""
-                                        oninput="atribuirValor(this.id)"
+                                    type="number"
+                                    id="campo-tipo-idade"
+                                    class="input-dado-quadrado form-control"
+                                    min="1"
+                                    max="4"
+                                    {% if ficha.tipo_idade != "0" %}
+                                        value="{{ ficha.tipo_idade }}"
+                                    {% endif %}
                                 />
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
@@ -234,9 +272,9 @@
                             </div>
                             <input
                                     id="campo-sexo"
+                                    value="{{ ficha.sexo }}"
                                     class="input-dado-quadrado form-control"
                                     maxlength="1"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                         <div class="container-input-dado letra-miuda">
@@ -254,12 +292,14 @@
                                 <label for="campo-gestante">Gestante</label>
                             </div>
                             <input
-                                    id="campo-gestante"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="9"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-gestante"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="9"
+                                {% if ficha.gestante != "0" %}
+                                    value="{{ ficha.gestante }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -277,12 +317,14 @@
                                 <label for="campo-raca">Raça/Cor</label>
                             </div>
                             <input
-                                    id="campo-raca"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="9"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-raca"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="9"
+                                {% if ficha.raca != "0" %}
+                                    value="{{ ficha.raca }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
@@ -302,11 +344,13 @@
                                 <label for="campo-escolaridade">Escolaridade</label>
                             </div>
                             <input
-                                    id="campo-escolaridade"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    maxlength="2"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-escolaridade"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="2"
+                                {% if ficha.escolaridade != "0" %}
+                                    value="{{ ficha.escolaridade }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
@@ -333,7 +377,14 @@
                             <label for="campo-numero-sus">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-numero-sus" type="number" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                id="campo-numero-sus"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_sus != "0" %}
+                                    value="{{ ficha.numero_sus }}"
+                                {% endif %}
+                            />
                         </div>
                     </div>
                     <div class="col-8 div-input">
@@ -342,7 +393,11 @@
                             <label for="campo-nome-mae">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-mae" type="text" class="input-dado form-control" oninput="atribuirValor(this.id)"/>
+                            <input
+                                id="campo-nome-mae"
+                                value="{{ ficha.nome_mae }}"
+                                class="input-dado form-control"
+                            />
                         </div>
                     </div>
                 </div>
@@ -364,9 +419,10 @@
                             </div>
                             <div class="container-input-dado">
                                 <input
-                                        id="campo-dt-primeiro-sintoma"
-                                        type="date"
-                                        class="input-dado form-control"
+                                    id="campo-dt-primeiro-sintoma"
+                                    type="date"
+                                    value="{% if dt_primeiro_sintoma %}{{ ficha.dt_primeiro_sintoma }}{% endif %}"
+                                    class="input-dado form-control"
                                 />
                             </div>
                         </div>
@@ -379,9 +435,12 @@
                             </div>
                             <div class="container-input-dado">
                                 <input
-                                        id="campo-numero-casos-suspeitos"
-                                        type="number"
-                                        class="input-dado form-control"
+                                    id="campo-numero-casos-suspeitos"
+                                    type="number"
+                                    class="input-dado form-control"
+                                    {% if ficha.numero_casos_suspeitos != "0" %}
+                                        value="{{ ficha.numero_casos_suspeitos }}"
+                                    {% endif %}
                                 />
                             </div>
                         </div>
@@ -395,11 +454,14 @@
                                 </label>
                             </div>
                             <input
-                                    id="campo-local-inicial-ocorrencia"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="11"
+                                id="campo-local-inicial-ocorrencia"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1"
+                                max="11"
+                                {% if ficha.local_inicial_ocorrencia != "0" %}
+                                    value="{{ ficha.local_inicial_ocorrencia }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado flex-column">
@@ -429,9 +491,10 @@
                                     <li class="px-2">Especificar</li>
                                     <li>
                                         <input
-                                                id="campo-local-especificar-ocorrencia"
-                                                class="input-dado form-control"
-                                                aria-label=""
+                                            id="campo-local-especificar-ocorrencia"
+                                            class="input-dado form-control"
+                                            aria-label=""
+                                            value="{{ ficha.local_inicial_ocorrencia_outro }}"
                                         />
                                     </li>
                                 </ul>
@@ -449,32 +512,30 @@
                 <div class="linha-dados">
                     <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">17</span>
+                            <span class="numeracao">20</span>
                             <label for="campo-uf-residencia">UF</label>
                         </div>
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-residencia"
-                                    type="text"
+                                    value="{{ ficha.uf_residencia }}"
                                     class="input-dado form-control"
                                     maxlength="2"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">18</span>
+                            <span class="numeracao">21</span>
                             <label for="campo-municipio-residencia">
                                 Município de Residência
                             </label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-municipio-residencia"
-                                type="text"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-municipio-residencia"
+                                    value="{{ ficha.municipio_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -487,21 +548,22 @@
                                 id="campo-cod-ibge-residencia"
                                 type="number"
                                 class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                {% if ficha.cod_ibge_residencia != "0" %}
+                                    value="{{ ficha.cod_ibge_residencia }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">19</span>
+                            <span class="numeracao">22</span>
                             <label for="campo-distrito-residencia">Distrito</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-distrito-residencia"
-                                type="text"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-distrito-residencia"
+                                    value="{{ ficha.distrito_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -509,30 +571,29 @@
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">20</span>
+                            <span class="numeracao">23</span>
                             <label for="campo-bairro-residencia">Bairro</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-bairro-residencia"
-                                type="text"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-bairro-residencia"
+                                    value="{{ ficha.bairro_residencia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">21</span>
+                            <span class="numeracao">24</span>
                             <label for="campo-logradouro-residencia">
                                 Logradouro (rua, avenida, ...)
                             </label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-logradouro-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
+                                    id="campo-logradouro-residencia"
+                                    class="input-dado form-control"
+                                    value="{{ ficha.logradouro_residencia }}"
                             />
                         </div>
                     </div>
@@ -543,9 +604,11 @@
                         <div class="container-input-dado">
                             <input
                                 id="campo-codigo-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
                                 type="number"
+                                class="input-dado form-control"
+                                {% if ficha.codigo_residencia != "0" %}
+                                    value="{{ ficha.codigo_residencia }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -553,21 +616,23 @@
                 <div class="linha-dados">
                     <div class="col-2 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">22</span>
+                            <span class="numeracao">25</span>
                             <label for="campo-numero-residencia">Número</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-numero-residencia"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-numero-residencia"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_residencia != "0" %}
+                                    value="{{ ficha.numero_residencia }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">23</span>
+                            <span class="numeracao">26</span>
                             <label for="campo-complemento-residencia">
                                 Complemento (apto, casa, ...)
                             </label>
@@ -575,70 +640,21 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-complemento-residencia"
-                                    type="text"
+                                    value="{{ ficha.complemento_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">24</span>
-                            <label for="campo-geo-campo1">Geo campo 1</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-geo-campo1"
-                                    type="text"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">25</span>
-                            <label for="campo-geo-campo2">Geo campo 2</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-geo-campo2"
-                                    type="text"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">26</span>
-                            <label for="campo-ponto-ref-residencia">
-                                Ponto de Referência
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-ponto-ref-residencia"
-                                    type="text"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">27</span>
-                            <label for="campo-cep-residencia">CEP</label>
+                            <label for="campo-geo-campo1">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cep-residencia"
-                                    type="text"
+                                    id="campo-geo-campo1"
+                                    value="{{ ficha.geo_campo1 }}"
                                     class="input-dado form-control"
-                                    maxlength="9"
-                                    onblur="pesquisaCepComReplicacao(this)"
                             />
                         </div>
                     </div>
@@ -647,29 +663,74 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">28</span>
+                            <label for="campo-geo-campo2">Geo campo 2</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-geo-campo2"
+                                    value="{{ ficha.geo_campo2 }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">29</span>
+                            <label for="campo-ponto-ref-residencia">
+                                Ponto de Referência
+                            </label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-ponto-ref-residencia"
+                                    value="{{ ficha.ponto_ref_residencia }}"
+                                    class="input-dado form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">30</span>
+                            <label for="campo-cep-residencia">CEP</label>
+                        </div>
+                        <div class="container-input-dado">
+                            <input
+                                    id="campo-cep-residencia"
+                                    value="{{ ficha.cep_residencia }}"
+                                    class="input-dado form-control"
+                                    maxlength="9"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="linha-dados">
+                    <div class="col-3 div-input">
+                        <div class="info-elevada">
+                            <span class="numeracao">31</span>
                             <label for="campo-telefone-residencia">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
                             <input
                                     id="campo-telefone-residencia"
-                                    type="text"
+                                    value="{{ ficha.telefone_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
                     <div class="col-3 div-input campo-zona-residencia">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">29</span>
+                                <span class="numeracao">32</span>
                                 <label for="campo-zona-residencia">Zona</label>
                             </div>
                             <input
-                                    id="campo-zona-residencia"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    maxlength="1"
-                                    oninput="atribuirValor(this.id)"
+                                id="campo-zona-residencia"
+                                type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="1"
+                                {% if ficha.zona_residencia != "0" %}
+                                    value="{{ ficha.zona_residencia }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
@@ -679,7 +740,7 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">30</span>
+                            <span class="numeracao">33</span>
                             <label for="campo-pais-residencia">
                                 País (se residente fora do Brasil)
                             </label>
@@ -687,9 +748,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-pais-residencia"
-                                    type="text"
+                                    value="{{ ficha.pais_residencia }}"
                                     class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
                             />
                         </div>
                     </div>
@@ -711,7 +771,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-us-notificante"
-                                    type="text"
+                                    value="{{ ficha.municipio_us_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -725,7 +785,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
-                                    type="text"
+                                    value="{{ ficha.nome_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -737,7 +797,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
-                                    type="text"
+                                    value="{{ ficha.funcao_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -749,7 +809,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
-                                    type="text"
+                                    value="{{ ficha.assinatura_notificante }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -788,6 +848,7 @@
                             <input
                                     id="campo-dt-amostra-sorologia"
                                     type="date"
+                                    value="{% if ficha.dt_amostra_sorologia %}{{ ficha.dt_amostra_sorologia }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -803,6 +864,7 @@
                             <input
                                     id="campo-dt-outra-amostra"
                                     type="date"
+                                    value="{% if ficha.dt_outra_amostra %}{{ ficha.dt_outra_amostra }}{% endif %}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -815,7 +877,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-tipo-exame"
-                                    type="text"
+                                    value="{{ ficha.tipo_exame }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -829,11 +891,14 @@
                                 <label for="campo-obito">Óbito ?</label>
                             </div>
                             <input
-                                    id="campo-obito"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
+                                id="campo-obito"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.obito != "0" %}
+                                    value="{{ ficha.obito }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
@@ -852,11 +917,14 @@
                                 </label>
                             </div>
                             <input
-                                    id="campo-caso-semelhante"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
+                                id="campo-caso-semelhante"
+                                class="input-dado-quadrado form-control"
+                                type="number"
+                                min="1"
+                                max="9"
+                                {% if ficha.caso_semelhante != "0" %}
+                                    value="{{ ficha.caso_semelhante }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
@@ -872,9 +940,7 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">06</span>
-                                <label for="campo-exantema">
-                                    Presença de exantema ?
-                                </label>
+                                <label for="campo-exantema"> Presença de exantema ? </label>
                             </div>
                             <input
                                 id="campo-exantema"
@@ -882,13 +948,15 @@
                                 type="number"
                                 min="1"
                                 max="9"
+                                {% if ficha.exantema != "0" %}
+                                    value="{{ ficha.exantema }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                         <span class="mb-1">
-                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            9 - Ignorado
+                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
                         </span>
                         </div>
                     </div>
@@ -902,8 +970,9 @@
                         <div class="container-input-dado">
                             <input
                                 id="campo-dt-inicio-exatema"
-                                class="input-dado form-control"
                                 type="date"
+                                value="{% if ficha.dt_inicio_exantema %}{{ ficha.dt_inicio_exantema }}{% endif %}"
+                                class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -916,18 +985,20 @@
                                 </label>
                             </div>
                             <input
-                                id="campo-petequiaSufusao"
-                                class="input-dado-quadrado form-control"
-                                type="number"
-                                min="1"
-                                max="9"
+                                    id="campo-petequiaSufusao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.petequiaSufusao != "0" %}
+                                        value="{{ ficha.petequiaSufusao }}"
+                                    {% endif %}
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
                             <span class="mb-1">
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
+                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
+                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
                             </span>
                         </div>
                     </div>
@@ -937,7 +1008,7 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">09</span>
-                                <label for="campo-liquor">Foi realizado líquor ?</label>
+                                <label for="campo-liquor"> Foi realizado líquor ? </label>
                             </div>
                             <input
                                 id="campo-liquor"
@@ -945,10 +1016,12 @@
                                 type="number"
                                 min="1"
                                 max="9"
+                                {% if ficha.liquor != "0" %}
+                                    value="{{ ficha.liquor }}"
+                                {% endif %}
                             />
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura
-                                flex-wrap justify-content-evenly px-1">
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
                             <span class="mx-1">1 - Sim</span>
                             <span class="mx-1">2 - Não</span>
                             <span class="mx-1">9 - Ignorado</span>
@@ -963,8 +1036,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-bacterioscopia"
-                                class="input-dado form-control"
+                                    id="campo-bacterioscopia"
+                                    value="{{ ficha.bacterioscopia }}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -975,19 +1049,22 @@
                             <div class="d-flex align-items-start">
                                 <span class="numeracao">11</span>
                                 <label class="mx-1 pb-2" for="campo-tomou-vacina">
-                                    O paciente tomou vacina contra agravo notificado neste impresso?
+                                    O paciente tomou vacina contra agravo notificado neste
+                                    impresso?
                                 </label>
                             </div>
                             <input
-                                id="campo-tomou-vacina"
-                                class="input-dado-quadrado form-control"
-                                type="number"
-                                min="1"
-                                max="9"
+                                    id="campo-tomou-vacina"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.tomou_vacina != "0" %}
+                                        value="{{ ficha.tomou_vacina }}"
+                                    {% endif %}
                             />
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura
-                            justify-content-evenly flex-wrap px-1">
+                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
                             <span class="mx-1">1 - Sim</span>
                             <span class="mx-1">2 - Não</span>
                             <span class="mx-1">9 - Ignorado</span>
@@ -1002,9 +1079,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                id="campo-dt-ultima-dose-tomada"
-                                type="date"
-                                class="input-dado form-control"
+                                    id="campo-dt-ultima-dose-tomada"
+                                    type="date"
+                                    value="{% if ficha.dt_ultima_dose_tomada %}{{ ficha.dt_ultima_dose_tomada }}{% endif %}"
+                                    class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -1017,11 +1095,14 @@
                                 </label>
                             </div>
                             <input
-                                id="campo-hospitalizacao"
-                                class="input-dado-quadrado form-control"
-                                type="number"
-                                min="1"
-                                max="9"
+                                    id="campo-hospitalizacao"
+                                    class="input-dado-quadrado form-control"
+                                    type="number"
+                                    min="1"
+                                    max="9"
+                                    {% if ficha.hospitalizacao != "0" %}
+                                        value="{{ ficha.hospitalizacao }}"
+                                    {% endif %}
                             />
                         </div>
                         <div class="container-input-dado justify-content-evenly px-1">
@@ -1039,9 +1120,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-dt-hospitalizacao"
-                                    type="date"
-                                    class="input-dado form-control"
+                                id="campo-dt-hospitalizacao"
+                                type="date"
+                                value="{% if ficha.dt_hospitalizacao %}{{ ficha.dt_hospitalizacao }}{% endif %}"
+                                class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -1055,7 +1137,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-uf-hospital"
-                                    type="text"
+                                    value="{{ ficha.uf_hospital }}"
                                     class="input-dado form-control"
                                     maxlength="2"
                             />
@@ -1071,7 +1153,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-hospital"
-                                    type="text"
+                                    value="{{ ficha.municipio_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1082,9 +1164,12 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cod-ibge-hospital"
-                                    type="number"
-                                    class="input-dado form-control"
+                                id="campo-cod-ibge-hospital"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_hospital != "0" %}
+                                    value="{{ ficha.cod_ibge_hospital }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -1096,7 +1181,7 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-hospital"
-                                    type="text"
+                                    value="{{ ficha.nome_hospital }}"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -1107,9 +1192,12 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cod-hospital"
-                                    type="number"
-                                    class="input-dado form-control"
+                                id="campo-cod-hospital"
+                                type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_hospital != "0" %}
+                                    value="{{ ficha.cod_hospital }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -1135,6 +1223,7 @@
                                 <input
                                         id="campo-hipotese-diagnostica1"
                                         class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica1 }}"
                                 />
                             </div>
                             <div class="pb-3 d-flex align-items-center">
@@ -1144,6 +1233,7 @@
                                 <input
                                         id="campo-hipotese-diagnostica2"
                                         class="input-dado form-control mx-2"
+                                        value="{{ ficha.hipotese_diagnostica2 }}"
                                 />
                             </div>
                         </div>
@@ -1171,6 +1261,7 @@
                                     <input
                                             id="campo-pais-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.pais_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1180,6 +1271,7 @@
                                     <input
                                             id="campo-distrito-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.distrito_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1191,6 +1283,7 @@
                                     <input
                                             id="campo-uf-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.uf_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1202,6 +1295,7 @@
                                     <input
                                             id="campo-municipio-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.municipio_infeccao }}"
                                     />
                                 </div>
                                 <div class="pb-3 d-flex align-items-center">
@@ -1211,6 +1305,7 @@
                                     <input
                                             id="campo-bairro-infeccao"
                                             class="input-dado form-control mx-2"
+                                            value="{{ ficha.bairro_infeccao }}"
                                     />
                                 </div>
                             </div>
@@ -1219,7 +1314,7 @@
                 </div>
             </div>
         </div>
-        <div class="linha-dados footer-ficha mb-3">
+        <div class="linha-dados footer-ficha">
             <span class="col-9">Dados Complementares/ Notificação</span>
             <div class="col-3 d-flex justify-content-evenly">
                 <span>SVS</span>
@@ -1246,7 +1341,11 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha2">N°</label>
-                <input type="number" class="form-control" id="numero-ficha2">
+                <input type="number" class="form-control" id="numero-ficha2"
+                    {% if ficha.numero_ficha2 != "0" %}
+                        value="{{ ficha.numero_ficha2 }}"
+                    {% endif %}
+                >
             </div>
         </div>
     </div>
@@ -1302,7 +1401,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-dt-notificacao2" type="date"
-                                class="input-dado form-control"/>
+                                class="input-dado form-control"
+                                value="{{ ficha.dt_notificacao2 }}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -1313,7 +1414,8 @@
                             <label for="campo-uf-notificacao2">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-notificacao2" class="input-dado form-control" maxlength="2">
+                            <input id="campo-uf-notificacao2" class="input-dado form-control"
+                                value="{{ ficha.uf_notificacao2 }}" maxlength="2"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -1324,18 +1426,21 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao2" class="input-dado form-control">
+                            <input id="campo-municipio-notificacao2" class="input-dado form-control"
+                                value="{{ ficha.municipio_notificacao2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-notificacao2">
-                                Código (IBGE)
-                            </label>
+                            <label for="campo-cod-ibge-notificacao2">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-cod-ibge-notificacao2" type="number"
-                                class="input-dado form-control">
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_notificacao2 != "0" %}
+                                    value="{{ ficha.cod_ibge_notificacao2 }}"
+                                {% endif %}
+                            />
                         </div>
                     </div>
                 </div>
@@ -1351,6 +1456,9 @@
                             <input id="campo-unidade-notificadora"
                                 class="input-dado-quadrado form-control"
                                 type="number" min="1" max="7"
+                                {% if ficha.unid_notif_num != "0" %}
+                                    value="{{ ficha.unid_notif_num }}"
+                                {% endif %}
                             />
                             <span>
                                 1- Unidade de Saúde&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1368,10 +1476,13 @@
                     <div class="col-7 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">7</span>
-                            <label for="campo-nome-un-notificadora">Nome da Unidade Notificadora</label>
+                            <label for="campo-nome-un-notificadora">
+                                Nome da Unidade Notificadora
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-un-notificadora" type="text" class="input-dado form-control">
+                            <input id="campo-nome-un-notificadora" class="input-dado form-control"
+                                value="{{ ficha.nome_unid_notif }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1379,7 +1490,12 @@
                             <label for="campo-codigo-unidade-saude2">Código Unidade</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-codigo-unidade-saude2" type="number" class="input-dado form-control">
+                            <input id="campo-codigo-unidade-saude2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_unid_notif != "0" %}
+                                    value="{{ ficha.cod_unid_notif }}"
+                                {% endif %}
+                            />
                         </div>
                     </div>
                 </div>
@@ -1390,24 +1506,35 @@
                             <label for="campo-unidade-saude2">Unidade de Saúde</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-unidade-saude2" type="text" class="input-dado form-control">
+                            <input id="campo-unidade-saude2" class="input-dado form-control"
+                                value="{{ ficha.unid_saude }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
-                        <div class="info-elevada-sem-num22eracao">
+                        <div class="info-elevada-sem-numeracao">
                             <label for="campo-cod-cnes-unidade-saude">Código (CNES)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-cnes-unidade-saude" type="number" class="input-dado form-control">
+                            <input id="campo-cod-cnes-unidade-saude" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_cnes_us != "0" %}
+                                    value="{{ ficha.cod_cnes_us }}"
+                                {% endif %}
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input campo-dt-violencia">
                         <div class="info-elevada">
                             <span class="numeracao">9</span>
-                            <label for="campo-dt-violencia">Data da ocorrência da violência</label>
+                            <label for="campo-dt-violencia">
+                                Data da ocorrência da violência
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-violencia" type="date" class="input-dado form-control">
+                            <input id="campo-dt-violencia" type="date"
+                                class="input-dado form-control"
+                                value="{{ ficha.dt_violencia }}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -1421,36 +1548,50 @@
                 <div class="linha-dados">
                     <div class="col-9 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">10</span>
-                            <label for="campo-nome-paciente22">Nome do Paciente</label>
+                            <span class="numeracao">8</span>
+                            <label for="campo-nome-paciente2">Nome do Paciente</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-paciente22" type="text" class="input-dado form-control">
+                            <input id="campo-nome-paciente2" class="input-dado form-control"
+                                value="{{ ficha.nome_paciente2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">11</span>
+                            <span class="numeracao">9</span>
                             <label for="campo-dt-nascimento2">Data de Nascimento</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-nascimento2" type="date" class="input-dado form-control">
+                            <input id="campo-dt-nascimento2" type="date"
+                                class="input-dado form-control"
+                                value="{{ ficha.dt_nascimento2 }}"
+                            />
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">12</span>
+                            <span class="numeracao">10</span>
                             <label for="campo-idade2">(ou) Idade</label>
                         </div>
                         <div class="container-input-dado">
                             <div class="col-4">
-                                <input id="campo-idade2" type="number" class="input-dado form-control" maxlength="3">
+                                <input id="campo-idade2" type="number"
+                                    class="input-dado form-control" maxlength="3"
+                                    {% if ficha.idade2 != "0" %}
+                                        value="{{ ficha.idade2 }}"
+                                    {% endif %}
+                                >
                             </div>
                             <div class="col-7 container-tipo-idade">
-                                <input type="number" id="campo-tipo-idade2" class="input-dado-quadrado form-control"
-                                       min="1" max="4" aria-label="">
+                                <input type="number" id="campo-tipo-idade2"
+                                    class="input-dado-quadrado form-control"
+                                    min="1" max="4"
+                                    {% if ficha.tipo_idade2 != "0" %}
+                                        value="{{ ficha.tipo_idade2 }}"
+                                    {% endif %}
+                                >
                                 <ul class="letra-miuda">
                                     <li>1 - Hora</li>
                                     <li>2 - Dia</li>
@@ -1463,10 +1604,11 @@
                     <div class="col-2 div-input campo-sexo">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">13</span>
+                                <span class="numeracao">11</span>
                                 <label for="campo-sexo2">Sexo</label>
                             </div>
-                            <input id="campo-sexo2" type="text" class="input-dado-quadrado form-control" maxlength="1">
+                            <input id="campo-sexo2" class="input-dado-quadrado form-control" maxlength="1"
+                                value="{{ ficha.sexo2 }}">
                         </div>
                         <div class="container-input-dado letra-miuda">
                             <ul>
@@ -1479,10 +1621,16 @@
                     <div class="col-4 div-input campo-gestante">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">14</span>
+                                <span class="numeracao">12</span>
                                 <label for="campo-gestante2">Gestante</label>
                             </div>
-                            <input id="campo-gestante2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-gestante2" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.gestante2 != "0" %}
+                                    value="{{ ficha.gestante2 }}"
+                                {% endif %}
+                            >
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
                             1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1497,10 +1645,16 @@
                     <div class="col-3 div-input campo-raca">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">15</span>
+                                <span class="numeracao">13</span>
                                 <label for="campo-raca2">Raça/Cor</label>
                             </div>
-                            <input id="campo-raca2" type="number" class="input-dado-quadrado form-control" min="1" max="9">
+                            <input id="campo-raca2" type="number"
+                                class="input-dado-quadrado form-control"
+                                min="1" max="9"
+                                {% if ficha.raca2 != "0" %}
+                                    value="{{ ficha.raca2 }}"
+                                {% endif %}
+                            >
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
                             1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1516,11 +1670,16 @@
                     <div class="col-12 div-input campo-escolaridade">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">16</span>
+                                <span class="numeracao">14</span>
                                 <label for="campo-escolaridade2">Escolaridade</label>
                             </div>
-                            <input id="campo-escolaridade2" type="number" class="input-dado-quadrado form-control"
-                                   maxlength="2">
+                            <input id="campo-escolaridade2" type="number"
+                                class="input-dado-quadrado form-control"
+                                maxlength="2"
+                                {% if ficha.escolaridade2 != "0" %}
+                                    value="{{ ficha.escolaridade2 }}"
+                                {% endif %}
+                            >
                         </div>
                         <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
                             0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série incompleta do EF (antigo
@@ -1540,20 +1699,26 @@
                 <div class="linha-dados">
                     <div class="col-4 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">17</span>
+                            <span class="numeracao">15</span>
                             <label for="campo-numero-sus2">Número do Cartão SUS</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-numero-sus2" type="number" class="input-dado form-control">
+                            <input id="campo-numero-sus2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.numero_sus2 != "0" %}
+                                    value="{{ ficha.numero_sus2 }}"
+                                {% endif %}
+                            >
                         </div>
                     </div>
                     <div class="col-8 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">18</span>
+                            <span class="numeracao">16</span>
                             <label for="campo-nome-mae2">Nome da mãe</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-mae2" type="text" class="input-dado form-control">
+                            <input id="campo-nome-mae2" class="input-dado form-control"
+                                value="{{ ficha.nome_mae2 }}">
                         </div>
                     </div>
                 </div>
@@ -1567,21 +1732,22 @@
                 <div class="linha-dados">
                     <div class="col-1 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">19</span>
+                            <span class="numeracao">17</span>
                             <label for="campo-uf-residencia2">UF</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-uf-residencia2" type="text" class="input-dado form-control"
-                                   maxlength="2">
+                            <input id="campo-uf-residencia2" class="input-dado form-control"
+                                maxlength="2" value="{{ ficha.uf_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">20</span>
+                            <span class="numeracao">18</span>
                             <label for="campo-municipio-residencia2">Município de Residência</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-municipio-residencia2" class="input-dado form-control"
+                                value="{{ ficha.municipio_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1589,38 +1755,46 @@
                             <label for="campo-cod-ibge-residencia2">Código (IBGE)</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-ibge-residencia2" type="number" class="input-dado form-control">
+                            <input id="campo-cod-ibge-residencia2" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_ibge_residencia2 != "0" %}
+                                    value="{{ ficha.cod_ibge_residencia2 }}"
+                                {% endif %}
+                            >
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">21</span>
+                            <span class="numeracao">19</span>
                             <label for="campo-distrito-residencia2">Distrito</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-distrito-residencia2" type="text" class="input-dado form-control">
+                            <input id="campo-distrito-residencia2" class="input-dado form-control"
+                                value="{{ ficha.distrito_residencia2 }}">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">22</span>
+                            <span class="numeracao">20</span>
                             <label for="campo-bairro-residencia2">Bairro</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-bairro-residencia2" class="input-dado form-control">
+                            <input id="campo-bairro-residencia2" class="input-dado form-control"
+                                value="{{ ficha.bairro_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">23</span>
+                            <span class="numeracao">21</span>
                             <label for="campo-logradouro-residencia2">
                                 Logradouro (rua, avenida, ...)
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-residencia2" class="input-dado form-control">
+                            <input id="campo-logradouro-residencia2" class="input-dado form-control"
+                                value="{{ ficha.logradouro_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -1629,96 +1803,110 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-codigo-residencia2" type="number"
-                                class="input-dado form-control"   
-                            />
+                                class="input-dado form-control"
+                                {% if ficha.codigo_residencia2 != "0" %}
+                                    value="{{ ficha.codigo_residencia2 }}"
+                                {% endif %}
+                            >
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-2 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">24</span>
+                            <span class="numeracao">22</span>
                             <label for="campo-numero-residencia2">Número</label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-numero-residencia2" type="number"
                                 class="input-dado form-control"
-                            />
+                                {% if ficha.numero_residencia2 != "0" %}
+                                    value="{{ ficha.numero_residencia2 }}"
+                                {% endif %}
+                            >
                         </div>
                     </div>
                     <div class="col-7 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">25</span>
+                            <span class="numeracao">23</span>
                             <label for="campo-complemento-residencia2">
                                 Complemento (apto, casa, ...)
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-complemento-residencia2" class="input-dado form-control">
+                            <input id="campo-complemento-residencia2" class="input-dado form-control"
+                                value="{{ ficha.complemento_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">26</span>
+                            <span class="numeracao">24</span>
                             <label for="campo-geo-campo12">Geo campo 1</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo12" class="input-dado form-control">
+                            <input id="campo-geo-campo12" class="input-dado form-control"
+                                value="{{ ficha.geo_campo1_2 }}">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">27</span>
+                            <span class="numeracao">25</span>
                             <label for="campo-geo-campo22">Geo campo 2</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo22" class="input-dado form-control">
+                            <input id="campo-geo-campo22" class="input-dado form-control"
+                                value="{{ ficha.geo_campo2_2 }}">
                         </div>
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">28</span>
+                            <span class="numeracao">26</span>
                             <label for="campo-ponto-ref-residencia2">
                                 Ponto de Referência
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ponto-ref-residencia2" class="input-dado form-control">
+                            <input id="campo-ponto-ref-residencia2" class="input-dado form-control"
+                                value="{{ ficha.ponto_ref_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">29</span>
+                            <span class="numeracao">27</span>
                             <label for="campo-cep-residencia2">CEP</label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-cep-residencia2" class="input-dado form-control"
-                                maxlength="9">
+                                maxlength="9" value="{{ ficha.cep_residencia2 }}">
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-3 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">30</span>
+                            <span class="numeracao">28</span>
                             <label for="campo-telefone-residencia2">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-telefone-residencia2" class="input-dado form-control">
+                            <input id="campo-telefone-residencia2" class="input-dado form-control"
+                                value="{{ ficha.telefone_residencia2 }}">
                         </div>
                     </div>
                     <div class="col-3 div-input campo-zona-residencia">
                         <div class="info-elevada-com-input">
                             <div>
-                                <span class="numeracao">31</span>
+                                <span class="numeracao">29</span>
                                 <label for="campo-zona-residencia2">Zona</label>
                             </div>
                             <input id="campo-zona-residencia2" type="number"
                                 class="input-dado-quadrado form-control"
                                 maxlength="1"
-                            />
+                                {% if ficha.zona_residencia2 != "0" %}
+                                    value="{{ ficha.zona_residencia2 }}"
+                                {% endif %}
+                            >
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
                             1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
@@ -1727,13 +1915,14 @@
                     </div>
                     <div class="col-6 div-input">
                         <div class="info-elevada">
-                            <span class="numeracao">32</span>
+                            <span class="numeracao">30</span>
                             <label for="campo-pais-residencia2">
                                 País (se residente fora do Brasil)
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-pais-residencia2" class="input-dado form-control">
+                            <input id="campo-pais-residencia2" class="input-dado form-control"
+                                value="{{ ficha.pais_residencia2 }}">
                         </div>
                     </div>
                 </div>
@@ -1754,7 +1943,8 @@
                             <label for="campo-nome-social">Nome Social</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-social" class="input-dado form-control">
+                            <input id="campo-nome-social" class="input-dado form-control"
+                                value="{{ ficha.nome_social }}">
                         </div>
                     </div>
                     <div class="col-5 div-input">
@@ -1763,7 +1953,8 @@
                             <label for="campo-ocupacao">Ocupação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ocupacao" class="input-dado form-control">
+                            <input id="campo-ocupacao" class="input-dado form-control"
+                                value="{{ ficha.ocupacao }}">
                         </div>
                     </div>
                 </div>
@@ -3195,5 +3386,5 @@
 </div>
 
 {% block rodape_ficha %}
-    {% include 'rodape_ficha.html' %}
+    {% include 'rodape_edicao_ficha.html' %}
 {% endblock %}

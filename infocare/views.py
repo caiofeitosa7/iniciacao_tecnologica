@@ -20,6 +20,8 @@ def home(request):
 def imagem_local(request, cod_img):
     if not cod_img:
         imagem_url = os.path.join('templates', 'images', 'bg-login.png')
+    else:
+        imagem_url = os.path.join('templates', 'images', 'brasao-da-republica.png')
     return FileResponse(open(imagem_url, 'rb'))
 
 

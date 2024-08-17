@@ -35,7 +35,7 @@
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
                 <input type="number" class="form-control" id="numero-ficha"
-                       value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
+                    value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
                 />
             </div>
         </div>
@@ -53,9 +53,10 @@
                                 <span class="numeracao">1</span>
                                 <label for="campo-tipo-notificacao">Tipo de Notificação</label>
                             </div>
-                            <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                   value="{% if ficha.tipo_notificacao %}{{ ficha.tipo_notificacao }}{% endif %}"
-                                   type="number" min="1" max="4"
+                            <input
+                                id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
+                                value="{% if ficha.tipo_notificacao %}{{ ficha.tipo_notificacao }}{% endif %}"
+                                type="number" min="1" max="4"
                             />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura">
@@ -84,8 +85,8 @@
                             <label for="campo-dt-notificacao">Data da Notificação</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}" type="date"
-                                   class="input-dado form-control"/>
+                            <input id="campo-dt-notificacao" value="{{ ficha.dt_notificacao }}"
+                                type="date" class="input-dado form-control"/>
                         </div>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-municipio-notificacao" value="{{ ficha.municipio_notificacao }}"
-                                   class="input-dado form-control"/>
+                                class="input-dado form-control"/>
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -134,9 +135,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-unidade-saude"
-                                    class="input-dado form-control"
-                                    value="{{ ficha.unidade_saude }}"
+                                id="campo-unidade-saude"
+                                class="input-dado form-control"
+                                value="{{ ficha.unidade_saude }}"
                             />
                         </div>
                     </div>
@@ -146,10 +147,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-cod-unidade-saude"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    value="{% if ficha.cod_unidade_saude %}{{ ficha.cod_unidade_saude }}{% endif %}"
+                                id="campo-cod-unidade-saude"
+                                type="number"
+                                class="input-dado form-control"
+                                value="{% if ficha.cod_unidade_saude %}{{ ficha.cod_unidade_saude }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -162,10 +163,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-dt-sintomas"
-                                    type="date"
-                                    class="input-dado form-control"
-                                    value="{{ ficha.dt_sintomas }}"
+                                id="campo-dt-sintomas"
+                                type="date"
+                                class="input-dado form-control"
+                                value="{{ ficha.dt_sintomas }}"
                             />
                         </div>
                     </div>
@@ -185,9 +186,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-nome-paciente"
-                                    class="input-dado form-control"
-                                    value="{{ ficha.nome_paciente }}"
+                                id="campo-nome-paciente"
+                                class="input-dado form-control"
+                                value="{{ ficha.nome_paciente }}"
                             />
                         </div>
                     </div>
@@ -198,10 +199,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-dt-nascimento"
-                                    type="date"
-                                    class="input-dado form-control"
-                                    value="{% if ficha.dt_nascimento %}{{ ficha.dt_nascimento }}{% endif %}"
+                                id="campo-dt-nascimento"
+                                type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_nascimento %}{{ ficha.dt_nascimento }}{% endif %}"
                             />
                         </div>
                     </div>
