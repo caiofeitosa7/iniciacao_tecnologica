@@ -1,24 +1,29 @@
 <div class="linha-dados justify-content-between">
     <div class="col-1">
         <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-            onclick="requisicaoGetPadrao('pagina_inicial')">
+           onclick="retornoListaFichas()">
         </i>
     </div>
     <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
+        <input id="cod_formulario" value="{{ ficha.cod_tipo_ficha }}" aria-label="" hidden>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-            <input id="prontuario" type="number" class="form-control"/>
+            <input id="prontuario" type="number" class="form-control"
+                {% if ficha.prontuario != "0" %}
+                    value="{{ ficha.prontuario }}"
+                {% endif %}
+            />
         </div>
         <div class="input-group flex-nowrap campo-hut">
             <label class="input-group-text negrito" for="setor">Setor</label>
-            <input id="setor" class="form-control"/>
+            <input id="setor" value="{{ ficha.setor }}" class="form-control"/>
         </div>
     </div>
     <div class="col-1"></div>
 </div>
 <div class="ficha fichaContornada mb-3">
     {% csrf_token %}
+    <input id="codigo" type="number" aria-label="" value="{{ ficha.codigo }}" hidden>
     <div class="d-flex align-items-center justify-content-between">
         <div class="col-8 d-flex flex-column">
             <label class="fs-5">
@@ -32,6 +37,9 @@
                 </label>
                 <input id="num-casos" type="number"
                     class="form-control input-dado-quadrado mx-2"
+                    {% if ficha.num_casos != "0" %}
+                        value="{{ ficha.num_casos }}"
+                    {% endif %}
                 />
             </div>
             <div class="d-grid col-3 justify-content-center py-2 ms-2"
@@ -47,8 +55,8 @@
             </span>
             <div class="d-flex align-items-center form-check m-0 mx-2">
                 <input class="form-check-input" type="checkbox"
-                    name="obito_fetal_DO"
-                    id="obito_fetal_DO"
+                    name="obito_fetal_DO" id="obito_fetal_DO"
+                    {% if ficha.op_obito_fetal_DO == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label ms-2" for="obito_fetal_DO">
                     Óbito fetal na DO
@@ -62,7 +70,8 @@
                     <label for="campo-nome-paciente" class="negrito mx-1">
                         Nome
                     </label>
-                    <input id="campo-nome-paciente" class="form-control input-dado mx-1"/>
+                    <input id="campo-nome-paciente" class="form-control input-dado mx-1"
+                        value="{{ ficha.nome_paciente }}"/>
                 </div>
                 <div class="col-3 d-flex justify-content-between colADireita mt-1">
                     <div class="d-flex">
@@ -76,6 +85,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="sexo" id="op-sexo-m" value="op-sexo-m"
+                                    {% if ficha.sexo == "op-sexo-m" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="op-sexo-m">
                                     M
@@ -84,6 +94,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="sexo" id="op-sexo-f" value="op-sexo-f"
+                                    {% if ficha.sexo == "op-sexo-f" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="op-sexo-f">
                                     F
@@ -103,6 +114,9 @@
                     <input id="semanas_gestacao" type="number"
                         class="form-control input-dado mx-1" min="0"
                         style="max-width: 50px;"
+                        {% if ficha.semanas_gestacao != "0" %}
+                            value="{{ ficha.semanas_gestacao }}"
+                        {% endif %}
                     />
                 </div>
                 <div class="d-flex col-5 colADireita">
@@ -112,12 +126,15 @@
                     <div class="d-flex align-items-center flex-wrap letra-miuda mx-1">
                         <input id="idade-obito" type="number" style="width: 50px;"
                             class="form-control input-dado me-2"
+                            {% if ficha.idade_obito != "0" %}
+                                value="{{ ficha.idade_obito }}"
+                            {% endif %}
                         />
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
-                                name="tp-idade-obito"
-                                id="tp-idade-obito-meses"
+                                name="tp-idade-obito" id="tp-idade-obito-meses"
                                 value="tp-idade-obito-meses"
+                                {% if ficha.tp_idade_obito == "tp-idade-obito-meses" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tp-idade-obito-meses">
                                 Meses
@@ -125,9 +142,9 @@
                         </div>
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
-                                name="tp-idade-obito"
-                                id="tp-idade-obito-dias"
+                                name="tp-idade-obito" id="tp-idade-obito-dias"
                                 value="tp-idade-obito-dias"
+                                {% if ficha.tp_idade_obito == "tp-idade-obito-dias" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tp-idade-obito-dias">
                                 Dias
@@ -135,9 +152,9 @@
                         </div>
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
-                                name="tp-idade-obito"
-                                id="tp-idade-obito-horas"
+                                name="tp-idade-obito" id="tp-idade-obito-horas"
                                 value="tp-idade-obito-horas"
+                                {% if ficha.tp_idade_obito == "tp-idade-obito-horas" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tp-idade-obito-horas">
                                 Horas
@@ -145,9 +162,9 @@
                         </div>
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
-                                name="tp-idade-obito"
-                                id="tp-idade-obito-min"
+                                name="tp-idade-obito" id="tp-idade-obito-min"
                                 value="tp-idade-obito-min"
+                                {% if ficha.tp_idade_obito == "tp-idade-obito-min" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tp-idade-obito-min">
                                 Min
@@ -164,13 +181,12 @@
                         </div>
                         <div class="d-flex align-items-center letra-miuda mx-1">
                             <input id="peso" class="form-control input-dado me-2"
-                                style="width: 50px;"
+                                style="width: 50px;" value="{{ ficha.peso }}"
                             />
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
-                                    name="tp-peso"
-                                    id="tp-peso-gr"
-                                    value="tp-peso-gr"
+                                    name="tp-peso" id="tp-peso-gr" value="tp-peso-gr"
+                                    {% if ficha.tp_peso == "tp-peso-gr" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="tp-peso-gr">
                                     gr.
@@ -178,9 +194,8 @@
                             </div>
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
-                                    name="tp-peso"
-                                    id="tp-peso-kg"
-                                    value="tp-peso-kg"
+                                    name="tp-peso" id="tp-peso-kg" value="tp-peso-kg"
+                                    {% if ficha.tp_peso == "tp-peso-kg" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="tp-peso-kg">
                                     Kg
@@ -200,8 +215,8 @@
                                 Data do óbito
                             </label>
                         </div>
-                        <input id="dt_obito" type="date"
-                            class="form-control input-dado"
+                        <input id="dt_obito" type="date" class="form-control input-dado"
+                            value="{{ ficha.dt_obito }}"
                         />
                     </div>
                     <span class="spanLGN">lgn</span>
@@ -216,6 +231,9 @@
                         </div>
                         <input id="num_DO" type="number"
                             class="form-control input-dado"
+                            {% if ficha.num_DO != "0" %}
+                                value="{{ ficha.num_DO }}"
+                            {% endif %}
                         />
                     </div>
                     <span class="spanLGN">lgn</span>
@@ -232,6 +250,7 @@
                         </div>
                         <input id="dt_nascimento" type="date"
                             class="form-control input-dado"
+                            value="{{ ficha.dt_nascimento }}"
                         />
                     </div>
                     <span class="spanLGN">lgn</span>
@@ -246,6 +265,9 @@
                         </div>
                         <input id="num_DN" type="number"
                             class="form-control input-dado"
+                            {% if ficha.num_DN != "0" %}
+                                value="{{ ficha.num_DN }}"
+                            {% endif %}
                         />
                     </div>
                     <span class="spanLGN">lgn</span>
@@ -262,6 +284,7 @@
                     <input id="ender_resid_responsavel"
                         class="form-control input-dado"
                         style="max-width: 50%;"
+                        value="{{ ficha.ender_responsavel }}"
                     />
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
@@ -270,7 +293,8 @@
                         <label for="telefone_responsavel" class="negrito mx-1">
                             Telefone:
                         </label>
-                        <input id="telefone_responsavel" class="form-control input-dado">
+                        <input id="telefone_responsavel" class="form-control input-dado"
+                            value="{{ ficha.telefone_responsavel }}"/>
                     </div>
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
@@ -286,6 +310,7 @@
                     <input id="municipio_residencia_responsavel"
                         class="form-control input-dado"
                         style="max-width: 50%;"
+                        value="{{ ficha.municipio_responsavel }}"
                     />
                 </div>
                 <div class="col-4 d-flex justify-content-between align-items-center colADireita">
@@ -297,6 +322,7 @@
                         <input id="uf_residencia_responsavel"
                             class="form-control input-dado"
                             style="max-width: 50px;"
+                            value="{{ ficha.uf_responsavel }}"
                         />
                     </div>
                     <span class="spanLGN ms-2">lgn</span>
@@ -315,6 +341,9 @@
                 </label>
                 <input id="num_cartao_sus" type="number"
                     class="form-control input-dado"
+                    {% if ficha.num_cartao_sus_mae != "0" %}
+                        value="{{ ficha.num_cartao_sus_mae }}"
+                    {% endif %}
                 />
                 <span class="spanLGN ms-2">lgn</span>
             </div>
@@ -326,7 +355,8 @@
                     <label for="nome_mae" class="negrito mx-1">
                         Nome:
                     </label>
-                    <input id="nome_mae" class="form-control input-dado ms-1"/>
+                    <input id="nome_mae" class="form-control input-dado ms-1"
+                        value="{{ ficha.nome_mae }}"/>
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
                 <div class="col-4 d-flex align-items-center colADireita">
@@ -336,6 +366,9 @@
                     </label>
                     <input id="idade_mae" type="number"
                         class="form-control input-dado mx-1"
+                        {% if ficha.idade_mae != "0" %}
+                            value="{{ ficha.idade_mae }}"
+                        {% endif %}
                     />
                     <span>anos</span>
                     <span class="spanLGN ms-2">lgn</span>
@@ -354,6 +387,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="raca" id="raca-branca" value="raca-branca"
+                                    {% if ficha.raca_mae == "raca-branca" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="raca-branca">
                                     Branca
@@ -362,6 +396,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="raca" id="raca-preta" value="raca-preta"
+                                    {% if ficha.raca_mae == "raca-preta" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="raca-preta">
                                     Preta
@@ -370,6 +405,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="raca" id="raca-indigena" value="raca-indigena"
+                                    {% if ficha.raca_mae == "raca-indigena" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="raca-indigena">
                                     Indígena
@@ -380,6 +416,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="raca" id="raca-parda" value="raca-parda"
+                                    {% if ficha.raca_mae == "raca-parda" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="raca-parda">
                                     Parda
@@ -388,6 +425,7 @@
                             <div class="form-check m-0 mx-2">
                                 <input class="form-check-input" type="radio"
                                     name="raca" id="raca-amarela" value="raca-amarela"
+                                    {% if ficha.raca_mae == "raca-amarela" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="raca-amarela">
                                     Amarela
@@ -404,7 +442,9 @@
                             Se “indígena”, informe a etnia:
                         </label>
                         <input id="etnia_indigena" class="form-control input-dado ms-1"
-                            style="max-width: 200px;"/>
+                            style="max-width: 200px;"
+                            value="{{ ficha.etnia_indig_mae }}"
+                        />
                         <span class="spanLGN ms-2">lgn</span>
                     </div>
                     <div class="d-flex align-items-center flex-wrap mt-2">
@@ -413,10 +453,13 @@
                             Se “indígena”, informe a aldeia:
                         </label>
                         <input id="aldeia_indigena" class="form-control input-dado ms-1"
-                            style="max-width: 200px;"/>
+                            style="max-width: 200px;"
+                            value="{{ ficha.aldeia_mae }}"
+                        />
                         <div class="d-flex align-items-center justify-content-between form-check m-0 ms-2">
                             <input class="form-check-input" type="checkbox"
                                 name="nao_aldeada" id="op_nao_aldeada"
+                                {% if ficha.nao_aldeada_mae == "1" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap ms-2" for="op_nao_aldeada">
                                 Não aldeada
@@ -440,7 +483,8 @@
                 <label for="nome_hospital" class="mx-1">
                     Nome:
                 </label>
-                <input id="nome_hospital" class="form-control input-dado">
+                <input id="nome_hospital" class="form-control input-dado"
+                    value="{{ ficha.nome_hospital2 }}">
             </div>
             <div class="col-5 d-flex align-items-center colADireita">
                 <span class="numeracao negrito">16</span>
@@ -449,6 +493,9 @@
                 </label>
                 <input id="cnes_hospital" type="number"
                     class="form-control input-dado ms-1"
+                    {% if ficha.cod_cnes_us != "0" %}
+                        value="{{ ficha.cod_cnes_us }}"
+                    {% endif %}
                 />
                 <span class="spanLGN ms-2">lgn</span>
             </div>
@@ -459,12 +506,13 @@
                 <label for="municipio-hospital" class="negrito mx-1">
                     Município:
                 </label>
-                <input id="municipio-hospital" class="form-control input-dado ms-1"/>
+                <input id="municipio-hospital" class="form-control input-dado ms-1"
+                    value="{{ ficha.municipio_hospital2 }}"/>
                 <label for="uf-hospital" class="negrito ms-3">
                     UF:
                 </label>
                 <input id="uf-hospital" class="form-control input-dado ms-1"
-                    style="max-width: 50px;"/>
+                    style="max-width: 50px;" value="{{ ficha.uf_hospital2 }}"/>
             </div>
             <div class="col-5 d-flex colADireita mt-1">
                 <div class="d-flex align-items-center">
@@ -480,6 +528,7 @@
                                 name="tipo-estabelecimento"
                                 id="tipo-estab-SUS"
                                 value="tipo-estab-SUS"
+                                {% if ficha.tipo_estab == "tipo-estab-SUS" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tipo-estab-SUS">
                                 SUS
@@ -490,6 +539,7 @@
                                 name="tipo-estabelecimento"
                                 id="tipo-estab-convenio-SUS"
                                 value="tipo-estab-convenio-SUS"
+                                {% if ficha.tipo_estab == "tipo-estab-convenio-SUS" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tipo-estab-convenio-SUS">
                                 Convênio SUS
@@ -502,6 +552,7 @@
                                 name="tipo-estabelecimento"
                                 id="tipo-estab-privado"
                                 value="tipo-estab-privado"
+                                {% if ficha.tipo_estab == "tipo-estab-privado" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tipo-estab-privado">
                                 Privado
@@ -512,6 +563,7 @@
                                 name="tipo-estabelecimento"
                                 id="tipo-estab-outro"
                                 value="tipo-estab-outro"
+                                {% if ficha.tipo_estab == "tipo-estab-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="tipo-estab-outro">
                                 Outro
@@ -527,14 +579,16 @@
                 <label for="prontuario-crianca" class="negrito mx-1">
                     Prontuário da criança:
                 </label>
-                <input id="prontuario-crianca" class="form-control input-dado ms-1"/>
+                <input id="prontuario-crianca" class="form-control input-dado ms-1"
+                    value="{{ ficha.pront_crianca }}"/>
             </div>
             <div class="col-5 colADireita d-flex align-items-center">
                 <span class="numeracao negrito">20</span>
                 <label for="prontuario-mae" class="negrito mx-1">
                     Prontuário da mãe:
                 </label>
-                <input id="prontuario-mae" class="form-control input-dado ms-1"/>
+                <input id="prontuario-mae" class="form-control input-dado ms-1"
+                    value="{{ ficha.pront_mae }}"/>
             </div>
         </div>
     </div>
@@ -554,6 +608,7 @@
                     <input id="dt-admissao-mae" type="date"
                         class="form-control input-dado ms-1"
                         style="max-width: 200px;"
+                        value="{{ ficha.dt_admiss_mae }}"
                     />
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
@@ -565,6 +620,7 @@
                         <input id="hora-admissao-mae" class="form-control input-dado ms-1"
                             placeholder="00:00"
                             style="max-width: 54px;"
+                            value="{{ ficha.hora_admiss_mae }}"
                         />
                     </div>
                     <span class="spanLGN ms-2">lgn</span>
@@ -580,6 +636,9 @@
                         <input id="idade-gestacional-mae" type="number"
                             class="form-control input-dado ms-1 me-2"
                             style="max-width: 50px;"
+                            {% if ficha.idade_gestacional != "0" %}
+                                value="{{ ficha.idade_gestacional }}"
+                            {% endif %}
                         />
                         <span class="label-nowrap me-2">
                             semanas, por:
@@ -590,19 +649,21 @@
                                     name="idade-gestacional"
                                     id="idade-gestacional-DUM"
                                     value="idade-gestacional-DUM"
+                                    {% if ficha.tp_idade_gest == "idade-gestacional-DUM" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="idade-gestacional-DUM">
                                     DUM
                                 </label>
                             </div>
                             <input id="dt-DUM" type="date" class="form-control input-dado mx-1"
-                                style="max-width: 140px;"/>
+                                style="max-width: 140px;" value="{{ ficha.dt_dum }}"/>
                         </div>
                         <div class="form-check m-0 mx-2">
                             <input class="form-check-input" type="radio"
                                 name="idade-gestacional"
                                 id="idade-gestacional-exame-fisico"
                                 value="idade-gestacional-exame-fisico"
+                                {% if ficha.tp_idade_gest == "idade-gestacional-exame-fisico" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="idade-gestacional-exame-fisico">
                                 Exame Físico
@@ -613,6 +674,7 @@
                                 name="idade-gestacional"
                                 id="idade-gestacional-outro"
                                 value="idade-gestacional-outro"
+                                {% if ficha.tp_idade_gest == "idade-gestacional-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="idade-gestacional-outro">
                                 Outro
@@ -623,6 +685,7 @@
                                 name="idade-gestacional"
                                 id="idade-gestacional-naoSeAplica"
                                 value="idade-gestacional-naoSeAplica"
+                                {% if ficha.tp_idade_gest == "idade-gestacional-naoSeAplica" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="idade-gestacional-naoSeAplica">
                                 Não se aplica
@@ -639,13 +702,15 @@
                         Pressão arterial (mmHg) na admissão:
                     </label>
                     <input id="pressao-arterial-mae" class="form-control input-dado ms-1 me-2"
-                        style="max-width: 80px;" placeholder="000 / 000"/>
+                        style="max-width: 80px;" placeholder="000 / 000"
+                        value="{{ ficha.press_art_adm_mae }}"
+                    />
                 </div>
                 <div class="col-5 d-flex  align-items-center justify-content-between">
                     <div class="form-check m-0 mx-2">
                         <input class="form-check-input" type="checkbox"
-                            name="mae-chegou-obito"
-                            id="op-mae-obito-admissao"
+                            name="mae-chegou-obito" id="op-mae-obito-admissao"
+                            {% if ficha.op_mae_obito_admissao == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-mae-obito-admissao">
                             Chegou em óbito (vá para <span class="numeracao negrito">27</span>)
@@ -667,6 +732,7 @@
                             name="parto-admisso"
                             id="parto-admisso-antes"
                             value="parto-admisso-antes"
+                            {% if ficha.parto_admissao == "parto-admisso-antes" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="parto-admisso-antes">
                             Antes do início do trabalho
@@ -677,6 +743,7 @@
                             name="parto-admisso"
                             id="parto-admisso-periodo-naoExpulsivo"
                             value="parto-admisso-periodo-naoExpulsivo"
+                            {% if ficha.parto_admissao == "parto-admisso-periodo-naoExpulsivo" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="parto-admisso-periodo-naoExpulsivo">
                             No período <b>não expulsivo</b>
@@ -687,6 +754,7 @@
                             name="parto-admisso"
                             id="parto-admisso-periodo-expulsivo"
                             value="parto-admisso-periodo-expulsivo"
+                            {% if ficha.parto_admissao == "parto-admisso-periodo-expulsivo" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="parto-admisso-periodo-expulsivo">
                             No período <b>expulsivo</b>
@@ -707,6 +775,7 @@
                         <input class="form-check-input" type="checkbox"
                             name="registro-clinico-admissao" 
                             id="op-registro-clinico-admissao"
+                            {% if ficha.op_reg_clinico_admiss == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-registro-clinico-admissao">
                             Não se aplica
@@ -724,6 +793,9 @@
                                 <input id="contracoes-10-min" type="number"
                                     class="form-control input-dado me-2"
                                     style="max-width: 50px;"
+                                    {% if ficha.contracoes_10min != "0" %}
+                                        value="{{ ficha.contracoes_10min }}"
+                                    {% endif %}
                                 />
                                 <span class="label-wrap-pretty">
                                     contrações por 10 min.
@@ -742,6 +814,7 @@
                                         name="apresentacao-fetal"
                                         id="apresentacao-fetal-cefalica"
                                         value="apresentacao-fetal-cefalica"
+                                        {% if ficha.apresentacao_fetal == "apresentacao-fetal-cefalica" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="apresentacao-fetal-cefalica">
                                         Cefálica
@@ -752,6 +825,7 @@
                                         name="apresentacao-fetal"
                                         id="apresentacao-fetal-pelvica"
                                         value="apresentacao-fetal-pelvica"
+                                        {% if ficha.apresentacao_fetal == "apresentacao-fetal-pelvica" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="apresentacao-fetal-pelvica">
                                         Pélvica
@@ -762,6 +836,7 @@
                                         name="apresentacao-fetal"
                                         id="apresentacao-fetal-outra"
                                         value="apresentacao-fetal-outra"
+                                        {% if ficha.apresentacao_fetal == "apresentacao-fetal-outra" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="apresentacao-fetal-outra">
                                         Outra
@@ -781,20 +856,22 @@
                                         <input class="form-check-input" type="radio"
                                             id="op-bcf-positivo"
                                             value="op-bcf-positivo"
-                                            name="bcf" 
+                                            name="bcf"
+                                            {% if ficha.bcf == "op-bcf-positivo" %} checked {% endif %}
                                         />
                                         <label class="form-check-label label-nowrap" for="op-bcf-positivo">
                                             Positivo
                                         </label>
                                     </div>
                                     <input id="bcf-positivo-descricao" class="form-control input-dado mx-2" 
-                                        style="max-width: 100px;">
+                                        style="max-width: 100px;" value="{{ ficha.bcf_posit_descricao }}">
                                 </div>
                                 <div class="form-check m-0 mx-2">
                                     <input class="form-check-input" type="radio"
                                         id="op-bcf-negativo"
                                         value="op-bcf-negativo"
-                                        name="bcf" 
+                                        name="bcf"
+                                        {% if ficha.bcf == "op-bcf-negativo" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-bcf-negativo">
                                         Negativo
@@ -810,7 +887,7 @@
                                     Descida de apresentação
                                 </label>
                                 <input id="descida-apresentacao" class="form-control input-dado mx-2"
-                                    style="max-width: 100px;"
+                                    style="max-width: 100px;" value="{{ ficha.descida_apresent }}"
                                 />
                             </div>
                             <span class="spanLGN">lgn</span>
@@ -824,8 +901,10 @@
                                     Dilatação do colo
                                 </label>
                                 <input id="dilatacao-colo" class="form-control input-dado mx-2" 
-                                    style="max-width: 100px;"
-                                    type="number"
+                                    style="max-width: 100px;" type="number"
+                                    {% if ficha.dilatacao_colo != "0" %}
+                                        value="{{ ficha.dilatacao_colo }}"
+                                    {% endif %}
                                 />
                                 <span>cm</span>
                             </div>
@@ -842,6 +921,7 @@
                                         id="op-membrana-integra"
                                         value="op-membrana-integra"
                                         name="membrana"
+                                        {% if ficha.membrana == "op-membrana-integra" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-membrana-integra">
                                         Íntegras
@@ -852,6 +932,7 @@
                                         id="op-membrana-rota"
                                         value="op-membrana-rota"
                                         name="membrana"
+                                        {% if ficha.membrana == "op-membrana-rota" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-membrana-rota">
                                         Rotas
@@ -867,6 +948,9 @@
                                 </label>
                                 <input id="rotas-tempo" class="form-control input-dado mx-2" 
                                     style="max-width: 50px;" type="number"
+                                    {% if ficha.rotas_tempo != "0" %}
+                                        value="{{ ficha.rotas_tempo }}"
+                                    {% endif %}
                                 />
                                 <span>horas</span>
                             </div>
@@ -882,6 +966,7 @@
                                         name="rotas-liqAmniotico"
                                         value="rotas-liqAmniotico-claro"
                                         id="op-rotas-liqAmniotico-claro"
+                                        {% if ficha.rotas_liqAmniotico == "rotas-liqAmniotico-claro" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-claro">
                                         Claro
@@ -892,6 +977,7 @@
                                         name="rotas-liqAmniotico"
                                         value="rotas-liqAmniotico-meconial"
                                         id="op-rotas-liqAmniotico-meconial"
+                                        {% if ficha.rotas_liqAmniotico == "rotas-liqAmniotico-meconial" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-meconial">
                                         Meconial
@@ -902,6 +988,7 @@
                                         name="rotas-liqAmniotico"
                                         value="rotas-liqAmniotico-fetido"
                                         id="op-rotas-liqAmniotico-fetido"
+                                        {% if ficha.rotas_liqAmniotico == "rotas-liqAmniotico-fetido" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-fetido">
                                         Fétido
@@ -912,6 +999,7 @@
                                         name="rotas-liqAmniotico"
                                         value="rotas-liqAmniotico-outro"
                                         id="op-rotas-liqAmniotico-outro"
+                                        {% if ficha.rotas_liqAmniotico == "rotas-liqAmniotico-outro" %} checked {% endif %}
                                     />
                                     <label class="form-check-label label-nowrap" for="op-rotas-liqAmniotico-outro">
                                         Outro
@@ -940,6 +1028,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-prematuro"
                             value="op-motivo-internacao-prematuro"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-prematuro" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-prematuro">
                             Trabalho de parto prematuro
@@ -950,6 +1039,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-posDatismo"
                             value="op-motivo-internacao-posDatismo"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-posDatismo" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-posDatismo">
                             Pós-datismo
@@ -960,6 +1050,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-ruptura"
                             value="op-motivo-internacao-ruptura"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-ruptura" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-ruptura">
                             Ruptura de membranas (bolsa rota)
@@ -970,6 +1061,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-preEclampsia"
                             value="op-motivo-internacao-preEclampsia"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-preEclampsia" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-preEclampsia">
                             Pré-eclâmpsia
@@ -980,6 +1072,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-eclampsia"
                             value="op-motivo-internacao-eclampsia"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-eclampsia" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-eclampsia">
                             Eclâmpsia
@@ -990,6 +1083,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-sangTransvaginal"
                             value="op-motivo-internacao-sangTransvaginal"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-sangTransvaginal" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-sangTransvaginal">
                             Sangramento transvaginal
@@ -1000,6 +1094,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-cesariaAgendada"
                             value="op-motivo-internacao-cesariaAgendada"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-cesariaAgendada" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-cesariaAgendada">
                             Cesárea agendada
@@ -1010,6 +1105,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-febre"
                             value="op-motivo-internacao-febre"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-febre" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-febre">
                             Febre
@@ -1020,6 +1116,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-dimMovFecais"
                             value="op-motivo-internacao-dimMovFecais"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-dimMovFecais" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-dimMovFecais">
                             Diminuição de movimentos fetais
@@ -1030,6 +1127,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-outros"
                             value="op-motivo-internacao-outros"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-outros" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-outros">
                             Outros
@@ -1040,6 +1138,7 @@
                             name="motivo-internacao"
                             id="op-motivo-internacao-nenhum"
                             value="op-motivo-internacao-nenhum"
+                            {% if ficha.motivo_inter == "op-motivo-internacao-nenhum" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-motivo-internacao-nenhum">
                             Nenhum dos anteriores.
@@ -1047,7 +1146,7 @@
                     </div>
                 </div>
                 <textarea id="motivo-internacao-outros-descricao" class="form-control input-dado" rows="3"
-                    style="font-size: small; width: 100%;"></textarea>
+                    style="font-size: small; width: 100%;">{{ ficha.motivo_inter_descricao }}</textarea>
             </div>
         </div>
     </div>
@@ -1065,6 +1164,7 @@
                 <input class="form-check-input" type="checkbox"
                     name="historia-obstetrica"
                     id="op-hist-obstetrica-naoSeAplica"
+                    {% if ficha.op_hist_obstet_NSA == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label label-nowrap" for="op-hist-obstetrica-naoSeAplica">
                     Não se aplica
@@ -1083,8 +1183,10 @@
                         </div>
                         <div class="d-flex align-items-center mt-2">
                             <input id="num-gestacoes-anteriores" class="form-control input-dado me-1"
-                                type="number"
-                                style="max-width: 50px;"
+                                type="number" style="max-width: 50px;"
+                                {% if ficha.num_gest_anteriores != "0" %}
+                                    value="{{ ficha.num_gest_anteriores }}"
+                                {% endif %}
                             />
                             <span>(Se = 00, vá para <span class="numeracao">29</span>)</span>
                         </div>
@@ -1094,6 +1196,9 @@
                         <input id="quant-abortos" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 50px;"
+                            {% if ficha.quant_abortos != "0" %}
+                                value="{{ ficha.quant_abortos }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -1101,6 +1206,9 @@
                         <input id="quant-partos" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 50px;"
+                            {% if ficha.quant_partos != "0" %}
+                                value="{{ ficha.quant_partos }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -1108,6 +1216,9 @@
                         <input id="quant-vaginais" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 50px;"
+                            {% if ficha.quant_vaginais != "0" %}
+                                value="{{ ficha.quant_vaginais }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -1115,6 +1226,9 @@
                         <input id="quant-cesarias" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 50px;"
+                            {% if ficha.quant_cesarias != "0" %}
+                                value="{{ ficha.quant_cesarias }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -1122,6 +1236,9 @@
                         <input id="quant-nascidos-vivos" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 50px;"
+                            {% if ficha.quant_vivos != "0" %}
+                                value="{{ ficha.quant_vivos }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -1129,6 +1246,9 @@
                         <input id="ano-ultimo-parto" type="number"
                             class="form-control input-dado mt-2"
                             style="max-width: 80px;"
+                            {% if ficha.ano_ult_parto != "0" %}
+                                value="{{ ficha.ano_ult_parto }}"
+                            {% endif %}
                         />
                     </div>
                 </div>
@@ -1145,6 +1265,7 @@
                             name="doenca-gestacao-anterior"
                             id="doenca-gestacao-anterior-nao"
                             value="doenca-gestacao-anterior-nao"
+                            {% if ficha.doen_gest_anterior == "doenca-gestacao-anterior-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="doenca-gestacao-anterior-nao">
                             Não
@@ -1155,6 +1276,7 @@
                             name="doenca-gestacao-anterior"
                             id="doenca-gestacao-anterior-sim"
                             value="doenca-gestacao-anterior-sim"
+                            {% if ficha.doen_gest_anterior == "doenca-gestacao-anterior-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="doenca-gestacao-anterior-sim">
                             Sim, quais?
@@ -1163,6 +1285,7 @@
                     <input id="doenca-gestacao-anterior-sim-descricao"
                         class="form-control input-dado" 
                         style="min-width: 150px;"
+                        value="{{ ficha.doen_gest_ante_sim_desc }}"
                     />
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -1178,6 +1301,7 @@
                             name="doenca-fora-gestacao"
                             id="doenca-fora-gestacao-nao"
                             value="doenca-fora-gestacao-nao"
+                            {% if ficha.doen_fora_gest == "doenca-fora-gestacao-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="doenca-fora-gestacao-nao">
                             Não
@@ -1188,6 +1312,7 @@
                             name="doenca-fora-gestacao"
                             id="doenca-fora-gestacao-sim"
                             value="doenca-fora-gestacao-sim"
+                            {% if ficha.doen_fora_gest == "doenca-fora-gestacao-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="doenca-fora-gestacao-sim">
                             Sim, quais?
@@ -1196,6 +1321,7 @@
                     <input id="doenca-fora-gestacao-sim-descricao"
                         class="form-control input-dado"
                         style="min-width: 150px;"
+                        value="{{ ficha.doen_fora_gest_sim_desc }}"
                     />
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -1211,6 +1337,7 @@
                 <input class="form-check-input" type="checkbox"
                     name="internacao-mae"
                     id="op-internacao-mae-naoSeAplica"
+                    {% if ficha.op_inter_mae_NSA == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label label-nowrap" for="op-internacao-mae-naoSeAplica">
                     Não se aplica
@@ -1224,17 +1351,21 @@
                     <label for="dt-internacao-gestante" class="negrito label-nowrap ms-1">
                         Data da internação:
                     </label>
-                    <input id="dt-internacao-gestante" class="form-control input-dado ms-2" type="date"
-                        style="max-width: 150px;">
-                        <span class="spanLGN ms-2">lgn</span>
+                    <input id="dt-internacao-gestante" class="form-control input-dado ms-2"
+                        type="date" style="max-width: 150px;"
+                        value="{{ ficha.dt_internacao_mae }}"
+                    />
+                    <span class="spanLGN ms-2">lgn</span>
                 </div>
                 <div class="col-6 colADireita d-flex align-items-center justify-content-between">
                     <div class=" d-flex align-items-center">
                         <label for="hr-internacao-gestante" class="negrito label-nowrap ms-1">
                             Hora da internação:
                         </label>
-                        <input id="hr-internacao-gestante" class="form-control input-dado ms-2" placeholder="00:00"
-                            style="max-width: 54px;">
+                        <input id="hr-internacao-gestante" class="form-control input-dado ms-2"
+                            placeholder="00:00" style="max-width: 54px;"
+                            value="{{ ficha.hora_internacao_mae }}"
+                        />
                     </div>
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -1250,6 +1381,7 @@
                             name="parto-internacao"
                             id="parto-internacao-sim"
                             value="parto-internacao-sim"
+                            {% if ficha.parto_internacao == "parto-internacao-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="parto-internacao-sim">
                             Sim (continue)
@@ -1260,6 +1392,7 @@
                             name="parto-internacao"
                             id="parto-internacao-nao"
                             value="parto-internacao-nao"
+                            {% if ficha.parto_internacao == "parto-internacao-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="parto-internacao-nao">
                             Não (vá para <span class="numeracao">44</span>)
@@ -1279,6 +1412,7 @@
                             name="utilizou-partograma"
                             id="utilizou-partograma-sim"
                             value="utilizou-partograma-sim"
+                            {% if ficha.util_partograma == "utilizou-partograma-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="utilizou-partograma-sim">
                             Sim
@@ -1289,6 +1423,7 @@
                             name="utilizou-partograma"
                             id="utilizou-partograma-nao"
                             value="utilizou-partograma-nao"
+                            {% if ficha.util_partograma == "utilizou-partograma-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="utilizou-partograma-nao">
                             Não
@@ -1298,7 +1433,8 @@
                         <label for="utilizou-partograma-observacoes" class="ms-4 me-2">
                             Observações:
                         </label>
-                        <input id="utilizou-partograma-observacoes" class="form-control input-dado">
+                        <input id="utilizou-partograma-observacoes" class="form-control input-dado"
+                            value="{{ ficha.util_partograma_obs }}">
                     </div>
                 </div>
                 <span class="spanLGN">lgn</span>
@@ -1315,6 +1451,9 @@
                         </label>
                         <input id="quant-maternas" class="form-control input-dado"
                             style="width: 70px;" type="number"
+                            {% if ficha.quant_maternas != "0" %}
+                                value="{{ ficha.quant_maternas }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="d-flex align-items-center">
@@ -1323,12 +1462,16 @@
                         </label>
                         <input id="quant-fetais" class="form-control input-dado"
                             style="width: 70px;" type="number"
+                            {% if ficha.quant_fetais != "0" %}
+                                value="{{ ficha.quant_fetais }}"
+                            {% endif %}
                         />
                     </div>
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="checkbox"
                             name="avaliacoes-parto"
                             id="op-av-parto-naoSeAplica"
+                            {% if ficha.op_av_parto_NSA == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-av-parto-naoSeAplica">
                             Não se aplica
@@ -1352,6 +1495,7 @@
                                 name="intervalo-avaliacoes-materna"
                                 id="intervalo-avaliacoes-materna-sim"
                                 value="intervalo-avaliacoes-materna-sim"
+                                {% if ficha.inter_aval_materna == "intervalo-avaliacoes-materna-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label ms-1" for="intervalo-avaliacoes-materna-sim">
                                 Sim
@@ -1362,6 +1506,7 @@
                                 name="intervalo-avaliacoes-materna"
                                 id="intervalo-avaliacoes-materna-nao"
                                 value="intervalo-avaliacoes-materna-nao"
+                                {% if ficha.inter_aval_materna == "intervalo-avaliacoes-materna-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label ms-1" for="intervalo-avaliacoes-materna-nao">
                                 Não
@@ -1377,6 +1522,7 @@
                                 name="intervalo-avaliacoes-fetal"
                                 id="intervalo-avaliacoes-fetal-sim"
                                 value="intervalo-avaliacoes-fetal-sim"
+                                {% if ficha.inter_aval_fetal == "intervalo-avaliacoes-fetal-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label ms-1" for="intervalo-avaliacoes-fetal-sim">
                                 Sim
@@ -1387,6 +1533,7 @@
                                 name="intervalo-avaliacoes-fetal"
                                 id="intervalo-avaliacoes-fetal-nao"
                                 value="intervalo-avaliacoes-fetal-nao"
+                                {% if ficha.inter_aval_fetal == "intervalo-avaliacoes-fetal-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label ms-1" for="intervalo-avaliacoes-fetal-nao">
                                 Não
@@ -1397,6 +1544,7 @@
                         <input class="form-check-input" type="checkbox"
                             name="intervalo-avaliacoes"
                             id="op-inter-avalia-naoSeAplica"
+                            {% if ficha.op_inter_aval_NSA == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap ms-1" for="op-inter-avalia-naoSeAplica">
                             Não se aplica
@@ -1416,6 +1564,7 @@
                             name="ocitocina-mae"
                             id="ocitocina-mae-sim"
                             value="ocitocina-mae-sim"
+                            {% if ficha.ocitocina_mae == "ocitocina-mae-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="ocitocina-mae-sim">
                             Sim
@@ -1426,6 +1575,7 @@
                             name="ocitocina-mae"
                             id="ocitocina-mae-nao"
                             value="ocitocina-mae-nao"
+                            {% if ficha.ocitocina_mae == "ocitocina-mae-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="ocitocina-mae-nao">
                             Não
@@ -1436,6 +1586,7 @@
                             name="ocitocina-mae"
                             id="ocitocina-mae-naoSeAplica"
                             value="ocitocina-mae-naoSeAplica"
+                            {% if ficha.ocitocina_mae == "ocitocina-mae-naoSeAplica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="ocitocina-mae-naoSeAplica">
                             Não se aplica
@@ -1455,6 +1606,7 @@
                             name="eperidina-mae"
                             id="eperidina-mae-sim"
                             value="eperidina-mae-sim"
+                            {% if ficha.eperidina_mae == "eperidina-mae-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="eperidina-mae-sim">
                             Sim
@@ -1465,6 +1617,7 @@
                             name="eperidina-mae"
                             id="eperidina-mae-nao"
                             value="eperidina-mae-nao"
+                            {% if ficha.eperidina_mae == "eperidina-mae-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="eperidina-mae-nao">
                             Não
@@ -1475,6 +1628,7 @@
                             name="eperidina-mae"
                             id="eperidina-mae-naoSeAplica"
                             value="eperidina-mae-naoSeAplica"
+                            {% if ficha.eperidina_mae == "eperidina-mae-naoSeAplica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="eperidina-mae-naoSeAplica">
                             Não se aplica
@@ -1495,12 +1649,14 @@
                                 name="corticoide-mae"
                                 id="corticoide-mae-sim"
                                 value="corticoide-mae-sim"
+                                {% if ficha.corticoide_mae == "corticoide-mae-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="corticoide-mae-sim">
                                 Sim, data de início:
                             </label>
                         </div>
-                        <input id="dt-inicio-corticoide" class="form-control input-dado" type="date"/>
+                        <input id="dt-inicio-corticoide" class="form-control input-dado"
+                            type="date" value="{{ ficha.dt_corticoide }}"/>
                         <span class="spanLGN ms-2">lgn</span>
                     </div>
                     <div class="form-check m-0 mx-3">
@@ -1508,6 +1664,7 @@
                             name="corticoide-mae"
                             id="corticoide-mae-nao"
                             value="corticoide-mae-nao"
+                            {% if ficha.corticoide_mae == "corticoide-mae-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="corticoide-mae-nao">
                             Não
@@ -1518,6 +1675,7 @@
                             name="corticoide-mae"
                             id="corticoide-mae-naoSeAplica"
                             value="corticoide-mae-naoSeAplica"
+                            {% if ficha.corticoide_mae == "corticoide-mae-naoSeAplica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="corticoide-mae-naoSeAplica">
                             Não se aplica
@@ -1535,7 +1693,7 @@
                         </label>
                     </div>
                     <textarea id="outra-medicacao-internacao" class="form-control input-dado" rows="2"
-                    style="font-size: small; width: 100%;"></textarea>
+                        style="font-size: small; width: 100%;">{{ ficha.outra_med_internacao }}</textarea>
                 </div>
             </div>
             <div class="linha-dados align-items-center">
@@ -1545,7 +1703,9 @@
                         Data do parto:
                     </label>
                     <input id="dt-parto-gestante" class="form-control input-dado ms-2"
-                        type="date" style="max-width: 150px;">
+                        type="date" style="max-width: 150px;"
+                        value="{{ ficha.dt_parto }}"
+                    />
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
                 <div class="col-6 colADireita d-flex align-items-center justify-content-between">
@@ -1554,7 +1714,9 @@
                             Hora do parto:
                         </label>
                         <input id="hr-parto-gestante" class="form-control input-dado ms-2"
-                            placeholder="00:00" style="max-width: 54px;">
+                            placeholder="00:00" style="max-width: 54px;"
+                            value="{{ ficha.hora_parto }}"
+                        />
                     </div>
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -1570,6 +1732,7 @@
                             name="tipo-parto"
                             id="tipo-parto-vaginal-forceps"
                             value="tipo-parto-vaginal-forceps"
+                            {% if ficha.tipo_parto == "tipo-parto-vaginal-forceps" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="tipo-parto-vaginal-forceps">
                             VAGINAL com fórceps ou vácuo-extrator
@@ -1580,6 +1743,7 @@
                             name="tipo-parto"
                             id="tipo-parto-vaginal"
                             value="tipo-parto-vaginal"
+                            {% if ficha.tipo_parto == "tipo-parto-vaginal" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="tipo-parto-vaginal">
                             VAGINAL
@@ -1590,6 +1754,7 @@
                             name="tipo-parto"
                             id="tipo-parto-cesaria"
                             value="tipo-parto-cesaria"
+                            {% if ficha.tipo_parto == "tipo-parto-cesaria" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="tipo-parto-cesaria">
                             CESÁRIA
@@ -1605,7 +1770,8 @@
                     registrado no<br>
                     prontuário?
                 </span>
-                <div class="d-flex flex-column py-2" style="border: 2px dashed #000; width: -webkit-fill-available;">
+                <div class="d-flex flex-column py-2"
+                    style="border: 2px dashed #000; width: -webkit-fill-available;">
                     <div class="d-flex justify-content-between">
                         <ul class="mx-3">
                             <li class="form-check m-0">
@@ -1613,6 +1779,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-anomalia"
                                     value="motivo-cesaria-anomalia"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-anomalia" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-anomalia">
                                     Apresentação anómala
@@ -1623,6 +1790,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-anterior"
                                     value="motivo-cesaria-anterior"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-anterior" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-anterior">
                                     Cesárea anterior
@@ -1633,6 +1801,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-desproporcao"
                                     value="motivo-cesaria-desproporcao"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-desproporcao" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-desproporcao">
                                     Desproporção céfalo-pélvica
@@ -1645,6 +1814,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-placenta"
                                     value="motivo-cesaria-placenta"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-placenta" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-placenta">
                                     Descolam. prematuro placenta
@@ -1655,6 +1825,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-falha"
                                     value="motivo-cesaria-falha"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-falha" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-falha">
                                     Falha de indução de parto
@@ -1665,6 +1836,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-feto-morto"
                                     value="motivo-cesaria-feto-morto"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-feto-morto" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-feto-morto">
                                     Feto morto
@@ -1677,6 +1849,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-hemorragia-vaginal"
                                     value="motivo-cesaria-hemorragia-vaginal"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-hemorragia-vaginal" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-hemorragia-vaginal">
                                     Hemorragia vaginal
@@ -1687,6 +1860,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-eclampsia"
                                     value="motivo-cesaria-eclampsia"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-eclampsia" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-eclampsia">
                                     Pré-eclâmpsia/ Eclâmpsia
@@ -1697,6 +1871,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-ruptura-prematura"
                                     value="motivo-cesaria-ruptura-prematura"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-ruptura-prematura" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-ruptura-prematura">
                                     Ruptura prematura membrana
@@ -1707,10 +1882,11 @@
                             <li class="form-check m-0">
                                 <input class="form-check-input" type="radio"
                                     name="motivo-cesaria"
-                                    id="motivo-cesaria-sofirmento-fetal"
-                                    value="motivo-cesaria-sofirmento-fetal"
+                                    id="motivo-cesaria-sofrimento-fetal"
+                                    value="motivo-cesaria-sofrimento-fetal"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-sofrimento-fetal" %} checked {% endif %}
                                 />
-                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-sofirmento-fetal">
+                                <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-sofrimento-fetal">
                                     Sofrimento fetal agudo
                                 </label>
                             </li>
@@ -1719,6 +1895,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-parto-prolongado"
                                     value="motivo-cesaria-parto-prolongado"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-parto-prolongado" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-parto-prolongado">
                                     Trabalho de parto prolongado
@@ -1729,6 +1906,7 @@
                                     name="motivo-cesaria"
                                     id="motivo-cesaria-outro"
                                     value="motivo-cesaria-outro"
+                                    {% if ficha.motivo_cesaria == "motivo-cesaria-outro" %} checked {% endif %}
                                 />
                                 <label class="form-check-label label-wrap-pretty" for="motivo-cesaria-outro">
                                     Outra; especifique:
@@ -1736,7 +1914,8 @@
                             </li>
                         </ul>
                     </div>
-                    <input id="motivo-cesaria-outro-descricao" class="form-control input-dado ms-3 mt-1">
+                    <input id="motivo-cesaria-outro-descricao" class="form-control input-dado ms-3 mt-1"
+                        value="{{ ficha.motivo_cesaria_outro_descricao }}">
                 </div>
             </div>
             <div class="linha-dados d-flex align-items-center justify-content-between">
@@ -1752,6 +1931,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-obstetra"
                             value="quem-atendeu-obstetra"
+                            {% if ficha.quem_atendeu == "quem-atendeu-obstetra" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="quem-atendeu-obstetra">
                             Médico gineco-obstetra
@@ -1762,6 +1942,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-nao-obstetra"
                             value="quem-atendeu-nao-obstetra"
+                            {% if ficha.quem_atendeu == "quem-atendeu-nao-obstetra" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="quem-atendeu-nao-obstetra">
                             Médico não gineco-obstetra
@@ -1772,6 +1953,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-obstretriz"
                             value="quem-atendeu-obstretriz"
+                            {% if ficha.quem_atendeu == "quem-atendeu-obstretriz" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="quem-atendeu-obstretriz">
                             Enfermeira obstetriz
@@ -1782,6 +1964,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-enfermeira"
                             value="quem-atendeu-enfermeira"
+                            {% if ficha.quem_atendeu == "quem-atendeu-enfermeira" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="quem-atendeu-enfermeira">
                             Enfermeira
@@ -1792,6 +1975,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-sem-assistencia"
                             value="quem-atendeu-sem-assistencia"
+                            {% if ficha.quem_atendeu == "quem-atendeu-sem-assistencia" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="quem-atendeu-sem-assistencia">
                             Sem assistência
@@ -1802,6 +1986,7 @@
                             name="quem-atendeu"
                             id="quem-atendeu-parteira"
                             value="quem-atendeu-parteira"
+                            {% if ficha.quem_atendeu == "quem-atendeu-parteira" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="quem-atendeu-parteira">
                             Parteira
@@ -1813,12 +1998,14 @@
                                 name="quem-atendeu"
                                 id="quem-atendeu-outro"
                                 value="quem-atendeu-outro"
+                                {% if ficha.quem_atendeu == "quem-atendeu-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="quem-atendeu-outro">
                                 Outro
                             </label>
                         </div>
-                        <input id="quem-atendeu-outro-descricao" class="form-control input-dado">
+                        <input id="quem-atendeu-outro-descricao" class="form-control input-dado"
+                            value="{{ ficha.que_atendeu_outro }}">
                     </div>
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -1836,6 +2023,7 @@
                             name="liq-amniotico"
                             id="liq-amniotico-claro"
                             value="liq-amniotico-claro"
+                            {% if ficha.liq_amni == "liq-amniotico-claro" %} checked {% endif %}
                         />
                         <label class="form-check-label label-wrap-pretty" for="liq-amniotico-claro">
                             Claro
@@ -1846,6 +2034,7 @@
                             name="liq-amniotico"
                             id="liq-amniotico-meconio"
                             value="liq-amniotico-meconio"
+                            {% if ficha.liq_amni == "liq-amniotico-meconio" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="liq-amniotico-meconio">
                             Com mecônio
@@ -1856,6 +2045,7 @@
                             name="liq-amniotico"
                             id="liq-amniotico-sanguinolento"
                             value="liq-amniotico-sanguinolento"
+                            {% if ficha.liq_amni == "liq-amniotico-sanguinolento" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="liq-amniotico-sanguinolento">
                             Sanguinolento
@@ -1866,6 +2056,7 @@
                             name="liq-amniotico"
                             id="liq-amniotico-fetido"
                             value="liq-amniotico-fetido"
+                            {% if ficha.liq_amni == "liq-amniotico-fetido" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="liq-amniotico-fetido">
                             Fétido
@@ -1877,12 +2068,14 @@
                                 name="liq-amniotico"
                                 id="liq-amniotico-outro"
                                 value="liq-amniotico-outro"
+                                {% if ficha.liq_amni == "liq-amniotico-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="liq-amniotico-outro">
                                 Outro:
                             </label>
                         </div>
-                        <input id="liq-amniotico-outro-descricao" class="form-control input-dado">
+                        <input id="liq-amniotico-outro-descricao" class="form-control input-dado"
+                            value="{{ ficha.liq_amni_outro }}">
                     </div>
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -1900,6 +2093,7 @@
                             name="anestesia-parto"
                             id="anestesia-parto-nenhuma"
                             value="anestesia-parto-nenhuma"
+                            {% if ficha.anestesia_parto == "anestesia-parto-nenhuma" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="anestesia-parto-nenhuma">
                             Nenhuma
@@ -1910,6 +2104,7 @@
                             name="anestesia-parto"
                             id="anestesia-parto-geral"
                             value="anestesia-parto-geral"
+                            {% if ficha.anestesia_parto == "anestesia-parto-geral" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="anestesia-parto-geral">
                             Geral
@@ -1920,6 +2115,7 @@
                             name="anestesia-parto"
                             id="anestesia-parto-raquidiana"
                             value="anestesia-parto-raquidiana"
+                            {% if ficha.anestesia_parto == "anestesia-parto-raquidiana" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="anestesia-parto-raquidiana">
                             Raquidiana
@@ -1930,6 +2126,7 @@
                             name="anestesia-parto"
                             id="anestesia-parto-peridural"
                             value="anestesia-parto-peridural"
+                            {% if ficha.anestesia_parto == "anestesia-parto-peridural" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="anestesia-parto-peridural">
                             Peridural
@@ -1940,6 +2137,7 @@
                             name="anestesia-parto"
                             id="anestesia-parto-local"
                             value="anestesia-parto-local"
+                            {% if ficha.anestesia_parto == "anestesia-parto-local" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="anestesia-parto-local">
                             Local
@@ -1951,12 +2149,14 @@
                                 name="anestesia-parto"
                                 id="anestesia-parto-outro"
                                 value="anestesia-parto-outro"
+                                {% if ficha.anestesia_parto == "anestesia-parto-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="anestesia-parto-outro">
                                 Outra:
                             </label>
                         </div>
-                        <input id="anestesia-parto-outro-descricao" class="form-control input-dado">
+                        <input id="anestesia-parto-outro-descricao" class="form-control input-dado"
+                            value="{{ ficha.anestesia_parto_outro }}">
                     </div>
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -1974,6 +2174,7 @@
                             name="intercorrencia-parto"
                             id="intercorrencia-parto-nenhuma"
                             value="intercorrencia-parto-nenhuma"
+                            {% if ficha.intercorr_parto == "intercorrencia-parto-nenhuma" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="intercorrencia-parto-nenhuma">
                             Nenhuma
@@ -1984,6 +2185,7 @@
                             name="intercorrencia-parto"
                             id="intercorrencia-parto-hipertensao"
                             value="intercorrencia-parto-hipertensao"
+                            {% if ficha.intercorr_parto == "intercorrencia-parto-hipertensao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="intercorrencia-parto-hipertensao">
                             Hipertensão
@@ -1994,6 +2196,7 @@
                             name="intercorrencia-parto"
                             id="intercorrencia-parto-hemorragia"
                             value="intercorrencia-parto-hemorragia"
+                            {% if ficha.intercorr_parto == "intercorrencia-parto-hemorragia" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="intercorrencia-parto-hemorragia">
                             Hemorragia
@@ -2005,12 +2208,14 @@
                                 name="intercorrencia-parto"
                                 id="intercorrencia-parto-outro"
                                 value="intercorrencia-parto-outro"
+                                {% if ficha.intercorr_parto == "intercorrencia-parto-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="intercorrencia-parto-outro">
                                 Outra:
                             </label>
                         </div>
-                        <input id="intercorrencia-parto-outro-descricao" class="form-control input-dado">
+                        <input id="intercorrencia-parto-outro-descricao" class="form-control input-dado"
+                            value="{{ ficha.intercorr_parto_outro }}">
                     </div>
                 </div>
                 <span class="spanLGN ms-2">lgn</span>
@@ -2024,7 +2229,7 @@
                         </label>
                     </div>
                     <textarea id="evolucao-internacao-mae" class="form-control input-dado" rows="3"
-                    style="font-size: small; width: 100%;"></textarea>
+                        style="font-size: small; width: 100%;">{{ ficha.evolucao_inter_mae }}</textarea>
                 </div>
             </div>
             <div class="linha-dados d-flex justify-content-between">
@@ -2043,6 +2248,7 @@
                                     name="parto-sifilis"
                                     id="parto-sifilis-nao"
                                     value="parto-sifilis-nao"
+                                    {% if ficha.parto_sifilis == "parto-sifilis-nao" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-sifilis-nao">
                                     Não reagente
@@ -2053,6 +2259,7 @@
                                     name="parto-sifilis"
                                     id="parto-sifilis-sim"
                                     value="parto-sifilis-sim"
+                                    {% if ficha.parto_sifilis == "parto-sifilis-sim" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-sifilis-sim">
                                     Reagente
@@ -2063,6 +2270,7 @@
                                     name="parto-sifilis"
                                     id="parto-sifilis-naoRealizado"
                                     value="parto-sifilis-naoRealizado"
+                                    {% if ficha.parto_sifilis == "parto-sifilis-naoRealizado" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-sifilis-naoRealizado">
                                     Não realizado
@@ -2076,6 +2284,7 @@
                                     name="parto-hiv"
                                     id="parto-hiv-nao"
                                     value="parto-hiv-nao"
+                                    {% if ficha.parto_hiv == "parto-hiv-nao" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-hiv-nao">
                                     Não reagente
@@ -2086,6 +2295,7 @@
                                     name="parto-hiv"
                                     id="parto-hiv-sim"
                                     value="parto-hiv-sim"
+                                    {% if ficha.parto_hiv == "parto-hiv-sim" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-hiv-sim">
                                     Reagente
@@ -2096,6 +2306,7 @@
                                     name="parto-hiv"
                                     id="parto-hiv-naoRealizado"
                                     value="parto-hiv-naoRealizado"
+                                    {% if ficha.parto_hiv == "parto-hiv-naoRealizado" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="parto-hiv-naoRealizado">
                                     Não realizado
@@ -2117,6 +2328,7 @@
                 <input class="form-check-input" type="checkbox"
                     name="condicao-nascimento"
                     id="op-cond-nascimento-naoSeAplica"
+                    {% if ficha.op_cond_nasc_NSA == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label label-nowrap" for="op-cond-nascimento-naoSeAplica">
                     Não se aplica
@@ -2135,6 +2347,7 @@
                             name="natimorto-avaliado"
                             id="natimorto-avaliado-obstetra"
                             value="natimorto-avaliado-obstetra"
+                            {% if ficha.natimorto_aval == "natimorto-avaliado-obstetra" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="natimorto-avaliado-obstetra">
                             Médico gineco-obstetra
@@ -2145,6 +2358,7 @@
                             name="natimorto-avaliado"
                             id="natimorto-avaliado-pediatra"
                             value="natimorto-avaliado-pediatra"
+                            {% if ficha.natimorto_aval == "natimorto-avaliado-pediatra" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="natimorto-avaliado-pediatra">
                             Médico pediatra/neonatologista
@@ -2155,6 +2369,7 @@
                             name="natimorto-avaliado"
                             id="natimorto-avaliado-outro-medico"
                             value="natimorto-avaliado-outro-medico"
+                            {% if ficha.natimorto_aval == "natimorto-avaliado-outro-medico" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="natimorto-avaliado-outro-medico">
                             Outro médico
@@ -2169,6 +2384,7 @@
                         name="natimorto-avaliado"
                         id="natimorto-avaliado-enfermeira"
                         value="natimorto-avaliado-enfermeira"
+                        {% if ficha.natimorto_aval == "natimorto-avaliado-enfermeira" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="natimorto-avaliado-enfermeira">
                         Enfermeira/obstetriz
@@ -2180,6 +2396,7 @@
                             name="natimorto-avaliado"
                             id="natimorto-avaliado-parteira"
                             value="natimorto-avaliado-parteira"
+                            {% if ficha.natimorto_aval == "natimorto-avaliado-parteira" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="natimorto-avaliado-parteira">
                             Parteira
@@ -2192,18 +2409,21 @@
                             name="natimorto-avaliado"
                             id="natimorto-avaliado-outro"
                             value="natimorto-avaliado-outro"
+                            {% if ficha.natimorto_aval == "natimorto-avaliado-outro" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="natimorto-avaliado-outro">
                             Outro
                         </label>
                     </div>
-                    <input id="natimorto-analisado-outro-descricao" class="form-control input-dado ms-1">
+                    <input id="natimorto-analisado-outro-descricao" class="form-control input-dado ms-1"
+                        value="{{ ficha.natimorto_aval_outro }}">
                 </div>
                 <div class="form-check m-0 ms-3">
                     <input class="form-check-input" type="radio"
                         name="natimorto-avaliado"
                         id="natimorto-avaliado-ninguem"
                         value="natimorto-avaliado-ninguem"
+                        {% if ficha.natimorto_aval == "natimorto-avaliado-ninguem" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="natimorto-avaliado-ninguem">
                         Ninguém
@@ -2219,6 +2439,9 @@
                     <input id="idade-gestacional-nascimento" type="number"
                         class="form-control input-dado me-2"
                         style="max-width: 50px;"
+                        {% if ficha.idade_gest_nasc != "0" %}
+                            value="{{ ficha.idade_gest_nasc }}"
+                        {% endif %}
                     />
                     <span class="label-wrap-pretty">
                         semanas
@@ -2235,6 +2458,9 @@
                     <input id="peso-nascimento" type="number"
                         class="form-control input-dado me-2"
                         style="max-width: 70px;"
+                        {% if ficha.peso_nascimento != "0" %}
+                            value="{{ ficha.peso_nascimento }}"
+                        {% endif %}
                     />
                     <span class="label-wrap-pretty">
                         gramas
@@ -2253,6 +2479,7 @@
                             name="obito-ocorreu"
                             id="obito-ocorreu-antes-parto"
                             value="obito-ocorreu-antes-parto"
+                            {% if ficha.quando_obito_ocorr == "obito-ocorreu-antes-parto" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-ocorreu-antes-parto">
                             <b>Antes</b> do início do trabalho de parto
@@ -2263,6 +2490,7 @@
                             name="obito-ocorreu"
                             id="obito-ocorreu-durante-parto"
                             value="obito-ocorreu-durante-parto"
+                            {% if ficha.quando_obito_ocorr == "obito-ocorreu-durante-parto" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-ocorreu-durante-parto">
                             <b>Durante</b> o trabalho de parto
@@ -2273,6 +2501,7 @@
                             name="obito-ocorreu"
                             id="obito-ocorreu-apos-parto"
                             value="obito-ocorreu-apos-parto"
+                            {% if ficha.quando_obito_ocorr == "obito-ocorreu-apos-parto" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-ocorreu-apos-parto">
                             <b>Após</b> o parto
@@ -2292,6 +2521,7 @@
                             name="feto-macerado"
                             id="feto-macerado-sim"
                             value="feto-macerado-sim"
+                            {% if ficha.feto_macerado == "feto-macerado-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="feto-macerado-sim">
                             Sim
@@ -2302,6 +2532,7 @@
                             name="feto-macerado"
                             id="feto-macerado-durante-nao"
                             value="feto-macerado-durante-nao"
+                            {% if ficha.feto_macerado == "feto-macerado-durante-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="feto-macerado-durante-nao">
                             Não
@@ -2318,17 +2549,20 @@
                 <label for="apgar-1min" class="label-wrap-pretty ms-5 me-2">
                     1º min
                 </label>
-                <input id="apgar-1min" class="form-control input-dado me-3" style="max-width: 50px;">
+                <input id="apgar-1min" class="form-control input-dado me-3"
+                    style="max-width: 50px;" value="{{ ficha.apgar_1min }}">
                 <span class="spanLGN">lgn</span>
                 <label for="apgar-5min" class="label-wrap-pretty ms-5 me-2">
                     5º min
                 </label>
-                <input id="apgar-5min" class="form-control input-dado me-3" style="max-width: 50px;">
+                <input id="apgar-5min" class="form-control input-dado me-3"
+                    style="max-width: 50px;" value="{{ ficha.apgar_5min }}">
                 <span class="spanLGN">lgn</span>
                 <div class="form-check m-0 ms-5">
                     <input class="form-check-input" type="checkbox"
                         name="apgar-natimorto"
                         id="op-apgar-natimorto"
+                        {% if ficha.op_apgar_natimorto == "1" %} checked {% endif %}
                     />
                     <label class="form-check-label label-nowrap" for="op-apgar-natimorto">
                         Natimorto
@@ -2346,6 +2580,7 @@
                             name="classificacaoRN"
                             id="classificacaoRN-adequado"
                             value="classificacaoRN-adequado"
+                            {% if ficha.classificacaoRN == "classificacaoRN-adequado" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="classificacaoRN-adequado">
                             <b>Adequado</b> para Idade Gestacional
@@ -2356,6 +2591,7 @@
                             name="classificacaoRN"
                             id="classificacaoRN-pequeno"
                             value="classificacaoRN-pequeno"
+                            {% if ficha.classificacaoRN == "classificacaoRN-pequeno" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="classificacaoRN-pequeno">
                             <b>Pequeno</b> para Idade Gestacional (PIG)
@@ -2366,6 +2602,7 @@
                             name="classificacaoRN"
                             id="classificacaoRN-grande"
                             value="classificacaoRN-grande"
+                            {% if ficha.classificacaoRN == "classificacaoRN-grande" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="classificacaoRN-grande">
                             <b>Grande</b> para Idade Gestacional (GIG)
@@ -2382,9 +2619,8 @@
                     </label>
                     <div class="form-check m-0 ms-3">
                         <input class="form-check-input" type="radio"
-                            name="reanimacao"
-                            id="reanimacao-sim"
-                            value="reanimacao-sim"
+                            name="reanimacao" id="reanimacao-sim" value="reanimacao-sim"
+                            {% if ficha.reanimacao == "reanimacao-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="reanimacao-sim">
                             Sim
@@ -2392,9 +2628,8 @@
                     </div>
                     <div class="form-check m-0 ms-3">
                         <input class="form-check-input" type="radio"
-                            name="reanimacao"
-                            id="reanimacao-nao"
-                            value="reanimacao-nao"
+                            name="reanimacao" id="reanimacao-nao" value="reanimacao-nao"
+                            {% if ficha.reanimacao == "reanimacao-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="reanimacao-nao">
                             Não
@@ -2416,6 +2651,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-nenhum"
                             value="assistenciaRN-nenhum"
+                            {% if ficha.assistenciaRN == "assistenciaRN-nenhum" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-nenhum">
                             Nenhum
@@ -2431,6 +2667,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-aspiracao"
                             value="assistenciaRN-aspiracao"
+                            {% if ficha.assistenciaRN == "assistenciaRN-aspiracao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-aspiracao">
                             Aspiração das vias aéreas
@@ -2441,6 +2678,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-cateterismo"
                             value="assistenciaRN-cateterismo"
+                            {% if ficha.assistenciaRN == "assistenciaRN-cateterismo" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-cateterismo">
                             Cateterismo umbilical
@@ -2451,6 +2689,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-entubacao"
                             value="assistenciaRN-entubacao"
+                            {% if ficha.assistenciaRN == "assistenciaRN-entubacao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-entubacao">
                             Entubação
@@ -2461,6 +2700,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-oxigenio"
                             value="assistenciaRN-oxigenio"
+                            {% if ficha.assistenciaRN == "assistenciaRN-oxigenio" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-oxigenio">
                             Oxigênio
@@ -2471,6 +2711,7 @@
                             name="assistenciaRN"
                             id="assistenciaRN-sonda"
                             value="assistenciaRN-sonda"
+                            {% if ficha.assistenciaRN == "assistenciaRN-sonda" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="assistenciaRN-sonda">
                             Sonda nasogástrica
@@ -2484,6 +2725,7 @@
                                 name="assistenciaRN"
                                 id="assistenciaRN-outro-procedimento"
                                 value="assistenciaRN-outro-procedimento"
+                                {% if ficha.assistenciaRN == "assistenciaRN-outro-procedimento" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="assistenciaRN-outro-procedimento">
                                 Outros procedimentos:
@@ -2494,6 +2736,7 @@
                                 name="assistenciaRN"
                                 id="assistenciaRN-medicamentos"
                                 value="assistenciaRN-medicamentos"
+                                {% if ficha.assistenciaRN == "assistenciaRN-medicamentos" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="assistenciaRN-medicamentos">
                                 Medicamentos utilizados:
@@ -2501,8 +2744,10 @@
                         </div>
                     </div>
                     <div class="col-8 d-flex flex-column">
-                        <input id="assistenciaRN-outro-procedimento-descricao" class="form-control input-dado">
-                        <input id="assistenciaRN-medicamentos-descricao" class="form-control input-dado">
+                        <input id="assistenciaRN-outro-procedimento-descricao" class="form-control input-dado"
+                            value="{{ ficha.assistRN_outro_proced }}">
+                        <input id="assistenciaRN-medicamentos-descricao" class="form-control input-dado"
+                            value="{{ ficha.assistRN_outro_medicam }}">
                     </div>
                 </div>
             </div>
@@ -2514,9 +2759,9 @@
                     </label>
                     <div class="form-check m-0 ms-3">
                         <input class="form-check-input" type="radio"
-                            name="hipoglicemia"
-                            id="hipoglicemia-sim"
+                            name="hipoglicemia" id="hipoglicemia-sim"
                             value="hipoglicemia-sim"
+                            {% if ficha.hipoglicemia == "hipoglicemia-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="hipoglicemia-sim">
                             Sim
@@ -2524,9 +2769,9 @@
                     </div>
                     <div class="form-check m-0 ms-3 me-5">
                         <input class="form-check-input" type="radio"
-                            name="hipoglicemia"
-                            id="hipoglicemia-nao"
+                            name="hipoglicemia" id="hipoglicemia-nao"
                             value="hipoglicemia-nao"
+                            {% if ficha.hipoglicemia == "hipoglicemia-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="hipoglicemia-nao">
                             Não
@@ -2534,9 +2779,9 @@
                     </div>
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="radio"
-                            name="hipoglicemia"
-                            id="hipoglicemia-naoFez"
+                            name="hipoglicemia" id="hipoglicemia-naoFez"
                             value="hipoglicemia-naoFez"
+                            {% if ficha.hipoglicemia == "hipoglicemia-naoFez" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="hipoglicemia-naoFez">
                             Não fez exame
@@ -2554,8 +2799,9 @@
             </span>
             <div class="form-check m-0 mx-2">
                 <input class="form-check-input" type="checkbox"
-                    name="atend-apos-nascimento"
                     id="op-atend-apos-nascimento-naoSeAplica"
+                    name="atend-apos-nascimento"
+                    {% if ficha.op_atend_apos_nasc == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label label-nowrap" for="op-atend-apos-nascimento-naoSeAplica">
                     Não se aplica
@@ -2574,6 +2820,7 @@
                             name="setorRN"
                             id="setorRN-aloj-conjunto"
                             value="setorRN-aloj-conjunto"
+                            {% if ficha.setorRN == "setorRN-aloj-conjunto" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="setorRN-aloj-conjunto">
                             Alojamento conjunto
@@ -2584,6 +2831,7 @@
                             name="setorRN"
                             id="setorRN-UTI-neonatal"
                             value="setorRN-UTI-neonatal"
+                            {% if ficha.setorRN == "setorRN-UTI-neonatal" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="setorRN-UTI-neonatal">
                             UTI/CTI neonatal
@@ -2594,6 +2842,7 @@
                             name="setorRN"
                             id="setorRN-ICINCo"
                             value="setorRN-ICINCo"
+                            {% if ficha.setorRN == "setorRN-ICINCo" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="setorRN-ICINCo">
                             Cuidado Intermediário Neonatal Convencional (UCINCo)
@@ -2608,6 +2857,7 @@
                         name="setorRN"
                         id="setorRN-ICINCa"
                         value="setorRN-ICINCa"
+                        {% if ficha.setorRN == "setorRN-ICINCa" %} checked {% endif %}
                     />
                     <label class="form-check-label label-wrap-pretty" for="setorRN-ICINCa">
                         Cuidado Intermediário Neonatal Canguru (UCINCa)
@@ -2618,12 +2868,14 @@
                         name="setorRN"
                         id="setorRN-outro"
                         value="setorRN-outro"
+                        {% if ficha.setorRN == "setorRN-outro" %} checked {% endif %}
                     />
                     <label class="form-check-label" for="setorRN-outro">
                         Outro:
                     </label>
                 </div>
-                <input id="setorRN-outro-descricao" class="form-control input-dado">
+                <input id="setorRN-outro-descricao" class="form-control input-dado"
+                    value="{{ ficha.setorRN_outro_descricao }}">
             </div>
             <div class="linha-dados">
                 <div class="col-6 d-flex align-items-center">
@@ -2636,6 +2888,7 @@
                             name="RN-baixo-peso"
                             id="RN-baixo-peso-sim"
                             value="RN-baixo-peso-sim"
+                            {% if ficha.RN_baixo_peso == "RN-baixo-peso-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="RN-baixo-peso-sim">
                             Sim
@@ -2646,6 +2899,7 @@
                             name="RN-baixo-peso"
                             id="RN-baixo-peso-nao"
                             value="RN-baixo-peso-nao"
+                            {% if ficha.RN_baixo_peso == "RN-baixo-peso-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="RN-baixo-peso-nao">
                             Não
@@ -2664,6 +2918,7 @@
                                 name="RN-prematuro"
                                 id="RN-prematuro-sim"
                                 value="RN-prematuro-sim"
+                                {% if ficha.RN_prematuro == "RN-prematuro-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="RN-prematuro-sim">
                                 Sim
@@ -2674,6 +2929,7 @@
                                 name="RN-prematuro"
                                 id="RN-prematuro-nao"
                                 value="RN-prematuro-nao"
+                                {% if ficha.RN_prematuro == "RN-prematuro-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="RN-prematuro-nao">
                                 Não
@@ -2694,6 +2950,7 @@
                             name="INASC"
                             id="INASC-metabolico"
                             value="INASC-metabolico"
+                            {% if ficha.INASC == "INASC-metabolico" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-metabolico">
                             Distúrbio metabólico
@@ -2704,6 +2961,7 @@
                             name="INASC"
                             id="INASC-membrana-hialina"
                             value="INASC-membrana-hialina"
+                            {% if ficha.INASC == "INASC-membrana-hialina" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-membrana-hialina">
                             Doença da membrana hialina
@@ -2714,6 +2972,7 @@
                             name="INASC"
                             id="INASC-hemolitica"
                             value="INASC-hemolitica"
+                            {% if ficha.INASC == "INASC-hemolitica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-hemolitica">
                             Doença hemolítica
@@ -2724,6 +2983,7 @@
                             name="INASC"
                             id="INASC-ictericia"
                             value="INASC-ictericia"
+                            {% if ficha.INASC == "INASC-ictericia" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-ictericia">
                             Icterícia
@@ -2739,6 +2999,7 @@
                             name="INASC"
                             id="INASC-infeccao-confirmada"
                             value="INASC-infeccao-confirmada"
+                            {% if ficha.INASC == "INASC-infeccao-confirmada" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-infeccao-confirmada">
                             Infecção confirmada
@@ -2749,6 +3010,7 @@
                             name="INASC"
                             id="INASC-infeccao-suspeita"
                             value="INASC-infeccao-suspeita"
+                            {% if ficha.INASC == "INASC-infeccao-suspeita" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-infeccao-suspeita">
                             Infecção suspeita
@@ -2759,6 +3021,7 @@
                             name="INASC"
                             id="INASC-malformacao"
                             value="INASC-malformacao"
+                            {% if ficha.INASC == "INASC-malformacao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-malformacao">
                             Malformação congênita
@@ -2769,6 +3032,7 @@
                             name="INASC"
                             id="INASC-aspiracao-meconial"
                             value="INASC-aspiracao-meconial"
+                            {% if ficha.INASC == "INASC-aspiracao-meconial" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-aspiracao-meconial">
                             Sd. aspiração meconial
@@ -2779,6 +3043,7 @@
                             name="INASC"
                             id="INASC-taquipneia"
                             value="INASC-taquipneia"
+                            {% if ficha.INASC == "INASC-taquipneia" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-taquipneia">
                             Taquipnéia transitória do RN
@@ -2791,6 +3056,7 @@
                             name="INASC"
                             id="INASC-tocotraumatismo"
                             value="INASC-tocotraumatismo"
+                            {% if ficha.INASC == "INASC-tocotraumatismo" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-tocotraumatismo">
                             Tocotraumatismo
@@ -2801,12 +3067,14 @@
                             name="INASC"
                             id="INASC-outro"
                             value="INASC-outro"
+                            {% if ficha.INASC == "INASC-outro" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INASC-outro">
                             Outra
                         </label>
                     </div>
-                    <input id="INASC-outro-descricao" class="form-control input-dado ms-1">
+                    <input id="INASC-outro-descricao" class="form-control input-dado ms-1"
+                        value="{{ ficha.INASC_outro_descricao }}">
                 </div>
             </div>
             <div class="linha-dados justify-content-between align-items-center">
@@ -2820,17 +3088,20 @@
                             name="IAUN"
                             id="IAUN-sim"
                             value="IAUN-sim"
+                            {% if ficha.IAUN == "IAUN-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="IAUN-sim">
                             Sim. Motivo
                         </label>
                     </div>
-                    <input id="IAUN-motivo" class="form-control input-dado ms-2">
+                    <input id="IAUN-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.IAUN_motivo }}">
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="radio"
                             name="IAUN"
                             id="IAUN-nao"
                             value="IAUN-nao"
+                            {% if ficha.IAUN == "IAUN-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="IAUN-nao">
                             Não
@@ -2850,23 +3121,29 @@
                             name="IUN"
                             id="IUN-sim"
                             value="IUN-sim"
+                            {% if ficha.IUN == "IUN-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="IUN-sim">
                             Sim. Data
                         </label>
                     </div>
                     <input id="IUN-dt" type="date" class="form-control input-dado ms-2"
-                        style="width: 140px;">
+                        style="width: 140px;"
+                        value="{{ ficha.dt_IUN }}"
+                    />
                     <label for="IUN-hora" class="label-wrap-pretty ms-3">
                         Hora
                     </label>
                     <input id="IUN-hora" class="form-control input-dado mx-2"
-                        placeholder="00:00" style="width: 55px;">
+                        placeholder="00:00" style="width: 55px;"
+                        value="{{ ficha.hora_IUN }}"
+                    />
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="radio"
                             name="IUN"
                             id="IUN-nao"
                             value="IUN-nao"
+                            {% if ficha.IUN == "IUN-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="IUN-nao">
                             Não
@@ -2886,17 +3163,20 @@
                             name="mais3horas-internar"
                             id="mais3horas-internar-sim"
                             value="mais3horas-internar-sim"
+                            {% if ficha.mais3horas_inter == "mais3horas-internar-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="mais3horas-internar-sim">
                             Sim. Por quê?
                         </label>
                     </div>
-                    <input id="mais3horas-internado-motivo" class="form-control input-dado ms-2">
+                    <input id="mais3horas-internado-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.mais3horas_inter_motivo }}">
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="radio"
                             name="mais3horas-internar"
                             id="mais3horas-internar-nao"
                             value="mais3horas-internar-nao"
+                            {% if ficha.mais3horas_inter == "mais3horas-internar-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="mais3horas-internar-nao">
                             Não
@@ -2911,7 +3191,8 @@
                     <label for="motivo-nao-internado" class="negrito label-nowrap mx-1">
                         Por que não foi internado?
                     </label>
-                    <input id="motivo-nao-internado" class="form-control input-dado ms-2">
+                    <input id="motivo-nao-internado" class="form-control input-dado ms-2"
+                        value="{{ ficha.motivo_nao_inter }}">
                 </div>
                 <span class="spanLGN">lgn</span>
             </div>
@@ -2927,7 +3208,11 @@
                         </div>
                         <span class="spanLGN">lgn</span>
                     </div>
-                    <textarea id="evolucao-internacao-RN" class="form-control mt-2" rows="4"></textarea>
+                    <textarea
+                        id="evolucao-internacao-RN"
+                        class="form-control mt-2" 
+                        rows="4"
+                    >{{ ficha.evolucao_inter_RN }}</textarea>
                 </div>
             </div>
             <div class="linha-dados align-items-center">
@@ -2943,6 +3228,7 @@
                             name="PRDIRN"
                             id="PRDIRN-nenhum"
                             value="PRDIRN-nenhum"
+                            {% if ficha.PRDIRN == "PRDIRN-nenhum" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-nenhum">
                             Nenhum
@@ -2958,6 +3244,7 @@
                             name="PRDIRN"
                             id="PRDIRN-antibioticoterapia"
                             value="PRDIRN-antibioticoterapia"
+                            {% if ficha.PRDIRN == "PRDIRN-antibioticoterapia" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-antibioticoterapia">
                             Antibioticoterapia
@@ -2968,6 +3255,7 @@
                             name="PRDIRN"
                             id="PRDIRN-berco-aquecido"
                             value="PRDIRN-berco-aquecido"
+                            {% if ficha.PRDIRN == "PRDIRN-berco-aquecido" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-berco-aquecido">
                             Berço aquecido
@@ -2978,6 +3266,7 @@
                             name="PRDIRN"
                             id="PRDIRN-metodo-canguru"
                             value="PRDIRN-metodo-canguru"
+                            {% if ficha.PRDIRN == "PRDIRN-metodo-canguru" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-metodo-canguru">
                             Método Canguru
@@ -2988,6 +3277,7 @@
                             name="PRDIRN"
                             id="PRDIRN-cateterismo-umbilical"
                             value="PRDIRN-cateterismo-umbilical"
+                            {% if ficha.PRDIRN == "PRDIRN-cateterismo-umbilical" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-cateterismo-umbilical">
                             Cateterismo umbilical
@@ -2998,6 +3288,7 @@
                             name="PRDIRN"
                             id="PRDIRN-CPAP"
                             value="PRDIRN-CPAP"
+                            {% if ficha.PRDIRN == "PRDIRN-CPAP" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-CPAP">
                             CPAP
@@ -3010,6 +3301,7 @@
                             name="PRDIRN"
                             id="PRDIRN-disseccao-venenosa"
                             value="PRDIRN-disseccao-venenosa"
+                            {% if ficha.PRDIRN == "PRDIRN-disseccao-venenosa" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-disseccao-venenosa">
                             Dissecção venosa
@@ -3020,6 +3312,7 @@
                             name="PRDIRN"
                             id="PRDIRN-entubacao"
                             value="PRDIRN-entubacao"
+                            {% if ficha.PRDIRN == "PRDIRN-entubacao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-entubacao">
                             Entubação
@@ -3030,6 +3323,7 @@
                             name="PRDIRN"
                             id="PRDIRN-fototerapia"
                             value="PRDIRN-fototerapia"
+                            {% if ficha.PRDIRN == "PRDIRN-fototerapia" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-fototerapia">
                             Fototerapia
@@ -3040,6 +3334,7 @@
                             name="PRDIRN"
                             id="PRDIRN-exsanguineo"
                             value="PRDIRN-exsanguineo"
+                            {% if ficha.PRDIRN == "PRDIRN-exsanguineo" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-exsanguineo">
                             Exsanguineo-transfusão
@@ -3050,6 +3345,7 @@
                             name="PRDIRN"
                             id="PRDIRN-hemotransfusao"
                             value="PRDIRN-hemotransfusao"
+                            {% if ficha.PRDIRN == "PRDIRN-hemotransfusao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-hemotransfusao">
                             Hemotransfusão
@@ -3062,6 +3358,7 @@
                             name="PRDIRN"
                             id="PRDIRN-incubadora"
                             value="PRDIRN-incubadora"
+                            {% if ficha.PRDIRN == "PRDIRN-incubadora" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-incubadora">
                             Incubadora
@@ -3072,6 +3369,7 @@
                             name="PRDIRN"
                             id="PRDIRN-nutricao-parenteral"
                             value="PRDIRN-nutricao-parenteral"
+                            {% if ficha.PRDIRN == "PRDIRN-nutricao-parenteral" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-nutricao-parenteral">
                             Nutrição parenteral
@@ -3082,6 +3380,7 @@
                             name="PRDIRN"
                             id="PRDIRN-oxigenio-capacete"
                             value="PRDIRN-oxigenio-capacete"
+                            {% if ficha.PRDIRN == "PRDIRN-oxigenio-capacete" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-oxigenio-capacete">
                             Oxigênio em capacete
@@ -3092,6 +3391,7 @@
                             name="PRDIRN"
                             id="PRDIRN-oxigenio-inalatorio"
                             value="PRDIRN-oxigenio-inalatorio"
+                            {% if ficha.PRDIRN == "PRDIRN-oxigenio-inalatorio" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-oxigenio-inalatorio">
                             Oxigênio inalatório
@@ -3102,6 +3402,7 @@
                             name="PRDIRN"
                             id="PRDIRN-puncao-nervosa"
                             value="PRDIRN-puncao-nervosa"
+                            {% if ficha.PRDIRN == "PRDIRN-puncao-nervosa" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-puncao-nervosa">
                             Punção venosa central
@@ -3114,6 +3415,7 @@
                             name="PRDIRN"
                             id="PRDIRN-surfactante"
                             value="PRDIRN-surfactante"
+                            {% if ficha.PRDIRN == "PRDIRN-surfactante" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-surfactante">
                             Surfactante
@@ -3124,6 +3426,7 @@
                             name="PRDIRN"
                             id="PRDIRN-ventilacao-mecanica"
                             value="PRDIRN-ventilacao-mecanica"
+                            {% if ficha.PRDIRN == "PRDIRN-ventilacao-mecanica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="PRDIRN-ventilacao-mecanica">
                             Ventilação mecânica
@@ -3134,12 +3437,14 @@
                             name="PRDIRN"
                             id="PRDIRN-outros"
                             value="PRDIRN-outros"
+                            {% if ficha.PRDIRN == "PRDIRN-outros" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-outros">
                             Outros
                         </label>
                     </div>
-                    <input id="PRDIRN-outros-descricao" class="form-control input-dado ms-2">
+                    <input id="PRDIRN-outros-descricao" class="form-control input-dado ms-2"
+                        value="{{ ficha.PRDIRN_outro_descricao }}">
                 </div>
             </div>
             <div class="linha-dados">
@@ -3154,6 +3459,7 @@
                                 name="MARNI"
                                 id="MARNI-sim-integral"
                                 value="MARNI-sim-integral"
+                                {% if ficha.MARNI == "MARNI-sim-integral" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="MARNI-sim-integral">
                                 Sim, em tempo integral
@@ -3164,6 +3470,7 @@
                                 name="MARNI"
                                 id="MARNI-sim-parcial"
                                 value="MARNI-sim-parcial"
+                                {% if ficha.MARNI == "MARNI-sim-parcial" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="MARNI-sim-parcial">
                                 Sim, parcialmente
@@ -3174,6 +3481,7 @@
                                 name="MARNI"
                                 id="MARNI-nao"
                                 value="MARNI-nao"
+                                {% if ficha.MARNI == "MARNI-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="MARNI-nao">
                                 Não
@@ -3195,6 +3503,7 @@
                                 name="RNOA"
                                 id="RNOA-sim-integral"
                                 value="RNOA-sim-integral"
+                                {% if ficha.RNOA == "RNOA-sim-integral" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="RNOA-sim-integral">
                                 Sim, em tempo integral
@@ -3205,6 +3514,7 @@
                                 name="RNOA"
                                 id="RNOA-sim-parcial"
                                 value="RNOA-sim-parcial"
+                                {% if ficha.RNOA == "RNOA-sim-parcial" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="RNOA-sim-parcial">
                                 Sim, parcialmente
@@ -3215,6 +3525,7 @@
                                 name="RNOA"
                                 id="RNOA-nao"
                                 value="RNOA-nao"
+                                {% if ficha.RNOA == "RNOA-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="RNOA-nao">
                                 Não
@@ -3236,6 +3547,7 @@
                                 name="DIAN"
                                 id="DIAN-alta"
                                 value="DIAN-alta"
+                                {% if ficha.DIAN == "DIAN-alta" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="DIAN-alta">
                                 Alta
@@ -3246,6 +3558,7 @@
                                 name="DIAN"
                                 id="DIAN-transferencia"
                                 value="DIAN-transferencia"
+                                {% if ficha.DIAN == "DIAN-transferencia" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="DIAN-transferencia">
                                 Transferência
@@ -3256,6 +3569,7 @@
                                 name="DIAN"
                                 id="DIAN-obito"
                                 value="DIAN-obito"
+                                {% if ficha.DIAN == "DIAN-obito" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="DIAN-obito">
                                 Óbito (vá para <span class="numeracao negrito">70</span>)
@@ -3272,7 +3586,7 @@
                         Data da Alta/Transferência:
                     </label>
                     <input id="dt-alta" type="date" class="form-control input-dado ms-2"
-                        style="width: 140px;"/>
+                        style="width: 140px;" value="{{ ficha.dt_altaRN }}"/>
                 </div>
                 <div class="col-6 d-flex colADireita justify-content-between align-items-center ps-4">
                     <div class="d-flex align-items-center flex-wrap">
@@ -3282,7 +3596,11 @@
                         </label>
                         <div class="d-flex align-items-center">
                             <input id="peso-alta" class="form-control input-dado ms-2"
-                                style="width: 60px;" type="number"/>
+                                style="width: 60px;" type="number"
+                                {% if ficha.peso_altaRN != "0" %}
+                                    value="{{ ficha.peso_altaRN }}"
+                                {% endif %}
+                            />
                             <span class="ms-2">gramas</span>
                         </div>
                     </div>
@@ -3295,7 +3613,8 @@
                     <label for="motivo-transferencia" class="negrito label-wrap-pretty mx-1">
                         Se foi transferido, qual o motivo?
                     </label>
-                    <input id="motivo-transferencia" class="form-control input-dado ms-2">
+                    <input id="motivo-transferencia" class="form-control input-dado ms-2"
+                        value="{{ ficha.motivo_transfRN }}">
                 </div>
                 <span class="spanLGN">lgn</span>
             </div>
@@ -3305,7 +3624,8 @@
                     <label for="hosp-transferencia" class="negrito label-wrap-pretty mx-1">
                         Se foi transferido, para qual hospital?
                     </label>
-                    <input id="hosp-transferencia" class="form-control input-dado ms-2">
+                    <input id="hosp-transferencia" class="form-control input-dado ms-2"
+                        value="{{ ficha.hosp_transfRN }}">
                 </div>
                 <span class="spanLGN">lgn</span>
             </div>
@@ -3318,6 +3638,7 @@
                     <input id="hora-obito-RN" class="form-control input-dado ms-2"
                         placeholder="00:00"
                         style="width: 55px;"
+                        value="{{ ficha.hora_obitoRN }}"
                     />
                     <span class="spanLGN ms-4">lgn</span>
                 </div>
@@ -3325,6 +3646,7 @@
                     <input class="form-check-input" type="checkbox"
                         name="hora-obito-RN"
                         id="op-hora-obito-RN-naoSeAplica"
+                        {% if ficha.op_hora_obitoRN_NSA == "1" %} checked {% endif %}
                     />
                     <label class="form-check-label label-nowrap" for="op-hora-obito-RN-naoSeAplica">
                         Não se aplica
@@ -3343,6 +3665,7 @@
                             name="obito-RN"
                             id="obito-RN-alojamento-conjunto"
                             value="obito-RN-alojamento-conjunto"
+                            {% if ficha.obito_RN == "obito-RN-alojamento-conjunto" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-RN-alojamento-conjunto">
                             Alojamento conjunto
@@ -3353,6 +3676,7 @@
                             name="obito-RN"
                             id="obito-RN-cuidado-intermediario"
                             value="obito-RN-cuidado-intermediario"
+                            {% if ficha.obito_RN == "obito-RN-cuidado-intermediario" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-RN-cuidado-intermediario">
                             Cuidado intermediário
@@ -3363,6 +3687,7 @@
                             name="obito-RN"
                             id="obito-RN-UTI-neonatal"
                             value="obito-RN-UTI-neonatal"
+                            {% if ficha.obito_RN == "obito-RN-UTI-neonatal" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-RN-UTI-neonatal">
                             UTI neonatal
@@ -3373,6 +3698,7 @@
                             name="obito-RN"
                             id="obito-RN-centro-obstetrico"
                             value="obito-RN-centro-obstetrico"
+                            {% if ficha.obito_RN == "obito-RN-centro-obstetrico" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-RN-centro-obstetrico">
                             Centro obstétrico
@@ -3383,6 +3709,7 @@
                             name="obito-RN"
                             id="obito-RN-outro"
                             value="obito-RN-outro"
+                            {% if ficha.obito_RN == "obito-RN-outro" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="obito-RN-outro">
                             Outro
@@ -3400,8 +3727,8 @@
             </span>
             <div class="form-check m-0 mx-2">
                 <input class="form-check-input" type="checkbox"
-                    name="AHCDSO"
-                    id="op-AHCDSO-naoSeAplica"
+                    name="AHCDSO" id="op-AHCDSO-naoSeAplica"
+                    {% if ficha.op_AHCDSO_NSA == "1" %} checked {% endif %}
                 />
                 <label class="form-check-label label-nowrap" for="op-AHCDSO-naoSeAplica">
                     Não se aplica
@@ -3421,7 +3748,7 @@
                         Data da internação:
                     </label>
                     <input id="dt-internacao-crianca" class="form-control input-dado ms-2" type="date"
-                        style="max-width: 150px;">
+                        style="max-width: 150px;" value="{{ ficha.dt_inter_crianca }}"/>
                     <span class="spanLGN ms-3">lgn</span>
                 </div>
                 <div class="col-6 colADireita d-flex align-items-center justify-content-between">
@@ -3430,7 +3757,7 @@
                             Hora da internação:
                         </label>
                         <input id="hr-internacao-crianca" class="form-control input-dado ms-2" placeholder="00:00"
-                            style="max-width: 54px;">
+                            style="max-width: 54px;" value="{{ ficha.hr_inter_crianca }}"/>
                     </div>
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -3446,6 +3773,7 @@
                             name="CVTH"
                             id="CVTH-sim"
                             value="CVTH-sim"
+                            {% if ficha.CVTH == "CVTH-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="CVTH-sim">
                             Sim, qual?
@@ -3456,6 +3784,7 @@
                             name="CVTH"
                             id="CVTH-nao"
                             value="CVTH-nao"
+                            {% if ficha.CVTH == "CVTH-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="CVTH-nao">
                             Não
@@ -3469,20 +3798,26 @@
                     <label for="CVTH-hospital" class="label-nowrap">
                         - Nome:
                     </label>
-                    <input id="CVTH-hospital" class="form-control input-dado ms-1">
+                    <input id="CVTH-hospital" class="form-control input-dado ms-1"
+                        value="{{ ficha.CVTH_hospital }}">
                 </div>
                 <div class="d-flex col-6 colADireita align-items-center justify-content-between">
                     <div class="d-flex align-items-center flex-wrap">
                         <label for="tempo-internacao-crianca" class="negrito me-2">
                             Tempo de Internação
                         </label>
-                        <input id="tempo-internacao-crianca" type="number" class="form-control input-dado"
-                            style="max-width: 50px;">
+                        <input id="tempo-internacao-crianca" type="number"
+                            class="form-control input-dado" style="max-width: 50px;"
+                            {% if ficha.tempo_inter_crianca != "0" %}
+                                value="{{ ficha.tempo_inter_crianca }}"
+                            {% endif %}
+                        />
                         <div class="form-check m-0 ms-3">
                             <input class="form-check-input" type="radio"
                                 name="TIT"
                                 id="TIT-dias"
                                 value="TIT-dias"
+                                {% if ficha.tipo_tempo_inter == "1" %} checked {% endif %}
                             />
                             <label class="form-check-label label-nowrap" for="TIT-dias">
                                 dias
@@ -3493,6 +3828,7 @@
                                 name="TIT"
                                 id="TIT-meses"
                                 value="TIT-meses"
+                                {% if ficha.tipo_tempo_inter == "1" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="TIT-meses">
                                 meses.
@@ -3514,7 +3850,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="historia-admissao" class="form-control input-dado mt-2"
-                        rows="3" style="width: 100%;"></textarea>
+                        rows="3" style="width: 100%;">{{ ficha.historia_admissao }}</textarea>
                 </div>
             </div>
             <div class="linha-dados px-2">
@@ -3530,12 +3866,17 @@
                         Idade
                     </label>
                     <input id="ICA" type="number" class="form-control input-dado"
-                        style="max-width: 50px;">
+                        style="max-width: 50px;"
+                        {% if ficha.ICA != "0" %}
+                            value="{{ ficha.ICA }}"
+                        {% endif %}
+                    />
                     <div class="form-check m-0 ms-3">
                         <input class="form-check-input" type="radio"
                             name="ICAT"
                             id="ICAT-dias"
                             value="ICAT-dias"
+                            {% if ficha.ICAT == "ICAT-dias" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="ICAT-dias">
                             dias
@@ -3546,6 +3887,7 @@
                             name="ICAT"
                             id="ICAT-meses"
                             value="ICAT-meses"
+                            {% if ficha.ICAT == "ICAT-meses" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="ICAT-meses">
                             meses
@@ -3556,6 +3898,7 @@
                             name="ICAT"
                             id="ICAT-anos"
                             value="ICAT-anos"
+                            {% if ficha.ICAT == "ICAT-anos" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="ICAT-anos">
                             anos
@@ -3570,8 +3913,13 @@
                         <label for="peso-crianca-admissao" class="negrito mx-1">
                             Peso
                         </label>
-                        <input id="peso-crianca-admissao" type="number" class="form-control input-dado me-1"
-                            style="max-width: 50px;">
+                        <input id="peso-crianca-admissao" type="number"
+                            class="form-control input-dado me-1"
+                            style="max-width: 50px;"
+                            {% if ficha.peso_crianca_admiss != "0" %}
+                                value="{{ ficha.peso_crianca_admiss }}"
+                            {% endif %}
+                        />
                         <span>gr.</span>
                     </div>
                     <span class="spanLGN mx-2">lgn</span>
@@ -3582,8 +3930,12 @@
                         <label for="ACA" class="negrito mx-1">
                             Altura
                         </label>
-                        <input id="ACA" type="number" class="form-control input-dado me-1"
-                            style="max-width: 50px;">
+                        <input id="ACA" type="number" style="max-width: 50px;"
+                            class="form-control input-dado me-1"
+                            {% if ficha.ACA != "0" %}
+                                value="{{ ficha.ACA }}"
+                            {% endif %}
+                        />
                         <span>cm</span>
                     </div>
                     <span class="spanLGN">lgn</span>
@@ -3601,6 +3953,7 @@
                                 name="ENCAT"
                                 id="ENCAT-eutrofica"
                                 value="ENCAT-eutrofica"
+                                {% if ficha.ENCAT == "ENCAT-eutrofica" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="ENCAT-eutrofica">
                                 Eutrófica
@@ -3611,6 +3964,7 @@
                                 name="ENCAT"
                                 id="ENCAT-desnutrida"
                                 value="ENCAT-desnutrida"
+                                {% if ficha.ENCAT == "ENCAT-desnutrida" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="ENCAT-desnutrida">
                                 Desnutrida/baixo peso
@@ -3630,6 +3984,7 @@
                                 name="EHCAT"
                                 id="EHCAT-hidratada"
                                 value="EHCAT-hidratada"
+                                {% if ficha.EHCAT == "EHCAT-hidratada" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="EHCAT-hidratada">
                                 Hidratada
@@ -3640,6 +3995,7 @@
                                 name="EHCAT"
                                 id="EHCAT-desidratada"
                                 value="EHCAT-desidratada"
+                                {% if ficha.EHCAT == "EHCAT-desidratada" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="EHCAT-desidratada">
                                 Desidratada
@@ -3661,6 +4017,7 @@
                                 name="EGGCA"
                                 id="EGGCA-sim"
                                 value="EGGCA-sim"
+                                {% if ficha.EGGCA == "EGGCA-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="EGGCA-sim">
                                 Sim
@@ -3671,6 +4028,7 @@
                                 name="EGGCA"
                                 id="EGGCA-nao"
                                 value="EGGCA-nao"
+                                {% if ficha.EGGCA == "EGGCA-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="EGGCA-nao">
                                 Não
@@ -3690,6 +4048,7 @@
                                 name="PCA"
                                 id="PCA-normal"
                                 value="PCA-normal"
+                                {% if ficha.PCA == "PCA-normal" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="PCA-normal">
                                 Normal
@@ -3700,6 +4059,7 @@
                                 name="PCA"
                                 id="PCA-diminuida"
                                 value="PCA-diminuida"
+                                {% if ficha.PCA == "PCA-diminuida" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="PCA-diminuida">
                                 Dininuída
@@ -3721,6 +4081,9 @@
                     <input id="BCCA" type="number"
                         class="form-control input-dado me-1"
                         style="max-width: 70px;"
+                        {% if ficha.BCCA != "0" %}
+                            value="{{ ficha.BCCA }}"
+                        {% endif %}
                     />
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
@@ -3731,6 +4094,9 @@
                     <input id="RCA" type="number"
                         class="form-control input-dado me-1"
                         style="max-width: 70px;"
+                        {% if ficha.RCA != "0" %}
+                            value="{{ ficha.RCA }}"
+                        {% endif %}
                     />
                     <span class="spanLGN ms-2">lgn</span>
                 </div>
@@ -3739,7 +4105,7 @@
                         Temperatura
                     </label>
                     <input id="TCA" class="form-control input-dado me-1"
-                        style="max-width: 80px;">
+                        style="max-width: 80px;" value="{{ ficha.TCA }}">
                     <span class="ms-1 me-3">°C</span>
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -3756,7 +4122,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="diagostico-crianca-admissao" class="form-control input-dado mt-2"
-                        rows="3" style="width: 100%;"></textarea>
+                        rows="3" style="width: 100%;">{{ ficha.diag_crianca_admissao }}</textarea>
                 </div>
             </div>
             <div class="linha-dados px-2">
@@ -3771,7 +4137,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="REIC" class="form-control input-dado mt-2"
-                        rows="4" style="width: 100%;"></textarea>
+                        rows="4" style="width: 100%;">{{ ficha.REIC }}</textarea>
                 </div>
             </div>
             <div class="linha-dados justify-content-between align-items-center px-2">
@@ -3785,17 +4151,20 @@
                             name="IA-UTIP"
                             id="IA-UTIP-sim"
                             value="IA-UTIP-sim"
+                            {% if ficha.IA_UTIP == "IA-UTIP-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="IA-UTIP-sim">
                             Sim. Motivo:
                         </label>
                     </div>
-                    <input id="IA-UTIP-motivo" class="form-control input-dado ms-2">
+                    <input id="IA-UTIP-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.IA_UTIP_motivo }}">
                     <div class="form-check m-0 ms-4">
                         <input class="form-check-input" type="radio"
                             name="IA-UTIP"
                             id="IA-UTIP-nao"
                             value="IA-UTIP-nao"
+                            {% if ficha.IA_UTIP == "IA-UTIP-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="IA-UTIP-nao">
                             Não
@@ -3815,25 +4184,27 @@
                             name="INT-UTIP"
                             id="INT-UTIP-sim"
                             value="INT-UTIP-sim"
+                            {% if ficha.INT_UTIP == "INT-UTIP-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap ps-1" for="INT-UTIP-sim">
                             Sim. Data
                         </label>
                         <input id="INT-UTIP-dt" type="date" class="form-control input-dado ms-2"
-                            style="width: 130px;"/>
+                            style="width: 130px;" value="{{ ficha.dt_INT_UTIP }}"/>
                     </div>
                     <div class="d-flex align-items-center">
                         <label for="INT-UTIP-hora" class="ms-4">
                             Hora
                         </label>
                         <input id="INT-UTIP-hora" class="form-control input-dado mx-2"
-                            placeholder="00:00" style="width: 60px;"/>
+                            placeholder="00:00" style="width: 60px;" value="{{ ficha.hora_INT_UTIP }}"/>
                     </div>
                     <div class="form-check m-0 ms-5">
                         <input class="form-check-input" type="radio"
                             name="INT-UTIP"
                             id="INT-UTIP-nao"
                             value="INT-UTIP-nao"
+                            {% if ficha.INT_UTIP == "INT-UTIP-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="INT-UTIP-nao">
                             Não
@@ -3853,17 +4224,20 @@
                             name="DM3HPSIC"
                             id="DM3HPSIC-sim"
                             value="DM3HPSIC-sim"
+                            {% if ficha.DM3HPSIC == "DM3HPSIC-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="DM3HPSIC-sim">
                             Sim. Por que?
                         </label>
                     </div>
-                    <input id="DM3HPSIC-motivo" class="form-control input-dado ms-2">
+                    <input id="DM3HPSIC-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.DM3HPSIC_motivo }}">
                     <div class="form-check m-0 ms-4">
                         <input class="form-check-input" type="radio"
                             name="DM3HPSIC"
                             id="DM3HPSIC-nao"
                             value="DM3HPSIC-nao"
+                            {% if ficha.DM3HPSIC == "DM3HPSIC-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="DM3HPSIC-nao">
                             Não
@@ -3878,7 +4252,8 @@
                     <label for="crianca-nao-internada-motivo" class="negrito label-nowrap mx-1">
                         Por que não foi internado?
                     </label>
-                    <input id="crianca-nao-internada-motivo" class="form-control input-dado ms-2">
+                    <input id="crianca-nao-internada-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.crianca_nao_inter_motivo }}">
                 </div>
                 <span class="spanLGN">lgn</span>
             </div>
@@ -3893,6 +4268,7 @@
                             name="DIANC"
                             id="DIANC-alta"
                             value="DIANC-alta"
+                            {% if ficha.DIANC == "DIANC-alta" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="DIANC-alta">
                             Alta
@@ -3903,6 +4279,7 @@
                             name="DIANC"
                             id="DIANC-transferencia"
                             value="DIANC-transferencia"
+                            {% if ficha.DIANC == "DIANC-transferencia" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="DIANC-transferencia">
                             Transferência
@@ -3913,6 +4290,7 @@
                             name="DIANC"
                             id="DIANC-obito"
                             value="DIANC-obito"
+                            {% if ficha.DIANC == "DIANC-obito" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="DIANC-obito">
                             Óbito (vá para <span class="numeracao negrito">84</span>)
@@ -3928,7 +4306,7 @@
                         Data da Alta/Transferência:
                     </label>
                     <input id="dt-alta-crianca" type="date" class="form-control input-dado"
-                        style="width: 130px;"/>
+                        style="width: 130px;" value="{{ ficha.dt_alta_crianca }}"/>
                 </div>
                 <div class="col-6 colADireita d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-wrap align-items-center">
@@ -3937,7 +4315,7 @@
                             Peso ao Alta/Transferência:
                         </label>
                         <input id="peso-alta-crianca" class="form-control input-dado"
-                            style="width: 80px;"/>
+                            style="width: 80px;" value="{{ ficha.peso_alta_crianca }}"/>
                     </div>
                     <span class="spanLGN">lgn</span>
                 </div>
@@ -3948,11 +4326,13 @@
                     <label for="CRIANCAT-motivo" class="negrito label-wrap-pretty mx-1">
                         Se foi transferido, anote o motivo:
                     </label>
-                    <input id="CRIANCAT-motivo" class="form-control input-dado ms-2">
+                    <input id="CRIANCAT-motivo" class="form-control input-dado ms-2"
+                        value="{{ ficha.CRIANCAT_motivo }}">
                     <div class="form-check m-0 ms-4">
                         <input class="form-check-input" type="checkbox"
                             name="CRIANCAT-motivo"
                             id="op-CRIANCAT-motivo-naoSeAplica"
+                            {% if ficha.op_CRIANCAT_motivo_NSA == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="CRIANCAT-motivo-naoSeAplica">
                             Não se aplica
@@ -3967,11 +4347,13 @@
                     <label for="CRIANCAT-nome-hospital" class="negrito label-wrap-pretty mx-1">
                         Se foi transferido, indique para qual hospital:
                     </label>
-                    <input id="CRIANCAT-nome-hospital" class="form-control input-dado ms-2">
+                    <input id="CRIANCAT-nome-hospital" class="form-control input-dado ms-2"
+                        value="{{ ficha.CRIANCAT_nome_hosp }}">
                     <div class="form-check m-0 ms-4">
                         <input class="form-check-input" type="checkbox"
                             name="CRIANCAT-hospital"
                             id="op-CRIANCAT-hospital-naoSeAplica"
+                            {% if ficha.op_CRIANCAT_hosp_NSA == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="CRIANCAT-hospital-naoSeAplica">
                             Não se aplica
@@ -3987,12 +4369,14 @@
                         Se foi a “Óbito”, indique a hora do óbito:
                     </label>
                     <input id="hora-obito-crianca" class="form-control input-dado ms-2"
-                        style="width: 54px;" placeholder="00:00">
+                        style="width: 54px;" placeholder="00:00"
+                        value="{{ ficha.hora_obito_crianca }}"
+                    />
                     <span class="spanLGN ms-3 me-5">lgn</span>
                     <div class="form-check m-0 ms-5">
-                        <input class="form-check-input" type="checkbox"
-                            name="HOC"
+                        <input class="form-check-input" type="checkbox" name="HOC"
                             id="op-HOC-naoSeAplica"
+                            {% if ficha.op_HOC_NSA == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="op-HOC-naoSeAplica">
                             Não se aplica
@@ -4011,6 +4395,7 @@
                         <input class="form-check-input" type="radio"
                             name="SOC" id="SOC-UTIP"
                             value="SOC-UTIP"
+                            {% if ficha.SOC == "SOC-UTIP" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="SOC-UTIP">
                             UTI neonatal/pediátrica
@@ -4020,6 +4405,7 @@
                         <input class="form-check-input" type="radio"
                             name="SOC" id="SOC-naoSeAplica"
                             value="SOC-naoSeAplica"
+                            {% if ficha.SOC == "SOC-naoSeAplica" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="SOC-naoSeAplica"
                             style="max-width: 300px;">
@@ -4031,12 +4417,14 @@
                             <input class="form-check-input" type="radio"
                                 name="SOC" id="SOC-outro"
                                 value="SOC-outro"
+                                {% if ficha.SOC == "SOC-outro" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="SOC-outro">
                                 Outro:
                             </label>
                         </div>
-                        <input id="SOC-outro-descricao" class="form-control input-dado ms-1 me-3">
+                        <input id="SOC-outro-descricao" class="form-control input-dado ms-1 me-3"
+                            value="{{ ficha.SOC_outro_descricao }}">
                     </div>
                 </div>
                 <span class="spanLGN">lgn</span>
@@ -4062,7 +4450,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="diagnosticos-clinicos" class="form-control input-dado mt-2"
-                        rows="4" style="width: 100%;"></textarea>
+                        rows="4" style="width: 100%;">{{ ficha.diag_clinicos }}</textarea>
                 </div>
             </div>
             <div class="linha-dados">
@@ -4077,6 +4465,7 @@
                                 name="corpo-enviado-necropsia"
                                 id="corpo-enviado-necropsia-sim"
                                 value="corpo-enviado-necropsia-sim"
+                                {% if ficha.corpo_env_necropsia == "corpo-enviado-necropsia-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label mx-1" for="corpo-enviado-necropsia-sim">
                                 Sim 
@@ -4086,9 +4475,8 @@
                             <span>(</span>
                             <div class="d-flex align-items-center form-check m-0 ms-1">
                                 <input class="form-check-input" type="radio"
-                                    name="CENL"
-                                    id="CENL-iml"
-                                    value="CENL-iml"
+                                    name="CENL" id="CENL-iml" value="CENL-iml"
+                                    {% if ficha.CENL == "CENL-iml" %} checked {% endif %}
                                 />
                                 <label class="form-check-label ms-1" for="CENL-iml">
                                     IML
@@ -4096,9 +4484,8 @@
                             </div>
                             <div class="d-flex align-items-center form-check m-0 ms-3">
                                 <input class="form-check-input" type="radio"
-                                    name="CENL"
-                                    id="CENL-svo"
-                                    value="CENL-svo"
+                                    name="CENL" id="CENL-svo" value="CENL-svo"
+                                    {% if ficha.CENL == "CENL-svo" %} checked {% endif %}
                                 />
                                 <label class="form-check-label ms-1" for="CENL-svo">
                                     SVO
@@ -4106,9 +4493,8 @@
                             </div>
                             <div class="d-flex align-items-center form-check m-0 ms-3">
                                 <input class="form-check-input" type="radio"
-                                    name="CENL"
-                                    id="CENL-outro"
-                                    value="CENL-outro"
+                                    name="CENL" id="CENL-outro" value="CENL-outro"
+                                    {% if ficha.CENL == "CENL-outro" %} checked {% endif %}
                                 />
                                 <label class="form-check-label ms-1" for="CENL-outro">
                                     Outro
@@ -4122,6 +4508,7 @@
                             name="corpo-enviado-necropsia"
                             id="corpo-enviado-necropsia-nao"
                             value="corpo-enviado-necropsia-nao"
+                            {% if ficha.corpo_env_necropsia == "corpo-enviado-necropsia-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="corpo-enviado-necropsia-nao">
                             Não
@@ -4140,6 +4527,7 @@
                                 name="realizada-necropsia"
                                 id="realizada-necropsia-sim"
                                 value="realizada-necropsia-sim"
+                                {% if ficha.realiz_necropsia == "realizada-necropsia-sim" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="realizada-necropsia-sim">
                                 Sim 
@@ -4150,6 +4538,7 @@
                                 name="realizada-necropsia"
                                 id="realizada-necropsia-nao"
                                 value="realizada-necropsia-nao"
+                                {% if ficha.realiz_necropsia == "realizada-necropsia-nao" %} checked {% endif %}
                             />
                             <label class="form-check-label" for="realizada-necropsia-nao">
                                 Não
@@ -4170,6 +4559,7 @@
                             name="caso-analisado"
                             id="caso-analisado-sim"
                             value="caso-analisado-sim"
+                            {% if ficha.caso_analisado == "caso-analisado-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="caso-analisado-sim">
                             Sim
@@ -4180,6 +4570,7 @@
                             name="caso-analisado"
                             id="caso-analisado-nao"
                             value="caso-analisado-nao"
+                            {% if ficha.caso_analisado == "caso-analisado-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="caso-analisado-nao">
                             Não
@@ -4195,7 +4586,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="comissao-conclusao" class="textArea form-control input-dado mt-2"
-                        rows="4" style="width: 100%;"></textarea>
+                        rows="4" style="width: 100%;">{{ ficha.comissao_conclusao }}</textarea>
                 </div>
                 <div class="col-12 d-flex flex-column pt-1">
                     <div class="d-flex justify-content-between align-items-center">
@@ -4208,6 +4599,7 @@
                                     name="CNA"
                                     id="CNA-nao-encaminhado"
                                     value="CNA-nao-encaminhado"
+                                    {% if ficha.CNA == "CNA-nao-encaminhado" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="CNA-nao-encaminhado">
                                     Não foi encaminhado.
@@ -4218,6 +4610,7 @@
                                     name="CNA"
                                     id="CNA-encaminhado-nao-analisado"
                                     value="CNA-encaminhado-nao-analisado"
+                                    {% if ficha.CNA == "CNA-encaminhado-nao-analisado" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="CNA-encaminhado-nao-analisado">
                                     Foi encaminhado, mas não analisado.
@@ -4228,6 +4621,7 @@
                                     name="CNA"
                                     id="CNA-sem-comissao"
                                     value="CNA-sem-comissao"
+                                    {% if ficha.CNA == "CNA-sem-comissao" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="CNA-sem-comissao">
                                     Não existe comissão/grupo
@@ -4238,6 +4632,7 @@
                                     name="CNA"
                                     id="CNA-outro"
                                     value="CNA-outro"
+                                    {% if ficha.CNA == "CNA-outro" %} checked {% endif %}
                                 />
                                 <label class="form-check-label" for="CNA-outro">
                                     Outro
@@ -4249,7 +4644,7 @@
                     </div>
                 </div>
                 <input id="CNA-outro-descricao" class="form-control input-dado mt-1"
-                    style="width: 100%;"/>
+                    style="width: 100%;" value="{{ ficha.CNA_outro_descricao }}"/>
             </div>
             <div class="linha-dados">
                 <div class="col-12">
@@ -4264,7 +4659,7 @@
                         <span class="spanLGN">lgn</span>
                     </div>
                     <textarea id="esclarecimento-notificante" class="textArea form-control input-dado mt-2"
-                        rows="4" style="width: 100%;"></textarea>
+                        rows="4" style="width: 100%;">{{ ficha.outras_informacoes }}</textarea>
                 </div>
             </div>
         </div>
@@ -4282,14 +4677,16 @@
                     <label for="nome-notificante" class="negrito label-wrap-pretty mx-1">
                         Responsável pelo preenchimento:
                     </label>
-                    <input id="nome-notificante" class="form-control input-dado ms-1"/>
+                    <input id="nome-notificante" class="form-control input-dado ms-1"
+                        value="{{ ficha.nome_notificante }}"/>
                 </div>
                 <div class="col-5 d-flex align-items-center colADireita">
                     <span class="numeracao negrito">91</span>
                     <label for="contato-notificante" class="negrito label-wrap-pretty mx-1">
                         Telefone de contato:
                     </label>
-                    <input id="contato-notificante" class="form-control input-dado ms-1"/>
+                    <input id="contato-notificante" class="form-control input-dado ms-1"
+                        value="{{ ficha.telefone_investigador }}"/>
                 </div>
             </div>
             <div class="linha-dados">
@@ -4303,6 +4700,7 @@
                             name="funcionario-hospital"
                             id="funcionario-hospital-sim"
                             value="funcionario-hospital-sim"
+                            {% if ficha.funcionario_hosp == "funcionario-hospital-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="funcionario-hospital-sim">
                             Sim
@@ -4313,6 +4711,7 @@
                             name="funcionario-hospital"
                             id="funcionario-hospital-nao"
                             value="funcionario-hospital-nao"
+                            {% if ficha.funcionario_hosp == "funcionario-hospital-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="funcionario-hospital-nao">
                             Não
@@ -4329,6 +4728,7 @@
                     <input id="dt-encerramento-investigacao" type="date"
                         class="form-control input-dado ms-1"
                         style="width: 150px;"
+                            value="{{ ficha.dt_encerramento }}"
                     />
                 </div>
                 <div class="col-5 colADireita d-flex flex-wrap align-items-center">
@@ -4341,6 +4741,7 @@
                             name="informacao-anexa"
                             id="informacao-anexa-sim"
                             value="informacao-anexa-sim"
+                            {% if ficha.info_anexa == "informacao-anexa-sim" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="informacao-anexa-sim">
                             Sim
@@ -4351,6 +4752,7 @@
                             name="informacao-anexa"
                             id="informacao-anexa-nao"
                             value="informacao-anexa-nao"
+                            {% if ficha.info_anexa == "informacao-anexa-nao" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="informacao-anexa-nao">
                             Não
@@ -4363,5 +4765,5 @@
 </div>
 
 {% block rodape_ficha %}
-    {% include 'rodape_ficha.html' %}
+    {% include 'rodape_edicao_ficha.html' %}
 {% endblock %}
