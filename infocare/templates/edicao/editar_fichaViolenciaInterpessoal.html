@@ -109,7 +109,7 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-uf-notificacao" value="{{ ficha.uf_notificacao }}"
-                                   class="input-dado form-control" maxlength="2"/>
+                                class="input-dado form-control" maxlength="2"/>
                         </div>
                     </div>
                     <div class="col-9 div-input">
@@ -182,10 +182,10 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-dt-sintomas"
-                                    type="date"
-                                    class="input-dado form-control"
-                                    value="{% if ficha.dt_sintomas %}{{ ficha.dt_sintomas }}{% endif %}"
+                                id="campo-dt-sintomas"
+                                type="date"
+                                class="input-dado form-control"
+                                value="{% if ficha.dt_sintomas %}{{ ficha.dt_sintomas }}{% endif %}"
                             />
                         </div>
                     </div>
@@ -205,9 +205,9 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-nome-paciente"
-                                    class="input-dado form-control"
-                                    value="{{ ficha.nome_paciente }}"
+                                id="campo-nome-paciente"
+                                class="input-dado form-control"
+                                value="{{ ficha.nome_paciente }}"
                             />
                         </div>
                     </div>
@@ -1970,6 +1970,9 @@
                             <input id="campo-estado-civil" type="number"
                                 class="input-dado-quadrado form-control"
                                 min="1" max="9"
+                                {% if ficha.sit_conjugal != "0" %}
+                                    value="{{ ficha.sit_conjugal }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado mb-1 justify-content-evenly">
@@ -1991,7 +1994,11 @@
                             </div>
                             <input id="campo-orientacao-sexual" type="number"
                                 class="input-dado-quadrado form-control"
-                                min="1" max="9">
+                                min="1" max="9"
+                                {% if ficha.orient_sexual != "0" %}
+                                    value="{{ ficha.orient_sexual }}"
+                                {% endif %}
+                                />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly align-items-end">
                             <ul>
@@ -2013,7 +2020,11 @@
                             </div>
                             <input id="campo-identidade-genero" type="number"
                                 class="input-dado-quadrado form-control"
-                                min="1" max="9">
+                                min="1" max="9"
+                                {% if ficha.ident_genero != "0" %}
+                                    value="{{ ficha.ident_genero }}"
+                                {% endif %}
+                                />
                         </div>
                         <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly align-items-end">
                             <ul>
@@ -2039,7 +2050,11 @@
                             </div>
                             <input id="campo-possui-deficiencia" type="number"
                                 class="input-dado-quadrado form-control"
-                                min="1" max="9">
+                                min="1" max="9"
+                                {% if ficha.possui_def != "0" %}
+                                    value="{{ ficha.possui_def }}"
+                                {% endif %}
+                                />
                         </div>
                         <div class="container-input-dado justify-content-evenly mb-1">
                             <span>1 - Sim</span>
@@ -2065,14 +2080,22 @@
                                 <ul class="col-4">
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-fisica">
+                                            id="opcao-deficiencia-fisica"
+                                            {% if ficha.def_fisica != "0" %}
+                                                value="{{ ficha.def_fisica }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-fisica">
                                             Deficiência Física
                                         </label>
                                     </li>
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-intelectual">
+                                            id="opcao-deficiencia-intelectual"
+                                            {% if ficha.def_intel != "0" %}
+                                                value="{{ ficha.def_intel }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-intelectual">
                                             Deficiência Intelectual
                                         </label>
@@ -2081,14 +2104,22 @@
                                 <ul class="col-4">
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-visual">
+                                            id="opcao-deficiencia-visual"
+                                            {% if ficha.def_visual != "0" %}
+                                                value="{{ ficha.def_visual }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-visual">
                                             Deficiência Visual
                                         </label>
                                     </li>
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-auditiva">
+                                            id="opcao-deficiencia-auditiva"
+                                            {% if ficha.def_audi != "0" %}
+                                                value="{{ ficha.def_audi }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-auditiva">
                                             Deficiência auditiva
                                         </label>
@@ -2097,14 +2128,22 @@
                                 <ul class="col-4">
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-mental">
+                                            id="opcao-deficiencia-mental"
+                                            {% if ficha.def_mental != "0" %}
+                                                value="{{ ficha.def_mental }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-mental">
                                             Transtorno mental
                                         </label>
                                     </li>
                                     <li class="d-flex align-items-center">
                                         <input class="form-control input-dado-quadrado" type="number" 
-                                            id="opcao-deficiencia-comportamento">
+                                            id="opcao-deficiencia-comportamento"
+                                            {% if ficha.def_comport != "0" %}
+                                                value="{{ ficha.def_comport }}"
+                                            {% endif %}
+                                        />
                                         <label for="opcao-deficiencia-comportamento">
                                             Transtorno de comportamento
                                         </label>
@@ -2114,14 +2153,19 @@
                             <div class="d-flex align-items-baseline">
                                 <div class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number" 
-                                        id="opcao-deficiencia-outro">
+                                        id="opcao-deficiencia-outro"
+                                        {% if ficha.def_outra != "0" %}
+                                            value="{{ ficha.def_outra }}"
+                                        {% endif %}
+                                    />
                                     <label for="opcao-deficiencia-outro">
                                         Outras
                                     </label>
                                 </div>
                                 <div class="col-5 mx-2">
                                     <input id="descricao-deficiencia-outro" class="input-dado form-control"
-                                        aria-label="">
+                                        aria-label="" value="{{ ficha.def_outra_descricao }}"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -2142,7 +2186,8 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-uf-ocorrencia" class="input-dado form-control"
-                                maxlength="2">
+                                maxlength="2" value="{{ ficha.uf_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-6 div-input">
@@ -2153,7 +2198,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-ocorrencia" class="input-dado form-control">
+                            <input id="campo-municipio-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.municipio_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -2163,6 +2210,9 @@
                         <div class="container-input-dado">
                             <input id="campo-cod-ibge-ocorrencia" type="number"
                                 class="input-dado form-control"
+                                {% if ficha.cod_ibge_ocorr != "0" %}
+                                    value="{{ ficha.cod_ibge_ocorr }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -2172,7 +2222,9 @@
                             <label for="campo-distrito-ocorrencia">Distrito</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-distrito-ocorrencia" class="input-dado form-control">
+                            <input id="campo-distrito-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.distrito_ocorr }}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -2183,7 +2235,9 @@
                             <label for="campo-bairro-ocorrencia">Bairro</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-bairro-ocorrencia" class="input-dado form-control">
+                            <input id="campo-bairro-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.bairro_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-7 div-input">
@@ -2194,7 +2248,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-logradouro-ocorrencia" class="input-dado form-control">
+                            <input id="campo-logradouro-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.logradouro_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-2 div-input">
@@ -2204,6 +2260,9 @@
                         <div class="container-input-dado">
                             <input id="campo-codigo-ocorrencia" type="number"
                                 class="input-dado form-control"
+                                {% if ficha.codigo_ocorr != "0" %}
+                                    value="{{ ficha.codigo_ocorr }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -2217,6 +2276,9 @@
                         <div class="container-input-dado">
                             <input id="campo-numero-ocorrencia" type="number"
                                 class="input-dado form-control"
+                                {% if ficha.numero_ocorr != "0" %}
+                                    value="{{ ficha.numero_ocorr }}"
+                                {% endif %}
                             />
                         </div>
                     </div>
@@ -2228,7 +2290,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-complemento-ocorrencia" class="input-dado form-control">
+                            <input id="campo-complemento-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.complemento_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -2237,7 +2301,9 @@
                             <label for="campo-geo-campo3">Geo campo 3</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo3" class="input-dado form-control">
+                            <input id="campo-geo-campo3" class="input-dado form-control"
+                                value="{{ ficha.geocampo3 }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -2246,7 +2312,9 @@
                             <label for="campo-geo-campo4">Geo campo 4</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-geo-campo4" class="input-dado form-control">
+                            <input id="campo-geo-campo4" class="input-dado form-control"
+                                value="{{ ficha.geocampo4 }}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -2259,7 +2327,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-ponto-ref-ocorrencia" class="input-dado form-control">
+                            <input id="campo-ponto-ref-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.ponto_ref_ocorr }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input campo-zona-ocorrencia">
@@ -2269,8 +2339,11 @@
                                 <label for="campo-zona-ocorrencia">Zona</label>
                             </div>
                             <input id="campo-zona-ocorrencia" type="number"
-                                class="input-dado-quadrado form-control"
-                                maxlength="1">
+                                class="input-dado-quadrado form-control" maxlength="1"
+                                {% if ficha.zona_ocorr != "0" %}
+                                    value="{{ ficha.zona_ocorr }}"
+                                {% endif %}
+                            />
                         </div>
                         <div class="container-input-dado descricao-tipos letra-miuda">
                             1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br>
@@ -2285,7 +2358,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-hora-ocorrencia" class="input-dado form-control">
+                            <input id="campo-hora-ocorrencia" class="input-dado form-control"
+                                value="{{ ficha.hora_ocorr }}"
+                            />
                         </div>
                     </div>
                 </div>
@@ -2301,6 +2376,9 @@
                             <input id="campo-local-ocorrencia" type="number"
                                 class="input-dado-quadrado form-control"
                                 min="1" max="99"
+                                {% if ficha.loc_ocorr_num != "0" %}
+                                    value="{{ ficha.loc_ocorr_num }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado justify-content-evenly px-2">
@@ -2320,7 +2398,9 @@
                                 <li class="d-flex align-items-baseline">
                                     <label for="descricao-local-outro">9- Outro</label>
                                     <div class="col-7 d-flex justify-content-center">
-                                        <input id="descricao-local-outro" class="input-dado form-control">
+                                        <input id="descricao-local-outro" class="input-dado form-control"
+                                            value="{{ ficha.loc_ocorr_outro }}"
+                                        />
                                     </div>
                                 </li>
                                 <li>99- Ignorado</li>
@@ -2337,8 +2417,10 @@
                                     </label>
                                 </div>
                                 <input id="campo-outras-vezes-ocorrencia" type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1" max="9"
+                                    class="input-dado-quadrado form-control" min="1" max="9"
+                                    {% if ficha.ocorr_outras_vezes != "0" %}
+                                        value="{{ ficha.ocorr_outras_vezes }}"
+                                    {% endif %}
                                 />
                             </div>
                             <div class="container-input-dado justify-content-evenly mb-2">
@@ -2356,8 +2438,10 @@
                                     </label>
                                 </div>
                                 <input id="campo-autoprovocada-ocorrencia" type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1" max="9"
+                                    class="input-dado-quadrado form-control" min="1" max="9"
+                                    {% if ficha.lesao_autoprov != "0" %}
+                                        value="{{ ficha.lesao_autoprov }}"
+                                    {% endif %}
                                 />
                             </div>
                             <div class="container-input-dado justify-content-evenly mb-2">
@@ -2385,8 +2469,11 @@
                                 </label>
                             </div>
                             <input id="campo-motivacao-violencia" type="number"
-                                class="input-dado-quadrado form-control"
-                                min="1" max="99">
+                                class="input-dado-quadrado form-control" min="1" max="99"
+                                {% if ficha.motiv_violencia != "0" %}
+                                    value="{{ ficha.motiv_violencia }}"
+                                {% endif %}
+                                />
                         </div>
                         <div class="container-input-dado justify-content-evenly flex-wrap">
                             <ul class="mx-1">
@@ -2408,7 +2495,8 @@
                                     <span>9-Outros</span>
                                     <div class="col-6 d-flex justify-content-end">
                                         <input id="descricao-violencia-outro" class="input-dado form-control"
-                                            aria-label="">
+                                            aria-label="" value="{{ ficha.motiv_violencia_outro }}"
+                                        />
                                     </div>
                                 </li>
                             </ul>
@@ -2441,6 +2529,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number" 
                                         id="opcao-violencia-fisica"
+                                        {% if ficha.viol_fisica != "0" %}
+                                            value="{{ ficha.viol_fisica }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-fisica">
                                         Física
@@ -2449,6 +2540,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number" 
                                         id="opcao-violencia-psicologica"
+                                        {% if ficha.viol_psico != "0" %}
+                                            value="{{ ficha.viol_psico }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-psicologica">
                                         Psicológica/Moral
@@ -2457,6 +2551,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number" 
                                         id="opcao-violencia-tortura"
+                                        {% if ficha.viol_tort != "0" %}
+                                            value="{{ ficha.viol_tort }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-tortura">
                                         Tortura
@@ -2465,6 +2562,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-sexual"
+                                        {% if ficha.viol_sexual != "0" %}
+                                            value="{{ ficha.viol_sexual }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-sexual">
                                         Sexual
@@ -2475,6 +2575,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-trafico-humano"
+                                        {% if ficha.viol_traf != "0" %}
+                                            value="{{ ficha.viol_traf }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-trafico-humano">
                                         Tráfico de seres humanos
@@ -2483,6 +2586,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-financeira"
+                                        {% if ficha.viol_finan != "0" %}
+                                            value="{{ ficha.viol_finan }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-financeira">
                                         Financeira/Econômica
@@ -2491,6 +2597,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-abandono"
+                                        {% if ficha.viol_negli != "0" %}
+                                            value="{{ ficha.viol_negli }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-abandono">
                                         Negligência/Abandono
@@ -2499,6 +2608,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-trabalho-infantil"
+                                        {% if ficha.viol_trab != "0" %}
+                                            value="{{ ficha.viol_trab }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-trabalho-infantil">
                                         Trabalho infantil
@@ -2509,6 +2621,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-intervencao-legal"
+                                        {% if ficha.viol_inter != "0" %}
+                                            value="{{ ficha.viol_inter }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-intervencao-legal">
                                         Intervenção legal
@@ -2517,6 +2632,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-violencia-outros"
+                                        {% if ficha.viol_outro != "0" %}
+                                            value="{{ ficha.viol_outro }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-violencia-outros">
                                         Outros
@@ -2524,7 +2642,8 @@
                                 </li>
                                 <li class="col-7">
                                     <input id="descricao-violencia-outros" class="input-dado form-control"
-                                        aria-label="">
+                                        aria-label="" value="{{ ficha.viol_outro_descricao }}"
+                                    />
                                 </li>
                             </ul>
                         </div>
@@ -2546,6 +2665,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-espancamento"
+                                        {% if ficha.agress_espanc != "0" %}
+                                            value="{{ ficha.agress_espanc }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-espancamento">
                                         Força corporal/<br>espancamento
@@ -2554,6 +2676,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-enforcamento"
+                                        {% if ficha.agress_enforc != "0" %}
+                                            value="{{ ficha.agress_enforc }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-enforcamento">
                                         Enforcamento
@@ -2562,6 +2687,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-objContundente"
+                                        {% if ficha.agress_contund != "0" %}
+                                            value="{{ ficha.agress_contund }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-objContundente">
                                         Obj. contundente
@@ -2572,6 +2700,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-objPerfurocortante"
+                                        {% if ficha.agress_perfuro != "0" %}
+                                            value="{{ ficha.agress_perfuro }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-objPerfurocortante">
                                         Obj. pérfuro-<br>cortante
@@ -2580,6 +2711,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-objQuente"
+                                        {% if ficha.agress_subst != "0" %}
+                                            value="{{ ficha.agress_subst }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-objQuente">
                                         Substância/<br>Obj. quente
@@ -2588,6 +2722,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-envenenamento"
+                                        {% if ficha.agress_intox != "0" %}
+                                            value="{{ ficha.agress_intox }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-envenenamento">
                                         Envenenamento,<br>intoxicação
@@ -2598,6 +2735,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-armaFogo"
+                                        {% if ficha.agress_arma != "0" %}
+                                            value="{{ ficha.agress_arma }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-armaFogo">
                                         Arma de fogo
@@ -2606,6 +2746,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-ameaca"
+                                        {% if ficha.agress_ameaca != "0" %}
+                                            value="{{ ficha.agress_ameaca }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-ameaca">
                                         Ameaça
@@ -2614,6 +2757,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="op-meio-agress-outro"
+                                        {% if ficha.agress_outro != "0" %}
+                                            value="{{ ficha.agress_outro }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-meio-agress-outro">
                                         Outro
@@ -2623,6 +2769,7 @@
                                     <input id="descricao-meio-agress-outro"
                                         class="input-dado form-control"
                                         aria-label=""
+                                        value="{{ ficha.agress_outro_descricao }}"
                                     />
                                 </li>
                             </ul>
@@ -2655,6 +2802,9 @@
                             <div class="d-flex align-items-center mx-1">
                                 <input class="form-control input-dado-quadrado"
                                     type="number" id="op-vio-sex-assedio"
+                                    {% if ficha.vio_sex_assedio != "0" %}
+                                        value="{{ ficha.vio_sex_assedio }}"
+                                    {% endif %}
                                 />
                                 <label class="form-check-label" for="op-vio-sex-assedio">
                                     Assédio sexual
@@ -2663,6 +2813,9 @@
                             <div class="d-flex align-items-center mx-1">
                                 <input class="form-control input-dado-quadrado"
                                     type="number" id="op-vio-sex-estupro"
+                                    {% if ficha.vio_sex_estupro != "0" %}
+                                        value="{{ ficha.vio_sex_estupro }}"
+                                    {% endif %}
                                 />
                                 <label class="form-check-label" for="op-vio-sex-estupro">
                                     Estupro
@@ -2671,6 +2824,9 @@
                             <div class="d-flex align-items-center mx-1">
                                 <input class="form-control input-dado-quadrado"
                                     type="number" id="op-vio-sex-pornInfatil"
+                                    {% if ficha.vio_sex_porno != "0" %}
+                                        value="{{ ficha.vio_sex_porno }}"
+                                    {% endif %}
                                 />
                                 <label class="form-check-label" for="op-vio-sex-pornInfatil">
                                     Pornografia infantil
@@ -2679,6 +2835,9 @@
                             <div class="d-flex align-items-center mx-1">
                                 <input class="form-control input-dado-quadrado"
                                     type="number" id="op-vio-sex-exploracaoSexual"
+                                    {% if ficha.vio_sex_explora != "0" %}
+                                        value="{{ ficha.vio_sex_explora }}"
+                                    {% endif %}
                                 />
                                 <label class="form-check-label" for="op-vio-sex-exploracaoSexual">
                                     Exploração sexual
@@ -2688,6 +2847,9 @@
                                 <div class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado"
                                         type="number" id="op-vio-sex-outros"
+                                        {% if ficha.vio_sex_outros != "0" %}
+                                            value="{{ ficha.vio_sex_outros }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="op-vio-sex-outros">
                                         Outros
@@ -2697,6 +2859,7 @@
                                     <input id="descricao-vio-sex-outros"
                                         class="input-dado form-control"
                                         aria-label=""
+                                        value="{{ ficha.vio_sex_outros_descricao }}"
                                     />
                                 </div>
                             </div>
@@ -2721,14 +2884,22 @@
                             <ul class="mx-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-dst">
+                                        id="opcao-procedimento-dst"
+                                        {% if ficha.proced_dst != "0" %}
+                                            value="{{ ficha.proced_dst }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-dst">
                                         Profilaxia DST
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-hiv">
+                                        id="opcao-procedimento-hiv"
+                                        {% if ficha.proced_hiv != "0" %}
+                                            value="{{ ficha.proced_hiv }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-hiv">
                                         Profilaxia HIV
                                     </label>
@@ -2737,14 +2908,22 @@
                             <ul class="mx-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-hepatiteB">
+                                        id="opcao-procedimento-hepatiteB"
+                                        {% if ficha.proced_hepB != "0" %}
+                                            value="{{ ficha.proced_hepB }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-hepatiteB">
                                         Profilaxia Hepatite B
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-sangue">
+                                        id="opcao-procedimento-sangue"
+                                        {% if ficha.proced_sangue != "0" %}
+                                            value="{{ ficha.proced_sangue }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-sangue">
                                         Coleta de sangue
                                     </label>
@@ -2753,14 +2932,22 @@
                             <ul class="mx-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-semen">
+                                        id="opcao-procedimento-semen"
+                                        {% if ficha.proced_semen != "0" %}
+                                            value="{{ ficha.proced_semen }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-semen">
                                         Coleta de sêmen
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-secrecaoVaginal">
+                                        id="opcao-procedimento-secrecaoVaginal"
+                                        {% if ficha.proced_vaginal != "0" %}
+                                            value="{{ ficha.proced_vaginal }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-secrecaoVaginal">
                                         Coleta de secreção vaginal
                                     </label>
@@ -2769,13 +2956,22 @@
                             <ul class="mx-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-procedimento-contracepcao">
+                                        id="opcao-procedimento-contracepcao"
+                                        {% if ficha.proced_contra != "0" %}
+                                            value="{{ ficha.proced_contra }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-contracepcao">
                                         Contracepção de emergência
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
-                                    <input class="form-control input-dado-quadrado" type="number" id="opcao-procedimento-aborto">
+                                    <input class="form-control input-dado-quadrado" type="number"
+                                        id="opcao-procedimento-aborto"
+                                        {% if ficha.proced_aborto != "0" %}
+                                            value="{{ ficha.proced_aborto }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-procedimento-aborto">
                                         Aborto previsto em lei
                                     </label>
@@ -2804,7 +3000,10 @@
                                 id="campo-numero-envolvidos"
                                 class="input-dado-quadrado form-control mb-2"
                                 type="number" min="1" max="9"
-                            >
+                                {% if ficha.num_envolvidos != "0" %}
+                                    value="{{ ficha.num_envolvidos }}"
+                                {% endif %}
+                            />
                             <ul>
                                 <li>1 - Um</li>
                                 <li>2 - Dois ou mais</li>
@@ -2830,35 +3029,55 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-pai">
+                                        id="opcao-vinculo-pai"
+                                        {% if ficha.grau_pai != "0" %}
+                                            value="{{ ficha.grau_pai }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-pai">
                                         Pai
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-mae">
+                                        id="opcao-vinculo-mae"
+                                        {% if ficha.grau_mae != "0" %}
+                                            value="{{ ficha.grau_mae }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-mae">
                                         Mãe
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-padrasto">
+                                        id="opcao-vinculo-padrasto"
+                                        {% if ficha.grau_padr != "0" %}
+                                            value="{{ ficha.grau_padr }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-padrasto">
                                         Padrasto
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-madrasta">
+                                        id="opcao-vinculo-madrasta"
+                                        {% if ficha.grau_madr != "0" %}
+                                            value="{{ ficha.grau_madr }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-madrasta">
                                         Madrasta
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-conjuge">
+                                        id="opcao-vinculo-conjuge"
+                                        {% if ficha.grau_conj != "0" %}
+                                            value="{{ ficha.grau_conj }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-conjuge">
                                         Cônjuge
                                     </label>
@@ -2867,35 +3086,55 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-ex-conjuge">
+                                        id="opcao-vinculo-ex-conjuge"
+                                        {% if ficha.grau_ex_conj != "0" %}
+                                            value="{{ ficha.grau_ex_conj }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-ex-conjuge">
                                         Ex-Cônjuge
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-namorado">
+                                        id="opcao-vinculo-namorado"
+                                        {% if ficha.grau_namor != "0" %}
+                                            value="{{ ficha.grau_namor }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-namorado">
                                         Namorado(a)
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-ex-namorado">
+                                        id="opcao-vinculo-ex-namorado"
+                                        {% if ficha.grau_ex_namor != "0" %}
+                                            value="{{ ficha.grau_ex_namor }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-ex-namorado">
                                         Ex-Namorado(a)
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-filho">
+                                        id="opcao-vinculo-filho"
+                                        {% if ficha.grau_filho != "0" %}
+                                            value="{{ ficha.grau_filho }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-filho">
                                         Filho(a)
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-irmao">
+                                        id="opcao-vinculo-irmao"
+                                        {% if ficha.grau_irmao != "0" %}
+                                            value="{{ ficha.grau_irmao }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-irmao">
                                         Irmão(ã)
                                     </label>
@@ -2904,35 +3143,55 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-amigos">
+                                        id="opcao-vinculo-amigos"
+                                        {% if ficha.grau_amigos != "0" %}
+                                            value="{{ ficha.grau_amigos }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-amigos">
                                         Amigos/conhecidos
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-desconhecido">
+                                        id="opcao-vinculo-desconhecido"
+                                        {% if ficha.grau_desco != "0" %}
+                                            value="{{ ficha.grau_desco }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-desconhecido">
                                         Desconhecido(a)
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-cuidador">
+                                        id="opcao-vinculo-cuidador"
+                                        {% if ficha.grau_cuida != "0" %}
+                                            value="{{ ficha.grau_cuida }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-cuidador">
                                         Cuidador(a)
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-patrao">
+                                        id="opcao-vinculo-patrao"
+                                        {% if ficha.grau_chefe != "0" %}
+                                            value="{{ ficha.grau_chefe }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-patrao">
                                         Patrão/chefe
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-relacao-institucional">
+                                        id="opcao-vinculo-relacao-institucional"
+                                        {% if ficha.grau_pessoa != "0" %}
+                                            value="{{ ficha.grau_pessoa }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-relacao-institucional">
                                         Pessoa com relação<br>institucional
                                     </label>
@@ -2941,28 +3200,41 @@
                             <ul class="px-1">
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-policial">
+                                        id="opcao-vinculo-policial"
+                                        {% if ficha.grau_policia != "0" %}
+                                            value="{{ ficha.grau_policia }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-policial">
                                         Policial/agente da lei
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-propria-pessoa">
+                                        id="opcao-vinculo-propria-pessoa"
+                                        {% if ficha.grau_proprio != "0" %}
+                                            value="{{ ficha.grau_proprio }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-propria-pessoa">
                                         Própria pessoa
                                     </label>
                                 </li>
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-vinculo-outros">
+                                        id="opcao-vinculo-outros"
+                                        {% if ficha.grau_outro != "0" %}
+                                            value="{{ ficha.grau_outro }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-vinculo-outros">
                                         Outros
                                     </label>
                                 </li>
                                 <li class="col-7">
                                     <input id="descricao-vinculo-outros" class="input-dado form-control"
-                                        aria-label="">
+                                        aria-label="" value="{{ ficha.grau_outro_descricao }}"
+                                    />
                                 </li>
                             </ul>
                         </div>
@@ -2975,8 +3247,12 @@
                             </label>
                         </div>
                         <div class="container-input-dado flex-column align-items-center pb-2">
-                            <input id="campo-sexo-autor" class="input-dado-quadrado form-control mb-2" type="number"
-                                min="1" max="9">
+                            <input id="campo-sexo-autor" class="input-dado-quadrado form-control mb-2"
+                                type="number" min="1" max="9"
+                                {% if ficha.sexo_autor != "0" %}
+                                    value="{{ ficha.sexo_autor }}"
+                                {% endif %}
+                            />
                             <ul>
                                 <li>1 - Masculino</li>
                                 <li>2 - Feminino</li>
@@ -2993,11 +3269,12 @@
                             </label>
                         </div>
                         <div class="container-input-dado flex-column align-items-center pb-2">
-                            <input
-                                id="campo-alcool-autor"
+                            <input id="campo-alcool-autor"
                                 class="input-dado-quadrado form-control mb-2"
-                                type="number"
-                                min="1" max="9"
+                                type="number" min="1" max="9"
+                                {% if ficha.uso_alcool != "0" %}
+                                    value="{{ ficha.uso_alcool }}"
+                                {% endif %}
                             />
                             <ul>
                                 <li>1 - Sim</li>
@@ -3018,6 +3295,9 @@
                             </div>
                             <input id="campo-ciclo-vida-autor" type="number"
                                 class="input-dado-quadrado form-control"
+                                {% if ficha.ciclo_autor != "0" %}
+                                    value="{{ ficha.ciclo_autor }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado px-2 pb-1">
@@ -3058,10 +3338,13 @@
                         </div>
                         <div class="container-input-dado justify-content-evenly px-2 pb-1">
                             <ul class="mx-1">
-                                <li class="d-flex align-items-center"
-                            />
+                                <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
-                                        id="opcao-encaminhamento-redeSaude">
+                                        id="opcao-encaminhamento-redeSaude"
+                                        {% if ficha.enca_saude != "0" %}
+                                            value="{{ ficha.enca_saude }}"
+                                        {% endif %}
+                                    />
                                     <label class="form-check-label" for="opcao-encaminhamento-redeSaude">
                                         Rede da Saúde (Unidade Báisca de Saúde, hospital, outras)
                                     </label>
@@ -3069,6 +3352,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-redeAssistencial"
+                                        {% if ficha.enca_social != "0" %}
+                                            value="{{ ficha.enca_social }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-redeAssistencial">
                                         Rede da Assistência Social (CRAS, CREAS, outras)
@@ -3077,6 +3363,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-redeEducacao"
+                                        {% if ficha.enca_educa != "0" %}
+                                            value="{{ ficha.enca_educa }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-redeEducacao">
                                         Rede da Educação (Creche, escola, outras)
@@ -3085,6 +3374,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-atendimentoMulher"
+                                        {% if ficha.enca_rede_mulher != "0" %}
+                                            value="{{ ficha.enca_rede_mulher }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-atendimentoMulher">
                                         Rede de Atendimento à Mulher (Centro Especializado de<br>
@@ -3094,6 +3386,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-conselhoTutelar"
+                                        {% if ficha.enca_tutelar != "0" %}
+                                            value="{{ ficha.enca_tutelar }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-conselhoTutelar">
                                         Conselho Tutelar
@@ -3104,6 +3399,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-conselhoIdoso"
+                                        {% if ficha.enca_cons_idoso != "0" %}
+                                            value="{{ ficha.enca_cons_idoso }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-conselhoIdoso">
                                         Conselho do Idoso
@@ -3112,6 +3410,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-delegaciaIdoso"
+                                        {% if ficha.enca_del_idoso != "0" %}
+                                            value="{{ ficha.enca_del_idoso }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaIdoso">
                                         Delegacia de Atendimento ao Idoso
@@ -3120,6 +3421,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-direitosHumanos"
+                                        {% if ficha.enca_dir_humano != "0" %}
+                                            value="{{ ficha.enca_dir_humano }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-direitosHumanos">
                                         Centro de referência dos Direitos Humanos
@@ -3128,6 +3432,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-ministerioPublico"
+                                        {% if ficha.enca_ministerio != "0" %}
+                                            value="{{ ficha.enca_ministerio }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-ministerioPublico">
                                         Ministério Público
@@ -3136,6 +3443,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-delegaciaCrianca"
+                                        {% if ficha.enca_del_crianca != "0" %}
+                                            value="{{ ficha.enca_del_crianca }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaCrianca">
                                         Delegacia Especializada de Proteção à<br>Criança e Adolescente
@@ -3146,6 +3456,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-delegaciaMulher"
+                                        {% if ficha.enca_del_mulher != "0" %}
+                                            value="{{ ficha.enca_del_mulher }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-delegaciaMulher">
                                         Delegacia de Atendimento à<br>Mulher
@@ -3154,6 +3467,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-outrasDelegacias"
+                                        {% if ficha.enca_outra_del != "0" %}
+                                            value="{{ ficha.enca_outra_del }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-outrasDelegacias">
                                         Outras delegacias
@@ -3162,6 +3478,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-justicaInfancia"
+                                        {% if ficha.enca_jus_infancia != "0" %}
+                                            value="{{ ficha.enca_jus_infancia }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-justicaInfancia">
                                         Justiça da Infância e da<br>Juventude
@@ -3170,6 +3489,9 @@
                                 <li class="d-flex align-items-center">
                                     <input class="form-control input-dado-quadrado" type="number"
                                         id="opcao-encaminhamento-defensoriaPublica"
+                                        {% if ficha.enca_def_publica != "0" %}
+                                            value="{{ ficha.enca_def_publica }}"
+                                        {% endif %}
                                     />
                                     <label class="form-check-label" for="opcao-encaminhamento-defensoriaPublica">
                                         Defensoria Pública
@@ -3198,6 +3520,9 @@
                             <input id="campo-violencia-relacionada" type="number"
                                 class="input-dado-quadrado form-control"
                                 min="1" max="9"
+                                {% if ficha.doenca_rel_trab != "0" %}
+                                    value="{{ ficha.doenca_rel_trab }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado letra-miuda justify-content-evenly">
@@ -3217,6 +3542,9 @@
                             <input id="campo-emitida-CAT" type="number"
                                 class="input-dado-quadrado form-control"
                                 min="1" max="9"
+                                {% if ficha.comun_acid_trab != "0" %}
+                                    value="{{ ficha.comun_acid_trab }}"
+                                {% endif %}
                             />
                         </div>
                         <div class="container-input-dado letra-miuda justify-content-evenly">
@@ -3229,13 +3557,16 @@
                     <div class="col-4 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">68</span>
-                            <label for="campo-circusntancia-lesao">Circunstancia da lesão</label>
+                            <label for="campo-circusntancia-lesao">
+                                Circunstancia da lesão
+                            </label>
                         </div>
                         <div class="container-input-dado align-items-center">
                             <span class="px-2 negrito">CID 10 - Cap XX</span>
                             <div class="col-5">
-                                <input id="campo-circusntancia-lesao" type="number"
+                                <input id="campo-circusntancia-lesao"
                                     class="input-dado form-control px-2"
+                                    value="{{ ficha.circunst_lesao }}"
                                 />
                             </div>
                         </div>
@@ -3252,6 +3583,7 @@
                         <div class="container-input-dado">
                             <input id="campo-dt-encerramento" type="date"
                                 class="input-dado form-control"
+                                value="{{ ficha.dt_encerramento }}"
                             />
                         </div>
                     </div>
@@ -3273,7 +3605,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-acompanhante" class="input-dado form-control">
+                            <input id="campo-nome-acompanhante" class="input-dado form-control"
+                                value="{{ ficha.nome_acompanha }}"
+                            />
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -3283,7 +3617,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-grau-parentesco" class="input-dado form-control">
+                            <input id="campo-grau-parentesco" class="input-dado form-control"
+                                value="{{ ficha.vinculo_acompanha }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -3291,20 +3627,21 @@
                             <label for="campo-telefone-acompanhate">(DDD) Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-telefone-acompanhate" class="input-dado form-control">
+                            <input id="campo-telefone-acompanhate" class="input-dado form-control"
+                                value="{{ ficha.telefone_acompanha }}"
+                            />
                         </div>
                     </div>
                 </div>
                 <div class="linha-dados">
                     <div class="col-12 textArea">
                         <span class="negrito">Obsercações Adicionais:</span>
-                        <textarea id="observacoes" class="form-control" rows="6"></textarea>
+                        <textarea id="observacoes" class="form-control" rows="6">{{ ficha.obs_adicionais }}</textarea>
                     </div>
                 </div>
                 <div class="linha-dados negrito telefones-uteis justify-content-around align-items-center">
                     <div class="d-flex flex-column align-items-center mx-2">
-                        <span class="text-center">
-                            Disque Saúde - Ouvidoria geral</span>
+                        <span class="text-center">Disque Saúde - Ouvidoria geral</span>
                         <span>136</span>
                     </div>
                     <div class="d-flex flex-column align-items-center mx-2">
@@ -3332,7 +3669,9 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-us-investigador" class="input-dado form-control">
+                            <input id="campo-municipio-us-investigador" class="input-dado form-control"
+                                value="{{ ficha.municipio_us_investigador }}"
+                            />
                         </div>
                     </div>
                     <div class="col-3 div-input">
@@ -3342,7 +3681,12 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-cod-us-investigador" type="number" class="input-dado form-control">
+                            <input id="campo-cod-us-investigador" type="number"
+                                class="input-dado form-control"
+                                {% if ficha.cod_us_investigador != "0" %}
+                                    value="{{ ficha.cod_us_investigador }}"
+                                {% endif %}
+                            />
                         </div>
                     </div>
                 </div>
@@ -3352,7 +3696,9 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                                value="{{ ficha.nome_investigador }}"
+                            />
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -3360,7 +3706,9 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control"
+                                value="{{ ficha.funcao_investigador }}"
+                            />
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -3368,7 +3716,9 @@
                             <label for="campo-assinatura-investigador">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control"
+                                value="{{ ficha.assinatura_investigador }}"
+                            />
                         </div>
                     </div>
                 </div>

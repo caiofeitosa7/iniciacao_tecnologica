@@ -1,6 +1,5 @@
 from django.db import connections
 from datetime import date, datetime, timedelta
-
 import sqlite3
 
 
