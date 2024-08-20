@@ -38,8 +38,9 @@ def logar_usuario(request):
 def usuarios_view(request):
     if request.method == 'GET':
         usuarios = models.listar_usuarios()
+        contexto = {'usuarios': usuarios}
         return JsonResponse({
-            'html': [render_to_string('usuarios.html', {'usuarios': usuarios})],
+            'html': [render_to_string('usuarios.html', contexto)],
             'status': 'success'
         })
 

@@ -4,7 +4,7 @@
             {% csrf_token %}
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modal-title"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body d-flex flex-column">
                 <div class="d-flex flex-column">
@@ -32,77 +32,82 @@
         Pendência
     </button>
 </div>
+
 <div class="pb-3">
     {% if pendencias %}
-    {% for pendencia in pendencias %}
-    <div class="d-flex mb-3">
-        <div class="mt-2">
-            <span class="inicialUsuario rounded-circle
-                  {% if pendencia.cod_autor == cod_usuario %}
-                  background-letra-inicial-meu-usuario
-                  {% else %}
-                  background-letra-inicial-outro-usuario
-                  {% endif %}
-            ">{{ pendencia.inicial_autor }}</span>
-        </div>
-        <div class="containerPendencia
-            {% if pendencia.cod_autor == cod_usuario %}
-            borda-esquerda-meu-usuario
-            {% else %}
-            borda-esquerda-outro-usuario
-            {% endif %}
-        ">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex">
-                    <span class="negrito">{{ pendencia.nome_autor }}</span>
-                    {% if pendencia.concluida %}
-                    <div class="status mx-1 text-success">
-                        <span class="mx-1">• Concluida</span>
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    {% else %}
-                    <div class="status mx-1 text-danger">
-                        <span class="pendencia-aberta mx-1">• Em aberto</span>
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                    </div>
-                    {% endif %}
+        {% for pendencia in pendencias %}
+            <div class="d-flex mb-3">
+                <div class="mt-2">
+                    <span class="inicialUsuario rounded-circle
+                        {% if pendencia.cod_autor == cod_usuario %}
+                        background-letra-inicial-meu-usuario
+                        {% else %}
+                        background-letra-inicial-outro-usuario
+                        {% endif %}
+                    ">{{ pendencia.inicial_autor }}</span>
                 </div>
-                <span class="negrito">{{ pendencia.dataHora_cadastro }}</span>
+                <div class="containerPendencia
+                    {% if pendencia.cod_autor == cod_usuario %}
+                    borda-esquerda-meu-usuario
+                    {% else %}
+                    borda-esquerda-outro-usuario
+                    {% endif %}
+                ">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <span class="negrito">{{ pendencia.nome_autor }}</span>
+
+                            {% if pendencia.concluida %}
+                                <div class="status mx-1 text-success">
+                                    <span class="mx-1">• Concluida</span>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                            {% else %}
+                                <div class="status mx-1 text-danger">
+                                    <span class="pendencia-aberta mx-1">• Em aberto</span>
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                        <span class="negrito">{{ pendencia.dataHora_cadastro }}</span>
+                    </div>
+                    <div class="my-3">{{ pendencia.descricao }}</div>
+
+                    {% if pendencia.concluida %}
+                        <div class="d-flex justify-content-end">
+                            <span class="font-smaller">
+                                Concluido por {{ pendencia.nome_concluinte }}
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class="d-flex justify-content-end">
+                            <button class="btn {% if pendencia.cod_autor == cod_usuario %} btn-minha-pendencia {% else %} btn-pendencia-outro {% endif %}"
+                            onclick="requisicaoGetPadrao('{% url 'fechar_pendencia' cod_ficha pendencia.codigo %}')">
+                                Fechar
+                            </button>
+                        </div>
+                    {% endif %}
+
+                </div>
             </div>
-            <div class="my-3">
-                {{ pendencia.descricao }}
-            </div>
-            {% if pendencia.concluida %}
-            <div class="d-flex justify-content-end">
-                <span class="font-smaller">
-                    Concluido por {{ pendencia.nome_concluinte }}
-                </span>
-            </div>
-            {% else %}
-            <div class="d-flex justify-content-end">
-                <button class="btn {% if pendencia.cod_autor == cod_usuario %} btn-minha-pendencia {% else %} btn-pendencia-outro {% endif %}"
-                        onclick="requisicaoGetPadrao('{% url 'fechar_pendencia' cod_ficha pendencia.codigo %}')">
-                    Fechar
+        {% endfor %}
+
+        {% if status_ficha_aberta == 4 %}
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btnTudoPronto"
+                onclick="verificarMudancaEstadoFicha('{% url 'marcar_ficha_preliminar' cod_ficha status_ficha_aberta %}')">
+                    Tudo Pronto
                 </button>
             </div>
-            {% endif %}
-        </div>
-    </div>
-    {% endfor %}
-    {% if status_ficha_aberta == 4 %}
-    <div class="d-flex justify-content-center mt-4">
-        <button class="btn btnTudoPronto"
-        onclick="verificarMudancaEstadoFicha('{% url 'marcar_ficha_preliminar' cod_ficha status_ficha_aberta %}')">
-            Tudo Pronto
-        </button>
-    </div>
-    {% endif %}
+        {% endif %}
+
     {% else %}
-    <div class="d-flex justify-content-center pt-3">
-        <span class="negrito font-xlarge">
-            Não há pendências para esta ficha!
-        </span>
-    </div>
+        <div class="d-flex justify-content-center pt-3">
+            <span class="negrito font-xlarge">
+                Não há pendências para esta ficha!
+            </span>
+        </div>
     {% endif %}
 </div>
 

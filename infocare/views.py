@@ -125,6 +125,7 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
 def registrar_ficha(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
+        cod_usuario = int(request.session.get('cod_usuario'))
 
         try:
             if dados.get('codigo', False):
@@ -136,7 +137,7 @@ def registrar_ficha(request):
                 cod_ficha = models.alterar_ficha(dados)
                 return redirect(reverse('visualizar_ficha', kwargs=args))
             else:
-                cod_ficha = models.set_ficha(dados)
+                cod_ficha = models.set_ficha(dados, cod_usuario)
 
                 if cod_ficha:
                     return JsonResponse({

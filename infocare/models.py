@@ -1,5 +1,5 @@
 from django.db import connections, transaction
-from datetime import datetime
+from datetime import datetime, date
 import pandas as pd
 
 
@@ -355,10 +355,10 @@ def averiguar_campos(cursor, tipo_ficha: int, campos: dict):
 
     df = pd.DataFrame(registros)
     df.to_excel('output.xlsx', index=False)
-    print('\n\nArquivo salvo.\n\n')
+    print('\nArquivo salvo.\n')
 
 
-def set_ficha(campos: dict):
+def set_ficha(campos: dict, cod_usuario):
     conexao, cursor = abrir_conexao()
     tipo_ficha = campos.pop('cod_tipo_ficha')
 
@@ -367,13 +367,15 @@ def set_ficha(campos: dict):
     try:
         with transaction.atomic():
             cursor.execute(f"""
-                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """, (
                 campos.pop('setor'),
                 campos.pop('prontuario'),
                 1,
                 tipo_ficha,
+                cod_usuario,
+                date.today()
             ))
 
             cursor.execute("SELECT LAST_INSERT_ID()")
@@ -514,34 +516,40 @@ def get_quantidade_fichas(status: int):
 def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
     conexao, cursor = abrir_conexao()
     query = f"""
-        SELECT F.codigo     AS COD_FICHA,
-               F.prontuario AS PRONTUARIO,
-               TF.nome      AS TIPO_FICHA,
-               TF.codigo    AS COD_TIPO_FICHA,
-               F.setor      AS SETOR,
-               C.nome       AS CAMPO,
+        SELECT F.codigo                                     AS COD_FICHA,
+               F.prontuario                                 AS PRONTUARIO,
+               TF.nome                                      AS TIPO_FICHA,
+               TF.codigo                                    AS COD_TIPO_FICHA,
+               F.setor                                      AS SETOR,
+               C.nome                                       AS CAMPO,
                MAX(CASE
                        WHEN (C.cod_tipo_campo = 1) THEN VC.valor_string
                        WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
                        WHEN (C.cod_tipo_campo = 3) THEN DATE_FORMAT(VC.valor_data, '%d/%m/%Y')
-                   END)     AS VALOR_CAMPO,
-               PEND.quant    AS QUANT_PEND
+                   END)                                     AS VALOR_CAMPO,
+               PEND.quant                                   AS QUANT_PEND,
+               DATE_FORMAT(F.data, '%d/%m/%Y')              AS DATA,
+               SUBSTRING_INDEX(U.nome, ' ', 2)              AS NOTIFICANTE
         FROM ficha AS F
-                 INNER JOIN campo_tipo_ficha AS CTF
-                        ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
-                 LEFT JOIN valorcampo AS VC
-                        ON VC.cod_ficha = F.codigo
-                 INNER JOIN tipo_ficha AS TF
-                        ON TF.codigo = F.cod_tipo_ficha
-                 INNER JOIN campo AS C
-                        ON C.codigo = VC.cod_campo
-                 LEFT JOIN (
-                    SELECT
-                        cod_ficha,
-                        COUNT(codigo) AS quant
-                    FROM pendencia
-                    GROUP BY cod_ficha
-                 ) AS PEND ON PEND.cod_ficha = F.codigo
+             INNER JOIN usuario AS U
+                    ON U.codigo = F.cod_usuario
+             INNER JOIN campo_tipo_ficha AS CTF
+                    ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
+                    AND CTF.cod_campo IN (1, 11)
+             LEFT JOIN valorcampo AS VC
+                    ON VC.cod_ficha = F.codigo
+             INNER JOIN tipo_ficha AS TF
+                    ON TF.codigo = F.cod_tipo_ficha
+             INNER JOIN campo AS C
+                    ON C.codigo = VC.cod_campo
+                    AND C.codigo IN (1, 11)
+             LEFT JOIN (
+                SELECT
+                    cod_ficha,
+                    COUNT(codigo) AS quant
+                FROM pendencia
+                GROUP BY cod_ficha
+             ) AS PEND ON PEND.cod_ficha = F.codigo
         WHERE
             F.cod_estado = {status}
         GROUP BY F.codigo,
@@ -550,8 +558,9 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                  TF.codigo,
                  F.setor,
                  C.nome,
-                 PEND.quant
-        ORDER BY F.setor;
+                 PEND.quant,
+                 F.data
+        ORDER BY F.setor, F.data;
     """
 
     cursor.execute(query)
@@ -576,6 +585,8 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                 'cod_tipo_ficha': resultado[3],
                 'setor': resultado[4],
                 'quant_pendencias': resultado[7],
+                'data': resultado[8],
+                'nome_notificante': resultado[9],
                 nome_campo: valor_campo
             }
 
