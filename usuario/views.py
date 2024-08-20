@@ -7,31 +7,6 @@ import json, string
 from . import models
 
 
-def retirar_caracteres_especiais(dados: dict):
-    caracteres_especiais = string.punctuation
-    valores = list(dados.values())
-    novos_valores = [''.join(caractere for caractere in texto if caractere not in caracteres_especiais) for texto in
-                     valores]
-
-    dicionario = {}
-    for i, key in enumerate(dados):
-        if 'dt' in key:
-            dicionario[key] = valores[i]
-            continue
-        dicionario[key] = novos_valores[i]
-
-    return dicionario
-
-
-def usuarios_view(request):
-    if request.method == 'GET':
-        usuarios = models.listar_usuarios()
-        return JsonResponse({
-            'html': [render_to_string('usuarios.html', {'usuarios': usuarios})],
-            'status': 'success'
-        })
-
-
 def logout(request):
     request.session.flush()
     return redirect('login')
@@ -60,15 +35,43 @@ def logar_usuario(request):
             return JsonResponse({'status': 'danger'})
 
 
+def usuarios_view(request):
+    if request.method == 'GET':
+        usuarios = models.listar_usuarios()
+        return JsonResponse({
+            'html': [render_to_string('usuarios.html', {'usuarios': usuarios})],
+            'status': 'success'
+        })
+
+
+def cadastrar_usuario_view(request):
+    contexto = {
+        'acessos': models.listar_acessos()
+    }
+
+    return JsonResponse({
+        'html': [
+            render_to_string(
+                'cadastrar_usuario.html',
+                context=contexto,
+                # request=request
+            )
+        ],
+        'status': 'success'
+    })
+
+
 def registrar_usuario(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
-        dados = retirar_caracteres_especiais(dados)
-        dados['convenio'] = int(dados['convenio'])
+        dados['acesso'] = int(dados['acesso'])
 
         if dados.get('codigo', False):
-            models.set_usuario(dados)
-            return redirect(reverse('visualizar_usuario', kwargs={'codigo': dados['codigo']}))
+            models.atualizar_usuario(dados)
+            return redirect(reverse(
+                'visualizar_usuario',
+                kwargs={'codigo': dados['codigo']}
+            ))
         else:
             models.set_usuario(dados)
             return redirect('usuarios')
@@ -77,8 +80,13 @@ def registrar_usuario(request):
 def visualizar_usuario_view(request, codigo):
     if request.method == 'GET':
         usuario = models.get_usuario(codigo)
+        contexto = {
+            'usuario': usuario,
+            'acessos': models.listar_acessos()
+        }
+
         return JsonResponse({
-            'html': [render_to_string('visualizar_usuario.html', {'usuario': usuario})],
+            'html': [render_to_string('visualizar_usuario.html', contexto)],
             'status': 'success'
         })
 

@@ -1,22 +1,7 @@
-<div class="linha-dados justify-content-between">
-    <div class="col-1">
-        <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-            onclick="requisicaoGetPadrao('pagina_inicial')">
-        </i>
-    </div>
-    <div class="d-flex justify-content-around pb-3">
-        <input id="cod_formulario" value="{{ cod_formulario }}" aria-label="" hidden>
-        <div class="input-group flex-nowrap campo-hut">
-            <label class="input-group-text negrito" for="prontuario">Prontuário</label>
-            <input id="prontuario" type="number" class="form-control" />
-        </div>
-        <div class="input-group flex-nowrap campo-hut">
-            <label class="input-group-text negrito" for="setor">Setor</label>
-            <input id="setor" class="form-control" />
-        </div>
-    </div>
-    <div class="col-1"></div>
-</div>
+{% block header_ficha %}
+    {% include 'topo_ficha.html' %}
+{% endblock %}
+
 <div class="ficha pb-5">
     {% csrf_token %}
     <div class="mt-2 container-cabecalho">
@@ -32,7 +17,8 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha" oninput="atribuirValor(this.id)" />
+                <input type="number" class="form-control" id="numero-ficha"
+                    oninput="atribuirValor(this.id)" />
             </div>
         </div>
     </div>

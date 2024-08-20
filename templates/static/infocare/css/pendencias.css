@@ -1,4 +1,27 @@
-.btnNovaObservacao {
+.btnAbrirPendencias {
+    background-color: var(--dark-color);
+    border-radius: 50%;
+    position: fixed;
+    padding: 12px;
+    color: white;
+    bottom: 17px;
+    right: 27px;
+}
+
+.btnAbrirPendencias:hover {
+    color: var(--dark-color);
+    background-color: white;
+}
+
+.btnAbrirPendencias #possuiPendencias {
+    border: 2px solid var(--light-color);
+    background-color: orange;
+    position: absolute;
+    padding: 7px;
+    top: -1px;
+}
+
+.btnNovaPendencia {
     font-size: small;
     font-weight: bold;
     padding: 7px 22px;
@@ -8,7 +31,7 @@
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
-.btnNovaObservacao:hover {
+.btnNovaPendencia:hover {
     color: white;
     background-color: var(--dark-color);
 }
@@ -19,7 +42,7 @@
     color: white;
 }
 
-.containerObservacao {
+.containerPendencia {
     background: white;
     border-radius: 5px;
     padding: 13px 17px;
@@ -29,24 +52,24 @@
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
-.containerObservacao .btn-obs-outro {
+.containerPendencia .btn-pendencia-outro {
     background-color: white;
     color: var(--main-color);
     border: 2px solid var(--main-color);
 }
 
-.containerObservacao .btn-obs-outro:hover {
+.containerPendencia .btn-pendencia-outro:hover {
     background-color: var(--main-color);
     color: white;
 }
 
-.containerObservacao .btn-minha-obs {
+.containerPendencia .btn-minha-pendencia {
     color: #4A97C2;
     background-color: white;
     border: 2px solid #4A97C2;
 }
 
-.containerObservacao .btn-minha-obs:hover {
+.containerPendencia .btn-minha-pendencia:hover {
     background-color: #4A97C2;
     color: white;
 }

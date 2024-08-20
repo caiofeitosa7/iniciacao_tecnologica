@@ -1,4 +1,4 @@
-<div id="modalNovaObservacao" class="modal fade" tabindex="-1" aria-hidden="true">
+<div id="modalNovaPendencia" class="modal fade" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             {% csrf_token %}
@@ -15,8 +15,8 @@
                 <input id="cod_ficha" class="form-control" type="number" value="{{ cod_ficha }}" hidden>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btnCorPrincipal btn"
-                        onclick="salvarObservacao('{% url 'registrar_observacao' %}', 'modalNovaObservacao')">
+                <button onclick="salvarPendencia('{% url 'registrar_pendencia' %}', 'modalNovaPendencia')"
+                type="button" class="btnCorPrincipal btn">
                     Salvar
                 </button>
             </div>
@@ -26,27 +26,27 @@
 
 <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
     <i class="clicavel font-xlarge bi bi-arrow-left-square-fill" style="color: var(--dark-color);"
-       onclick="requisicaoGetPadrao('{% url 'visualizar_ficha' cod_ficha=cod_ficha cod_formulario=cod_formulario %}')">
+       onclick="requisicaoGetPadrao('{% url 'visualizar_ficha' cod_ficha cod_formulario %}')">
     </i>
-    <button class="btn btnNovaObservacao" onclick="abrirModalNovaObservacao()">
+    <button class="btn btnNovaPendencia" onclick="abrirModalNovaPendencia()">
         Pendência
     </button>
 </div>
 <div class="pb-3">
-    {% if observacoes %}
-    {% for obs in observacoes %}
+    {% if pendencias %}
+    {% for pendencia in pendencias %}
     <div class="d-flex mb-3">
         <div class="mt-2">
             <span class="inicialUsuario rounded-circle
-                  {% if obs.cod_autor == cod_usuario %}
+                  {% if pendencia.cod_autor == cod_usuario %}
                   background-letra-inicial-meu-usuario
                   {% else %}
                   background-letra-inicial-outro-usuario
                   {% endif %}
-            ">{{ obs.inicial_autor }}</span>
+            ">{{ pendencia.inicial_autor }}</span>
         </div>
-        <div class="containerObservacao
-            {% if obs.cod_autor == cod_usuario %}
+        <div class="containerPendencia
+            {% if pendencia.cod_autor == cod_usuario %}
             borda-esquerda-meu-usuario
             {% else %}
             borda-esquerda-outro-usuario
@@ -54,34 +54,34 @@
         ">
             <div class="d-flex justify-content-between">
                 <div class="d-flex">
-                    <span class="negrito">{{ obs.nome_autor }}</span>
-                    {% if obs.concluida %}
+                    <span class="negrito">{{ pendencia.nome_autor }}</span>
+                    {% if pendencia.concluida %}
                     <div class="status mx-1 text-success">
                         <span class="mx-1">• Concluida</span>
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
                     {% else %}
                     <div class="status mx-1 text-danger">
-                        <span class="obs-aberta mx-1">• Em aberto</span>
+                        <span class="pendencia-aberta mx-1">• Em aberto</span>
                         <i class="bi bi-exclamation-triangle-fill"></i>
                     </div>
                     {% endif %}
                 </div>
-                <span class="negrito">{{ obs.dataHora_cadastro }}</span>
+                <span class="negrito">{{ pendencia.dataHora_cadastro }}</span>
             </div>
             <div class="my-3">
-                {{ obs.descricao }}
+                {{ pendencia.descricao }}
             </div>
-            {% if obs.concluida %}
+            {% if pendencia.concluida %}
             <div class="d-flex justify-content-end">
                 <span class="font-smaller">
-                    Concluido por {{ obs.nome_concluinte }}
+                    Concluido por {{ pendencia.nome_concluinte }}
                 </span>
             </div>
             {% else %}
             <div class="d-flex justify-content-end">
-                <button class="btn {% if obs.cod_autor == cod_usuario %} btn-minha-obs {% else %} btn-obs-outro {% endif %}"
-                        onclick="requisicaoGetPadrao('{% url 'fechar_observacao' cod_ficha=cod_ficha cod_obs=obs.codigo %}')">
+                <button class="btn {% if pendencia.cod_autor == cod_usuario %} btn-minha-pendencia {% else %} btn-pendencia-outro {% endif %}"
+                        onclick="requisicaoGetPadrao('{% url 'fechar_pendencia' cod_ficha pendencia.codigo %}')">
                     Fechar
                 </button>
             </div>
@@ -92,7 +92,7 @@
     {% if status_ficha_aberta == 4 %}
     <div class="d-flex justify-content-center mt-4">
         <button class="btn btnTudoPronto"
-                onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_preliminar' cod_ficha=cod_ficha %}')">
+        onclick="verificarMudancaEstadoFicha('{% url 'marcar_ficha_preliminar' cod_ficha status_ficha_aberta %}')">
             Tudo Pronto
         </button>
     </div>

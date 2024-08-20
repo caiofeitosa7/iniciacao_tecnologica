@@ -65,26 +65,68 @@ def get_colunas_tabela(cursor, nome_tabela: str, indentificacao: bool = False) -
 def get_placeholders(colunas: list, usa_colunas: bool) -> str:
     if usa_colunas:
         return ', '.join(colunas)
-    return ', '.join(['?' for _ in range(len(colunas))])
+    return ', '.join(['%s'] * len(colunas))
 
 
-def alterar_registro_tabela(nome_tabela: str, dados: dict):
+def inserir_registro_tabela(nome_tabela: str, dados: dict):
     conexao, cursor = abrir_conexao()
-    valores = tuple(dados.values())[1:]
     colunas = get_colunas_tabela(cursor, nome_tabela)
-    lista = [f"{coluna} = ?" for coluna in colunas[1:]]
+    valores = tuple(dados.values())
     query = f"""
-        UPDATE {nome_tabela}
-        SET {get_placeholders(lista, True)}
-        WHERE codigo = {dados['codigo']};
+        INSERT INTO {nome_tabela} (
+            {get_placeholders(colunas[1:], True)}
+        ) VALUES (
+            {get_placeholders(colunas[1:], False)}
+        )
     """
 
     try:
         cursor.execute(query, valores)
+        conexao.commit()
+        cod_registro = cursor.lastrowid
+        return cod_registro
     except Exception as e:
+        conexao.rollback()
         print(e)
+    finally:
+        fechar_conexao(conexao)
 
+
+def alterar_registro_tabela(nome_tabela: str, dicionario: dict):
+    conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
+    placeholders = [f"{coluna} = %s" for coluna in colunas][1:]
+    dados = dicionario.copy()
+    codigo = dados.pop('codigo')
+
+    query = f"""
+        UPDATE {nome_tabela}
+        SET {', '.join(placeholders)}
+        WHERE codigo = %s;
+    """
+
+    valores = list(dados.values())
+    valores.append(codigo)
+
+    try:
+        cursor.execute(query, valores)
+        conexao.commit()
+    except Exception as e:
+        conexao.rollback()
+        print(e)
+    finally:
+        fechar_conexao(conexao)
+
+
+def listar_acessos():
+    nome_tabela = 'acesso'
+    conexao, cursor = abrir_conexao()
+    colunas = get_colunas_tabela(cursor, nome_tabela)
+    cursor.execute("SELECT * FROM acesso")
+    resultados = cursor.fetchall()
     fechar_conexao(conexao)
+
+    return [criar_dicionario(colunas, list(res)) for res in resultados]
 
 
 def listar_usuarios():
@@ -99,43 +141,27 @@ def listar_usuarios():
 
 
 def set_usuario(dados: dict):
-    nome_tabela = 'usuario'
-    conexao, cursor = abrir_conexao()
-    valores = tuple(dados.values())
-    colunas = get_colunas_tabela(cursor, nome_tabela)
-    query = f"""INSERT INTO {nome_tabela} (
-                    {get_placeholders(colunas[1:], True)}
-                ) VALUES (
-                    {get_placeholders(colunas[1:], False)}
-                )
-            """
+    return inserir_registro_tabela('usuario', dados)
 
-    try:
-        cursor.execute(query, valores)
-    except Exception as e:
-        print(e)
 
-    fechar_conexao(conexao)
+def atualizar_usuario(dados: dict):
+    alterar_registro_tabela('usuario', dados)
 
 
 def get_usuario(codigo: int):
     nome_tabela = 'usuario'
     conexao, cursor = abrir_conexao()
     colunas = get_colunas_tabela(cursor, nome_tabela)
-    cursor.execute(f"SELECT * FROM {nome_tabela} WHERE codigo = ?", (codigo,))
+    cursor.execute(f"SELECT * FROM {nome_tabela} WHERE codigo = %s", (codigo,))
     resultado = cursor.fetchone()
     fechar_conexao(conexao)
 
     return criar_dicionario(colunas, list(resultado)) if resultado else {}
 
 
-def alterar_usuario(dados: dict):
-    alterar_registro_tabela('usuario', dados)
-
-
 def apagar_usuario(codigo: int):
     conexao, cursor = abrir_conexao()
-    cursor.execute("DELETE FROM usuario WHERE codigo = ?", (codigo,))
+    cursor.execute("DELETE FROM usuario WHERE codigo = %s", (codigo,))
     fechar_conexao(conexao)
 
 

@@ -1,25 +1,10 @@
-function enviarFichaParaConclusao(url) {
-    let quantObsAbertas = 0
-    document.querySelectorAll('span.obs-aberta').forEach(function(span){
-        quantObsAbertas += 1
-    });
-
-    if (quantObsAbertas > 0) {
-        $('#mensagem-retorno .modal-title').html("Erro!");
-        $('#mensagem-retorno .modal-body').html("Para enviar a ficha para análise, você precisa concluir todas as pendências.");
-        $('#mensagem-retorno').modal("toggle");
-    } else {
-        requisicaoGetPadrao(url)
-    }
-}
-
-function abrirModalNovaObservacao() {
-    $('#modalNovaObservacao').modal("toggle");
+function abrirModalNovaPendencia() {
+    $('#modalNovaPendencia').modal("toggle");
     $(".modal-backdrop").css("display", 'none');
     $('#modal-title').html('Pendência');
 }
 
-function salvarObservacao(url, idModal){
+function salvarPendencia(url, idModal){
     let csrfToken = getCookie("csrftoken");
     let formulario = document.getElementById(idModal);
     let camposInput = formulario.querySelectorAll("input, textarea");

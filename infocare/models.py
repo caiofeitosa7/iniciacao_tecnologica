@@ -123,23 +123,21 @@ def inserir_registro_tabela(nome_tabela: str, dados: dict):
         fechar_conexao(conexao)
 
 
-def alterar_registro_tabela(nome_tabela: str, dados: dict):
+def alterar_registro_tabela(nome_tabela: str, dicionario: dict):
     conexao, cursor = abrir_conexao()
     colunas = get_colunas_tabela(cursor, nome_tabela)
+    placeholders = [f"{coluna} = %s" for coluna in colunas]
+    dados = dicionario.copy()
     codigo = dados.pop('codigo')
-    placeholders = [f"{coluna} = %s" for coluna in colunas if coluna in dados]
 
     query = f"""
         UPDATE {nome_tabela}
         SET {', '.join(placeholders)}
-        WHERE codigo = %s;
+        WHERE codigo = {codigo};
     """
 
-    valores = list(dados.values())
-    valores.append(codigo)
-
     try:
-        cursor.execute(query, valores)
+        cursor.execute(query, tuple(dados.values()))
         conexao.commit()
     except Exception as e:
         conexao.rollback()
@@ -267,33 +265,33 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
         registro = []
         cod_campo = res[0]
         tipo_campo = res[1]
-        nome_campo = res[2]
+        # nome_campo = res[2]
+        #
+        # if type(valores[i]) in (int, float):
+        #     tp_input = 2
+        # elif type(valores[i]) == str:
+        #     tp_input = 1
+        # else:
+        #     tp_input = 3
+        #
+        # print('\ncod_campo:', cod_campo,
+        #       '; nome_banco:', nome_campo,
+        #       '; nome_input:', ids[i],
+        #       '; tp_banco:', tipo_campo,
+        #       '; tp_input:', tp_input,
+        #       '; tipo_diferente:', 0 if tipo_campo == tp_input else 1,
+        #       '; valor_input:', valores[i],
+        #       )
 
-        if type(valores[i]) in (int, float):
-            tp_input = 2
-        elif type(valores[i]) == str:
-            tp_input = 1
-        else:
-            tp_input = 3
-
-        print('\ncod_campo:', cod_campo,
-              '; nome_banco:', nome_campo,
-              '; nome_input:', ids[i],
-              '; tp_banco:', tipo_campo,
-              '; tp_input:', tp_input,
-              '; tipo_diferente:', 0 if tipo_campo == tp_input else 1,
-              '; valor_input:', valores[i],
-              )
-
-        if tipo_campo == 1:  # Se for do tipo string
+        if tipo_campo == 1:     # Se for do tipo string
             registro.append(str(valores[i]))
             registro.append(None)
             registro.append(None)
-        elif tipo_campo == 2:  # Se for do tipo numérico
+        elif tipo_campo == 2:   # Se for do tipo numérico
             registro.append(None)
             registro.append(int(valores[i]))
             registro.append(None)
-        else:  # Campo do tipo data
+        else:                   # Campo do tipo data
             registro.append(None)
             registro.append(None)
             registro.append(valores[i])
@@ -366,56 +364,33 @@ def set_ficha(campos: dict):
 
     averiguar_campos(cursor, tipo_ficha, campos)
 
-    with transaction.atomic():
-        cursor.execute(f"""
-            INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
-            VALUES (%s, %s, %s, %s)
-        """, (
-            campos.pop('setor'),
-            campos.pop('prontuario'),
-            1,
-            tipo_ficha,
-        ))
+    try:
+        with transaction.atomic():
+            cursor.execute(f"""
+                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
+                VALUES (%s, %s, %s, %s)
+            """, (
+                campos.pop('setor'),
+                campos.pop('prontuario'),
+                1,
+                tipo_ficha,
+            ))
 
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        cod_ficha = int(cursor.fetchone()[0])
+            cursor.execute("SELECT LAST_INSERT_ID()")
+            cod_ficha = int(cursor.fetchone()[0])
 
-        # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-    return cod_ficha
+        return cod_ficha
 
+    except Exception as e:
+        conexao.rollback()
+        print(e)
+        return None
 
-
-    # try:
-    #     with transaction.atomic():
-    #         cursor.execute(f"""
-    #             INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha)
-    #             VALUES (%s, %s, %s, %s)
-    #         """, (
-    #             campos.pop('setor'),
-    #             campos.pop('prontuario'),
-    #             1,
-    #             tipo_ficha,
-    #         ))
-    #
-    #         cursor.execute("SELECT LAST_INSERT_ID()")
-    #         cod_ficha = int(cursor.fetchone()[0])
-    #
-    #         averiguar_campos(cursor, tipo_ficha, campos)
-    #
-    #         # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-    #         inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
-    #
-    #     return cod_ficha
-    #
-    # except Exception as e:
-    #     conexao.rollback()
-    #     print(e)
-    #     return None
-    #
-    # finally:
-    #     fechar_conexao(conexao)
+    finally:
+        fechar_conexao(conexao)
 
 
 def alterar_ficha(campos: dict):
@@ -468,7 +443,7 @@ def get_ficha(cod_ficha: int):
                        WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
                        WHEN (C.cod_tipo_campo = 3) THEN VC.valor_data
                    END)     AS VALOR_CAMPO,
-               OBS.quant    AS QUANT_OBS_ABERTAS
+               PEND.quant    AS QUANT_PEND_ABERTAS
         FROM ficha AS F
                  INNER JOIN campo_tipo_ficha AS CTF
                             ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
@@ -480,9 +455,9 @@ def get_ficha(cod_ficha: int):
                             ON C.codigo = VC.cod_campo
                  LEFT JOIN (SELECT cod_ficha,
                                    COUNT(codigo) AS quant
-                            FROM observacao
+                            FROM pendencia
                             WHERE concluida = 0
-                            GROUP BY cod_ficha) AS OBS ON OBS.cod_ficha = F.codigo
+                            GROUP BY cod_ficha) AS PEND ON PEND.cod_ficha = F.codigo
         WHERE
             F.codigo = %s
         GROUP BY F.codigo,
@@ -491,7 +466,7 @@ def get_ficha(cod_ficha: int):
                  TF.codigo,
                  F.setor,
                  C.nome,
-                 OBS.quant
+                 PEND.quant
         ORDER BY F.setor;
     """
 
@@ -516,7 +491,7 @@ def get_ficha(cod_ficha: int):
                 'nome_tipo_ficha': resultado[2],
                 'cod_tipo_ficha': resultado[3],
                 'setor': resultado[4],
-                'quant_obs': resultado[7],
+                'quant_pendencias': resultado[7],
                 nome_campo: valor_campo
             }
 
@@ -550,7 +525,7 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                        WHEN (C.cod_tipo_campo = 2) THEN VC.valor_numerico
                        WHEN (C.cod_tipo_campo = 3) THEN DATE_FORMAT(VC.valor_data, '%d/%m/%Y')
                    END)     AS VALOR_CAMPO,
-               OBS.quant    AS QUANT_OBS
+               PEND.quant    AS QUANT_PEND
         FROM ficha AS F
                  INNER JOIN campo_tipo_ficha AS CTF
                         ON CTF.cod_tipo_ficha = F.cod_tipo_ficha
@@ -564,9 +539,9 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                     SELECT
                         cod_ficha,
                         COUNT(codigo) AS quant
-                    FROM observacao
+                    FROM pendencia
                     GROUP BY cod_ficha
-                 ) AS OBS ON OBS.cod_ficha = F.codigo
+                 ) AS PEND ON PEND.cod_ficha = F.codigo
         WHERE
             F.cod_estado = {status}
         GROUP BY F.codigo,
@@ -575,7 +550,7 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                  TF.codigo,
                  F.setor,
                  C.nome,
-                 OBS.quant
+                 PEND.quant
         ORDER BY F.setor;
     """
 
@@ -600,7 +575,7 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                 'nome_tipo_ficha': resultado[2],
                 'cod_tipo_ficha': resultado[3],
                 'setor': resultado[4],
-                'quant_obs': resultado[7],
+                'quant_pendencias': resultado[7],
                 nome_campo: valor_campo
             }
 
@@ -609,24 +584,24 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
     return fichas
 
 
-def listar_observacoes(cod_ficha: int):
-    nome_tabela = 'observacao'
+def listar_pendencias(cod_ficha: int):
+    nome_tabela = 'pendencia'
     conexao, cursor = abrir_conexao()
     cursor.execute(f"""
         SELECT
-            OBS.codigo,
-            OBS.descricao,
-            OBS.concluida,
-            OBS.cod_ficha,
-            OBS.cod_usuario_autor,
-            OBS.cod_usuario_concluinte,
-            OBS.dataHora_cadastro,
-            OBS.dataHora_concluida,
+            PEND.codigo,
+            PEND.descricao,
+            PEND.concluida,
+            PEND.cod_ficha,
+            PEND.cod_usuario_autor,
+            PEND.cod_usuario_concluinte,
+            PEND.dataHora_cadastro,
+            PEND.dataHora_concluida,
             AUTOR.codigo,
             AUTOR.nome,
             CONCLUINTE.codigo,
             CONCLUINTE.nome
-        FROM {nome_tabela} AS OBS
+        FROM {nome_tabela} AS PEND
             INNER JOIN usuario AS AUTOR
                 ON cod_usuario_autor = AUTOR.codigo
             INNER JOIN usuario AS CONCLUINTE
@@ -636,42 +611,42 @@ def listar_observacoes(cod_ficha: int):
 
     resultados = cursor.fetchall()
     colunas = get_colunas_tabela(cursor, nome_tabela) + ['cod_autor', 'nome_autor', 'cod_concluinte', 'nome_concluinte']
-    observacoes = [criar_dicionario(colunas, list(resultado)) for resultado in resultados] if resultados else []
+    pendencias = [criar_dicionario(colunas, list(resultado)) for resultado in resultados] if resultados else []
 
-    for observacao in observacoes:
-        observacao['nome_concluinte'] = observacao['nome_concluinte'].split(' ')[0]
-        observacao['nome_autor'] = observacao['nome_autor'].split(' ')[0]
-        observacao['inicial_autor'] = observacao['nome_autor'][0].upper()
+    for pendencia in pendencias:
+        pendencia['nome_concluinte'] = pendencia['nome_concluinte'].split(' ')[0]
+        pendencia['nome_autor'] = pendencia['nome_autor'].split(' ')[0]
+        pendencia['inicial_autor'] = pendencia['nome_autor'][0].upper()
 
     fechar_conexao(conexao, False)
-    return observacoes
+    return pendencias
 
 
-def set_observacao(dados: dict):
-    inserir_registro_tabela('observacao', dados)
+def set_pendencia(dados: dict):
+    inserir_registro_tabela('pendencia', dados)
     alterar_estado_ficha(dados['cod_ficha'], 4)
 
 
-def alterar_observacao(dados: dict):
-    alterar_registro_tabela('observacao', dados)
+def alterar_pendencia(dados: dict):
+    alterar_registro_tabela('pendencia', dados)
 
 
-def deletar_observacao(cod_observacao: int):
-    apagar_registro_tabela('observacao', cod_observacao)
+def deletar_pendencia(cod_pendencia: int):
+    apagar_registro_tabela('pendencia', cod_pendencia)
 
 
-def fechar_observacao(dados: dict):
+def fechar_pendencia(dados: dict):
     valores = (
         dados['dataHora_concluida'],
         dados['cod_usuario_concluinte'],
-        dados['cod_observacao']
+        dados['cod_pendencia']
     )
 
     try:
         conexao, cursor = abrir_conexao()
         cursor.execute(f"""
             UPDATE
-                observacao
+                pendencia
             SET concluida = 1,
                 dataHora_concluida = %s,
                 cod_usuario_concluinte = %s
@@ -692,7 +667,7 @@ def set_ficha_preliminar(cod_ficha: int):
 
 
 def set_ficha_descartada(cod_ficha: int):
-    alterar_registro_tabela(cod_ficha, 3)
+    alterar_estado_ficha(cod_ficha, 3)
 
 
 def set_arquivos_ficha(registros):

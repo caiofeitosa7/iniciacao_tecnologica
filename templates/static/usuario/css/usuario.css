@@ -1,0 +1,52 @@
+.tabela-usuario {
+    font-size: small;
+
+    .linha-tabela {
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+        border-left: 6px solid var(--main-color);
+        background-color: white;
+        border-radius: 10px;
+        padding: 0 15px;
+        font-weight: 500;
+    }
+    
+    .linha-tabela .btn-abrir {
+        width: 35px;
+        height: 35px;
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-color);
+        border-radius: 50%;
+        font-size: large;
+    
+        .icon-arrow {
+            font-size: xx-large !important;
+            margin-left: 2px;
+            font-weight: 600;
+            color: #fff;
+        }
+    
+        &:hover {
+            background-color: var(--cor-azul);
+        }
+    }    
+}
+
+.formCadastro label,
+.formCadastro input,
+.formCadastro .form-select {
+    color: var(--preto);
+    font-size: small;
+}
+
+.formCadastro .form-select {
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 940px) {
+    .formCadastro .label-nowrap {
+        text-wrap: pretty;
+    }
+}

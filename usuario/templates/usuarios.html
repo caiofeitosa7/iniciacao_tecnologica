@@ -1,8 +1,54 @@
-<div class="container d-flex justify-content-center mt-3">
-    Ainda não disponível!
-<!--    <ul>-->
-<!--        {% for usuario in usuarios %}-->
-<!--            <li>{{usuario}}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
+<div class="mt-3">
+    <div class="tabela-usuario my-4">
+        <div class="cabecalho d-flex mx-3">
+            <div class="col-2">
+                <label class="negrito">Matrícula</label>
+            </div>
+            <div class="col-4">
+                <label class="negrito">Nome</label>
+            </div>
+            <div style="width: 14.5%">
+                <label class="negrito">CPF</label>
+            </div>
+            <div class="col-2">
+                <label class="negrito">Cargo/Função</label>
+            </div>
+            <div style="width: 12.5%; margin-left: 1%;">
+                <label class="negrito">COREN</label>
+            </div>
+        </div>
+
+        {% for usuario in usuarios %}
+            <div class="linha-tabela clicavel d-flex align-items-center mt-2"
+                onclick="requisicaoGetPadrao('{% url 'visualizar_usuario' usuario.codigo %}')">
+                <div class="col-2">
+                    <label class="clicavel">{{ usuario.matricula }}</label>
+                </div>
+                <div class="col-4">
+                    <label class="clicavel">{{ usuario.nome }}</label>
+                </div>
+                <div style="width: 14.5%">
+                    <label class="clicavel">{{ usuario.cpf }}</label>
+                </div>
+                <div class="col-2">
+                    <label class="clicavel">{{ usuario.funcao }}</label>
+                </div>
+                <div style="width: 12.5%; margin-left: 1%;">
+                    <label class="clicavel">{{ usuario.coren }}</label>
+                </div>
+                <div class="d-flex justify-content-end align-items-center" style="width: 5%;">
+                    <div class="btn-abrir">
+                        <span class="icon-arrow">></span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-center">
+        <div id="btnNovoProfissional" class="btn btnCorPrincipal"
+        onclick="requisicaoGetPadrao('{% url 'cadastrar_usuario' %}')">
+            <i class="bi bi-briefcase-fill mx-1"></i>
+            Cadastrar Profissional
+        </div>
+    </div>
 </div>

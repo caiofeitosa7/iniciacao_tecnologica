@@ -1,0 +1,86 @@
+<form id="formCadUsuario" class="formCadastro mt-3">
+    {% csrf_token %}
+    <input id="codigo" type="number" value="{{ usuario.codigo }}" hidden>
+    <div class="d-flex mt-3">
+        <div class="d-flex align-items-center col-5">
+            <label class="negrito pe-1" for="nome">
+                Nome:
+            </label>
+            <input id="nome" class="form-control" value="{{ usuario.nome }}" required>
+        </div>
+        <div class="d-flex align-items-center col-3 ps-3">
+            <label class="negrito pe-1" for="cpf">
+                CPF:
+            </label>
+            <input id="cpf" class="form-control" value="{{ usuario.cpf }}">
+        </div>
+        <div class="d-flex align-items-center col-4 ps-3">
+            <label class="negrito pe-1" for="endereco">
+                Endereço:
+            </label>
+            <input id="endereco" class="form-control" value="{{ usuario.endereco }}">
+        </div>
+    </div>
+    <div class="d-flex mt-3">
+        <div class="d-flex align-items-center col-4">
+            <label class="negrito pe-1" for="cargo_funcao">
+                Cargo/Função:
+            </label>
+            <input id="cargo_funcao" class="form-control" value="{{ usuario.funcao }}" required>
+        </div>
+        <div class="d-flex align-items-center col-4 ps-3">
+            <label class="negrito label-nowrap pe-1" for="dt-nascimento">
+                Data de Nascimento:
+            </label>
+            <input id="dt-nascimento" class="form-control" type="date"
+                value="{{ usuario.dt_nascimento }}">
+        </div>
+        <div class="d-flex align-items-center col-4 ps-3">
+            <label class="negrito pe-1" for="matricula">
+                Matrícula:
+            </label>
+            <input id="matricula" class="form-control" value="{{ usuario.matricula }}">
+        </div>
+    </div>
+    <div class="d-flex mt-3">
+        <div class="d-flex align-items-center col-3">
+            <label class="negrito pe-1" for="COREN">
+                COREN:
+            </label>
+            <input id="COREN" class="form-control" value="{{ usuario.coren }}" required>
+        </div>
+        <div class="d-flex align-items-center col-3 ps-3">
+            <label class="negrito label-nowrap me-1" for="acesso">
+                Tipo de acesso:
+            </label>
+            <select id="acesso" class="form-select clicavel">
+                {% for acesso in acessos %}
+                    <option value="{{ acesso.codigo }}" {% if usuario.tipo_acesso == acesso.codigo %} selected {% endif %}>
+                        {{ acesso.descricao }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="d-flex align-items-center col-3 ps-3">
+            <label class="negrito pe-1" for="usuario">
+                Usuário:
+            </label>
+            <input id="usuario" class="form-control" value="{{ usuario.usuario }}" required>
+        </div>
+        <div class="d-flex align-items-center col-3 ps-3">
+            <label class="negrito pe-1" for="senha">
+                Senha:
+            </label>
+            <input id="senha" class="form-control" value="{{ usuario.senha }}" required>
+        </div>
+    </div>
+    <div id="containerBtnAcao" class="d-flex justify-content-center mt-5 mb-3">
+        <button class="btnCancelar btn me-4" onclick="abrirOpcaoUsuarios()">
+            CANCELAR
+        </button>
+        <button class="btnCorPrincipal btn ms-4"
+        onclick="cadastrarUsuario('{% url 'registrar_usuario' %}', 'formCadUsuario');">
+            ATUALIZAR
+        </button>
+    </div>
+</form>

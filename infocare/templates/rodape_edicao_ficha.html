@@ -37,31 +37,47 @@
           </div>
       </div>
   </form> -->
-  <div id="containerBtnAcao" class="d-flex justify-content-center align-items-center my-3">
-      <button class="btnCancelar btn mx-4" onclick="retornoListaFichas()">
-          VOLTAR
-      </button>
   
-      {% if status_ficha_aberta == 1 %}
-      <button class="btnCorPrincipal btn mx-4"
-              onclick="enviarFichaParaConclusao('{% url 'marcar_ficha_concluida' ficha.codigo %}')">
-          TUDO CERTO
-      </button>
-      {% endif %}
-  
-      {% if status_ficha_aberta == 4 %}
-      <button class="btnCorPrincipal btn mx-4"
-              onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
-          ATUALIZAR
-      </button>
-      {% endif %}
-  </div>
-  <button class="btnAbrirObservacoes btn"
-          onclick="requisicaoGetPadrao('{% url 'observacoes' ficha.codigo %}')">
-      <i class="mx-1 bi bi-chat-right-text-fill"></i>
-  
-      {% if ficha.quant_obs %}
-          <span id="possuiObservacoes" class="rounded-circle"></span>
-      {% endif %}
-  </button>
+    <div id="containerBtnAcao" class="d-flex justify-content-center align-items-center my-3">
+        {% if status_ficha_aberta == 1 and acesso_usuario != 3 %}
+            <button class="btn btnDescartar btn mx-4"
+                    onclick="requisicaoGetPadrao('{% url 'marcar_ficha_descartada' ficha.codigo %}')">
+                DESCARTAR
+            </button>
+        {% endif %}
+
+        {% if status_ficha_aberta == 3 and acesso_usuario != 3 %}
+            <button class="btn btnDescartar btn mx-4"
+                    onclick="requisicaoGetPadrao('{% url 'marcar_ficha_preliminar' ficha.codigo status_ficha_aberta %}')">
+                RESTAURAR
+            </button>
+        {% endif %}
+
+        <button class="btnCancelar btn mx-4" onclick="retornoListaFichas()">
+            VOLTAR
+        </button>
+
+        {% if status_ficha_aberta == 1 and acesso_usuario != 3 %}
+        <button class="btnCorPrincipal btn mx-4"
+                onclick="verificarMudancaEstadoFicha('{% url 'marcar_ficha_concluida' ficha.codigo %}')">
+            TUDO CERTO
+        </button>
+        {% endif %}
+
+        {% if status_ficha_aberta == 4 %}
+        <button class="btnCorPrincipal btn mx-4"
+                onclick="cadastrarFichaNotificacao('{% url 'registrar_ficha' %}')">
+            ATUALIZAR
+        </button>
+        {% endif %}
+    </div>
+
+    <button class="btnAbrirPendencias btn"
+            onclick="requisicaoGetPadrao('{% url 'pendencias' ficha.codigo %}')">
+        <i class="mx-1 bi bi-chat-right-text-fill"></i>
+
+        {% if ficha.quant_pendencias %}
+            <span id="possuiPendencias" class="rounded-circle"></span>
+        {% endif %}
+    </button>
 </div>

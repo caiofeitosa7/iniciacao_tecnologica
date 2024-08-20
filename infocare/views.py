@@ -106,14 +106,16 @@ def abrir_formulario_view(request, codigo: int):
 
 def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
     if request.method == 'GET':
-        request.session['ultimo_form_aberto'] = cod_formulario
         dados = models.get_ficha(cod_ficha)
         html = models.get_html_tipo_ficha(cod_formulario)
         arquivo_html = os.path.join('edicao', 'editar_' + html)
+        request.session['ultimo_form_aberto'] = cod_formulario
         contexto = {
             'ficha': dados,
+            'acesso_usuario': request.session.get('acesso_usuario'),
             'status_ficha_aberta': request.session.get('status_ficha_aberta')
         }
+
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],
             'status': 'success'
@@ -151,47 +153,52 @@ def registrar_ficha(request):
             return redirect(reverse('pagina_inicial'))
 
 
-def observacoes_view(request, cod_ficha):
+def pendencias_view(request, cod_ficha):
     contexto = {
         'cod_ficha': cod_ficha,
         'status_ficha_aberta': request.session.get('status_ficha_aberta'),
         'cod_formulario': request.session.get('ultimo_form_aberto'),
         'cod_usuario': request.session.get('cod_usuario'),
-        'observacoes': models.listar_observacoes(cod_ficha)
+        'pendencias': models.listar_pendencias(cod_ficha)
     }
     return JsonResponse({
-        'html': [render_to_string('observacoes.html', contexto, request=request)],
+        'html': [render_to_string('pendencias.html', contexto, request=request)],
         'status': 'success'
     })
 
 
-def registrar_observacao(request):
+def registrar_pendencia(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
         dados['cod_usuario'] = int(request.session.get('cod_usuario'))
         dados['cod_usuario_concluinte'] = int(request.session.get('cod_usuario'))
         dados['dataHora_cadastro'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         dados['dataHora_concluida'] = dados['dataHora_cadastro']
-        models.set_observacao(dados)
+        models.set_pendencia(dados)
 
         return redirect(reverse(
-            'observacoes',
+            'pendencias',
             kwargs={
                 'cod_ficha': dados['cod_ficha']
             }
         ))
 
 
-def fechar_observacao(request, cod_ficha, cod_obs):
+def fechar_pendencia(request, cod_ficha, cod_pendencia):
     if request.method == 'GET':
         dados = {
-            'cod_observacao': cod_obs,
+            'cod_pendencia': cod_pendencia,
             'dataHora_concluida': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'cod_usuario_concluinte': request.session.get('cod_usuario')
         }
 
-        models.fechar_observacao(dados)
-        return redirect(reverse('observacoes', kwargs={'cod_ficha': cod_ficha}))
+        models.fechar_pendencia(dados)
+        return redirect(reverse(
+            'pendencias',
+            kwargs={
+                'cod_ficha': cod_ficha
+            }
+        ))
 
 
 def marcar_ficha_concluida(request, cod_ficha):
@@ -200,16 +207,20 @@ def marcar_ficha_concluida(request, cod_ficha):
         return redirect(reverse('fichas_preliminares'))
 
 
-def marcar_ficha_preliminar(request, cod_ficha):
+def marcar_ficha_preliminar(request, cod_ficha, estado_ficha):
     if request.method == 'GET':
         models.set_ficha_preliminar(cod_ficha)
-        return redirect(reverse('fichas_pendentes'))
+
+        if estado_ficha == 4:
+            return redirect(reverse('fichas_pendentes'))
+        else:
+            return redirect(reverse('fichas_descartadas'))
 
 
 def marcar_ficha_descartada(request, cod_ficha):
     if request.method == 'GET':
         models.set_ficha_descartada(cod_ficha)
-        return redirect(reverse('fichas_descartadas'))
+        return redirect(reverse('fichas_preliminares'))
 
 
 def upload_arquivos(request, cod_ficha):

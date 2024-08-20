@@ -244,6 +244,46 @@ function requisicaoGetPadrao(url) {
         });
 }
 
+function requisicaoPostPadrao(url, idForm) {
+    let csrfToken = getCookie("csrftoken");
+    let formulario = document.getElementById(idForm);
+    let camposInput = formulario.querySelectorAll("input, select, textarea");
+
+    let dicionario = {};
+    camposInput.forEach(function (campo) {
+        if (campo.id)
+            if (campo.type === 'number')
+                dicionario[campo.id] = parseInt(campo.value, 10);
+            else
+                dicionario[campo.id] = campo.value;
+    });
+
+    console.log(dicionario);
+
+    // mostrarTelaCarregamento();
+    fetch(url, {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+            "Content-type": "application/json;charset=UTF-8",
+            "X-CSRFToken": csrfToken
+        },
+        body: JSON.stringify(dicionario)
+    })
+        .then(response => response.json())
+        .then(
+            function (json) {
+                // retirarTelaCarregamento();
+                // if (json["status"] === 'success') {
+                //     $('#conteudo')[0].innerHTML = json.html[0];
+                // }
+
+                console.log(dicionario);
+            }
+        )
+        .catch(err => console.log(err));
+}
+
 function retornoListaFichas() {
     let ultimaListaSelecionada = parseInt(localStorage.getItem('opcaoSelecionada'));
 
@@ -264,21 +304,3 @@ function retornoListaFichas() {
             abrirOpcaoPaginaInicial();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -230,29 +230,6 @@ ul {
   color: #fff;
 }
 
-.btnAbrirObservacoes {
-  background-color: var(--dark-color);
-  border-radius: 50%;
-  position: fixed;
-  padding: 12px;
-  color: white;
-  bottom: 17px;
-  right: 27px;
-}
-
-.btnAbrirObservacoes:hover {
-  color: var(--dark-color);
-  background-color: white;
-}
-
-.btnAbrirObservacoes #possuiObservacoes {
-  border: 2px solid var(--light-color);
-  background-color: orange;
-  position: absolute;
-  padding: 7px;
-  top: -1px;
-}
-
 #uploadForm {
   input,
   button {

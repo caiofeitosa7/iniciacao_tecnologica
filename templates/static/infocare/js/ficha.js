@@ -77,30 +77,29 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         },
         body: JSON.stringify(dicionario)
     })
-        .then(response => response.json())
-        .then(
-            function (json) {
-                if (json["status"] === 'success') {
-                    let uploadForm = document.getElementById('uploadForm');
-                    let parts = uploadForm.action.split('/');
-                    
-                    parts[parts.length - 1] = json["cod_ficha"];
-                    uploadForm.action = parts.join('/');
+    .then(response => response.json())
+    .then(
+        function (json) {
+            if (json["status"] === 'success') {
+                let uploadForm = document.getElementById('uploadForm');
+                let parts = uploadForm.action.split('/');
+                
+                parts[parts.length - 1] = json["cod_ficha"];
+                uploadForm.action = parts.join('/');
+                uploadForm.submit();
 
-                    uploadForm.submit();
-
-                    $('#conteudo')[0].innerHTML = json.html[0];
-                    $('#mensagem-retorno .modal-title').html("Sucesso!");
-                    $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
-                    $('#mensagem-retorno').modal("toggle");
-                } else {
-                    $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
-                    $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
-                    $('#mensagem-retorno').modal("toggle");
-                }
+                $('#conteudo')[0].innerHTML = json.html[0];
+                $('#mensagem-retorno .modal-title').html("Sucesso!");
+                $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                $('#mensagem-retorno').modal("toggle");
+            } else {
+                $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
+                $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
+                $('#mensagem-retorno').modal("toggle");
             }
-        )
-        .catch(err => console.log(err));
+        }
+    )
+    .catch(err => console.log(err));
 }
 
 function addInputFile() {
@@ -117,15 +116,17 @@ function addInputFile() {
     containerInputs.appendChild(inputFile);
 }
 
+function verificarMudancaEstadoFicha(url) {
+    let quantPendenciaAbertas = 0
+    document.querySelectorAll('span.pendencia-aberta').forEach(function(span){
+        quantPendenciaAbertas += 1
+    });
 
-
-
-
-
-
-
-
-
-
-
-
+    if (quantPendenciaAbertas > 0) {
+        $('#mensagem-retorno .modal-title').html("Erro!");
+        $('#mensagem-retorno .modal-body').html("Para enviar a ficha para análise, você precisa concluir todas as pendências.");
+        $('#mensagem-retorno').modal("toggle");
+    } else {
+        requisicaoGetPadrao(url)
+    }
+}
