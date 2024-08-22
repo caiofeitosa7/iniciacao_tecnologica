@@ -1,6 +1,13 @@
+import os
+
 from django.db import connections, transaction
 from datetime import datetime, date
+from . import settings
 import pandas as pd
+
+# imports locais
+from geracao_pdf.script_ficha_base import generateFicha
+from geracao_pdf.script_aids_adulto import gerar_pdf_hiv
 
 
 def abrir_conexao():
@@ -35,9 +42,6 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
 
     dados = dict()
     for i, coluna in enumerate(colunas):
-        # if 'dt' in coluna.lower() and valores[i]:
-        #     data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
-        #     valores[i] = data_obj.strftime('%d/%m/%Y')
         if 'dataHora' in coluna.lower() and valores[i]:
             data_hora = datetime.strptime(str(valores[i]), '%Y-%m-%d %H:%M:%S')
             valores[i] = data_hora.strftime('%d/%m/%Y %H:%M')
@@ -45,19 +49,19 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
     return dados
 
 
-# def formatar_datas_dicionario(dados: dict) -> dict:
-#     """
-#     Formata as datas do dicionário para o formato dd/mm/aaaa.
-#     """
-#     for key in dados:
-#         if 'dt' in key.lower() and dados[key]:
-#             data_obj = datetime.strptime(str(dados[key]), '%Y-%m-%d')
-#             dados[key] = data_obj.strftime('%d/%m/%Y')
-#         elif 'dataHora' in key.lower() and dados[key]:
-#             data_hora = datetime.strptime(str(dados[key]), '%Y-%m-%d %H:%M:%S')
-#             dados[key] = data_hora.strftime('%d/%m/%Y %H:%M')
-#
-#     return dados
+def separar_dicionario_ficha(dicionario: dict) -> tuple:
+    """
+        Separa um dicionário em duas partes: uma parte para a ficha de notificação e outra para a ficha específica.
+        return: tuple (ficha_notificacao, ficha_especifica)
+    """
+    campo_separacao = "bairro_infeccao"
+    chaves = list(dicionario.keys())
+    indice_separacao = chaves.index(campo_separacao) + 1
+
+    ficha_notificacao = {chave: dicionario[chave] for chave in chaves[:indice_separacao]}
+    ficha_especifica = {chave: dicionario[chave] for chave in chaves[indice_separacao:]}
+
+    return ficha_notificacao, ficha_especifica
 
 
 def get_colunas_tabela(cursor, nome_tabela: str, indentificacao: bool = False) -> list:
@@ -283,15 +287,15 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
         #       '; valor_input:', valores[i],
         #       )
 
-        if tipo_campo == 1:     # Se for do tipo string
+        if tipo_campo == 1:  # Se for do tipo string
             registro.append(str(valores[i]))
             registro.append(None)
             registro.append(None)
-        elif tipo_campo == 2:   # Se for do tipo numérico
+        elif tipo_campo == 2:  # Se for do tipo numérico
             registro.append(None)
             registro.append(int(valores[i]))
             registro.append(None)
-        else:                   # Campo do tipo data
+        else:  # Campo do tipo data
             registro.append(None)
             registro.append(None)
             registro.append(valores[i])
@@ -364,35 +368,40 @@ def set_ficha(campos: dict, cod_usuario):
 
     averiguar_campos(cursor, tipo_ficha, campos)
 
-    try:
-        with transaction.atomic():
-            cursor.execute(f"""
-                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (
-                campos.pop('setor'),
-                campos.pop('prontuario'),
-                1,
-                tipo_ficha,
-                cod_usuario,
-                date.today()
-            ))
+    # try:
+    with transaction.atomic():
+        cursor.execute(f"""
+            INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (
+            campos.pop('setor'),
+            campos.pop('prontuario'),
+            1,
+            tipo_ficha,
+            cod_usuario,
+            date.today()
+        ))
 
-            cursor.execute("SELECT LAST_INSERT_ID()")
-            cod_ficha = int(cursor.fetchone()[0])
+        cursor.execute("SELECT LAST_INSERT_ID()")
+        cod_ficha = int(cursor.fetchone()[0])
 
-            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+        # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-        return cod_ficha
+        print('Passou na insercao dos dados!')
 
-    except Exception as e:
-        conexao.rollback()
-        print(e)
-        return None
+    if cod_ficha:
+        preencher_pdf(cod_ficha, tipo_ficha)
 
-    finally:
-        fechar_conexao(conexao)
+    return cod_ficha
+
+    # except Exception as e:
+    #     conexao.rollback()
+    #     print(e)
+    #     return None
+    #
+    # finally:
+    #     fechar_conexao(conexao)
 
 
 def alterar_ficha(campos: dict):
@@ -419,6 +428,9 @@ def alterar_ficha(campos: dict):
             """, (cod_ficha,))
 
             inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+
+        if cod_ficha:
+            preencher_pdf(cod_ficha, tipo_ficha, True)
 
         return cod_ficha
 
@@ -682,13 +694,20 @@ def set_ficha_descartada(cod_ficha: int):
 
 
 def set_arquivos_ficha(registros):
-    print('chegou no model do arquivo')
-
     try:
         conexao, cursor = abrir_conexao()
         cursor.executemany("""
-            INSERT INTO arquivo (nome_original, nome_armazenado, extensao, url, data_cadastro, data_deletado, deletado, cod_ficha)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO arquivo (
+                nome_original,
+                nome_armazenado,
+                extensao,
+                url,
+                data_cadastro,
+                data_deletado,
+                deletado,
+                cod_ficha,
+                arq_principal
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, registros)
         fechar_conexao(conexao)
     except Exception as e:
@@ -715,3 +734,125 @@ def listar_arquivos_ficha(cod_ficha: int):
     return [criar_dicionario(colunas, list(resultado)) for resultado in resultados] \
         if resultados \
         else []
+
+
+def numero_ficha_existe(numero_ficha: int) -> int:
+    conexao, cursor = abrir_conexao()
+    query = f"""
+        SELECT COUNT(*)
+        FROM valorcampo AS VC
+        WHERE cod_campo = 1
+            AND valor_numerico = %s
+    """
+
+    cursor.execute(query, (numero_ficha,))
+    quant = cursor.fetchone()[0]
+    fechar_conexao(conexao, False)
+    return quant > 0
+
+
+def formatar_dados_esperados(dados: dict) -> dict:
+    """
+        Formata as datas do dicionário para o formato dd/mm/aaaa.
+        return: Dicionário com as datas formatadas.
+    """
+    for key in dados:
+        if 'dt' in key.lower() and dados[key]:
+            data_obj = datetime.strptime(str(dados[key]), '%Y-%m-%d')
+            dados[key] = data_obj.strftime('%d/%m/%Y')
+        elif 'dataHora' in key.lower() and dados[key]:
+            data_hora = datetime.strptime(str(dados[key]), '%Y-%m-%d %H:%M:%S')
+            dados[key] = data_hora.strftime('%d/%m/%Y %H:%M')
+
+    return dados
+
+
+def apagar_arquivo_ficha(cursor, cod_ficha: int):
+    cursor.execute("""
+        SELECT nome_armazenado, extensao
+        FROM arquivo
+        WHERE cod_ficha = %s
+            AND arq_principal = 1
+    """, (cod_ficha,))
+
+    nome_arquivo, extensao = cursor.fetchone()
+    os.remove(os.path.join(settings.MEDIA_ROOT, 'arquivos', nome_arquivo + extensao))
+
+    cursor.execute("""
+            DELETE FROM arquivo
+            WHERE cod_ficha = %s
+                AND arq_principal = 1;
+        """, (cod_ficha,))
+
+    return nome_arquivo
+
+
+def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
+    conexao, cursor = abrir_conexao()
+
+    if arq_existe:
+        nome_arq_anterior = apagar_arquivo_ficha(cursor, cod_ficha)
+        print(nome_arq_anterior)
+
+    print(arq_existe)
+
+    cursor.execute("""
+        SELECT modelo_pdf, obito
+        FROM tipo_ficha
+        WHERE codigo = %s
+    """, (tipo_ficha,))
+
+    modelo_pdf, ficha_de_obito = cursor.fetchone()
+    ficha_completa = get_ficha(cod_ficha)
+    ficha_completa = formatar_dados_esperados(ficha_completa)
+    nome_original = ficha_completa['nome_paciente']
+
+    if arq_existe:
+        nome_armazenado = nome_arq_anterior
+    else:
+        nome_armazenado = '_'.join(nome_original.split(' ')[:2]) \
+                          + datetime.now().strftime('_%f')
+                          # + datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+
+    data_cadastro = datetime.now().strftime('%Y-%m-%d')
+    data_deletado = None
+    extensao = '.pdf'
+    deletado = 0
+
+    nome_arquivo = nome_armazenado + extensao
+    url_arquivo = settings.MEDIA_URL + 'arquivos/' + nome_arquivo
+    path_pdf_modelo = os.path.join('geracao_pdf', 'modelos_pdf', modelo_pdf)
+    path_pdf_ficha_base = os.path.join('geracao_pdf', 'modelos_pdf', 'FichaNotificacao.pdf')
+    path_pdf_gerado = os.path.join(settings.MEDIA_ROOT, 'arquivos')
+
+    print('indo gerar o pdf')
+
+    if not ficha_de_obito and tipo_ficha != 1:  # Exclui ficha de notificacao geral e as fichas de obito
+        ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
+
+        if tipo_ficha == 11:
+            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado,
+                          nome_arquivo)
+
+    elif tipo_ficha == 1:
+        print('Entrou na opcao de salvar ficha de notificação')
+        generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
+
+    else:
+        pass
+
+    print('passando para registro no banco')
+
+    info_arquivo = (
+        nome_original,
+        nome_armazenado,
+        extensao,
+        url_arquivo,
+        data_cadastro,
+        data_deletado,
+        deletado,
+        cod_ficha,
+        1
+    )
+
+    set_arquivos_ficha([info_arquivo])

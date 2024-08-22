@@ -1,8 +1,9 @@
 function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
-    let csrfToken = getCookie("csrftoken");
     let cod_formulario = document.getElementById("cod_formulario").value;
     let prontuario = document.getElementById("prontuario").value;
+    let elem_numero_ficha = document.getElementById("numero-ficha");
     let setor = document.getElementById("setor").value;
+    let csrfToken = getCookie("csrftoken");
 
     let camposNumericos = document.querySelectorAll('input[type="number"]');
     camposNumericos.forEach(function (campo) {
@@ -15,20 +16,6 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
 
     Array.from(fichas).forEach(function(ficha) {
         let camposInput = ficha.querySelectorAll("input, textarea");
-
-        // camposInput.forEach(function(campo) {
-        //     if (campo.id) { // Exclui o campo do csrf_token
-        //         if (campo.type === 'number') {
-        //             dicionario[campo.id] = parseInt(campo.value, 10);
-        //         } else {
-        //             if (campo.type === 'date' && campo.value === '') {
-        //                 dicionario[campo.id] = null;
-        //             } else {
-        //                 dicionario[campo.id] = campo.value;
-        //             }
-        //         }
-        //     }
-        // });
 
         camposInput.forEach(function(campo) {
             if (campo.id) {    // Exclui o campo do csrf_token
@@ -80,27 +67,41 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     .then(response => response.json())
     .then(
         function (json) {
-            if (json["status"] === 'success') {
-                let uploadForm = document.getElementById('uploadForm');
-                let parts = uploadForm.action.split('/');
-                
-                parts[parts.length - 1] = json["cod_ficha"];
-                uploadForm.action = parts.join('/');
-                uploadForm.submit();
+            switch (json["status"]) {
+                case 'success':
+                    let uploadForm = document.getElementById('uploadForm');
+                    let parts = uploadForm.action.split('/');
+                    
+                    parts[parts.length - 1] = json["cod_ficha"];
+                    uploadForm.action = parts.join('/');
+                    uploadForm.submit();
+    
+                    // $('#conteudo')[0].innerHTML = json.html[0];
+                    // $('#mensagem-retorno .modal-title').html("Sucesso!");
+                    // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+                    // $('#mensagem-retorno').modal("toggle");
+                    break;
 
-                $('#conteudo')[0].innerHTML = json.html[0];
-                $('#mensagem-retorno .modal-title').html("Sucesso!");
-                $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
-                $('#mensagem-retorno').modal("toggle");
-            } else {
-                $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
-                $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
-                $('#mensagem-retorno').modal("toggle");
+                case 'erro-numero-ficha':
+                    $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
+                    $('#mensagem-retorno .modal-body').html('Já existe uma ficha com esse número!');
+                    $('#mensagem-retorno').modal("toggle");
+                    break;
+
+                case 'erro':
+                    $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
+                    $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
+                    $('#mensagem-retorno').modal("toggle");
+                    break;
+
+                default:
+                    break;
             }
         }
     )
     .catch(err => console.log(err));
-}
+    }
+
 
 function addInputFile() {
     let containerInputs = document.getElementById("containerInputsPDF");
@@ -129,4 +130,25 @@ function verificarMudancaEstadoFicha(url) {
     } else {
         requisicaoGetPadrao(url)
     }
+}
+
+function validarNumeroFicha(numero, memorizar) {
+    url = 'fichas/numero_ficha/' + numero
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json;charset=UTF-8"
+        },
+    })
+    .then(response => response.json())
+    .then(
+        function (json) {
+            if (json["numero_existe"]) {
+                $('#mensagem-retorno .modal-title').html("Atenção!");
+                $('#mensagem-retorno .modal-body').html("Já existe uma ficha com esse número!");
+                $('#mensagem-retorno').modal("toggle");
+            }
+        }
+    )
+    .catch(err => console.log(err));
 }

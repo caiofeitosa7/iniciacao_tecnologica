@@ -125,33 +125,43 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
 def registrar_ficha(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
-        cod_usuario = int(request.session.get('cod_usuario'))
 
-        try:
-            if dados.get('codigo', False):
-                args = {
-                    'cod_ficha': dados['codigo'],
-                    'cod_formulario': dados['cod_tipo_ficha'],
-                }
+        # cod_usuario = int(request.session.get('cod_usuario'))
+        cod_usuario = 1
 
-                cod_ficha = models.alterar_ficha(dados)
-                return redirect(reverse('visualizar_ficha', kwargs=args))
-            else:
-                cod_ficha = models.set_ficha(dados, cod_usuario)
 
-                if cod_ficha:
-                    return JsonResponse({
-                        'cod_ficha': cod_ficha,
-                        'status': 'success'
-                    })
 
+        # try:
+        if dados.get('codigo', False):
+            args = {
+                'cod_ficha': dados['codigo'],
+                'cod_formulario': dados['cod_tipo_ficha'],
+            }
+
+            cod_ficha = models.alterar_ficha(dados)
+            return redirect(reverse('visualizar_ficha', kwargs=args))
+        else:
+            numero_ficha = dados.get('numero-ficha', False)
+
+            if numero_ficha and models.numero_ficha_existe(numero_ficha):
                 return JsonResponse({
-                    'status': 'error'
+                    'status': 'erro-numero-ficha'
                 })
 
-        except Exception as e:
-            print(e)
-            return redirect(reverse('pagina_inicial'))
+            cod_ficha = models.set_ficha(dados, cod_usuario)
+            if cod_ficha:
+                return JsonResponse({
+                    'cod_ficha': cod_ficha,
+                    'status': 'success'
+                })
+
+            return JsonResponse({
+                'status': 'error'
+            })
+
+        # except Exception as e:
+        #     print(e)
+        #     return redirect(reverse('pagina_inicial'))
 
 
 def pendencias_view(request, cod_ficha):
@@ -185,7 +195,7 @@ def registrar_pendencia(request):
         ))
 
 
-def fechar_pendencia(request, cod_ficha, cod_pendencia):
+def fechar_pendencia(request, cod_ficha: int, cod_pendencia: int):
     if request.method == 'GET':
         dados = {
             'cod_pendencia': cod_pendencia,
@@ -202,13 +212,13 @@ def fechar_pendencia(request, cod_ficha, cod_pendencia):
         ))
 
 
-def marcar_ficha_concluida(request, cod_ficha):
+def marcar_ficha_concluida(request, cod_ficha: int):
     if request.method == 'GET':
         models.set_ficha_concluida(cod_ficha)
         return redirect(reverse('fichas_preliminares'))
 
 
-def marcar_ficha_preliminar(request, cod_ficha, estado_ficha):
+def marcar_ficha_preliminar(request, cod_ficha: int, estado_ficha: int):
     if request.method == 'GET':
         models.set_ficha_preliminar(cod_ficha)
 
@@ -218,13 +228,13 @@ def marcar_ficha_preliminar(request, cod_ficha, estado_ficha):
             return redirect(reverse('fichas_descartadas'))
 
 
-def marcar_ficha_descartada(request, cod_ficha):
+def marcar_ficha_descartada(request, cod_ficha: int):
     if request.method == 'GET':
         models.set_ficha_descartada(cod_ficha)
         return redirect(reverse('fichas_preliminares'))
 
 
-def upload_arquivos(request, cod_ficha):
+def upload_arquivos(request, cod_ficha: int):
     if request.method == 'POST':
 
         registros = []
@@ -232,14 +242,14 @@ def upload_arquivos(request, cod_ficha):
             diretorio = 'arquivos'
             arquivo = request.FILES[key]
             nome_original = arquivo.name.split('.')[0]
-            nome_armazenado = datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+            nome_armazenado = nome_original + datetime.now().strftime('_%f')
             extensao = '.' + arquivo.name.split('.')[-1]
             data_cadastro = datetime.now().strftime('%Y-%m-%d')
             data_deletado = None
             deletado = 0
 
             fs = FileSystemStorage()
-            filename = fs.save(os.path.join(diretorio, nome_armazenado+extensao), arquivo)
+            filename = fs.save(os.path.join(diretorio, nome_armazenado + extensao), arquivo)
             url_arquivo = fs.url(filename)
 
             registros.append((
@@ -251,22 +261,21 @@ def upload_arquivos(request, cod_ficha):
                 data_deletado,
                 deletado,
                 cod_ficha,
+                0
             ))
 
         models.set_arquivos_ficha(registros)
         return redirect('home')
 
 
+def verificar_numero_ficha_existe(request, numero: int) -> int:
+    """
+        Verifica se o número da ficha já existe no banco de dados
+        :param request:
+        :param numero:
+        :return: Bool
+    """
 
-
-
-
-
-
-
-
-
-
-
-
-
+    return JsonResponse({
+        'numero_existe': models.numero_ficha_existe(numero)
+    })

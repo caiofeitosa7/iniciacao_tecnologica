@@ -157,7 +157,7 @@ def criar_tabela_arquivo(cursor):
 			    codigo          INTEGER PRIMARY KEY AUTO_INCREMENT,
 			    nome_original   VARCHAR(255) DEFAULT NULL,
 			    nome_armazenado VARCHAR(255) DEFAULT NULL,
-			    extensao        VARCHAR(7)   DEFAULT '.pdf',
+			    extensao        VARCHAR(7)   DEFAULT '.geracao_pdf',
 			    url             VARCHAR(500) DEFAULT NULL,
 			    data_cadastro   DATE         DEFAULT NULL,
 			    data_deletado   DATE         DEFAULT NULL,

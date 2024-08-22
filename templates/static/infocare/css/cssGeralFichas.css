@@ -230,6 +230,17 @@ ul {
   color: #fff;
 }
 
+.btnDescartar {
+  border: 2px solid var(--cor-vermelha);
+  background-color: var(--cor-vermelha);
+  color: #fff;
+}
+
+.btnDescartar:hover {
+  color: var(--cor-vermelha);
+  background-color: #fff;
+}
+
 #uploadForm {
   input,
   button {

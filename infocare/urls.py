@@ -25,6 +25,7 @@ urlpatterns = [
     path('home/fichas/pendencias/registrar_pendencia/', views.registrar_pendencia, name='registrar_pendencia'),
     path('home/fichas/pendencias/fechar_pendencia/<int:cod_ficha>/<int:cod_pendencia>', views.fechar_pendencia, name='fechar_pendencia'),
     # path('home/fichas/pendencias/apagar_pendencia/<int:codigo>', views.apagar_pendencia, name='apagar_pendencia'),
+    path('home/fichas/numero_ficha/<int:numero>', views.verificar_numero_ficha_existe, name='numero_ficha_existe'),
     path('upload/<int:cod_ficha>', views.upload_arquivos, name='upload'),
     path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
