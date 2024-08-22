@@ -236,7 +236,6 @@ def marcar_ficha_descartada(request, cod_ficha: int):
 
 def upload_arquivos(request, cod_ficha: int):
     if request.method == 'POST':
-
         registros = []
         for key in request.FILES.keys():
             diretorio = 'arquivos'

@@ -2441,9 +2441,9 @@
                                 <label for="mecan-infec">Provável Fonte / Mecanismo de Infecção</label>
                             </div>
                             <input id="mecan-infec" type="number" class="input-dado-quadrado form-control"
-                                   min="1" max="99">
+                                min="1" max="99">
                         </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly">
+                        <div class="container-input-dado justify-content-evenly mb-2">
                             <ul>
                                 <li>01-Sexual</li>
                                 <li>02-Transfusional</li>
@@ -2462,7 +2462,13 @@
                             </ul>
                             <ul>
                                 <li>11-Alimento/água contaminada</li>
-                                <li>12-Outros</li>
+                                <li class="d-flex align-items-center">
+                                    <span class="label-nowrap me-1">
+                                        12-Outros
+                                    </span>
+                                    <input id="mecan_infeccao_outros" class="form-control input-dado"
+                                        style="max-width: 130px;">
+                                </li>
                                 <li>99- Ignorado</li>
                             </ul>
                         </div>
@@ -2472,10 +2478,13 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">52</span>
-                            <label for="campo-dt-encerramento">Data do Encerramento</label>
+                            <label for="campo-dt-encerramento">
+                                Data do Encerramento
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-encerramento" type="date" class="input-dado form-control">
+                            <input id="campo-dt-encerramento" type="date" 
+                                class="input-dado form-control">
                         </div>
                     </div>
                 </div>

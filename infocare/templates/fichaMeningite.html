@@ -1811,11 +1811,11 @@
                                         class="form-control input-dado-quadrado mx-1"
                                         min="1" max="9"
                                     />
-                                    <span style="margin-right: 3.2rem;">
+                                    <span>
                                         Outra
                                     </span>
-                                    <input id="quant-outra" type="number"
-                                        class="form-control input-dado-quadrado mx-2"
+                                    <input id="quant-outra" style="max-width: 110px; min-width: 80px;"
+                                        class="form-control input-dado mx-2"
                                     />
                                     <input id="dt-outra" type="date" class="form-control me-2">
                                 </div>
@@ -2398,21 +2398,39 @@
                                 <input id="tipo-men-confirmacao" type="number" min="1" max="2"
                                     class="input-dado-quadrado form-control">
                             </div>
-                            <div class="container-input-dado">
-                                <div class="container-input-dado descricao-tipos-meia-altura">
-                                    1 - Meningococcemia <br>
-                                    2 - Meningite Meningocócica <br>
-                                    3 - Meningite Meningocócica com Meningococemia <br>
-                                    4 - Meningite Tuberculosa <br>
-                                    5 - Meningite por outras bactérias <br>
-                                </div>
-                                <div class="container-input-dado descricao-tipos-meia-altura">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 - Meningite não especificada <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7 - Meningite Asséptica <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8 - Meningite de outra etiologia <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Meningite por Hemófilo <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 - Meningite por Pneumococos
-                                </div>
+                            <div class="container-input-dado justify-content-evenly mb-2">
+                                <ul class="pe-1">
+                                    <li>1 - Meningococcemia</li>
+                                    <li>2 - Meningite Meningocócica</li>
+                                    <li>3 - Meningite Meningocócica com Meningococemia</li>
+                                    <li>4 - Meningite Tuberculosa</li>
+                                    <li class="d-flex align-items-center">
+                                        <label for="mening_bacterias" class="label-wrap-prety me-1">
+                                            5 - Meningite por outras bactérias
+                                        </label>
+                                        <input id="mening_bacterias" class="form-control input-dado"
+                                            style="max-width: 120px;">
+                                    </li>
+                                </ul>
+                                <ul class="ps-1">
+                                    <li>6 - Meningite não especificada</li>
+                                    <li class="d-flex align-items-center">
+                                        <label for="mening_assept" class="label-wrap-prety me-1">
+                                            7 - Meningite Asséptica
+                                        </label>
+                                        <input id="mening_assept" class="form-control input-dado"
+                                            style="max-width: 160px;">
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <label for="mening_otr_etiologia" class="label-wrap-prety me-1">
+                                            8 - Meningite de outra etiologia
+                                        </label>
+                                        <input id="mening_otr_etiologia" class="form-control input-dado"
+                                            style="max-width: 120px;">
+                                    </li>
+                                    <li>9 - Meningite por Hemófilo</li>
+                                    <li>10 - Meningite por Pneumococos</li>
+                                </ul>
                             </div>
                         </div>
                     </div>

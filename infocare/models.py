@@ -572,7 +572,7 @@ def listar_fichas(status: int, numero_ficha: int = 0, setor: str = ''):
                  C.nome,
                  PEND.quant,
                  F.data
-        ORDER BY F.setor, F.data;
+        ORDER BY F.data DESC;
     """
 
     cursor.execute(query)
@@ -830,7 +830,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     if not ficha_de_obito and tipo_ficha != 1:  # Exclui ficha de notificacao geral e as fichas de obito
         ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
 
-        if tipo_ficha == 11:
+        if tipo_ficha == 11:    # AIDS/HIV
             gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado,
                           nome_arquivo)
 
@@ -838,7 +838,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
         print('Entrou na opcao de salvar ficha de notificação')
         generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
 
-    else:
+    else:   # Fichas de Obito
         pass
 
     print('passando para registro no banco')
