@@ -198,6 +198,29 @@ input[type=number] {
     border-radius: 10px;
 }
 
+#tela-carregamento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1);
+    height: 90vh;
+}
+
+.c-loader {
+    animation: is-rotating 1s infinite;
+    border: 13px solid #e5e5e5;
+    border-top-color: var(--dark-color);
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+  }
+  
+  @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
 
 
 

@@ -19,6 +19,8 @@ function salvarPendencia(url, idModal){
         }
     });
 
+    abrirTelaCarregamento();
+
     fetch(url, {
             method: "POST",
             credentials: 'include',
@@ -30,6 +32,8 @@ function salvarPendencia(url, idModal){
         })
             .then(response => response.json())
             .then(function (json) {
+                    fecharTelaCarregamento();
+                    
                     if (json["status"] === 'success') {
                         // $('#mensagem-retorno .modal-title').html("Sucesso!");
                         // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");

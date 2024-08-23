@@ -227,6 +227,8 @@ function escaparCaracteresEspeciaisHTML(input) {
 }
 
 function requisicaoGetPadrao(url) {
+    abrirTelaCarregamento();
+
     fetch(url, {
         method: 'GET',
         headers: {
@@ -237,6 +239,7 @@ function requisicaoGetPadrao(url) {
         .then(data => {
             // if (tituloAba)
             //     alterarTituloAba(tituloAba);
+            fecharTelaCarregamento();
             $('#conteudo')[0].innerHTML = data.html[0];
         })
         .catch(error => {
@@ -258,9 +261,8 @@ function requisicaoPostPadrao(url, idForm) {
                 dicionario[campo.id] = campo.value;
     });
 
-    console.log(dicionario);
+    abrirTelaCarregamento();
 
-    // mostrarTelaCarregamento();
     fetch(url, {
         method: "POST",
         credentials: 'include',
@@ -273,6 +275,7 @@ function requisicaoPostPadrao(url, idForm) {
         .then(response => response.json())
         .then(
             function (json) {
+                fecharTelaCarregamento();
                 // retirarTelaCarregamento();
                 // if (json["status"] === 'success') {
                 //     $('#conteudo')[0].innerHTML = json.html[0];
@@ -303,4 +306,25 @@ function retornoListaFichas() {
         default:
             abrirOpcaoPaginaInicial();
     }
+}
+
+
+function abrirTelaCarregamento() {
+    let tela_carregamento = document.getElementById("tela-carregamento");
+    let tela_conteudo = document.getElementById("conteudo");
+
+    tela_carregamento.classList.remove("d-none");
+    tela_carregamento.classList.add("d-flex");
+    tela_conteudo.classList.remove("d-block");
+    tela_conteudo.classList.add("d-none");
+}
+
+function fecharTelaCarregamento() {
+    let tela_carregamento = document.getElementById("tela-carregamento");
+    let tela_conteudo = document.getElementById("conteudo");
+
+    tela_carregamento.classList.remove("d-flex");
+    tela_carregamento.classList.add("d-none");
+    tela_conteudo.classList.remove("d-none");
+    tela_conteudo.classList.add("d-block");
 }

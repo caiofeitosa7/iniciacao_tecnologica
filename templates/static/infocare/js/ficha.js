@@ -55,6 +55,8 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         dicionario['campo-dt-notificacao'] = dataAtual.toLocaleDateString('pt-BR', options).split('/').reverse().join('-');
     }
 
+    abrirTelaCarregamento();
+
     fetch(urlSetFichaNotificacao, {
         method: "POST",
         credentials: 'include',
@@ -67,6 +69,8 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
     .then(response => response.json())
     .then(
         function (json) {
+            fecharTelaCarregamento();
+            
             switch (json["status"]) {
                 case 'success':
                     let uploadForm = document.getElementById('uploadForm');

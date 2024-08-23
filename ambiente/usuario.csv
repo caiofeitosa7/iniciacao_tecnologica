@@ -1,3 +1,2 @@
-codigo,nome,funcao,usuario,senha,tipo_acesso
-1,Caio Feitosa,desenvolvedor,caio.feitosa,ch0c0l4t3,1
-2,Carlos Menezes,desenvolvedor,carlos.menezes,12345678,1
+codigo,nome,cpf,endereco,funcao,dt_nascimento,matricula,coren,tipo_acesso,usuario,senha
+6,Adm,,,,,,,,admin_infocare,1nf0c4r3hut

@@ -1,5 +1,4 @@
 codigo,descricao
-1,superadmin
-2,admin
-3,enf. chefe
-4,tecnico
+1,Admin
+2,Avaliador
+3,Técnico
