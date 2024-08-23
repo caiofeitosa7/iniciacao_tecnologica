@@ -1,13 +1,25 @@
-import os
-
 from django.db import connections, transaction
 from datetime import datetime, date
 from . import settings
 import pandas as pd
+import os
 
 # imports locais
 from geracao_pdf.script_ficha_base import generateFicha
 from geracao_pdf.script_aids_adulto import gerar_pdf_hiv
+from geracao_pdf.script_meningite import gerar_pdf_meningite
+from geracao_pdf.script_coqueluche import gerar_pdf_coqueluche
+from geracao_pdf.script_intox_exog import gerar_pdf_intox_exog
+from geracao_pdf.script_anti_rabica import gerar_pdf_anti_rabica
+from geracao_pdf.script_leptospirose import gerar_pdf_leptospirose
+from geracao_pdf.script_acid_mat_bio import gerar_pdf_acid_mat_bio
+from geracao_pdf.script_leish_visceral import gerar_pdf_leish_visceral
+from geracao_pdf.script_dengue_chikungunya import gerar_pdf_dengue_chik
+from geracao_pdf.script_doenca_chagas_aguda import gerar_pdf_chagas_aguda
+from geracao_pdf.script_hepatites_virais import gerar_pdf_hepatites_virais
+from geracao_pdf.script_acidente_trabalho_grave import gerar_acid_trab_grave
+from geracao_pdf.script_evento_adv_pos_vacina import gerar_pdf_evento_adv_pos_vacina
+from geracao_pdf.script_acid_animal_peconhento import gerar_pdf_acid_animal_peconhento
 
 
 def abrir_conexao():
@@ -794,8 +806,6 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
         nome_arq_anterior = apagar_arquivo_ficha(cursor, cod_ficha)
         print(nome_arq_anterior)
 
-    print(arq_existe)
-
     cursor.execute("""
         SELECT modelo_pdf, obito
         FROM tipo_ficha
@@ -830,9 +840,34 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     if not ficha_de_obito and tipo_ficha != 1:  # Exclui ficha de notificacao geral e as fichas de obito
         ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
 
-        if tipo_ficha == 11:    # AIDS/HIV
-            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado,
-                          nome_arquivo)
+        if tipo_ficha == 2:
+            gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 4:
+            gerar_pdf_anti_rabica(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 6:
+            gerar_pdf_leptospirose(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 9:
+            gerar_pdf_meningite(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 11:
+            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 12:
+            gerar_pdf_acid_mat_bio(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 13:
+            gerar_pdf_coqueluche(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 14:
+            gerar_pdf_acid_animal_peconhento(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 15:
+            gerar_pdf_dengue_chik(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 16:
+            gerar_pdf_chagas_aguda(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 17:
+            gerar_pdf_intox_exog(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 18:
+            gerar_pdf_hepatites_virais(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 21:
+            gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 22:
+            gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
 
     elif tipo_ficha == 1:
         print('Entrou na opcao de salvar ficha de notificação')

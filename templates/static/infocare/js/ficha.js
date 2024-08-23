@@ -71,10 +71,20 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
                 case 'success':
                     let uploadForm = document.getElementById('uploadForm');
                     let parts = uploadForm.action.split('/');
-                    
                     parts[parts.length - 1] = json["cod_ficha"];
                     uploadForm.action = parts.join('/');
+
                     uploadForm.submit();
+
+                    // console.log(json['edicao_ficha'])
+                    // console.log(json['edicao_ficha'] === 1)
+                    // console.log(document.getElementById('redirecionamento').value)
+
+                    // if (json['edicao_ficha'] === 1) {
+                    //     document.getElementById('redirecionamento').value = json['view_visualizacao'];
+                    // }
+
+                    // uploadForm.submit();
     
                     // $('#conteudo')[0].innerHTML = json.html[0];
                     // $('#mensagem-retorno .modal-title').html("Sucesso!");

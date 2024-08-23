@@ -2,7 +2,11 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, reverse
 from django.template.loader import render_to_string
 from django.http import FileResponse, JsonResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from datetime import datetime, timedelta
+from django.contrib import messages
 from . import models
 import json
 import os
@@ -14,7 +18,13 @@ def login(request):
 
 
 def home(request):
-    return render(request, 'base.html')
+    if not request.session.get('acesso_usuario'):
+        return redirect(reverse('login'))
+
+    contexto = {
+        'acesso_usuario': request.session.get('acesso_usuario')
+    }
+    return render(request, 'base.html', contexto)
 
 
 def imagem_local(request, cod_img):
@@ -39,10 +49,9 @@ def pagina_inicial_view(request):
 
 
 def listagem_fichas(request, status: int, titulo: str, id_tabela: str):
-    if request.method == 'POST':
+    if request.method == 'POST':    # fazer filtro
         pass
         # dados = json.loads(request.body)
-        # dados = retirar_caracteres_especiais(dados)
     else:
         request.session['status_ficha_aberta'] = status
         fichas = models.listar_fichas(status)
@@ -53,6 +62,7 @@ def listagem_fichas(request, status: int, titulo: str, id_tabela: str):
         'id_tabela': id_tabela,
         'status_fichas': status,
     }
+
     return JsonResponse({
         'html': [render_to_string('listagem_fichas.html', contexto, request=request)]
     })
@@ -125,43 +135,49 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
 def registrar_ficha(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
+        cod_usuario = int(request.session.get('cod_usuario'))
 
-        # cod_usuario = int(request.session.get('cod_usuario'))
-        cod_usuario = 1
+        try:
+            if dados.get('codigo', False):
+                args = {
+                    'cod_ficha': dados['codigo'],
+                    'cod_formulario': dados['cod_tipo_ficha'],
+                }
 
+                cod_ficha = models.alterar_ficha(dados)
 
+                if cod_ficha:
+                    messages.success(request, 'Ficha atualizada com sucesso!')
+                    return JsonResponse({
+                        'status': 'success',
+                        'cod_ficha': 111,
+                        'edicao_ficha': 1,
+                        'view_visualizacao': reverse('visualizar_ficha', kwargs=args)
+                    })
+            else:
+                numero_ficha = dados.get('numero-ficha', False)
 
-        # try:
-        if dados.get('codigo', False):
-            args = {
-                'cod_ficha': dados['codigo'],
-                'cod_formulario': dados['cod_tipo_ficha'],
-            }
+                if numero_ficha and models.numero_ficha_existe(numero_ficha):
+                    return JsonResponse({
+                        'status': 'erro-numero-ficha'
+                    })
 
-            cod_ficha = models.alterar_ficha(dados)
-            return redirect(reverse('visualizar_ficha', kwargs=args))
-        else:
-            numero_ficha = dados.get('numero-ficha', False)
-
-            if numero_ficha and models.numero_ficha_existe(numero_ficha):
-                return JsonResponse({
-                    'status': 'erro-numero-ficha'
-                })
-
-            cod_ficha = models.set_ficha(dados, cod_usuario)
-            if cod_ficha:
-                return JsonResponse({
-                    'cod_ficha': cod_ficha,
-                    'status': 'success'
-                })
+                cod_ficha = models.set_ficha(dados, cod_usuario)
+                if cod_ficha:
+                    messages.success(request, 'Ficha cadastrada com sucesso!')
+                    return JsonResponse({
+                        'cod_ficha': 1,
+                        'status': 'success',
+                        'edicao_ficha': 0
+                    })
 
             return JsonResponse({
                 'status': 'error'
             })
 
-        # except Exception as e:
-        #     print(e)
-        #     return redirect(reverse('pagina_inicial'))
+        except Exception as e:
+            print(e)
+            return redirect(reverse('pagina_inicial'))
 
 
 def pendencias_view(request, cod_ficha):
@@ -215,6 +231,7 @@ def fechar_pendencia(request, cod_ficha: int, cod_pendencia: int):
 def marcar_ficha_concluida(request, cod_ficha: int):
     if request.method == 'GET':
         models.set_ficha_concluida(cod_ficha)
+        messages.success(request, 'Ficha concluida!')
         return redirect(reverse('fichas_preliminares'))
 
 
@@ -225,17 +242,24 @@ def marcar_ficha_preliminar(request, cod_ficha: int, estado_ficha: int):
         if estado_ficha == 4:
             return redirect(reverse('fichas_pendentes'))
         else:
+            messages.success(request, 'A ficha foi restaurada para NOTIFICAÇÕES PRELIMINARES!')
             return redirect(reverse('fichas_descartadas'))
 
 
 def marcar_ficha_descartada(request, cod_ficha: int):
     if request.method == 'GET':
         models.set_ficha_descartada(cod_ficha)
+        messages.success(request, 'Ficha descartada com sucesso!')
         return redirect(reverse('fichas_preliminares'))
 
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def upload_arquivos(request, cod_ficha: int):
-    if request.method == 'POST':
+    # redirecionamento = request.POST.get('redirecionamento')
+    # print(redirecionamento)
+
+    if request.session.get('cod_usuario') is not None:
         registros = []
         for key in request.FILES.keys():
             diretorio = 'arquivos'
@@ -263,8 +287,13 @@ def upload_arquivos(request, cod_ficha: int):
                 0
             ))
 
-        models.set_arquivos_ficha(registros)
+        # models.set_arquivos_ficha(registros)
+
+        # if redirecionamento:
+        #     return redirect(redirecionamento)
         return redirect('home')
+    else:
+        return redirect('login')
 
 
 def verificar_numero_ficha_existe(request, numero: int) -> int:

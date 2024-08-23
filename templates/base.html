@@ -58,26 +58,24 @@
                         <span class="links_name">Fichas Descartadas</span>
                     </a>
                 </li>
-                <li>
-                    <a class="opcao-menu-lateral" onclick="abrirOpcaoUsuarios()">
-                        <i class='bx bx-group'></i>
-                        <span class="links_name">Usuários</span>
-                    </a>
-                </li>
+
+                {% if acesso_usuario != 3 %}
+                    <li>
+                        <a class="opcao-menu-lateral" onclick="abrirOpcaoUsuarios()">
+                            <i class='bx bx-group'></i>
+                            <span class="links_name">Usuários</span>
+                        </a>
+                    </li>
+                {% endif %}
+
                 <!-- <li>
-                    <a class="opcao-menu-lateral" href="#" onclick="abreFechaMenu()">
+                    <a class="opcao-menu-lateral" >
                         <i class='bx bx-cog'></i>
                         <span class="links_name">Configurações</span>
                     </a>
                 </li> -->
             </ul>
         </div>
-        <!--            <div>-->
-        <!--                <a href="#">-->
-        <!--                    <i class='bx bx-cog'></i>-->
-        <!--                    <span class="links_name">Sair</span>-->
-        <!--                </a>-->
-        <!--            </div>-->
     </div>
 
     <section class="home-section">
@@ -90,6 +88,19 @@
 <!--            <i class='clicavel bx bxs-bell'></i>-->
 <!--            <i class='clicavel bx bxs-bell-ring' style='display: none'></i>-->
         </nav>
+
+        <div class="container">
+            {% if messages %}
+            <ul id="messages" class="list-unstyled pt-2 mb-0">
+                {% for message in messages %}
+                <li class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">{{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </li>
+                {% endfor %}
+            </ul>
+            {%  endif %}
+        </div>
+
         <div id="conteudo" class="pb-5"></div>
     </section>
 

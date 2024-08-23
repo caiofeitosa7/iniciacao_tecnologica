@@ -1,8 +1,6 @@
 def generateFicha(dict_geral: dict, modelo_pdf: str, path_pdf_gerado: str, nome_arquivo: str, close_doc: bool = True):
     from .pdfWritter import PDFWriter
-    import os
 
-    print('Diretorio modelo_pdf:', modelo_pdf)
 
     try:
         document = PDFWriter(modelo_pdf)
@@ -88,6 +86,7 @@ def generateFicha(dict_geral: dict, modelo_pdf: str, path_pdf_gerado: str, nome_
         document.write_text(dict_geral['municipio_infeccao'], (385, 770))
         document.write_text(dict_geral['bairro_infeccao'], (375, 791))
         document.save(nome_arquivo, path_pdf_gerado, close_doc=close_doc)
+
         return document
 
     except Exception as e:
