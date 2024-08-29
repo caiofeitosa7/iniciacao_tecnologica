@@ -76,17 +76,21 @@ WSGI_APPLICATION = 'infocare.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ana',
         'USER': 'root',
         'PASSWORD': 'suc0_b0l4ch4',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3306'
+    },
+    'hutsaude05': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hutsaude05',
+        'USER': 'hutsaude05_add1',
+        'PASSWORD': 'H117125',
+        'HOST': 'mysql.hutsaude.com.br',
+        'PORT': '3306'
     }
 }
 

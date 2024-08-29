@@ -6,8 +6,6 @@ function logarUsuario(urlLogarUsuario, urlHome) {
     urlHome = escaparCaracteresEspeciaisHTML(urlHome);
     urlLogarUsuario = escaparCaracteresEspeciaisHTML(urlLogarUsuario);
 
-    abrirTelaCarregamento();
-
     fetch(urlLogarUsuario, {
         method: "POST",
         credentials: 'include',
@@ -23,8 +21,6 @@ function logarUsuario(urlLogarUsuario, urlHome) {
         .then(response => response.json())
         .then(
             function (json) {
-                fecharTelaCarregamento();
-                
                 if (json["status"] === 'success') {
                     localStorage.setItem('opcaoSelecionada', 1);
                     window.location.href = urlHome;

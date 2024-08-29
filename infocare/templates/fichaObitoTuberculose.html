@@ -18,7 +18,8 @@
         <div class="col-2" style="min-width: 130px;">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha"/>
+                <input type="number" class="form-control" id="numero-ficha"
+                    onblur="validarNumeroFicha(this.value, false)"/>
             </div>
         </div>
     </div>
@@ -39,7 +40,8 @@
                                 Foi notificado no Sinan antes de morrer?
                             </label>
                             <div class="d-flex align-items-center">
-                                <input id="notif-antes-morrer" type="number" class="form-control input-dado-quadrado mx-3">
+                                <input id="notif-antes-morrer" type="number"
+                                    class="form-control input-dado-quadrado mx-3">
                                 <span>
                                     1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     2 - Não
@@ -108,26 +110,26 @@
                     </div>
                     <div class="linha-dados">
                         <div class="col-12 p-2">
-                            <label for="nome-paciente" class="mb-1">
+                            <label for="campo-nome-paciente" class="mb-1">
                                 Nome do paciente:
                             </label>
-                            <input id="nome-paciente" class="form-control input-dado mx-1">
+                            <input id="campo-nome-paciente" class="form-control input-dado mx-1">
                         </div>
                     </div>
                     <div class="linha-dados">
                         <div class="col-12 p-2">
-                            <label for="nome-mae" class="mb-1">
+                            <label for="campo-nome-mae" class="mb-1">
                                 Nome da mãe:
                             </label>
-                            <input id="nome-mae" class="form-control input-dado mx-1">
+                            <input id="campo-nome-mae" class="form-control input-dado mx-1">
                         </div>
                     </div>
                     <div class="linha-dados">
                         <div class="col-5 d-flex align-items-center border-right p-2">
-                            <label for="dt-nascimento-paciente" class="label-nowrap mb-1">
+                            <label for="campo-dt-nascimento" class="label-nowrap mb-1">
                                 Data de nascimento:
                             </label>
-                            <input id="dt-nascimento-paciente" type="date" class="form-control input-dado mx-1"
+                            <input id="campo-dt-nascimento" type="date" class="form-control input-dado mx-1"
                                 style="max-width: 200px;">
                         </div>
                         <div class="col-3 d-flex align-items-center border-right p-2">
@@ -152,30 +154,30 @@
                     </div>
                     <div class="linha-dados">
                         <div class="col-12 p-2">
-                            <label for="endereco-paciente" class="mb-1">
+                            <label for="endereco-residencia" class="mb-1">
                                 Endereço:
                             </label>
-                            <input id="endereco-paciente" class="form-control input-dado mx-1">
+                            <input id="endereco-residencia" class="form-control input-dado mx-1">
                         </div>
                     </div>
                     <div class="linha-dados">
                         <div class="col-5 border-right p-2">
-                            <label for="bairro-paciente" class="mb-1">
+                            <label for="campo-bairro-residencia" class="mb-1">
                                 Bairro:
                             </label>
-                            <input id="bairro-paciente" class="form-control input-dado mx-1">
+                            <input id="campo-bairro-residencia" class="form-control input-dado mx-1">
                         </div>
                         <div class="col-6 border-right p-2">
-                            <label for="municipio-paciente" class="mb-1">
+                            <label for="campo-municipio-residencia" class="mb-1">
                                 Município de residência:
                             </label>
-                            <input id="municipio-paciente" class="form-control input-dado mx-1">
+                            <input id="campo-municipio-residencia" class="form-control input-dado mx-1">
                         </div>
                         <div class="col-1 p-2">
-                            <label for="uf-paciente" class="mb-1">
+                            <label for="campo-uf-residencia" class="mb-1">
                                 UF:
                             </label>
-                            <input id="uf-paciente" class="form-control input-dado mx-1">
+                            <input id="campo-uf-residencia" class="form-control input-dado mx-1">
                         </div>
                     </div>
                 </div>

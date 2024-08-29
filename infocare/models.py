@@ -2,6 +2,8 @@ from django.db import connections, transaction
 from datetime import datetime, date
 from . import settings
 import pandas as pd
+import pymysql
+import re
 import os
 
 # imports locais
@@ -822,7 +824,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     else:
         nome_armazenado = '_'.join(nome_original.split(' ')[:2]) \
                           + datetime.now().strftime('_%f')
-                          # + datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+        # + datetime.now().strftime('%Y%m%d_%H%M%S_%f')
 
     data_cadastro = datetime.now().strftime('%Y-%m-%d')
     data_deletado = None
@@ -841,39 +843,53 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
         ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
 
         if tipo_ficha == 2:
-            gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 4:
-            gerar_pdf_anti_rabica(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_anti_rabica(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 6:
-            gerar_pdf_leptospirose(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_leptospirose(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 9:
-            gerar_pdf_meningite(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_meningite(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 11:
-            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado,
+                          nome_arquivo)
         elif tipo_ficha == 12:
-            gerar_pdf_acid_mat_bio(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_acid_mat_bio(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 13:
-            gerar_pdf_coqueluche(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_coqueluche(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                 path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 14:
-            gerar_pdf_acid_animal_peconhento(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_acid_animal_peconhento(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                             path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 15:
-            gerar_pdf_dengue_chik(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_dengue_chik(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 16:
-            gerar_pdf_chagas_aguda(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_chagas_aguda(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 17:
-            gerar_pdf_intox_exog(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_intox_exog(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                 path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 18:
-            gerar_pdf_hepatites_virais(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_hepatites_virais(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                       path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 21:
-            gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                     path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 22:
-            gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base, path_pdf_gerado, nome_arquivo)
+            gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                            path_pdf_gerado, nome_arquivo)
 
     elif tipo_ficha == 1:
         print('Entrou na opcao de salvar ficha de notificação')
         generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
 
-    else:   # Fichas de Obito
+    else:  # Fichas de Obito
         pass
 
     print('passando para registro no banco')
@@ -891,3 +907,49 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     )
 
     set_arquivos_ficha([info_arquivo])
+
+
+def get_info_comum_paciente(prontuario: int):
+    bd_hut05 = settings.DATABASES.get('hutsaude05')
+    resultado = None
+
+    try:
+        connection = pymysql.connect(
+            host=bd_hut05['HOST'],
+            user=bd_hut05['USER'],
+            password=bd_hut05['PASSWORD'],
+            database=bd_hut05['NAME'],
+            cursorclass=pymysql.cursors.DictCursor  # Opcional, retorna resultados como dicionários
+        )
+
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                    SELECT *
+                    FROM infocare
+                    WHERE prontuario = %s
+                        OR prontuario_unico = %s
+                """, (prontuario, prontuario))
+            resultado = cursor.fetchone()
+
+            if resultado:
+                endereco_numero = resultado['endereco_numero'] \
+                    .replace('NÂº', '&&') \
+                    .split('&&')
+
+                numero = endereco_numero[1].strip()
+                numero = re.findall(r'\d+', numero) if numero else None
+                resultado['endereco_numero'] = int(numero[0]) if numero else None
+                resultado['endereco_logradouro'] = endereco_numero[0].strip(', ')
+                resultado['endereco_completo'] = ' - '.join(endereco_numero)
+                telefones = resultado['telefones'].replace(' ', '').split('/')
+                resultado['telefones'] = telefones[0]
+
+    except pymysql.MySQLError as e:
+        print(f"Erro ao conectar ao banco de dados: {e}")
+
+    finally:
+        if connection:
+            connection.close()
+            print("Conexão fechada.")
+
+        return resultado

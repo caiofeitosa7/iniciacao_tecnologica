@@ -11,6 +11,7 @@
                 Prontuário
             </label>
             <input id="prontuario" type="number" class="form-control"
+                onblur="autoPreenchimento('{% url 'info_paciente' 0 %}', this.value)"
                 {% if ficha.prontuario != "0" %}
                     value="{{ ficha.prontuario }}"
                 {% endif %}

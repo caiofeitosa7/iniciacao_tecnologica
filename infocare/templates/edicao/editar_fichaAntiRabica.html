@@ -19,7 +19,9 @@
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha">N°</label>
                 <input type="number" class="form-control" id="numero-ficha"
-                       value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
+                    onchange="validarNumeroFicha(this.value, false)"
+                    oninput="atribuirValor(this.id)"
+                    value="{% if ficha.numero_ficha %}{{ ficha.numero_ficha }}{% endif %}"
                 />
             </div>
         </div>

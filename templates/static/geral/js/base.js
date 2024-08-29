@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
 function atribuirValor(elementId) {
     let valorDoCampo = document.getElementById(elementId).value;
     let novoElementId = elementId + "2";
@@ -215,6 +214,111 @@ function deslogarUsuario(url) {
     localStorage.clear();
     window.location.href = url;
 }
+
+function autoPreenchimento(url, prontuario) {
+    let parts = url.split('/');
+    parts[parts.length - 1] = prontuario;
+    url = parts.join('/');
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json;charset=UTF-8"
+        },
+    })
+        .then(response => response.json())
+        .then(json => {
+            if (json.status == "success") {
+                dados = json.dados;
+                document.getElementById("setor").value = dados.posto_nome;
+
+                let nomePaciente = document.getElementById("campo-nome-paciente");
+                let nomePaciente2 = document.getElementById("campo-nome-paciente2");
+                let dtNascimento = document.getElementById("campo-dt-nascimento");
+                let dtNascimento2 = document.getElementById("campo-dt-nascimento2");
+                let sexo = document.getElementById("campo-sexo");
+                let sexo2 = document.getElementById("campo-sexo2");
+                let numeroSus = document.getElementById("campo-numero-sus");
+                let numeroSus2 = document.getElementById("campo-numero-sus2");
+                let nomeMae = document.getElementById("campo-nome-mae");
+                let nomeMae2 = document.getElementById("campo-nome-mae2");
+                let ufResidencia = document.getElementById("campo-uf-residencia");
+                let ufResidencia2 = document.getElementById("campo-uf-residencia2");
+                let municipioResidencia = document.getElementById("campo-municipio-residencia");
+                let municipioResidencia2 = document.getElementById("campo-municipio-residencia2");
+                let codIbgeResidencia = document.getElementById("campo-cod-ibge-residencia");
+                let codIbgeResidencia2 = document.getElementById("campo-cod-ibge-residencia2");
+                let bairroResidencia = document.getElementById("campo-bairro-residencia");
+                let bairroResidencia2 = document.getElementById("campo-bairro-residencia2");
+                let logradouroResidencia = document.getElementById("campo-logradouro-residencia");
+                let logradouroResidencia2 = document.getElementById("campo-logradouro-residencia2");
+                let numeroResidencia = document.getElementById("campo-numero-residencia");
+                let numeroResidencia2 = document.getElementById("campo-numero-residencia2");
+                let telefoneResidencia = document.getElementById("campo-telefone-residencia");
+                let telefoneResidencia2 = document.getElementById("campo-telefone-residencia2");
+                let endereco = document.getElementById("endereco-residencia");
+
+                if (nomePaciente != null) nomePaciente.value = dados.nome;
+                if (nomePaciente2 != null) nomePaciente2.value = dados.nome;
+                if (dtNascimento != null) dtNascimento.value = dados.data_nascimento;
+                if (dtNascimento2 != null) dtNascimento2.value = dados.data_nascimento;
+                if (sexo != null) sexo.value = dados.paciente_sexo;
+                if (sexo2 != null) sexo2.value = dados.paciente_sexo;
+                if (numeroSus != null) numeroSus.value = dados.cartao_sus;
+                if (numeroSus2 != null) numeroSus2.value = dados.cartao_sus;
+                if (nomeMae != null) nomeMae.value = dados.nome_mae;
+                if (nomeMae2 != null) nomeMae2.value = dados.nome_mae;
+                if (ufResidencia != null) ufResidencia.value = dados.endereco_uf;
+                if (ufResidencia2 != null) ufResidencia2.value = dados.endereco_uf;
+                if (municipioResidencia != null) municipioResidencia.value = dados.endereco_municipio;
+                if (municipioResidencia2 != null) municipioResidencia2.value = dados.endereco_municipio;
+                if (codIbgeResidencia != null) codIbgeResidencia.value = dados.endereco_municipio_codigo;
+                if (codIbgeResidencia2 != null) codIbgeResidencia2.value = dados.endereco_municipio_codigo;
+                if (bairroResidencia != null) bairroResidencia.value = dados.endereco_bairro;
+                if (bairroResidencia2 != null) bairroResidencia2.value = dados.endereco_bairro;
+                if (logradouroResidencia != null) logradouroResidencia.value = dados.endereco_logradouro;
+                if (logradouroResidencia2 != null) logradouroResidencia2.value = dados.endereco_logradouro;
+                if (numeroResidencia != null) numeroResidencia.value = dados.endereco_numero;
+                if (numeroResidencia2 != null) numeroResidencia2.value = dados.endereco_numero;
+                if (telefoneResidencia != null) telefoneResidencia.value = dados.telefones;
+                if (telefoneResidencia2 != null) telefoneResidencia2.value = dados.telefones;
+                if (endereco != null) endereco.value = dados.endereco_completo;
+
+            } else {
+                console.log('Não encontrou nada')
+            }
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ------------------------------ Funcoes Auxiliares --------------------------------- //
 

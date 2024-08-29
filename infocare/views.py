@@ -307,3 +307,23 @@ def verificar_numero_ficha_existe(request, numero: int) -> int:
     return JsonResponse({
         'numero_existe': models.numero_ficha_existe(numero)
     })
+
+
+def obter_info_paciente(request, prontuario: int):
+    """
+        Retorna as informações básicas do paciente
+        :param request:
+        :param prontuario:
+        :return: JSON
+    """
+
+    dados = models.get_info_comum_paciente(prontuario)
+    return JsonResponse({
+            'status': 'success' if dados else 'erro',
+            'dados': dados if dados else {}
+        })
+
+
+
+
+
