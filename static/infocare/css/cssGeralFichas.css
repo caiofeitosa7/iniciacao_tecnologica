@@ -1,0 +1,269 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  --bs-gutter-x: 0;
+}
+
+.negrito {
+  font-weight: 600;
+}
+
+.label-nowrap {
+  text-wrap: nowrap;
+}
+
+.letra-miuda {
+  font-size: x-small;
+}
+
+.descricao-tipos {
+  position: relative;
+  top: -20px;
+}
+
+.descricao-tipos-meia-altura {
+  position: relative;
+  top: -10px;
+}
+
+.campo-hut {
+  width: 40%;
+}
+
+.campo-hut label {
+  font-size: small;
+}
+
+.ficha {
+  line-height: 1.2;
+}
+
+.ficha,
+.ficha input,
+.ficha label,
+.ficha textarea {
+  font-size: small;
+}
+
+.font-xsmall label {
+  font-size: x-small !important;
+}
+
+.container-cabecalho {
+  display: flex;
+  align-items: center;
+  text-align: -webkit-center;
+}
+
+.container-cabecalho .left-div,
+.container-cabecalho .center-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right-div .input-group {
+  width: 90%;
+}
+
+.bloco-dados {
+  margin-top: 2vh;
+  display: flex;
+}
+
+.bloco-dados .titulo-bloco {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  margin-right: 0.8vh;
+  min-width: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cbcbcb;
+  border: 1px solid #000;
+  font-size: small;
+  font-weight: bold;
+}
+
+.bloco-dados .conteudo-bloco {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: 100%;
+}
+
+.linha-dados {
+  width: -webkit-fill-available;
+  margin-top: 1.7vh;
+  display: flex;
+}
+
+.div-input {
+  border-radius: 0 0 7px 7px;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.info-elevada,
+.info-elevada-sem-numeracao,
+.info-elevada-com-input {
+  position: relative;
+  margin-bottom: 3px;
+  left: -1px;
+  top: -3px;
+}
+
+.info-elevada-sem-numeracao {
+  padding-left: 4px;
+}
+
+.info-elevada-com-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.numeracao {
+  border: 1px solid #000;
+  height: fit-content;
+  font-weight: bold;
+  padding: 0 6px;
+}
+
+.container-input-dado {
+  display: flex;
+  justify-content: center;
+}
+
+.input-dado {
+  width: 95%;
+  padding: 2px 7px;
+  margin-bottom: 3px;
+}
+
+.input-dado-quadrado {
+  margin-right: 3px;
+  padding: 0 3px;
+  height: 30px;
+  width: 30px;
+}
+
+.container-input-dado .container-tipo-idade {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 22px;
+}
+
+.campo-zona-residencia,
+.campo-zona-ocorrencia {
+  height: 48px;
+}
+
+.campo-escolaridade .descricao-tipos {
+  padding: 3px 45px 0 10px;
+}
+
+.campo-sexo .descricao-tipos {
+  justify-content: flex-start;
+  position: relative;
+  margin-left: 5px;
+  padding: 0;
+}
+
+.campo-raca .descricao-tipos,
+.campo-gestante .descricao-tipos {
+  padding: 3px 5px 0;
+  justify-content: flex-start;
+}
+
+.titulo-section {
+  padding: 7px;
+  display: block;
+  text-align: center;
+  border-radius: 7px;
+  border: 1px solid #000;
+  background-color: #cbcbcb;
+}
+
+.textArea textarea {
+  border-radius: 0 0 7px 7px;
+}
+
+.textArea span {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 7px 7px 0 0;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-top: 1px solid #000;
+}
+
+.footer-ficha {
+  margin-left: 41px;
+}
+
+#containerBtnAcao .btnCancelar {
+  border: 2px solid var(--dark-color);
+  color: var(--dark-color);
+}
+
+#containerBtnAcao .btnCancelar:hover {
+  border: 2px solid var(--dark-color);
+  background-color: #abcbee;
+  color: var(--dark-color);
+}
+
+.btnCorPrincipal {
+  background-color: var(--dark-color);
+  color: #fff;
+}
+
+.btnCorPrincipal:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.btnDescartar {
+  border: 2px solid var(--cor-vermelha);
+  background-color: var(--cor-vermelha);
+  color: #fff;
+}
+
+.btnDescartar:hover {
+  color: var(--cor-vermelha);
+  background-color: #fff;
+}
+
+#uploadForm {
+  input,
+  button {
+    font-size: small !important;
+  }
+
+  input {
+    width: 50%;
+    margin-bottom: 0;
+  }
+}
+
+#anexos {
+  a, i {
+    color: var(--dark-color);
+
+    &:hover {
+      color: #0b1921;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+}

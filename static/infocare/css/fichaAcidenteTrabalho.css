@@ -1,0 +1,10 @@
+.descricao-acidenteTrabalho {
+    border-radius: 7px;
+    border: 2px solid #000;
+    padding: 3px 10px;
+    line-height: 1.5;
+}
+
+.campo-partes-corpo-atendimento {
+    height: 100px;
+}

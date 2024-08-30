@@ -1,0 +1,11 @@
+#div-dt-corticoide {
+    position: relative;
+    margin-left: 67px;
+    top: -30px;
+}
+
+@media only screen and (max-width: 836px) {
+    #div-dt-corticoide {
+        top: -54px;
+    }
+}

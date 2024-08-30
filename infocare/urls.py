@@ -1,8 +1,9 @@
 from . import views
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.core.files.storage import FileSystemStorage
 from django.conf.urls.static import static
+from django.views.static import serve
 from django.conf import settings
 
 urlpatterns = [
@@ -30,4 +31,10 @@ urlpatterns = [
     path('upload/<int:cod_ficha>', views.upload_arquivos, name='upload'),
     path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
     path('download/', views.download_fichas, name='download_fichas'),
+
+    # O código abaixo é para que o django forneça os arquivos státicos (no caso, os PDFs).
+    # Porém o ideal é que esses arquivos sejam fornecidos por um servidor web como nginx, apache ou etc
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

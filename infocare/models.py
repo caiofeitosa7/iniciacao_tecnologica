@@ -371,9 +371,9 @@ def averiguar_campos(cursor, tipo_ficha: int, campos: dict):
 
         registros.append(registro)
 
-    df = pd.DataFrame(registros)
-    df.to_excel('output.xlsx', index=False)
-    print('\nArquivo salvo.\n')
+    # df = pd.DataFrame(registros)
+    # df.to_excel('output.xlsx', index=False)
+    # print('\nArquivo salvo.\n')
 
 
 def set_ficha(campos: dict, cod_usuario):
@@ -806,7 +806,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
 
     if arq_existe:
         nome_arq_anterior = apagar_arquivo_ficha(cursor, cod_ficha)
-        print(nome_arq_anterior)
+        # print(nome_arq_anterior)
 
     cursor.execute("""
         SELECT modelo_pdf, obito
@@ -819,12 +819,12 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     ficha_completa = formatar_dados_esperados(ficha_completa)
     nome_original = ficha_completa['nome_paciente']
 
-    if arq_existe:
-        nome_armazenado = nome_arq_anterior
-    else:
-        nome_armazenado = '_'.join(nome_original.split(' ')[:2]) \
-                          + datetime.now().strftime('_%f')
-        # + datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+    # if arq_existe:
+    #     nome_armazenado = nome_arq_anterior
+    # else:
+    nome_armazenado = '_'.join(nome_original.split(' ')[:2]) \
+                      + datetime.now().strftime('_%f')
+                      # + datetime.now().strftime('%Y%m%d_%H%M%S_%f')
 
     data_cadastro = datetime.now().strftime('%Y-%m-%d')
     data_deletado = None
