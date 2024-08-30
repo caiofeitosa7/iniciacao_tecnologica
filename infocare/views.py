@@ -14,8 +14,6 @@ import zipfile
 import json
 import csv
 import os
-import io
-
 
 
 def login(request):
@@ -24,8 +22,8 @@ def login(request):
 
 
 def home(request):
-    # if not request.session.get('acesso_usuario'):
-    #     return redirect(reverse('login'))
+    if not request.session.get('acesso_usuario'):
+        return redirect(reverse('login'))
 
     contexto = {
         'acesso_usuario': request.session.get('acesso_usuario'),
@@ -145,20 +143,19 @@ def registrar_ficha(request):
         cod_usuario = int(request.session.get('cod_usuario'))
 
         try:
-            if dados.get('codigo', False):
+            if dados.get('codigo', False):  # Se exitir, significa que é uma atualizacao
                 args = {
                     'cod_ficha': dados['codigo'],
                     'cod_formulario': dados['cod_tipo_ficha'],
                 }
 
                 cod_ficha = models.alterar_ficha(dados)
-
                 if cod_ficha:
                     messages.success(request, 'Ficha atualizada com sucesso!')
                     return JsonResponse({
                         'status': 'success',
-                        'cod_ficha': 111,
-                        'edicao_ficha': 1,
+                        'cod_ficha': cod_ficha,
+                        # 'edicao_ficha': 1,
                         'view_visualizacao': reverse('visualizar_ficha', kwargs=args)
                     })
             else:
@@ -173,9 +170,9 @@ def registrar_ficha(request):
                 if cod_ficha:
                     messages.success(request, 'Ficha cadastrada com sucesso!')
                     return JsonResponse({
-                        'cod_ficha': 1,
+                        'cod_ficha': cod_ficha,
                         'status': 'success',
-                        'edicao_ficha': 0
+                        # 'edicao_ficha': 0
                     })
 
             return JsonResponse({
@@ -294,7 +291,7 @@ def upload_arquivos(request, cod_ficha: int):
                 0
             ))
 
-        # models.set_arquivos_ficha(registros)
+        models.set_arquivos_ficha(registros)
 
         # if redirecionamento:
         #     return redirect(redirecionamento)
@@ -331,25 +328,6 @@ def obter_info_paciente(request, prontuario: int):
         })
 
 
-# def download_fichas(request):
-#     """
-#         Faz o download das fichas do tipo selecionado dentro de um determiado periodo
-#         :param request:
-#         :return: JSON
-#     """
-#
-#     dados = json.loads(request.body)
-#     fichas = models.listar_fichas_download(dados)
-#     temp_dir = tempfile.mkdtemp()
-#
-#     for codigo in fichas:
-#         dados_ficha = models.get_ficha(codigo)
-#
-#     return JsonResponse({
-#         'fichas': fichas
-#     })
-
-
 def download_fichas(request):
     """
     Faz o download das fichas do tipo selecionado dentro de um determinado período.
@@ -364,53 +342,39 @@ def download_fichas(request):
     temp_dir = tempfile.mkdtemp()
     zip_filename = ''
 
-    # try:
-    csv_files = []
-    for codigo in fichas:
-        dados_ficha = models.get_ficha(codigo)
+    try:
+        csv_files = []
+        for codigo in fichas:
+            dados_ficha = models.get_ficha(codigo)
+            dados_ficha.pop('quant_pendencias', None)
+            dados_ficha.pop('arquivos', None)
 
-        # Definir o caminho do arquivo CSV
-        csv_filename = os.path.join(temp_dir, f'ficha_{codigo}.csv')
-        csv_files.append(csv_filename)
+            # Definir o caminho do arquivo CSV
+            csv_filename = os.path.join(temp_dir, f'ficha_{codigo}.csv')
+            csv_files.append(csv_filename)
 
-        # Criar o arquivo CSV no disco
-        with open(csv_filename, 'w', newline='') as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(dados_ficha.keys())
-            writer.writerow(dados_ficha.values())
+            # Criar o arquivo CSV no disco
+            with open(csv_filename, 'w', newline='') as csv_file:
+                writer = csv.writer(csv_file)
+                writer.writerow(dados_ficha.keys())
+                writer.writerow(dados_ficha.values())
 
-    # Criar um arquivo ZIP temporário no disco
-    zip_filename = os.path.join(temp_dir, 'fichas.zip')
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        # Criar um arquivo ZIP temporário no disco
+        zip_filename = os.path.join(temp_dir, 'fichas.zip')
+        with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            for csv_file in csv_files:
+                zip_file.write(csv_file, os.path.basename(csv_file))
+
+        # Abrir o ZIP para leitura e enviar como resposta
+        with open(zip_filename, 'rb') as zip_file:
+            response = HttpResponse(zip_file.read(), content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename="fichas.zip"'
+
+        return response
+
+    finally:
+        # Apagar todos os arquivos temporários
         for csv_file in csv_files:
-            zip_file.write(csv_file, os.path.basename(csv_file))
-
-    # Abrir o ZIP para leitura e enviar como resposta
-    with open(zip_filename, 'rb') as zip_file:
-        response = HttpResponse(zip_file.read(), content_type='application/zip')
-        response['Content-Disposition'] = 'attachment; filename="fichas.zip"'
-
-    return response
-
-    # finally:
-    #     # Apagar todos os arquivos temporários
-    #     for csv_file in csv_files:
-    #         os.remove(csv_file)
-    #     os.remove(zip_filename)
-    #     os.rmdir(temp_dir)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            os.remove(csv_file)
+        os.remove(zip_filename)
+        os.rmdir(temp_dir)

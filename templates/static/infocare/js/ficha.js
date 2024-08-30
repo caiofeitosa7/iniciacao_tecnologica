@@ -78,13 +78,9 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
                     parts[parts.length - 1] = json["cod_ficha"];
                     uploadForm.action = parts.join('/');
 
-                    if (json["cod_ficha"]) {
-                        uploadForm.submit();
-                    } else {
-                        $('#mensagem-retorno .modal-title').html("Cadastro não efetuado!");
-                        $('#mensagem-retorno .modal-body').html("Algo deu errado ao salvar as informações.");
-                        $('#mensagem-retorno').modal("toggle");
-                    }
+                    console.log(json["cod_ficha"]);
+
+                    uploadForm.submit();
 
                     // console.log(json['edicao_ficha'])
                     // console.log(json['edicao_ficha'] === 1)

@@ -7,13 +7,13 @@ from infocare import settings
 
 
 class PDFWriter:
-    def __init__(self, pdf_path:str):
-        self.document = fitz.open(pdf_path) 
+    def __init__(self, pdf_path: str):
+        self.document = fitz.open(pdf_path)
         self.default_font = 'helvetica'
         self.default_font_size = 13
         self.default_color = (1, 0, 0)
-    
-    def write_date(self, date: str, pos: tuple, pg: int = 0, font_size=None, spacing=0):
+
+    def write_date(self, date: str, pos: tuple, pg: int = 0, font_size=None, spacing=0, printbars=False):
         if font_size is None: font_size = self.default_font_size
         """
         Escreve uma data no PDF na posição especificada.
@@ -36,12 +36,14 @@ class PDFWriter:
         except:
             if not date:
                 date = ''
-            date = date.replace('/', '')
+
+            if not printbars:
+                date = date.replace('/', '')
         finally:
             date = (' ' * spacing).join(date)
             self.document[pg].insert_text(pos, date, fontsize=font_size, fontname=self.default_font, color=self.default_color)
-            
-    def write_uf(self, uf: str, pos: tuple, pg: int = 0):
+
+    def write_uf(self, uf, pos: tuple, pg: int = 0):
         """
         Escreve uma UF (sigla do estado) no PDF na posição especificada.
         
@@ -52,7 +54,7 @@ class PDFWriter:
         """
         uf = ' '.join(uf).upper()
         self.document[pg].insert_text(pos, uf, fontsize=self.default_font_size, fontname=self.default_font, color=self.default_color)
-    
+
     def write_text(self, text:str, pos: tuple, pg: int = 0, color=(1, 0, 0), font_size=10):
         if font_size is None: font_size = self.default_font_size
 
@@ -69,10 +71,10 @@ class PDFWriter:
 
         if text == "0":
             text = ""
-
+            
         self.document[pg].insert_text(pos, text, fontsize=font_size, fontname=self.default_font, color=color)
-    
-    def write_cep(self, code: str, pos: tuple, pg: int = 0, space=0, font_size=None):
+
+    def write_cep(self, code, pos: tuple, pg: int = 0, space=0, font_size=None):
         if font_size is None: font_size = self.default_font_size
 
         """
@@ -92,7 +94,6 @@ class PDFWriter:
 
     def write_code(self, code: str, pos: tuple, pg: int = 0, space=0, font_size=None):
         if font_size is None: font_size = self.default_font_size
-        
         """
         Escreve um código no PDF na posição especificada.
         
@@ -103,13 +104,13 @@ class PDFWriter:
             space (int, opcional): O espaçamento entre os caracteres. Padrão é 0.
             font_size (int, opcional): O tamanho da fonte a ser usada. Padrão é 13.
         """
-
+        
         if code == "0":
             code = ""
 
         code = (' ' * space).join(code)
-        self.document[pg].insert_text(pos, code, fontsize=font_size, fontname=self.default_font, color=self.default_color)
-    
+        self.document[pg].insert_text(pos, code, fontsize=font_size, fontname= self.default_font, color=self.default_color)
+
     def write_telefone(self, telefone: str, pos: tuple, space=0, pg: int = 0, font_size=None):
         if font_size is None: font_size = self.default_font_size
         """
@@ -128,9 +129,9 @@ class PDFWriter:
         telefone = (' ' * space).join(telefone).strip()
         
         self.document[pg].insert_text(pos, telefone, fontsize=font_size, fontname=self.default_font, color=self.default_color)
-    
-    def write_mini(self, text: str, pos: tuple, pg: int = 0, font_size=10, spacing=0):
-        if font_size is None: font_size = self.default_font_size
+
+    def write_mini(self, text: str, pos: tuple, pg: int = 0, font_size=None, spacing=0):
+        if font_size is None: font_size = self.default_font_size - 3
 
         """
         Escreve um texto em tamanho reduzido no PDF na posição especificada.
@@ -142,14 +143,52 @@ class PDFWriter:
             size (int, opcional): O tamanho da fonte a ser usada. Padrão é 10.
             spacing (int, opcional): O espaçamento entre os caracteres. Padrão é 0.
         """
-
         if text == "0":
             text = ""
-
+            
         text = str(text)
         text = (' ' * spacing).join(text)
         self.document[pg].insert_text(pos, text, fontsize=font_size, fontname=self.default_font, color=self.default_color)
+
+    def trab_tempo_ocupacao(self, multiplier , pg: int = 0):
+        """
+        Seleciona uma caixa no PDF na posição especificada.
+        
+        Args:
+            pg (int, opcional): O número da página onde selecionar. Padrão é 0.
+        """
+        #self.document[pg].add_circle_annot(rect)
+        try:
+            mult = int(multiplier)
+            match mult:
+                case 1:
+                    rect = (128, 650, 138, 662) #x,y,x+10,y+12
+                    self.document[pg].add_rect_annot(rect)
+                case 2:
+                    rect = (162, 650, 172, 662) #x,y,x+10,y+12
+                    self.document[pg].add_rect_annot(rect)
+                case 3:
+                    rect = (195, 650, 205, 662) #x,y,x+10,y+12
+                    self.document[pg].add_rect_annot(rect)
+                case 4:
+                    rect = (230, 650, 240, 662) #x,y,x+10,y+12
+                    self.document[pg].add_rect_annot(rect)
+        except Exception as e:
+            print(f'multiplier não é um número, erro:{e}')
     
+    def write_cross(self, write ,pos: tuple, pg: int = 0, font_size=None):
+        if font_size is None: font_size = self.default_font_size
+        """
+        Escreve uma cruz no PDF na posição especificada.
+        
+        Args:
+            write (str): Se for diferente de vazio, insere um x na [pos].
+            pos (tuple): A posição (x, y) onde o x será escrita.
+            pg (int, opcional): O número da página onde escrever. Padrão é 0.
+        """
+        if write != '':
+            self.document[pg].insert_text(pos, 'X', fontsize=font_size, fontname=self.default_font, color=self.default_color)
+
     def write_box(self, text: str, pg: int, rect: tuple, color='red'):
         """
         Escreve um texto em uma caixa no PDF na posição especificada.
@@ -163,11 +202,12 @@ class PDFWriter:
 
         if text == "0":
             text = ""
-
+            
         text = str(text)
-        self.document[pg].insert_htmlbox(rect, text, css='* {font-size: 12pt; font-family: Helvetica; text-align: justify; color:' + color + '; background-color: #fff; text-decoration-color: black;}')
-    
-    def save(self, nome_arquivo: str, path_pdf_gerado: str, dictcsv: dict = None, path_pdf_base: str = '', close_doc=True):
+        self.document[pg].insert_htmlbox(rect, text, css='* {font-size: '+ str(self.default_font_size) + 'pt; font-family: Helvetica; text-align: justify; color:'+ color + '; background-color: #fff; text-decoration-color: black;}')
+
+    def save(self, nome_arquivo: str, path_pdf_gerado: str, dictcsv: dict = None, path_pdf_base: str = '',
+             close_doc=True):
         """
         Salva o documento PDF com o nome especificado.
         
@@ -175,7 +215,7 @@ class PDFWriter:
             file_name (str): O nome do arquivo PDF a ser salvo.
             dictcsv (dict): O dicionário contendo os dados para gerar a ficha.
         """
-        
+
         if dictcsv:
             notificatoria = generateFicha(dictcsv, path_pdf_base, path_pdf_gerado, nome_arquivo, close_doc=False)
             self.document.insert_pdf(notificatoria.document, start_at=0)
@@ -191,3 +231,9 @@ class PDFWriter:
         if close_doc:
             self.document.close()
     
+    def addAnexos(self, anexos: list):
+        """
+            Adiciona anexos ao documento PDF.
+        """
+        for anexo in anexos:
+            self.document.insert_pdf(anexo.document)
