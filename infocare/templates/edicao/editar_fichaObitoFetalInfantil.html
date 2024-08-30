@@ -3214,11 +3214,11 @@
                 </div>
                 <div class="d-flex colADireita col-4 align-items-center justify-content-between">
                     <div class="form-check m-0 ms-5">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-nenhum"
                             value="PRDIRN-nenhum"
-                            {% if ficha.PRDIRN == "PRDIRN-nenhum" %} checked {% endif %}
+                            {% if ficha.PRDIRN_nenhum == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-nenhum">
                             Nenhum
@@ -3230,55 +3230,55 @@
             <div class="d-flex flex-column px-3">
                 <div class="col-12 d-flex justify-content-between mt-1">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-antibioticoterapia"
                             value="PRDIRN-antibioticoterapia"
-                            {% if ficha.PRDIRN == "PRDIRN-antibioticoterapia" %} checked {% endif %}
+                            {% if ficha.PRDIRN_antibioti == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-antibioticoterapia">
                             Antibioticoterapia
                         </label>
                     </div>
                     <div class="form-check m-0 ms-5">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-berco-aquecido"
                             value="PRDIRN-berco-aquecido"
-                            {% if ficha.PRDIRN == "PRDIRN-berco-aquecido" %} checked {% endif %}
+                            {% if ficha.PRDIRN_berco == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-berco-aquecido">
                             Berço aquecido
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-metodo-canguru"
                             value="PRDIRN-metodo-canguru"
-                            {% if ficha.PRDIRN == "PRDIRN-metodo-canguru" %} checked {% endif %}
+                            {% if ficha.PRDIRN_canguru == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-metodo-canguru">
                             Método Canguru
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-cateterismo-umbilical"
                             value="PRDIRN-cateterismo-umbilical"
-                            {% if ficha.PRDIRN == "PRDIRN-cateterismo-umbilical" %} checked {% endif %}
+                            {% if ficha.PRDIRN_cateter == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-cateterismo-umbilical">
                             Cateterismo umbilical
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-CPAP"
                             value="PRDIRN-CPAP"
-                            {% if ficha.PRDIRN == "PRDIRN-CPAP" %} checked {% endif %}
+                            {% if ficha.PRDIRN_cpap == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-CPAP">
                             CPAP
@@ -3287,55 +3287,55 @@
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-1">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-disseccao-venenosa"
                             value="PRDIRN-disseccao-venenosa"
-                            {% if ficha.PRDIRN == "PRDIRN-disseccao-venenosa" %} checked {% endif %}
+                            {% if ficha.PRDIRN_disseccao == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-disseccao-venenosa">
                             Dissecção venosa
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-entubacao"
                             value="PRDIRN-entubacao"
-                            {% if ficha.PRDIRN == "PRDIRN-entubacao" %} checked {% endif %}
+                            {% if ficha.PRDIRN_entubacao == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-entubacao">
                             Entubação
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-fototerapia"
                             value="PRDIRN-fototerapia"
-                            {% if ficha.PRDIRN == "PRDIRN-fototerapia" %} checked {% endif %}
+                            {% if ficha.PRDIRN_fototera == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-fototerapia">
                             Fototerapia
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-exsanguineo"
                             value="PRDIRN-exsanguineo"
-                            {% if ficha.PRDIRN == "PRDIRN-exsanguineo" %} checked {% endif %}
+                            {% if ficha.PRDIRN_exsang == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-exsanguineo">
                             Exsanguineo-transfusão
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-hemotransfusao"
                             value="PRDIRN-hemotransfusao"
-                            {% if ficha.PRDIRN == "PRDIRN-hemotransfusao" %} checked {% endif %}
+                            {% if ficha.PRDIRN_hemotrans == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-hemotransfusao">
                             Hemotransfusão
@@ -3344,55 +3344,55 @@
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-1">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-incubadora"
                             value="PRDIRN-incubadora"
-                            {% if ficha.PRDIRN == "PRDIRN-incubadora" %} checked {% endif %}
+                            {% if ficha.PRDIRN_incuba == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-incubadora">
                             Incubadora
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-nutricao-parenteral"
                             value="PRDIRN-nutricao-parenteral"
-                            {% if ficha.PRDIRN == "PRDIRN-nutricao-parenteral" %} checked {% endif %}
+                            {% if ficha.PRDIRN_nutri_par == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-nutricao-parenteral">
                             Nutrição parenteral
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-oxigenio-capacete"
                             value="PRDIRN-oxigenio-capacete"
-                            {% if ficha.PRDIRN == "PRDIRN-oxigenio-capacete" %} checked {% endif %}
+                            {% if ficha.PRDIRN_oxig_capacete == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-oxigenio-capacete">
                             Oxigênio em capacete
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-oxigenio-inalatorio"
                             value="PRDIRN-oxigenio-inalatorio"
-                            {% if ficha.PRDIRN == "PRDIRN-oxigenio-inalatorio" %} checked {% endif %}
+                            {% if ficha.PRDIRN_oxig_inala == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-oxigenio-inalatorio">
                             Oxigênio inalatório
                         </label>
                     </div>
                     <div class="form-check m-0 ms-3">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-puncao-nervosa"
                             value="PRDIRN-puncao-nervosa"
-                            {% if ficha.PRDIRN == "PRDIRN-puncao-nervosa" %} checked {% endif %}
+                            {% if ficha.PRDIRN_puncao == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-puncao-nervosa">
                             Punção venosa central
@@ -3401,33 +3401,33 @@
                 </div>
                 <div class="col-12 d-flex justify-content-between mt-1">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-surfactante"
                             value="PRDIRN-surfactante"
-                            {% if ficha.PRDIRN == "PRDIRN-surfactante" %} checked {% endif %}
+                            {% if ficha.PRDIRN_surf == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-surfactante">
                             Surfactante
                         </label>
                     </div>
                     <div class="form-check m-0 ms-4">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-ventilacao-mecanica"
                             value="PRDIRN-ventilacao-mecanica"
-                            {% if ficha.PRDIRN == "PRDIRN-ventilacao-mecanica" %} checked {% endif %}
+                            {% if ficha.PRDIRN_ventila == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label label-nowrap" for="PRDIRN-ventilacao-mecanica">
                             Ventilação mecânica
                         </label>
                     </div>
                     <div class="form-check m-0 ms-4">
-                        <input class="form-check-input" type="radio"
+                        <input class="form-check-input" type="checkbox"
                             name="PRDIRN"
                             id="PRDIRN-outros"
                             value="PRDIRN-outros"
-                            {% if ficha.PRDIRN == "PRDIRN-outros" %} checked {% endif %}
+                            {% if ficha.PRDIRN_outros == "1" %} checked {% endif %}
                         />
                         <label class="form-check-label" for="PRDIRN-outros">
                             Outros

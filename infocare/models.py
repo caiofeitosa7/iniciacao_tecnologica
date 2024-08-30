@@ -886,7 +886,6 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
                                             path_pdf_gerado, nome_arquivo)
 
     elif tipo_ficha == 1:
-        print('Entrou na opcao de salvar ficha de notificação')
         generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
 
     else:  # Fichas de Obito
