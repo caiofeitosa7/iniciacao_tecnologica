@@ -953,3 +953,51 @@ def get_info_comum_paciente(prontuario: int):
             print("Conexão fechada.")
 
         return resultado
+
+
+def listar_fichas_download(dados):
+    """
+        Retorna uma lista contendo os códigos das fichas para download.
+        :param dados: Dicionário contendo os filtros de data e tipo de ficha.
+    """
+
+    tipo_ficha = int(dados['tipo-ficha'])
+    dt_inicio = dados['dt-inicio'] \
+        if dados['dt-inicio'] \
+        else datetime.now().strftime('%Y-%m-%d')
+    dt_fim = dados['dt-fim'] \
+        if dados['dt-fim'] \
+        else datetime.now().strftime('%Y-%m-%d')
+    query = """
+        SELECT codigo
+        FROM ficha
+        WHERE data BETWEEN %s AND %s
+    """
+
+    if tipo_ficha:
+        query += f' AND cod_tipo_ficha = {tipo_ficha};'
+
+    conexao, cursor = abrir_conexao()
+    cursor.execute(query, (dt_inicio, dt_fim))
+
+    resultados = cursor.fetchall()
+    fechar_conexao(conexao, False)
+    return [res[0] for res in resultados] if resultados else list()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

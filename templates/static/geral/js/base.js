@@ -105,111 +105,6 @@ function atribuirValor(elementId) {
     document.getElementById(novoElementId).value = valorDoCampo;
 }
 
-function pesquisaCepComReplicacao(elemento) {
-    let cep = elemento.value.replace(/\D/g, '');  // somente numeros
-
-    if (cep !== "") {
-        let validacep = /^[0-9]{8}$/;
-
-        if (validacep.test(cep)) {
-            let apiUrl = 'https://viacep.com.br/ws/' + cep + '/json/';
-
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok)
-                        console.log('Erro ao consultar o CEP');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data["cep"] !== 'undefined') {
-                        elemento.value = data["cep"];
-                        document.getElementById(elemento.id + "2").value = data["cep"];
-                        document.getElementById("campo-uf-residencia").value = data["uf"];
-                        document.getElementById("campo-uf-residencia2").value = data["uf"];
-                        document.getElementById("campo-municipio-residencia").value = data["localidade"];
-                        document.getElementById("campo-municipio-residencia2").value = data["localidade"];
-                        document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
-                        document.getElementById("campo-cod-ibge-residencia2").value = data["ibge"];
-                        document.getElementById("campo-bairro-residencia").value = data["bairro"];
-                        document.getElementById("campo-bairro-residencia2").value = data["bairro"];
-                        document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
-                        document.getElementById("campo-logradouro-residencia2").value = data["logradouro"];
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro na requisição:', error);
-                    elemento.value = "";
-                    document.getElementById(elemento.id + "2").value = "";
-                    document.getElementById("campo-uf-residencia").value = "";
-                    document.getElementById("campo-uf-residencia2").value = "";
-                    document.getElementById("campo-municipio-residencia").value = "";
-                    document.getElementById("campo-municipio-residencia2").value = "";
-                    document.getElementById("campo-cod-ibge-residencia").value = "";
-                    document.getElementById("campo-cod-ibge-residencia2").value = "";
-                    document.getElementById("campo-bairro-residencia").value = "";
-                    document.getElementById("campo-bairro-residencia2").value = "";
-                    document.getElementById("campo-logradouro-residencia").value = "";
-                    document.getElementById("campo-logradouro-residencia2").value = "";
-                });
-        } else {
-            console.error('CEP não passou no teste do regex');
-            elemento.value = "";
-            document.getElementById(elemento.id + "2").value = "";
-            document.getElementById("campo-uf-residencia").value = "";
-            document.getElementById("campo-municipio-residencia").value = "";
-            document.getElementById("campo-cod-ibge-residencia").value = "";
-            document.getElementById("campo-bairro-residencia").value = "";
-            document.getElementById("campo-logradouro-residencia").value = "";
-        }
-    }
-}
-
-function pesquisaCepSemReplicacao(elemento) {
-    let cep = elemento.value.replace(/\D/g, '');  // somente numeros
-
-    if (cep !== "") {
-        let validacep = /^[0-9]{8}$/;
-
-        if (validacep.test(cep)) {
-            let apiUrl = 'https://viacep.com.br/ws/' + cep + '/json/';
-
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok)
-                        console.log('Erro ao consultar o CEP');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data["cep"] !== 'undefined') {
-                        elemento.value = data["cep"];
-                        document.getElementById("campo-uf-residencia").value = data["uf"];
-                        document.getElementById("campo-municipio-residencia").value = data["localidade"];
-                        document.getElementById("campo-cod-ibge-residencia").value = data["ibge"];
-                        document.getElementById("campo-bairro-residencia").value = data["bairro"];
-                        document.getElementById("campo-logradouro-residencia").value = data["logradouro"];
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro na requisição:', error);
-                    elemento.value = "";
-                    document.getElementById("campo-uf-residencia").value = "";
-                    document.getElementById("campo-municipio-residencia").value = "";
-                    document.getElementById("campo-cod-ibge-residencia").value = "";
-                    document.getElementById("campo-bairro-residencia").value = "";
-                    document.getElementById("campo-logradouro-residencia").value = "";
-                });
-        } else {
-            console.error('CEP não passou no teste do regex');
-            elemento.value = "";
-            document.getElementById("campo-uf-residencia").value = "";
-            document.getElementById("campo-municipio-residencia").value = "";
-            document.getElementById("campo-cod-ibge-residencia").value = "";
-            document.getElementById("campo-bairro-residencia").value = "";
-            document.getElementById("campo-logradouro-residencia").value = "";
-        }
-    }
-}
-
 function deslogarUsuario(url) {
     localStorage.clear();
     window.location.href = url;
@@ -293,6 +188,67 @@ function autoPreenchimento(url, prontuario) {
         });
 }
 
+function abrirModalDownloadFichas() {
+    $('#modal-download-fichas').modal("toggle");
+    $(".modal-backdrop").css("display", 'none');
+}
+
+function baixarFichas() {
+    formulario = document.getElementById('formBaixarFicha');
+    formulario.submit();
+}
+
+
+
+
+
+
+
+
+
+// function baixarFichas(url) {
+//     let csrfToken = getCookie("csrftoken");
+//     dicionario = {
+//         'tipo_ficha': document.getElementById('tipo-ficha').value,
+//         'dt_inicio': document.getElementById('dt-inicio').value,
+//         'dt_fim': document.getElementById('dt-fim').value
+//     };
+
+//     console.log(dicionario);
+    
+//     // abrirTelaCarregamento();
+
+//     fetch(url, {
+//             method: "POST",
+//             credentials: 'include',
+//             headers: {
+//                 "Content-type": "application/json;charset=UTF-8",
+//                 "X-CSRFToken": csrfToken
+//             },
+//             body: JSON.stringify(dicionario)
+//         })
+//             .then(response => response.json())
+//             .then(function (json) {
+//                     // fecharTelaCarregamento();
+
+//                     console.log('funciona');
+
+//                     // if (json["status"] === 'success') {
+//                     //     // $('#mensagem-retorno .modal-title').html("Sucesso!");
+//                     //     // $('#mensagem-retorno .modal-body').html("Dados cadastrados com sucesso.");
+//                     //     // $('#mensagem-retorno').modal("toggle");
+//                     //     $(idModal).modal("toggle");
+//                     //     $('#conteudo')[0].innerHTML = json.html[0];
+//                     // } else {
+//                     //     $('#mensagem-retorno .modal-title').html("Erro!");
+//                     //     $('#mensagem-retorno .modal-body').html("Você não tem permissão para acessar essa página.");
+//                     //     $('#mensagem-retorno').modal("toggle");
+//                     //     $(idModal).modal("toggle");
+//                     // }
+//                 }
+//             )
+//             .catch(err => console.log(err));
+// }
 
 
 
@@ -411,7 +367,6 @@ function retornoListaFichas() {
             abrirOpcaoPaginaInicial();
     }
 }
-
 
 function abrirTelaCarregamento() {
     let tela_carregamento = document.getElementById("tela-carregamento");

@@ -40,6 +40,53 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-download-fichas" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Download de Fichas</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formBaixarFicha" action="{% url 'download_fichas' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="d-flex flex-column">
+                            <div class="d-flex is-align-items-center">
+                                <label for="dt-inicio" class="negrito me-2">
+                                    Período:
+                                </label>
+                                <input id="dt-inicio" name="dt-inicio" type="date" class="form-control input-dado font-smaller">
+                                <span class="negrito mx-2">à</span>
+                                <input id="dt-fim" name="dt-fim" type="date" class="form-control input-dado font-smaller">
+                            </div>
+                            <div class="d-flex is-align-items-center my-3">
+                                <label for="tipo-ficha" class="label-nowrap negrito me-2"
+                                    style="align-self: center;">
+                                    Tipo de ficha:
+                                </label>
+                                <select id="tipo-ficha" name="tipo-ficha" class="form-select font-smaller clicavel">
+                                    <option value="0" selected>
+                                        Todos
+                                    </option>
+                                    
+                                    {% for formulario in formularios %}
+                                        <option value="{{ formulario.codigo }}">
+                                            {{ formulario.nome }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3">
+                                <button type="button" class="btn btnCorPrincipal" onclick="baixarFichas()">
+                                    Baixar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="sidebar">
         <div id="logo-details">
             <div id="logo-name">INFOCARE</div>
@@ -68,12 +115,12 @@
                     </li>
                 {% endif %}
 
-                <!-- <li>
-                    <a class="opcao-menu-lateral" >
-                        <i class='bx bx-cog'></i>
-                        <span class="links_name">Configurações</span>
+                <li>
+                    <a class="opcao-menu-lateral" onclick="abrirModalDownloadFichas()">
+                        <i class='bx bx-cloud-download'></i>
+                        <span class="links_name">Download de Fichas</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
     </div>
@@ -88,7 +135,6 @@
 <!--            <i class='clicavel bx bxs-bell'></i>-->
 <!--            <i class='clicavel bx bxs-bell-ring' style='display: none'></i>-->
         </nav>
-
         <div class="container">
             {% if messages %}
             <ul id="messages" class="list-unstyled pt-2 mb-0">
@@ -100,7 +146,6 @@
             </ul>
             {%  endif %}
         </div>
-
         <div id="conteudo" class="pb-5"></div>
         <div id="tela-carregamento" style="display: none;">
             <div class="c-loader"></div>

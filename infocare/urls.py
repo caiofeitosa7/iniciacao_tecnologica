@@ -29,4 +29,5 @@ urlpatterns = [
     path('informacao_paciente/<int:prontuario>', views.obter_info_paciente, name='info_paciente'),
     path('upload/<int:cod_ficha>', views.upload_arquivos, name='upload'),
     path('imagem/<int:cod_img>', views.imagem_local, name='imagem'),
+    path('download/', views.download_fichas, name='download_fichas'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
