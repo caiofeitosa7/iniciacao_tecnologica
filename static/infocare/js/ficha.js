@@ -55,6 +55,8 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         dicionario['campo-dt-notificacao'] = dataAtual.toLocaleDateString('pt-BR', options).split('/').reverse().join('-');
     }
 
+    
+
     abrirTelaCarregamento();
 
     fetch(urlSetFichaNotificacao, {

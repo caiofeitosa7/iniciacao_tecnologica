@@ -153,7 +153,7 @@ def gerar_pdf_leptospirose(notificatoriaCSV: dict, dict_especifico: dict, modelo
     document.write_text(dict_especifico['municipio_risco4'], (160, 654),pg=1, font_size=11) #tab_municipio_4
     document.write_text(dict_especifico['ender_risco4'], (299, 654),pg=1, font_size=12) #tab_adress_4
     document.write_text(dict_especifico['localid_risco4'], (458, 654),pg=1, font_size=11) #tab_local_4
-    document.write_box(dict_especifico['obs_adicionais'], 1,(35, 670, 569, 730)) #obs
+    document.write_box(dict_especifico['obs_adicionais'], pg=1, rect=(35, 670, 569, 730)) #obs
     document.write_text(dict_especifico['municipio_us_investigador'], (62, 747),pg=1) #municipio_investigador
     document.write_code(dict_especifico['cod_us_investigador'], (467, 747),pg=1,space=2) #cod_unid_investigador
     document.write_text(dict_especifico['nome_investigador'], (64, 778),pg=1) #nome_investigador

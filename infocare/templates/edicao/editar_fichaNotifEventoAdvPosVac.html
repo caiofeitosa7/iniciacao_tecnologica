@@ -3890,15 +3890,15 @@
                         </div>
 
                         <div class="d-flex flex-row align-items-center p-2 bloco">
-                            <span class="col-4" for="bacterioscopia">
+                            <span class="col-4" for="bacterioscopia2">
                                 Bacterioscopia
                             </span>
                             
                             <div class="col-8 d-flex flex-row align-items-center"> 
                                 <input type="number" class="input-dado-quadrado form-control mx-2"
-                                    id="bacterioscopia" min="1" max="2"
-                                    {% if ficha.bacterioscopia != "0" %}
-                                        value="{{ ficha.bacterioscopia }}"
+                                    id="bacterioscopia2" min="1" max="2"
+                                    {% if ficha.bacterioscopia2 != "0" %}
+                                        value="{{ ficha.bacterioscopia2 }}"
                                     {% endif %}
                                 />
                                 <ul class="letra-miuda">
@@ -4494,7 +4494,7 @@
             <div class="col-3 form-floating">
                 <label class="negrito" for="campo-dt">Data</label>
                 <input type="date" class="form-control" id="campo-dt"
-                    value="{{ ficha.data_preenchimento }}">
+                    value="{{ ficha.dt_preenchimento }}">
             </div>
         </div>                    
     </section>

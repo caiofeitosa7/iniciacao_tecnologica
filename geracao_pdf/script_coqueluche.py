@@ -105,7 +105,7 @@ def gerar_pdf_coqueluche(notificatoriaCSV: dict, dict_especifico: dict, modelo_p
     document.write_mini(dict_especifico['evolucao_caso'], (555, 303),pg=1) #evolucao
     document.write_date(dict_especifico['dt_obito'], (63, 350),pg=1, spacing=2) #dt-obito
     document.write_date(dict_especifico['dt_encerramento'], (182, 349),pg=1, spacing=2) #dt-encerramento
-    document.write_box(dict_especifico['obs_adicionais'], 1,(33, 413,570,660)) #obs
+    document.write_box(dict_especifico['obs_adicionais'], pg=1,rect=(33, 413,570,660)) #obs
     document.write_text(dict_especifico['municipio_us_investigador'], (60, 690),pg=1) #municipio-investigador
     document.write_code(dict_especifico['cod_us_investigador'], (477, 692),pg=1, space=1) #cod-unid-saud
     document.write_text(dict_especifico['nome_investigador'], (60, 720),pg=1) #nome-investigador

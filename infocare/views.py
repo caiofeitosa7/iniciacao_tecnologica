@@ -142,46 +142,46 @@ def registrar_ficha(request):
         dados = json.loads(request.body)
         cod_usuario = int(request.session.get('cod_usuario'))
 
-        try:
-            if dados.get('codigo', False):  # Se exitir, significa que é uma atualizacao
-                args = {
-                    'cod_ficha': dados['codigo'],
-                    'cod_formulario': dados['cod_tipo_ficha'],
-                }
+        # try:
+        if dados.get('codigo', False):  # Se exitir, significa que é uma atualizacao
+            args = {
+                'cod_ficha': dados['codigo'],
+                'cod_formulario': dados['cod_tipo_ficha'],
+            }
 
-                cod_ficha = models.alterar_ficha(dados)
-                if cod_ficha:
-                    messages.success(request, 'Ficha atualizada com sucesso!')
-                    return JsonResponse({
-                        'status': 'success',
-                        'cod_ficha': cod_ficha,
-                        # 'edicao_ficha': 1,
-                        'view_visualizacao': reverse('visualizar_ficha', kwargs=args)
-                    })
-            else:
-                numero_ficha = dados.get('numero-ficha', False)
+            cod_ficha = models.alterar_ficha(dados)
+            if cod_ficha:
+                messages.success(request, 'Ficha atualizada com sucesso!')
+                return JsonResponse({
+                    'status': 'success',
+                    'cod_ficha': cod_ficha,
+                    # 'edicao_ficha': 1,
+                    'view_visualizacao': reverse('visualizar_ficha', kwargs=args)
+                })
+        else:
+            numero_ficha = dados.get('numero-ficha', False)
 
-                if numero_ficha and models.numero_ficha_existe(numero_ficha):
-                    return JsonResponse({
-                        'status': 'erro-numero-ficha'
-                    })
+            if numero_ficha and models.numero_ficha_existe(numero_ficha):
+                return JsonResponse({
+                    'status': 'erro-numero-ficha'
+                })
 
-                cod_ficha = models.set_ficha(dados, cod_usuario)
-                if cod_ficha:
-                    messages.success(request, 'Ficha cadastrada com sucesso!')
-                    return JsonResponse({
-                        'cod_ficha': cod_ficha,
-                        'status': 'success',
-                        # 'edicao_ficha': 0
-                    })
+            cod_ficha = models.set_ficha(dados, cod_usuario)
+            if cod_ficha:
+                messages.success(request, 'Ficha cadastrada com sucesso!')
+                return JsonResponse({
+                    'cod_ficha': cod_ficha,
+                    'status': 'success',
+                    # 'edicao_ficha': 0
+                })
 
-            return JsonResponse({
-                'status': 'error'
-            })
+        return JsonResponse({
+            'status': 'error'
+        })
 
-        except Exception as e:
-            print(e)
-            return redirect(reverse('pagina_inicial'))
+        # except Exception as e:
+        #     print(e)
+        #     return redirect(reverse('pagina_inicial'))
 
 
 def pendencias_view(request, cod_ficha):

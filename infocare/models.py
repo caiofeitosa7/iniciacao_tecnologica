@@ -423,38 +423,38 @@ def alterar_ficha(campos: dict):
     tipo_ficha = campos.pop('cod_tipo_ficha')
     cod_ficha = campos.pop('codigo')
 
-    try:
-        with transaction.atomic():
-            cursor.execute(f"""
-                UPDATE ficha
-                SET setor = %s,
-                    prontuario = %s
-                WHERE codigo = %s
-            """, (
-                campos.pop('setor'),
-                campos.pop('prontuario'),
-                cod_ficha
-            ))
+    # try:
+    with transaction.atomic():
+        cursor.execute(f"""
+            UPDATE ficha
+            SET setor = %s,
+                prontuario = %s
+            WHERE codigo = %s
+        """, (
+            campos.pop('setor'),
+            campos.pop('prontuario'),
+            cod_ficha
+        ))
 
-            cursor.execute("""
-                DELETE FROM valorcampo
-                WHERE cod_ficha = %s
-            """, (cod_ficha,))
+        cursor.execute("""
+            DELETE FROM valorcampo
+            WHERE cod_ficha = %s
+        """, (cod_ficha,))
 
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-        if cod_ficha:
-            preencher_pdf(cod_ficha, tipo_ficha, True)
+    if cod_ficha:
+        preencher_pdf(cod_ficha, tipo_ficha, True)
 
-        return cod_ficha
+    return cod_ficha
 
-    except Exception as e:
-        conexao.rollback()
-        print(e)
-        return None
-
-    finally:
-        fechar_conexao(conexao)
+    # except Exception as e:
+    #     conexao.rollback()
+    #     print(e)
+    #     return None
+    #
+    # finally:
+    #     fechar_conexao(conexao)
 
 
 def get_ficha(cod_ficha: int):

@@ -110,7 +110,7 @@ def gerar_pdf_acid_animal_peconhento(notificatoriaCSV: dict, dict_especifico: di
     document.write_mini(dict_especifico['evolucao_caso'], (279, 205),pg=1) #evolucao_caso
     document.write_date(dict_especifico['dt_obito'], (330, 233),pg=1,spacing=2) #data_obito
     document.write_date(dict_especifico['dt_encerramento'], (460, 233),pg=1,spacing=2) #data_encerramento
-    document.write_box(dict_especifico['obs_adicionais'], 1,(32, 680, 568,740)) #observacoes
+    document.write_box(dict_especifico['obs_adicionais'], pg=1,rect=(32, 680, 568,740)) #observacoes
     document.write_text(dict_especifico['municipio_us_investigador'], (60, 745),pg=1) #municipio_investigador
     document.write_code(dict_especifico['cod_us_investigador'], (471, 745),pg=1,space=2) #cod_unid_investigador
     document.write_text(dict_especifico['nome_investigador'], (60, 768),pg=1) #nome_investigador

@@ -35,16 +35,16 @@ def generateFicha(dict_geral: dict, modelo_pdf: str, path_pdf_gerado: str, nome_
         document.write_mini(dict_geral['local_inicial_ocorrencia_outro'], (458, 295), font_size=12)
 
         document.write_uf(dict_geral['uf_residencia'], (67, 320), 0)  #uf-residencia
-        document.write_text(dict_geral['municipio_residencia'], (105, 320), 0)  #municipio-residencia
+        document.write_text(dict_geral['municipio_residencia'], (105, 320), 0, font_size=8)  #municipio-residencia
         document.write_code(dict_geral['cod_ibge_residencia'], (322, 320), space=2, font_size=13)  #cod-ibge-residencia
-        document.write_text(dict_geral['distrito_residencia'], (424, 321), 0)  #endereco
-        document.write_text(dict_geral['bairro_residencia'], (75, 340), 0)  #bairro
-        document.write_text(dict_geral['logradouro_residencia'], (210, 341), 0)  #logradouro
+        document.write_text(dict_geral['distrito_residencia'], (424, 321), 0, font_size=9)  #endereco
+        document.write_text(dict_geral['bairro_residencia'], (75, 340), 0, font_size=8)  #bairro
+        document.write_text(dict_geral['logradouro_residencia'], (210, 341), 0, font_size=8)  #logradouro
         document.write_code(dict_geral['codigo_residencia'], (473, 342), space=2, font_size=13)  #cod-logradouro
         document.write_mini(dict_geral['numero_residencia'], (69, 360), 0)  #numero
-        document.write_text(dict_geral['complemento_residencia'], (130, 360), 0)  #complemento
-        document.write_text(dict_geral['geo_campo1'], (415, 362), 0)  #geo-campo-1
-        document.write_text(dict_geral['geo_campo2'], (70, 380), 0)  #geo-campo-2
+        document.write_text(dict_geral['complemento_residencia'], (130, 360), 0, font_size=8)  #complemento
+        document.write_text(dict_geral['geo_campo1'], (415, 362), 0, font_size=9)  #geo-campo-1
+        document.write_text(dict_geral['geo_campo2'], (70, 380), 0, font_size=9)  #geo-campo-2
         document.write_text(dict_geral['ponto_ref_residencia'], (230, 382), 0)  #ponto-ref
         document.write_code(dict_geral['cep_residencia'], (451, 384), space=2, font_size=11)  #cep
         document.write_telefone(dict_geral['telefone_residencia'], (66, 403), space=2, font_size=12)  #telefone

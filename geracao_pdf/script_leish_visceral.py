@@ -109,7 +109,7 @@ def gerar_pdf_leish_visceral(notificatoriaCSV: dict, dict_especifico: dict, mode
     document.write_text(dict_especifico['transporte_desloc1'], (460, 281),pg=1) #meio_1_transporte
     document.write_text(dict_especifico['transporte_desloc2'], (460, 294),pg=1) #meio_2_transporte
     document.write_text(dict_especifico['transporte_desloc3'], (460, 306),pg=1) #meio_3_transporte
-    document.write_box(dict_especifico['obs_adicionais'], 1,(35,349, 570, 660)) #text_obs
+    document.write_box(dict_especifico['obs_adicionais'], pg=1, rect=(35,349, 570, 660)) #text_obs
     document.write_text(dict_especifico['municipio_us_investigador'], (65, 695),pg=1) #municipio_unid_saude
     document.write_code(dict_especifico['cod_us_investigador'], (466, 695),pg=1,space=2) #cod_municipio_un
     document.write_text(dict_especifico['nome_investigador'], (65, 723),pg=1) #investigador

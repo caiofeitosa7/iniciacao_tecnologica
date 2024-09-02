@@ -121,7 +121,7 @@ def gerar_pdf_intox_exog(notificatoriaCSV: dict, dict_especifico: dict, modelo_p
     document.write_date(dict_especifico['dt_obito'], (63, 665),pg=1, spacing=2) #dt_obito
     document.write_mini(dict_especifico['comun_acid_trab'], (428, 653),pg=1) #cat
     document.write_date(dict_especifico['dt_encerramento'], (458, 665),pg=1, spacing=2) #dt_encerramento
-    document.write_box(dict_especifico['obs_adicionais'], 1, (35,705, 565, 750)) #obs
+    document.write_box(dict_especifico['obs_adicionais'], pg=1, rect=(35,705, 565, 750)) #obs
     document.write_text(dict_especifico['municipio_us_investigador'], (65, 778),pg=1) #municipio_unid_saude
     document.write_code(dict_especifico['cod_us_investigador'], (468, 780),pg=1, space=2) #cod_unidade_saude
     document.write_text(dict_especifico['nome_investigador'], (70, 810),pg=1) #nome_investigador

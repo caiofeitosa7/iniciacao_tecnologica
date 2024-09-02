@@ -12,22 +12,45 @@
 
 - [Python](https://www.python.org/)
 
-### Opcional:
+### Ambiente Virtual Python:
+
+Caso o 'pip', instalador de pacotes do python não esteja instalado.
+
+- `$ sudo apt install python3-pip -y`
+
+Instalar o pacote 'virtualenv'.
+
+- `$ pip install virtualenv` ou
+- `$ sudo apt install python3-virtualenv`
+
 
 Criar um ambiente virtual para instalar as dependências do projeto.
 
-- `python -m venv venv` (sendo o segundo venv o nome do ambiente virtual)
-- `venv\Scripts\activate` (para ativar o ambiente virtual)
-- `deactivate` (para desativar o ambiente virtual)
+- `$ virtualenv venv` (sendo o segundo venv o nome do ambiente virtual)
+- `$ venv\Scripts\activate` (para ativar o ambiente virtual - WINDOWS)
+- `$ source venv/bin/activate` (para ativar o ambiente virtual - LINUX)
+- `$ deactivate` (para desativar o ambiente virtual)
+
+OBS: Os passos seguintes devem ser executados com o ambiente virtual ativo.
 
 ### Instalar as dependencias do projeto:
 
-- `pip install -r requirements.txt` (para instalar as dependências do projeto)
+- `$ pip install -r requirements.txt`
+
+OBS: caso dê erro na instalação do mysqlclient. Execute: `sudo apt-get install python3-dev default-libmysqlclient-dev build-essential`
+
+### Preparar arquivos estáticos:
+
+- `$ python manage.py collectstatic` (WINDOWS)
+- `$ python3 manage.py collectstatic` (LINUX)
 
 ### Executar o projeto:
 
-- `python manage.py runserver` (para executar o projeto)
+- `$ python manage.py runserver 0.0.0.0:8000` (WINDOWS)
+- `$ python3 manage.py runserver 0.0.0.0:8000` (LINUX)
 
 ### Acessar o projeto:
 
-No console ira aparecer o endereço de acesso, normalmente fica no [localhost:8000](https://127.0.0.1:8000/), Podendo variar dependendo das configurações da maquina.
+- No console aparecerá o endereço de acesso, normalmente fica no [localhost:8000](http://127.0.0.1:8000/), podendo variar dependendo das configurações da maquina.
+
+- Para acessar de outros dispositivos (incluindo os tablets), a url difere do padrão 'http://127.0.0.1:8000/'. Ao invés de acessar o localhost, outro dispositivo que deseja entrar na aplicação deve acessar pelo IP do servidor do sistema. Isso é possível desde que esteja conectado à mesma rede do servidor.
