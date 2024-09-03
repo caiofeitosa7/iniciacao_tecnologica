@@ -160,53 +160,43 @@ doc.write_text(especifico['nome_mae2'], (227, 311)) #nome_mae
 ##############################################
 
 doc.write_uf(especifico['uf_residencia2'], (54, 340)) #uf_residencia
-doc.write_text(especifico['municipio_residencia2'], (95, 340)) #municipio_residencia
+doc.write_text(especifico['municipio_residencia2'], (95, 340), font_size=8) #municipio_residencia
 doc.write_code(especifico['cod_ibge_residencia2'], (307, 340),space=2) #cod_ibge_residencia
-doc.write_text(especifico['distrito_residencia2'], (400, 340)) #endereco
-doc.write_text(especifico['bairro_residencia2'], (64, 365)) #bairro
-doc.write_text(especifico['logradouro_residencia2'], (195, 366)) #logradouro
+doc.write_text(especifico['distrito_residencia2'], (400, 340), font_size=9) #endereco
+doc.write_text(especifico['bairro_residencia2'], (64, 365), font_size=8) #bairro
+doc.write_text(especifico['logradouro_residencia2'], (195, 366), font_size=8) #logradouro
 doc.write_code(especifico['codigo_residencia2'], (452, 366),space=2) #cod_logradouro
 doc.write_text(especifico['numero_residencia2'], (65, 390)) #numero
-doc.write_text(especifico['complemento_residencia2'], (120, 390)) #complemento
+doc.write_text(especifico['complemento_residencia2'], (120, 390), font_size=9) #complemento
 doc.write_text(especifico['geo_campo1_2'], (400, 391)) #geo_campo_1
 doc.write_text(especifico['geo_campo2_2'], (55, 420)) #geo_campo_2
-doc.write_text(especifico['ponto_ref_residencia2'], (215, 422)) #ponto_ref
+doc.write_text(especifico['ponto_ref_residencia2'], (215, 422), font_size=9) #ponto_ref
 doc.write_code(especifico['cep_residencia2'], (431, 423),space=2, font_size=12) #cep
 doc.write_telefone(especifico['telefone_residencia2'], (55, 450), space=2, font_size=12) #telefone
 doc.write_mini(especifico['zona_residencia2'], (316, 439)) #zona
-doc.write_text(especifico['pais_residencia2'], (345, 449)) #pais
+doc.write_text(especifico['pais_residencia2'], (345, 449), font_size=9) #pais
 ##############################################
 #####        DADOS  COMPLEMENTARES        ####
 ##############################################
-doc.write_text(especifico['ocupacao'], (60, 502)) #ocupacao
+doc.write_text(especifico['ocupacao'], (60, 502), font_size=9) #ocupacao
 doc.write_mini(especifico['antecedente_sifilis'], (275, 515)) #antecedente_sifilis
 doc.write_mini(especifico['trat_realizado_sifilis'], (520, 515)) #trat_realizado_sifilis
 doc.write_mini(especifico['comportamento_sexual'], (519, 550)) #comportamento_sexual
 doc.write_mini(especifico['teste_nao_treponemico'], (291, 597)) #teste_nao_treponemico
-doc.write_text(especifico['titulo_laboratorial'], (334, 607)) #titulo_laboratorial
+doc.write_text(especifico['titulo_laboratorial'], (334, 607), font_size=8) #titulo_laboratorial
 doc.write_date(especifico['dt_laboratorial'], (420, 610), spacing=2) #data_laboratorial
 doc.write_mini(especifico['teste_treponemico'], (515, 627)) #teste_treponemico
 doc.write_mini(especifico['classif_clinica'], (518, 658)) #classif_clinica
 doc.write_mini(especifico['trat_realizado'], (360, 690)) #trat_realizado
 doc.write_date(especifico['dt_inicio_trat'], (422, 715), spacing=2) #data_inicio_trat
 doc.write_mini(especifico['classif_final'], (242, 740)) #classif_final
-doc.write_text(especifico['classif_final_descricao'], (182, 754)) #classif_final_descricao
+doc.write_text(especifico['classif_final_descricao'], (182, 754), font_size=8) #classif_final_descricao
 #*=========================== fim da pagina 1 ===========================*#
 doc.write_box(especifico['obs_adicionais'], rect=(26, 20, 535, 183),pg=1, bord=True)
-doc.write_text(especifico['municipio_us_investigador'], (55, 208), pg=1) #municipio_us_investigador
+doc.write_text(especifico['municipio_us_investigador'], (55, 208), pg=1, font_size=9) #municipio_us_investigador
 doc.write_code(especifico['cod_us_investigador'], (433, 209),space=2, pg=1) #cod_us_investigador
-doc.write_text(especifico['nome_investigador'], (55, 231), pg=1) #nome_investigador
-doc.write_text(especifico['funcao_investigador'], (240, 231), pg=1) #funcao_investigador
-doc.write_text(especifico['assinatura_investigador'], (435, 232), pg=1) #assinatura_investigador
-
-
-
-
-
-
-
-
-
-
+doc.write_text(especifico['nome_investigador'], (55, 231), pg=1, font_size=9) #nome_investigador
+doc.write_text(especifico['funcao_investigador'], (240, 231), pg=1, font_size=9) #funcao_investigador
+doc.write_text(especifico['assinatura_investigador'], (435, 232), pg=1, font_size=9) #assinatura_investigador
 
 doc.save('sifilis_adquirida.pdf', notificatoria)

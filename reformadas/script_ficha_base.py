@@ -1,5 +1,5 @@
 def generateFicha(dictcsv=0):
-  pdf = 'fichas/completas/FichaNotificacao.pdf'
+  pdf = 'FichaNotificacao.pdf'
   try:
     from pdfWritter import PDFWriter
     document = PDFWriter(pdf)

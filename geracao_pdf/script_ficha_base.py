@@ -48,12 +48,12 @@ def generateFicha(dict_geral: dict, modelo_pdf: str, path_pdf_gerado: str, nome_
         document.write_text(dict_geral['ponto_ref_residencia'], (230, 382), 0)  #ponto-ref
         document.write_code(dict_geral['cep_residencia'], (451, 384), space=2, font_size=11)  #cep
         document.write_telefone(dict_geral['telefone_residencia'], (66, 403), space=2, font_size=12)  #telefone
-        document.write_mini(dict_geral['zona_residencia'], (331, 395), 0)  #zona
-        document.write_text(dict_geral['pais_residencia'], (370, 403), 0)  #pais
-        document.write_text(dict_geral['municipio_us_notificante'], (70, 430))  #municipio hospital / unid saude
-        document.write_mini(dict_geral['nome_notificante'], (70, 457))  #nome hospital
-        document.write_text(dict_geral['funcao_notificante'], (255, 458))
-        document.write_text(dict_geral['assinatura_notificante'], (465, 458))
+        document.write_mini(dict_geral['zona_residencia'], (331, 395), 0, font_size=9)  #zona
+        document.write_text(dict_geral['pais_residencia'], (370, 403), 0, font_size=9)  #pais
+        document.write_text(dict_geral['municipio_us_notificante'], (70, 430), font_size=9)  #municipio hospital / unid saude
+        document.write_mini(dict_geral['nome_notificante'], (70, 457), font_size=9)  #nome hospital
+        document.write_text(dict_geral['funcao_notificante'], (255, 458), font_size=9)
+        document.write_text(dict_geral['assinatura_notificante'], (465, 458), font_size=9)
 
         ##############################################
         #####          DADOS COMPLEMENTARES       ####
@@ -68,23 +68,23 @@ def generateFicha(dict_geral: dict, modelo_pdf: str, path_pdf_gerado: str, nome_
         document.write_date(dict_geral['dt_inicio_exantema'], (248, 606), spacing=2)
         document.write_mini(dict_geral['petequiaSufusao'], (539, 595))
         document.write_mini(dict_geral['liquor'], (192, 617))
-        document.write_text(dict_geral['bacterioscopia'], (220, 630))
+        document.write_text(dict_geral['bacterioscopia'], (220, 630), font_size=9)
         document.write_mini(dict_geral['tomou_vacina'], (195, 645))
         document.write_date(dict_geral['dt_ultima_dose_tomada'], (211, 661), spacing=2)
         document.write_mini(dict_geral['hospitalizacao'], (429, 647))
         document.write_date(dict_geral['dt_hospitalizacao'], (443, 664), spacing=2)
         document.write_uf(dict_geral['uf_hospital'], (65, 684))
-        document.write_text(dict_geral['municipio_hospital'], (95, 686))
+        document.write_text(dict_geral['municipio_hospital'], (95, 686), font_size=8)
         document.write_code(dict_geral['cod_ibge_hospital'], (216, 688), space=2, font_size=13)
-        document.write_text(dict_geral['nome_hospital'], (320, 688))
+        document.write_text(dict_geral['nome_hospital'], (320, 688), font_size=9)
         document.write_code(dict_geral['cod_hospital'], (457, 690), space=2, font_size=13)
-        document.write_text(dict_geral['hipotese_diagnostica1'], (190, 714))
-        document.write_text(dict_geral['hipotese_diagnostica2'], (190, 736))
-        document.write_text(dict_geral['pais_infeccao'], (100, 769))
-        document.write_text(dict_geral['distrito_infeccao'], (110, 790))
+        document.write_text(dict_geral['hipotese_diagnostica1'], (190, 714), font_size=9)
+        document.write_text(dict_geral['hipotese_diagnostica2'], (190, 736), font_size=9)
+        document.write_text(dict_geral['pais_infeccao'], (100, 769), font_size=9)
+        document.write_text(dict_geral['distrito_infeccao'], (110, 790), font_size=9)
         document.write_uf(dict_geral['uf_infeccao'], (305, 772))
-        document.write_text(dict_geral['municipio_infeccao'], (385, 770))
-        document.write_text(dict_geral['bairro_infeccao'], (375, 791))
+        document.write_text(dict_geral['municipio_infeccao'], (385, 770), font_size=9)
+        document.write_text(dict_geral['bairro_infeccao'], (375, 791), font_size=9)
         document.save(nome_arquivo, path_pdf_gerado, close_doc=close_doc)
 
         return document

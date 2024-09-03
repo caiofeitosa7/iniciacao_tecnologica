@@ -87,6 +87,7 @@ class PDFWriter:
             space (int, opcional): O espaçamento entre os caracteres. Padrão é 0.
             font_size (int, opcional): O tamanho da fonte a ser usada. Padrão é 13.
         """
+
         code = (' ' * space).join(code)
         alvo = (' ' * space + '-' + ' ' * space)
         code = code.replace(alvo, ' - ')
@@ -144,7 +145,7 @@ class PDFWriter:
             self.document[pg].insert_text(pos, hrmin, fontsize=font_size, fontname=self.default_font,
                                           color=self.default_color)
         else:
-            hrmin = '9999'
+            hrmin = ''
             hrmin = (' ' * space).join(hrmin)
             self.document[pg].insert_text(pos, hrmin, fontsize=font_size, fontname=self.default_font,
                                           color=self.default_color)
@@ -251,7 +252,7 @@ class PDFWriter:
                                                              'border: 1px solid black;' if bord else '') + '}')
 
     def save(self, nome_arquivo: str, path_pdf_gerado: str, dictcsv: dict = None, path_pdf_base: str = '',
-             close_doc=True):
+             close_doc = True):
         """
         Salva o documento PDF com o nome especificado.
 
@@ -270,6 +271,7 @@ class PDFWriter:
         print('função save')
         print('salvando o arquivo:', path_arquivo)
 
+        self.document.set_metadata({"title": nome_arquivo})
         self.document.save(path_arquivo)
 
         if close_doc:

@@ -1224,7 +1224,8 @@
         <div class="col-3 right-div">
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha2">N°</label>
-                <input type="number" class="form-control" id="numero-ficha2">
+                <input type="number" class="form-control" id="numero-ficha2"
+                    onblur="validarNumeroFicha(this.value, false)"/>
             </div>
         </div>
     </div>

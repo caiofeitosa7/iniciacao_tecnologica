@@ -1264,7 +1264,11 @@
             <div class="input-group flex-nowrap">
                 <label class="input-group-text negrito" for="numero-ficha2">N°</label>
                 <input type="number" class="form-control" id="numero-ficha2"
-                    value="{% if ficha.numero_ficha2 %}{{ ficha.numero_ficha2 }}{% endif %}">
+                    onchange="validarNumeroFicha(this.value, false)"
+                    {% if ficha.numero_ficha2 != "0" %}
+                        value="{{ ficha.numero_ficha2 }}"
+                    {% endif %}
+                />
             </div>
         </div>
     </div>
@@ -1378,7 +1382,7 @@
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-dt-hospit" type="date" class="input-dado form-control"
-                                value="{% if ficha.dt_hospitalizacao %}{{ ficha.dt_hospitalizacao }}{% endif %}">
+                                value="{{ ficha.dt_hospitalizacao2 }}">
                         </div>
                     </div>
                     <div class="col-6 div-input">
@@ -1829,10 +1833,12 @@
                         <div class="info-elevada-com-input">
                             <div>
                                 <span class="numeracao">36</span>
-                                <label for="cas-semelh">Houve casos semelhantes na <br> família ou vizinhança?</label>
+                                <label for="cas-semelh">
+                                    Houve casos semelhantes na <br> família ou vizinhança?
+                                </label>
                             </div>
                             <input id="cas-semelh" type="number" class="input-dado-quadrado form-control" min="1"
-                                max="9" value="{% if ficha.caso_semelhante %}{{ ficha.caso_semelhante }}{% endif %}">
+                                max="9" value="{% if ficha.caso_semelhante_viz %}{{ ficha.caso_semelhante_viz }}{% endif %}">
                         </div>
                         <div
                             class="container-input-dado descricao-tipos-meia-altura letra-miuda justify-content-evenly">

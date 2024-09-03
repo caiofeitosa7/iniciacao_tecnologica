@@ -286,27 +286,27 @@ doc.write_mini(especifico['gestante2'], (429, 263)) #gestante
 doc.write_mini(especifico['raca2'], (554, 264)) #raça/cor
 doc.write_mini(especifico['escolaridade2'], (554, 293)) #escolaridade
 doc.write_code(especifico['numero_sus2'], (57, 338),space=2, font_size=10) #cartao_sus
-doc.write_text(especifico['nome_mae2'], (240, 338)) #nome_mae
+doc.write_text(especifico['nome_mae2'], (240, 338), font_size=9) #nome_mae
 ##############################################
 #####          DADOS DE RESIDENCIA        ####
 ##############################################
 
 doc.write_uf(especifico['uf_residencia2'], (57, 368)) #uf_residencia
-doc.write_text(especifico['municipio_residencia2'], (90, 368)) #municipio_residencia
+doc.write_text(especifico['municipio_residencia2'], (90, 368), font_size=9) #municipio_residencia
 doc.write_code(especifico['cod_ibge_residencia2'], (325, 368),space=2) #cod_ibge_residencia
-doc.write_text(especifico['distrito_residencia2'], (420, 368)) #endereco
-doc.write_text(especifico['bairro_residencia2'], (62, 392)) #bairro
-doc.write_text(especifico['logradouro_residencia2'], (208, 393)) #logradouro
+doc.write_text(especifico['distrito_residencia2'], (420, 368), font_size=9) #endereco
+doc.write_text(especifico['bairro_residencia2'], (62, 392), font_size=9) #bairro
+doc.write_text(especifico['logradouro_residencia2'], (208, 393), font_size=9) #logradouro
 doc.write_code(especifico['codigo_residencia2'], (480, 394),space=2) #cod_logradouro
 doc.write_text(especifico['numero_residencia2'], (62, 417)) #numero
-doc.write_text(especifico['complemento_residencia2'], (120, 417)) #complemento
+doc.write_text(especifico['complemento_residencia2'], (120, 417), font_size=9) #complemento
 doc.write_text(especifico['geo_campo1_2'], (415, 420)) #geo_campo_1
 doc.write_text(especifico['geo_campo2_2'], (55, 443)) #geo_campo_2
-doc.write_text(especifico['ponto_ref_residencia2'], (230, 443)) #ponto_ref
+doc.write_text(especifico['ponto_ref_residencia2'], (230, 443), font_size=9) #ponto_ref
 doc.write_code(especifico['cep_residencia2'], (456, 446),space=2) #cep
 doc.write_telefone(especifico['telefone_residencia2'], (55, 470), space=2) #telefone
 doc.write_mini(especifico['zona_residencia2'], (333, 458)) #zona
-doc.write_text(especifico['pais_residencia2'], (360, 469)) #pais
+doc.write_text(especifico['pais_residencia2'], (360, 469), font_size=9) #pais
 ##############################################
 #####        DADOS  COMPLEMENTARES        ####
 ##############################################
@@ -327,7 +327,7 @@ doc.write_mini(especifico['sint_dor_muscular'], (221, 606)) #sint_dor_muscular
 doc.write_mini(especifico['sint_cefaleia'], (221, 625)) #sint_cefaleia
 doc.write_mini(especifico['sint_alter_resp'], (315, 606)) #sint_alter_resp
 doc.write_mini(especifico['sint_outro'], (315, 625)) #sint_outro
-doc.write_text(especifico['sint_outro_descricao'], (353, 623)) #sint_outro_descricao
+doc.write_text(especifico['sint_outro_descricao'], (353, 623), font_size=8) #sint_outro_descricao
 
 #! campo 39
 doc.write_date(especifico['dt_def_motora'], (452, 630), spacing=2) #data_def_motora
@@ -408,7 +408,7 @@ doc.write_mini(especifico['meningea_brud'], (461, 72), pg=1) #brudzinski
 doc.write_mini(especifico['ingest_toxica'], (265, 92), pg=1) #ingestao_toxica
 
 #! campo 52 especificacao da ingestao toxica
-doc.write_text(especifico['esp_ingest_toxica'], (290, 110), pg=1) #especificacao_ingestao_toxica
+doc.write_text(especifico['esp_ingest_toxica'], (290, 110), pg=1, font_size=9) #especificacao_ingestao_toxica
 
 #! campo 53 injecao intramuscular
 doc.write_mini(especifico['inj_intramusc'], (199, 126), pg=1) #injecao_intramuscular
@@ -459,17 +459,23 @@ doc.write_code(especifico['res_laboratorial2'], (535, 297), pg=1, font_size=11, 
 doc.write_code(especifico['res_laboratorial3'], (535, 309), pg=1, font_size=11, space=2) #resultado3
 
 #! campo 68 exames complementares
-doc.write_code(especifico['liq_dt1'][:2], (75, 385), pg=1) #data
-doc.write_code(especifico['liq_dt1'][3:5], (112, 385), pg=1) #data
-doc.write_code(especifico['liq_dt1'][6:], (149, 385), pg=1) #data
+
+if especifico['liq_dt1']:
+    doc.write_code(especifico['liq_dt1'][:2], (75, 385), pg=1) #data
+    doc.write_code(especifico['liq_dt1'][3:5], (112, 385), pg=1) #data
+    doc.write_code(especifico['liq_dt1'][6:], (149, 385), pg=1) #data
+
 doc.write_code(especifico['liq_cel1'], (190, 385), pg=1) #celulas
 doc.write_code(especifico['liq_linf1'], (282, 385), pg=1) #linfocitos
 doc.write_code(especifico['liq_prot1'], (358, 385), pg=1) #proteinas
 doc.write_code(especifico['liq_gli1'], (432, 385), pg=1) #glicose
 doc.write_code(especifico['liq_clo1'], (501, 385), pg=1) #cloreto
-doc.write_code(especifico['liq_dt2'][:2], (75, 407), pg=1) #data
-doc.write_code(especifico['liq_dt2'][3:5], (112, 407), pg=1) #data
-doc.write_code(especifico['liq_dt2'][6:], (149, 407), pg=1) #data
+
+if especifico['liq_dt2']:
+    doc.write_code(especifico['liq_dt2'][:2], (75, 407), pg=1) #data
+    doc.write_code(especifico['liq_dt2'][3:5], (112, 407), pg=1) #data
+    doc.write_code(especifico['liq_dt2'][6:], (149, 407), pg=1) #data
+
 doc.write_code(especifico['liq_cel2'], (190, 407), pg=1) #celulas
 doc.write_code(especifico['liq_linf2'], (282, 407), pg=1) #linfocitos
 doc.write_code(especifico['liq_prot2'], (358, 407), pg=1) #proteinas
@@ -558,17 +564,10 @@ doc.write_date(especifico['dt_obito'], (60, 736), pg=1, spacing=2) #data_obito
 #! campo 87 data do encerramento
 doc.write_date(especifico['dt_encerramento'], (180, 735), pg=1, spacing=2) #data_encerramento
 
-doc.write_text(especifico['municipio_us_investigador'], (60, 769), pg=1) #municipio_investigador
+doc.write_text(especifico['municipio_us_investigador'], (60, 769), pg=1, font_size=9) #municipio_investigador
 doc.write_code(especifico['cod_us_investigador'], (469, 769), pg=1, space=2) #cod_unidade_investigador
-doc.write_text(especifico['nome_investigador'], (55, 797), pg=1) #nome_investigador
-doc.write_text(especifico['funcao_investigador'], (260, 797), pg=1) #funcao_investigador
-doc.write_text(especifico['assinatura_investigador'], (470, 797), pg=1) #assinatura_investigador
-
-
-
-
-
-
-
+doc.write_text(especifico['nome_investigador'], (55, 797), pg=1, font_size=9) #nome_investigador
+doc.write_text(especifico['funcao_investigador'], (260, 797), pg=1, font_size=9) #funcao_investigador
+doc.write_text(especifico['assinatura_investigador'], (470, 797), pg=1, font_size=9) #assinatura_investigador
 
 doc.save('paralisia_flacida.pdf', notificatoria)

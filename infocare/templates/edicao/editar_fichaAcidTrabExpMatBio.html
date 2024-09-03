@@ -1268,10 +1268,12 @@
             </label>
         </div>
         <div class="col-3 right-div">
-            <div class="input-group flex-nowrap">
+            <div class="input-group flex-nowrap"> 
                 <label class="input-group-text negrito" for="numero-ficha2">N°</label>
                 <input type="number" class="form-control" id="numero-ficha2"
-                    value="{% if ficha.numero_ficha2 %}{{ ficha.numero_ficha2 }}{% endif %}">
+                    value="{% if ficha.numero_ficha2 %}{{ ficha.numero_ficha2 }}{% endif %}"
+                    onchange="validarNumeroFicha(this.value, false)"
+                >
             </div>
         </div>
     </div>

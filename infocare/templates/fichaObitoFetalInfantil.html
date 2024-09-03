@@ -13,10 +13,10 @@
         <div class="col-3 d-flex justify-content-end">
             <div class="container-ano col-7 d-flex align-items-center">
                 <label for="num-casos" class="label-nowrap">
-                    N° de casos:
+                    N° de caso:
                 </label>
-                <input id="num-casos" type="number"
-                    class="form-control input-dado-quadrado mx-2"
+                <input id="numero-ficha" type="number" class="form-control mx-2"
+                    style="min-width: 80px;" onblur="validarNumeroFicha(this.value, false)"
                 />
             </div>
             <div class="d-grid col-3 justify-content-center py-2 ms-2"
@@ -1519,14 +1519,25 @@
             </div>
             <div class="linha-dados">
                 <div class="col-12 d-flex flex-column">
-                    <div class="d-flex mb-1">
-                        <span class="numeracao negrito">38</span>
-                        <label for="outra-medicacao-internacao" class="negrito mx-1">
-                            Outras medicações usadas durante a internação:
-                        </label>
+                    <div class="d-flex justify-content-between mb-1">
+                        <div class="d-flex">
+                            <span class="numeracao negrito">38</span>
+                            <label for="outra-medicacao-internacao" class="negrito mx-1">
+                                Outras medicações usadas durante a internação:
+                            </label>
+                        </div>
+                        <div class="form-check m-0 mx-2">
+                            <input class="form-check-input" type="checkbox"
+                                name="outra-medicacao-internacao"
+                                id="nenhuma_outra_med_intern"
+                            />
+                            <label class="form-check-label" for="nenhuma_outra_med_intern">
+                                Nenhuma
+                            </label>
+                        </div>
                     </div>
                     <textarea id="outra-medicacao-internacao" class="form-control input-dado" rows="2"
-                    style="font-size: small; width: 100%;"></textarea>
+                    style="font-size: small; width: 100%;"></textarea>                    
                 </div>
             </div>
             <div class="linha-dados align-items-center">

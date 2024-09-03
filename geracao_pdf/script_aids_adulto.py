@@ -1,7 +1,8 @@
 from .pdfWritter import PDFWriter
 
 
-def gerar_pdf_hiv(notificatoriaCSV: dict, dict_especifico: dict, modelo_pdf: str, modelo_pdf_base: str, path_pdf_gerado: str, nome_arquivo: str):
+def gerar_pdf_hiv(notificatoriaCSV: dict, dict_especifico: dict, modelo_pdf: str, modelo_pdf_base: str,
+                  path_pdf_gerado: str, nome_arquivo: str):
     document = PDFWriter(modelo_pdf)
 
     ##############################################
@@ -10,7 +11,8 @@ def gerar_pdf_hiv(notificatoriaCSV: dict, dict_especifico: dict, modelo_pdf: str
     document.write_text(dict_especifico["numero_ficha2"], (475, 44), 0)
     document.write_date(dict_especifico['dt_notificacao2'], (448, 162), 0, spacing=2)  #data-notificacao
     document.write_uf(dict_especifico['uf_notificacao2'], (55, 191), 0)  #uf-notificacao
-    document.write_text(dict_especifico['municipio_notificacao2'], (90, 191), 0)  #municipio-notificacao --unid-saude 55,220
+    document.write_text(dict_especifico['municipio_notificacao2'], (90, 191),
+                        0)  #municipio-notificacao --unid-saude 55,220
     document.write_code(dict_especifico['cod_ibge_notificacao2'], (477, 191), 0, 2)  #cod-ibge
     document.write_text(dict_especifico['unidade_saude2'], (70, 220), 0)  #cod-unid-saude
     document.write_code(dict_especifico['cod_unidade_saude2'], (340, 220), space=2)  #cod-unid-saude
