@@ -7,6 +7,7 @@ import re
 import os
 
 # imports locais
+from geracao_pdf.pdfWritter import PDFWriter
 from geracao_pdf.script_ficha_base import generateFicha
 from geracao_pdf.script_aids_adulto import gerar_pdf_hiv
 from geracao_pdf.script_meningite import gerar_pdf_meningite
@@ -29,6 +30,9 @@ from geracao_pdf.script_obt_mulher_id_fer import gerar_pdf_obt_mulher_id_fertil
 from geracao_pdf.script_sindrome_neuroinvasiva import gerar_pdf_sind_neuroinvasiva
 from geracao_pdf.script_evento_adv_pos_vacina import gerar_pdf_evento_adv_pos_vacina
 from geracao_pdf.script_acid_animal_peconhento import gerar_pdf_acid_animal_peconhento
+
+
+
 
 
 def abrir_conexao():
@@ -75,6 +79,7 @@ def separar_dicionario_ficha(dicionario: dict) -> tuple:
         Separa um dicionário em duas partes: uma parte para a ficha de notificação e outra para a ficha específica.
         return: tuple (ficha_notificacao, ficha_especifica)
     """
+
     campo_separacao = "bairro_infeccao"
     chaves = list(dicionario.keys())
     indice_separacao = chaves.index(campo_separacao) + 1
@@ -108,20 +113,6 @@ def get_placeholders(colunas: list, usa_colunas: bool) -> str:
     if usa_colunas:
         return ', '.join(colunas)
     return ', '.join(['%s'] * len(colunas))
-
-
-# def preparar_query(nome_tabela: str, lista_filtros: list) -> str:
-#     clausura_where = ''
-#     for filtro in lista_filtros:
-#         if filtro:
-#             if clausura_where:
-#                 clausura_where += " AND "
-#             clausura_where += filtro
-#
-#     query = f"SELECT * FROM {nome_tabela}"
-#     query += f" WHERE {clausura_where}" if clausura_where else ""
-#
-#     return query
 
 
 def inserir_registro_tabela(nome_tabela: str, dados: dict):
@@ -273,6 +264,7 @@ def inserir_valores_ficha(cursor, cod_ficha: int, tipo_ficha: int, valores: list
         :param ids: Lista com os nomes das colunas do tipo de ficha.
         :return: None.
     """
+
     cursor.execute("""
         SELECT
             C.codigo,
@@ -714,25 +706,36 @@ def set_ficha_descartada(cod_ficha: int):
     alterar_estado_ficha(cod_ficha, 3)
 
 
-def set_arquivos_ficha(registros):
-    try:
-        conexao, cursor = abrir_conexao()
-        cursor.executemany("""
-            INSERT INTO arquivo (
-                nome_original,
-                nome_armazenado,
-                extensao,
-                url,
-                data_cadastro,
-                data_deletado,
-                deletado,
-                cod_ficha,
-                arq_principal
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, registros)
-        fechar_conexao(conexao)
-    except Exception as e:
-        print(e)
+def set_arquivos_ficha(registros: list, cod_ficha: int, salvar_anexo: bool = True):
+    # try:
+    conexao, cursor = abrir_conexao()
+    cursor.executemany("""
+        INSERT INTO arquivo (
+            nome_original,
+            nome_armazenado,
+            extensao,
+            url,
+            data_cadastro,
+            data_deletado,
+            deletado,
+            cod_ficha,
+            arq_principal
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, registros)
+
+    if salvar_anexo:
+        # anexos = list()
+        # for registro in registros:
+        #     nome_arquivo = registro[1]
+        #     extensao = registro[2]
+        #     anexos.append(os.path.join(settings.DIRETORIO_PDF, nome_arquivo + extensao))
+
+        juntar_anexos_com_ficha_principal(cursor, cod_ficha)
+
+    fechar_conexao(conexao)
+
+    # except Exception as e:
+    #     print(e)
 
 
 def listar_arquivos_ficha(cod_ficha: int):
@@ -788,16 +791,35 @@ def formatar_dados_esperados(dados: dict) -> dict:
     return dados
 
 
-def apagar_arquivo_ficha(cursor, cod_ficha: int):
+def get_arquivo_principal_ficha(cursor, cod_ficha: int):
     cursor.execute("""
-        SELECT nome_armazenado, extensao
-        FROM arquivo
-        WHERE cod_ficha = %s
-            AND arq_principal = 1
-    """, (cod_ficha,))
+            SELECT nome_armazenado, extensao
+            FROM arquivo
+            WHERE cod_ficha = %s
+                AND arq_principal = 1
+        """, (cod_ficha,))
 
     nome_arquivo, extensao = cursor.fetchone()
-    os.remove(os.path.join(settings.MEDIA_ROOT, 'arquivos', nome_arquivo + extensao))
+    return nome_arquivo, extensao
+
+
+def get_arquivos_anexos_ficha(cursor, cod_ficha: int):
+    cursor.execute("""
+            SELECT nome_armazenado, extensao
+            FROM arquivo
+            WHERE cod_ficha = %s
+                AND arq_principal = 0
+        """, (cod_ficha,))
+
+    registros = cursor.fetchall()
+    return [os.path.join(settings.DIRETORIO_PDF, res[0] + res[1])
+            for res in registros] \
+        if registros else []
+
+
+def apagar_arquivo_ficha(cursor, cod_ficha: int):
+    nome_arquivo, extensao = get_arquivo_principal_ficha(cursor, cod_ficha)
+    os.remove(os.path.join(settings.DIRETORIO_PDF, nome_arquivo + extensao))
 
     cursor.execute("""
             DELETE FROM arquivo
@@ -806,6 +828,18 @@ def apagar_arquivo_ficha(cursor, cod_ficha: int):
         """, (cod_ficha,))
 
     return nome_arquivo
+
+
+def juntar_anexos_com_ficha_principal(cursor, cod_ficha: int):
+    nome_arquivo, extensao = get_arquivo_principal_ficha(cursor, cod_ficha)
+    anexos = get_arquivos_anexos_ficha(cursor, cod_ficha)
+
+    arquivo = nome_arquivo + extensao
+    diretorio = settings.DIRETORIO_PDF
+    path_pdf_principal = os.path.join(diretorio, arquivo)
+    anexos = [PDFWriter(anexo) for anexo in anexos]
+    pdf_principal = PDFWriter(path_pdf_principal)
+    pdf_principal.addAnexos(anexos, diretorio, arquivo)
 
 
 def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
@@ -842,7 +876,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     url_arquivo = settings.MEDIA_URL + 'arquivos/' + nome_arquivo
     path_pdf_modelo = os.path.join('geracao_pdf', 'modelos_pdf', modelo_pdf)
     path_pdf_ficha_base = os.path.join('geracao_pdf', 'modelos_pdf', 'FichaNotificacao.pdf')
-    path_pdf_gerado = os.path.join(settings.MEDIA_ROOT, 'arquivos')
+    path_pdf_gerado = settings.DIRETORIO_PDF
 
     print('indo gerar o pdf')
 
@@ -935,7 +969,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
         1
     )
 
-    set_arquivos_ficha([info_arquivo])
+    set_arquivos_ficha([info_arquivo], cod_ficha, False)
 
 
 def get_info_comum_paciente(prontuario: int):

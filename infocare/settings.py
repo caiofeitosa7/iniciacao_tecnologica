@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'e8120b9twuwwq7ib7v[-=9-33-=e^iormh9$%^at3vl&97b)^q0^ua^(h(%-v6u68l#!4ylm67u-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,14 +85,6 @@ DATABASES = {
         'PASSWORD': 'suc0_b0l4ch4',
         'HOST': '127.0.0.1',
         'PORT': '3306'
-    },
-    'hutsaude05': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hutsaude05',
-        'USER': 'hutsaude05_add1',
-        'PASSWORD': 'H117125',
-        'HOST': 'mysql.hutsaude.com.br',
-        'PORT': '3306'
     }
 }
 
@@ -136,13 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
-
-
-
-
-
-
-
+DIRETORIO_PDF = os.path.join(MEDIA_ROOT, 'arquivos')

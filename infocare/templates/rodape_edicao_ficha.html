@@ -19,7 +19,7 @@
         </div>
     {% endif %}
 
-    {% if status_ficha_aberta != 2 %}
+    {% if status_ficha_aberta == 4 %}
         <form id="uploadForm" class="pb-5" enctype="multipart/form-data"
             method="POST" action="{% url 'upload' 0 %}">
             {% csrf_token %}

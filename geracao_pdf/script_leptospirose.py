@@ -102,15 +102,15 @@ def gerar_pdf_leptospirose(notificatoriaCSV: dict, dict_especifico: dict, modelo
     document.write_mini(dict_especifico['res_amostra_elisa2'], (552, 51),pg=1) #res_sorologia_2
     document.write_date(dict_especifico['dt_micro1'], (72, 124),pg=1, spacing=2) #data_coleta_micro_aglut_1
     document.write_text(dict_especifico['sorovar1_micro1'], (219, 122),pg=1) #micro_1_sorovar
-    document.write_code(dict_especifico['titulo1_micro1'], (303, 124),pg=1,space=2) #micro_1_titulo
-    document.write_text(dict_especifico['sorovar2_micro1'], (413, 123),pg=1) #micro_1_sorovar2
-    document.write_code(dict_especifico['titulo2_micro1'], (496, 124),pg=1,space=2) #micro_1_titulo2
-    document.write_mini(dict_especifico['res_aglu_micro1'], (542, 149),pg=1) #res_micro_1
-    document.write_date(dict_especifico['dt_micro2'], (70, 200),pg=1, spacing=2) #data_coleta_micro_aglut_2
-    document.write_text(dict_especifico['sorovar1_micro2'], (218, 197),pg=1) #micro_2_sorovar
-    document.write_code(dict_especifico['titulo1_micro2'], (302, 200),pg=1,space=2) #micro_2_titulo
-    document.write_text(dict_especifico['sorovar2_micro2'], (412, 199),pg=1) #micro_2_sorovar2
-    document.write_code(dict_especifico['titulo2_micro2'], (495, 200),pg=1,space=2) #micro_2_titulo2
+    document.write_code(dict_especifico['titulo1_micro1'], (283, 125), pg=1, space=2)  # micro_1_titulo
+    document.write_text(dict_especifico['sorovar2_micro1'], (413, 123), pg=1)  # micro_1_sorovar2
+    document.write_code(dict_especifico['titulo2_micro1'], (476, 126), pg=1, space=2)  # micro_1_titulo2
+    document.write_mini(dict_especifico['res_aglu_micro1'], (542, 149), pg=1)  # res_micro_1
+    document.write_date(dict_especifico['dt_micro2'], (70, 200), pg=1, spacing=2)  # data_coleta_micro_aglut_2
+    document.write_text(dict_especifico['sorovar1_micro2'], (218, 197), pg=1)  # micro_2_sorovar
+    document.write_code(dict_especifico['titulo1_micro2'], (282, 200), pg=1, space=2)  # micro_2_titulo
+    document.write_text(dict_especifico['sorovar2_micro2'], (412, 199), pg=1)  # micro_2_sorovar2
+    document.write_code(dict_especifico['titulo2_micro2'], (475, 201), pg=1, space=2)  # micro_2_titulo2
     document.write_mini(dict_especifico['res_aglu_micro2'], (541, 225),pg=1) #res_micro_2
     document.write_date(dict_especifico['dt_col_isola'], (68, 285),pg=1, spacing=2) #data_iso_coleta
     document.write_mini(dict_especifico['res_col_isola'], (552, 270),pg=1) #iso_res

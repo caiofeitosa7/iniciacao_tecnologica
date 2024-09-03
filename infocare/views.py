@@ -291,7 +291,8 @@ def upload_arquivos(request, cod_ficha: int):
                 0
             ))
 
-        models.set_arquivos_ficha(registros)
+        if registros:
+            models.set_arquivos_ficha(registros, cod_ficha)
 
         # if redirecionamento:
         #     return redirect(redirecionamento)
@@ -330,7 +331,7 @@ def obter_info_paciente(request, prontuario: int):
 
 def download_fichas(request):
     """
-    Faz o download das fichas do tipo selecionado dentro de um determinado período.
+    Faz o ‘download’ das fichas do tipo selecionado em um determinado período.
     :param request:
     :return: ZIP contendo os arquivos CSV.
     """

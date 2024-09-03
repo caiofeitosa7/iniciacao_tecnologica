@@ -1,6 +1,7 @@
 from .script_ficha_base import generateFicha
 import fitz  # type: ignore
 import datetime
+import shutil
 import re
 import os
 
@@ -277,9 +278,42 @@ class PDFWriter:
         if close_doc:
             self.document.close()
 
-    def addAnexos(self, anexos: list):
+    # def addAnexos(self, anexos: list, diretorio: str, nome_arquivo: str):
+    #     """
+    #     Adiciona anexos ao documento PDF.
+    #     """
+    #     for anexo in anexos:
+    #         self.document.insert_pdf(anexo.document)
+
+    #     path_arquivo = os.path.join(diretorio, nome_arquivo)
+    #     self.document.set_metadata({"title": nome_arquivo})
+    #     self.document.save(path_arquivo)
+    #     self.document.close()
+
+    # def addAnexos(self, anexos: list, diretorio: str, nome_arquivo: str):
+    #     """
+    #     Adiciona anexos ao documento PDF.
+    #     """
+    #     for anexo in anexos:
+    #         self.document.insert_pdf(anexo.document)
+
+    #     path_arquivo = os.path.join(diretorio, nome_arquivo)
+    #     # self.document.set_metadata({"title": nome_arquivo})
+    #     self.document.save(path_arquivo, incremental=True)
+    #     self.document.close()
+
+    def addAnexos(self, anexos: list, diretorio: str, nome_arquivo: str):
         """
-        Adiciona anexos ao documento PDF.
+            Adiciona anexos ao documento PDF.
         """
         for anexo in anexos:
             self.document.insert_pdf(anexo.document)
+
+        path_arquivo = os.path.join(diretorio, nome_arquivo)
+        temp_file = os.path.join(diretorio, f"temp_{nome_arquivo}")
+
+        self.document.set_metadata({"title": nome_arquivo})
+        self.document.save(temp_file)
+        self.document.close()
+
+        shutil.move(temp_file, path_arquivo)
