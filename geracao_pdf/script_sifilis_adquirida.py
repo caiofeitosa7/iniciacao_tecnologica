@@ -14,7 +14,7 @@ def gerar_pdf_sifilis_adquirida(notificatoriaCSV: dict, dict_especifico: dict, m
     document.write_code(dict_especifico['cod_ibge_notificacao2'], (448, 160), space=2)  # cod_ibge
     document.write_text(dict_especifico['unidade_saude2'], (64, 186))  # cod_unid_saude
     document.write_code(dict_especifico['cod_unidade_saude2'], (317, 187), space=2)  # cod_unid_saude
-    document.write_date(dict_especifico['dt_acidente'], (417, 186), spacing=2)  # data acidente
+    document.write_date(dict_especifico['dt_diagnostico'], (417, 186), spacing=2)  # data diagnostico
     ##############################################
     #####          NOTIFICACAO INDIVIDUAL     ####
     ##############################################

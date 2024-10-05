@@ -3,7 +3,7 @@ from .pdfWritter import PDFWriter
 
 def gerar_pdf_obt_mulher_id_fertil(dict_especifico: dict, modelo_pdf: str, path_pdf_gerado: str, nome_arquivo: str):
     document = PDFWriter(modelo_pdf)
-    
+
     # ! campo 0 ao 6
     document.write_code(dict_especifico['ano'], (425, 46), space=3)  # ano
     document.write_text(dict_especifico['nome_paciente'], (118, 92))  # nome_paciente
@@ -15,17 +15,16 @@ def gerar_pdf_obt_mulher_id_fertil(dict_especifico: dict, modelo_pdf: str, path_
 
     # !campo 7
     # todo validar cor da pele
-    match dict_especifico['btn_raca']:
-        case 'raca-branca':
-            document.write_cross((372, 146))  # branca
-        case 'raca-preta':
-            document.write_cross((406, 146))  # preta
-        case 'raca-amarela':
-            document.write_cross((435, 146))  # amarela
-        case 'raca-parda':
-            document.write_cross((475, 146))  # parda
-        case 'raca-indigena':
-            document.write_cross((509, 146))  # indigena
+    if dict_especifico['btn_raca'] == 'raca-branca':
+        document.write_cross((372, 146))  # branca
+    elif dict_especifico['btn_raca'] == 'raca-preta':
+        document.write_cross((406, 146))  # preta
+    elif dict_especifico['btn_raca'] == 'raca-amarela':
+        document.write_cross((435, 146))  # amarela
+    elif dict_especifico['btn_raca'] == 'raca-parda':
+        document.write_cross((475, 146))  # parda
+    elif dict_especifico['btn_raca'] == 'raca-indigena':
+        document.write_cross((509, 146))  # indigena
 
     document.write_text(dict_especifico['etnia'], (164, 167))  # etnia
     document.write_text(dict_especifico['aldeia'], (164, 184))  # aldeia
@@ -64,52 +63,48 @@ def gerar_pdf_obt_mulher_id_fertil(dict_especifico: dict, modelo_pdf: str, path_
 
     # ! campo 11
     # todo verificar momento da morte
-    match dict_especifico['momento_morte']:
-        case 'op-gestacao':
-            document.write_cross((43, 324))  # durante a gestação
-        case 'op-abortamento':
-            document.write_cross((43, 337))  # durante o abortamento
-        case 'op-apos-abortamento':
-            document.write_cross((142, 324))  # apos o abortamento
-        case 'op-parto':
-            document.write_cross((142, 337))  # no parto ou ate 1hora depois
-        case 'op-42d-parto':
-            document.write_cross((283, 324))  # ate 42 dias apos o parto
-        case 'op-43d-1ano-parto':
-            document.write_cross((283, 337))  # ate 43 dias a 1 ano apos o parto
-        case 'op-NDA':
-            document.write_cross((410, 324))  # nao ocorreu nesses periodos
-        case 'op-nao-edentificado':
-            document.write_cross((410, 337))  # momento nao identificado
+    if dict_especifico['momento_morte'] == 'op-gestacao':
+        document.write_cross((43, 324))  # durante a gestação
+    elif dict_especifico['momento_morte'] == 'op-abortamento':
+        document.write_cross((43, 337))  # durante o abortamento
+    elif dict_especifico['momento_morte'] == 'op-apos-abortamento':
+        document.write_cross((142, 324))  # apos o abortamento
+    elif dict_especifico['momento_morte'] == 'op-parto':
+        document.write_cross((142, 337))  # no parto ou ate 1hora depois
+    elif dict_especifico['momento_morte'] == 'op-42d-parto':
+        document.write_cross((283, 324))  # ate 42 dias apos o parto
+    elif dict_especifico['momento_morte'] == 'op-43d-1ano-parto':
+        document.write_cross((283, 337))  # ate 43 dias a 1 ano apos o parto
+    elif dict_especifico['momento_morte'] == 'op-NDA':
+        document.write_cross((410, 324))  # nao ocorreu nesses periodos
+    elif dict_especifico['momento_morte'] == 'op-nao-edentificado':
+        document.write_cross((410, 337))  # momento nao identificado
 
     # ! campo 12
     # todo verificar morte devido causa externa
-    match dict_especifico['morte_causa_ext']:
-        case 'op-causa-externa-sim':
-            document.write_cross((176, 353))  # sim
-        case 'op-causa-externa-nao':
-            document.write_cross((347, 353))  # nao
+    if dict_especifico['morte_causa_ext'] == 'op-causa-externa-sim':
+        document.write_cross((176, 353))  # sim
+    elif dict_especifico['morte_causa_ext'] == 'op-causa-externa-nao':
+        document.write_cross((347, 353))  # nao
     # 12.A
     # todo verificar cirscunstancia provavel
-    match dict_especifico['circunst_morte']:
-        case 'op-circuns-acidente':
-            document.write_cross((176, 365))  # acidente
-        case 'op-circuns-suicidio':
-            document.write_cross((222, 365))  # suicidio
-        case 'op-circuns-homicidio':
-            document.write_cross((261, 365))  # homicidio
-        case 'op-circuns-outro':
-            document.write_cross((307, 365))  # outro
+    if dict_especifico['circunst_morte'] == 'op-circuns-acidente':
+        document.write_cross((176, 365))  # acidente
+    elif dict_especifico['circunst_morte'] == 'op-circuns-suicidio':
+        document.write_cross((222, 365))  # suicidio
+    elif dict_especifico['circunst_morte'] == 'op-circuns-homicidio':
+        document.write_cross((261, 365))  # homicidio
+    elif dict_especifico['circunst_morte'] == 'op-circuns-outro':
+        document.write_cross((307, 365))  # outro
 
     document.write_text(dict_especifico['circunst_morte_outro'], (350, 369))  # outra possibilidade
 
     # 12.B
     # todo verificar estado puerperal
-    match dict_especifico['estado_puerperal']:
-        case 'op-estado-puerperal-sim':
-            document.write_cross((232, 384))  # sim
-        case 'op-estado-puerperal-nao':
-            document.write_cross((347, 384))  # nao
+    if dict_especifico['estado_puerperal'] == 'op-estado-puerperal-sim':
+        document.write_cross((232, 384))  # sim
+    elif dict_especifico['estado_puerperal'] == 'op-estado-puerperal-nao':
+        document.write_cross((347, 384))  # nao
 
     # ! campo 13
     if dict_especifico['seq_eventos'] == '1':
@@ -133,11 +128,10 @@ def gerar_pdf_obt_mulher_id_fertil(dict_especifico: dict, modelo_pdf: str, path_
 
     # ! campo 14
     # todo verificar modificação do DO
-    match dict_especifico['modif_do']:
-        case 'op-modif-DO-sim':
-            document.write_cross((282, 587))  # sim
-        case 'op-modif-DO-nao':
-            document.write_cross((399, 587))  # nao
+    if dict_especifico['modif_do'] == 'op-modif-DO-sim':
+        document.write_cross((282, 587))  # sim
+    elif dict_especifico['modif_do'] == 'op-modif-DO-nao':
+        document.write_cross((399, 587))  # nao
 
     document.write_box(dict_especifico['num_campo1'], rect=(46, 603, 97, 618), bord=True)  # num_campo1
     document.write_box(dict_especifico['info_original1'], rect=(98, 603, 335, 618), bord=True)  # info_original1
@@ -153,16 +147,16 @@ def gerar_pdf_obt_mulher_id_fertil(dict_especifico: dict, modelo_pdf: str, path_
     # ! campo 15
     document.write_text(dict_especifico['nome_notificante'], (185, 695))  # nome_notificante
     # ! campo 16
-    document.write_code(dict_especifico['telefone_notificante'], (472, 696), space=1, font_size=10)  # telefone_notificante
+    document.write_code(dict_especifico['telefone_notificante'], (472, 696), space=1,
+                        font_size=10)  # telefone_notificante
     # ! campo 17
     document.write_date(dict_especifico['dt_notificacao'], (208, 716), spacing=3)  # dt_notificacao
 
     # ! campo 18
-    match dict_especifico['info_anexa']:
-        case 'op-info-anexa-sim':
-            document.write_cross((482, 717))  # info_anexa sim
-        case 'op-info-anexa-nao':
-            document.write_cross((508, 717))  # info_anexa nao
+    if dict_especifico['info_anexa'] == 'op-info-anexa-sim':
+        document.write_cross((482, 717))  # info_anexa sim
+    elif dict_especifico['info_anexa'] == 'op-info-anexa-nao':
+        document.write_cross((508, 717))  # info_anexa nao
 
     # ! campo 19
     if dict_especifico['destino_web'] == '1':

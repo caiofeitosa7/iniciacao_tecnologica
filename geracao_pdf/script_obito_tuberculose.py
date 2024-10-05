@@ -104,25 +104,22 @@ def gerar_pdf_obt_tuberculose(dict_especifico: dict, modelo_pdf: str, path_pdf_g
     #*========================== fim da pagina 2 ==========================*#
 
     document.write_box(dict_especifico['outros_exames'], rect=(65, 83, 588, 180), pg=2, bord=True)  #outros exames
-    match dict_especifico['necropsia']:
-        case 'op-necropsia-sim':
-            document.write_cross((78, 212), pg=2)  #necropsia sim
-        case 'op-necropsia-nao':
-            document.write_cross((112, 212), pg=2)  #necropsia nao
+    if dict_especifico['necropsia'] == 'op-necropsia-sim':
+        document.write_cross((78, 212), pg=2)  #necropsia sim
+    elif dict_especifico['necropsia'] == 'op-necropsia-nao':
+        document.write_cross((112, 212), pg=2)  #necropsia nao
 
-    match dict_especifico['necropsia_serv']:
-        case "op-necropsia-serv-iml":
-            document.write_cross((357, 200), pg=2)  #servico IML
-        case "op-necropsia-serv-svo":
-            document.write_cross((395, 200), pg=2)  #servico SVO
-        case "op-necropsia-serv-hospital":
-            document.write_cross((433, 200), pg=2)  #servico hospital
+    if dict_especifico['necropsia_serv'] == "op-necropsia-serv-iml":
+        document.write_cross((357, 200), pg=2)  #servico IML
+    elif dict_especifico['necropsia_serv'] == "op-necropsia-serv-svo":
+        document.write_cross((395, 200), pg=2)  #servico SVO
+    elif dict_especifico['necropsia_serv'] == "op-necropsia-serv-hospital":
+        document.write_cross((433, 200), pg=2)  #servico hospital
 
-    match dict_especifico['achados_necropsia']:
-        case "op-achados-necropsia-sim":
-            document.write_cross((518, 218), pg=2)  #sim
-        case "op-achados-necropsia-nao":
-            document.write_cross((553, 218), pg=2)  #nao
+    if dict_especifico['achados_necropsia'] == "op-achados-necropsia-sim":
+        document.write_cross((518, 218), pg=2)  #sim
+    elif dict_especifico['achados_necropsia'] == "op-achados-necropsia-nao":
+        document.write_cross((553, 218), pg=2)  #nao
 
     document.write_text(dict_especifico['momento_diag'], (299, 268), pg=2)  #momento diagnostico
     document.write_text(dict_especifico['ini_trat_tuberc'], (236, 332), pg=2)  #inicio tratamento
@@ -133,23 +130,21 @@ def gerar_pdf_obt_tuberculose(dict_especifico: dict, modelo_pdf: str, path_pdf_g
     document.write_text(dict_especifico['confirm_obt_tuberc'], (330, 455), pg=2)  #confirmacao TB
     document.write_text(dict_especifico['cont_investig'], (192, 475), pg=2)  #continuar investigacao
 
-    match dict_especifico['motiv_cont_invest']:
-        case 'op-tuberculose-outras-unidades':
-            document.write_cross((191, 493), pg=2)  #confirmar caso de tuberculose em outras unidades
-        case 'op-investigacao-contatos':
-            document.write_cross((191, 514), pg=2)  #investigação de contatos
-        case 'op-motivo-continuacao-outro':
-            document.write_cross((310, 514), pg=2)  #outros
+    if dict_especifico['motiv_cont_invest'] == 'op-tuberculose-outras-unidades':
+        document.write_cross((191, 493), pg=2)  #confirmar caso de tuberculose em outras unidades
+    elif dict_especifico['motiv_cont_invest'] == 'op-investigacao-contatos':
+        document.write_cross((191, 514), pg=2)  #investigação de contatos
+    elif dict_especifico['motiv_cont_invest'] == 'op-motivo-continuacao-outro':
+        document.write_cross((310, 514), pg=2)  #outros
 
     document.write_text(dict_especifico['motiv_cont_invest_outro'], (383, 514), pg=2)  #outro motivo
     document.write_box(dict_especifico['obs_adicionais'], rect=(65, 541, 588, 672), pg=2,
                        bord=True)  #observacoes adicionais
 
-    match dict_especifico['info_anexa']:
-        case 'op-info-anexa-sim':
-            document.write_cross((205, 706), pg=2)  #sim
-        case 'op-info-anexa-nao':
-            document.write_cross((240, 706), pg=2)  #nao
+    if dict_especifico['info_anexa'] == 'op-info-anexa-sim':
+        document.write_cross((205, 706), pg=2)  #sim
+    elif dict_especifico['info_anexa'] == 'op-info-anexa-nao':
+        document.write_cross((240, 706), pg=2)  #nao
 
     document.write_date(dict_especifico['dt_notificacao'], (401, 706), spacing=3, pg=2)  #data notificacao
     document.write_text(dict_especifico['nome_notificante'], (70, 745), pg=2)  #nome notificante

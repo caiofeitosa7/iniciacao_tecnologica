@@ -1384,13 +1384,13 @@
                     <div class="col-3 div-input">
                         <div class="info-elevada">
                             <span class="numeracao">7</span>
-                            <label for="campo-dt-acidente">
-                                Data do Acidente
+                            <label for="dt-diagnostico">
+                                Data do Diagnóstico
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-dt-acidente" type="date" class="input-dado form-control"
-                            value="{% if ficha.dt_acidente %}{{ ficha.dt_acidente }}{% endif %}">
+                            <input id="dt-diagnostico" type="date" class="input-dado form-control"
+                                value="{{ ficha.dt_diagnostico }}">
                         </div>
                     </div>
                 </div>

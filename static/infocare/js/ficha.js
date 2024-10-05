@@ -55,8 +55,6 @@ function cadastrarFichaNotificacao(urlSetFichaNotificacao) {
         dicionario['campo-dt-notificacao'] = dataAtual.toLocaleDateString('pt-BR', options).split('/').reverse().join('-');
     }
 
-    
-
     abrirTelaCarregamento();
 
     fetch(urlSetFichaNotificacao, {
@@ -149,7 +147,7 @@ function verificarMudancaEstadoFicha(url) {
 }
 
 function validarNumeroFicha(numero, memorizar) {
-    url = 'fichas/numero_ficha/' + numero
+    url = 'fichas/verificar_numero_ficha/' + numero
     fetch(url, {
         method: 'GET',
         headers: {

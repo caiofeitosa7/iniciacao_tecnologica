@@ -36,8 +36,7 @@ def criar_dicionario(colunas: list, valores: list) -> dict:
     dados = dict()
     for i, coluna in enumerate(colunas):
         if 'dt' in coluna.lower() and valores[i]:
-            data_obj = datetime.strptime(str(valores[i]), '%Y-%m-%d')
-            valores[i] = data_obj.strftime('%d/%m/%Y')
+            valores[i] = str(valores[i])
         dados[coluna] = valores[i]
 
     return dados

@@ -199,24 +199,25 @@ class PDFWriter:
         Seleciona uma caixa no PDF na posição especificada.
 
         Args:
+            multiplier (int): O número de vezes que a caixa deve ser selecionada.
             pg (int, opcional): O número da página onde selecionar. Padrão é 0.
         """
         # self.document[pg].add_circle_annot(rect)
         try:
             mult = int(multiplier)
-            match mult:
-                case 1:
-                    rect = (128, 650, 138, 662)  # x,y,x+10,y+12
-                    self.document[pg].add_rect_annot(rect)
-                case 2:
-                    rect = (162, 650, 172, 662)  # x,y,x+10,y+12
-                    self.document[pg].add_rect_annot(rect)
-                case 3:
-                    rect = (195, 650, 205, 662)  # x,y,x+10,y+12
-                    self.document[pg].add_rect_annot(rect)
-                case 4:
-                    rect = (230, 650, 240, 662)  # x,y,x+10,y+12
-                    self.document[pg].add_rect_annot(rect)
+
+            if mult == 1:
+                rect = (128, 650, 138, 662)  # x,y,x+10,y+12
+                self.document[pg].add_rect_annot(rect)
+            elif mult == 2:
+                rect = (162, 650, 172, 662)  # x,y,x+10,y+12
+                self.document[pg].add_rect_annot(rect)
+            elif mult == 3:
+                rect = (195, 650, 205, 662)  # x,y,x+10,y+12
+                self.document[pg].add_rect_annot(rect)
+            elif mult == 4:
+                rect = (230, 650, 240, 662)  # x,y,x+10,y+12
+                self.document[pg].add_rect_annot(rect)
         except Exception as e:
             print(f'multiplier não é um número, erro:{e}')
 

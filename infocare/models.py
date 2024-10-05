@@ -32,9 +32,6 @@ from geracao_pdf.script_evento_adv_pos_vacina import gerar_pdf_evento_adv_pos_va
 from geracao_pdf.script_acid_animal_peconhento import gerar_pdf_acid_animal_peconhento
 
 
-
-
-
 def abrir_conexao():
     conexao = connections['default']
     cursor = conexao.cursor()
@@ -370,51 +367,53 @@ def averiguar_campos(cursor, tipo_ficha: int, campos: dict):
 
         registros.append(registro)
 
-    # df = pd.DataFrame(registros)
-    # df.to_excel('output.xlsx', index=False)
-    # print('\nArquivo salvo.\n')
+    df = pd.DataFrame(registros)
+    df.to_excel('output.xlsx', index=False)
+    print('\nArquivo salvo.\n')
 
 
 def set_ficha(campos: dict, cod_usuario):
     conexao, cursor = abrir_conexao()
     tipo_ficha = campos.pop('cod_tipo_ficha')
+    data_ficha = date.today() if not campos.get('campo-dt-notificacao') \
+        else campos.get('campo-dt-notificacao')
 
-    averiguar_campos(cursor, tipo_ficha, campos)
+    # averiguar_campos(cursor, tipo_ficha, campos)
 
-    # try:
-    with transaction.atomic():
-        cursor.execute(f"""
-            INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (
-            campos.pop('setor'),
-            campos.pop('prontuario'),
-            1,
-            tipo_ficha,
-            cod_usuario,
-            date.today()
-        ))
+    try:
+        with transaction.atomic():
+            cursor.execute(f"""
+                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                campos.pop('setor'),
+                campos.pop('prontuario'),
+                1,
+                tipo_ficha,
+                cod_usuario,
+                data_ficha
+            ))
 
-        cursor.execute("SELECT LAST_INSERT_ID()")
-        cod_ficha = int(cursor.fetchone()[0])
+            cursor.execute("SELECT LAST_INSERT_ID()")
+            cod_ficha = int(cursor.fetchone()[0])
 
-        # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-        print('Passou na insercao dos dados!')
+            print('Passou na insercao dos dados!')
 
-    if cod_ficha:
-        preencher_pdf(cod_ficha, tipo_ficha)
+        if cod_ficha:
+            preencher_pdf(cod_ficha, tipo_ficha)
 
-    return cod_ficha
+        return cod_ficha
 
-    # except Exception as e:
-    #     conexao.rollback()
-    #     print(e)
-    #     return None
-    #
-    # finally:
-    #     fechar_conexao(conexao)
+    except Exception as e:
+        conexao.rollback()
+        print(e)
+        return None
+
+    finally:
+        fechar_conexao(conexao)
 
 
 def alterar_ficha(campos: dict):
@@ -883,77 +882,74 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     if not ficha_de_obito and tipo_ficha != 1:  # Exclui ficha de notificacao geral e as fichas de obito
         ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
 
-        match tipo_ficha:
-            case 2:
-                gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                      path_pdf_gerado, nome_arquivo)
-            case 3:
-                gerar_pdf_vio_autoprov(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                       path_pdf_gerado, nome_arquivo)
-            case 4:
-                gerar_pdf_anti_rabica(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                      path_pdf_gerado, nome_arquivo)
-            case 6:
-                gerar_pdf_leptospirose(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                       path_pdf_gerado, nome_arquivo)
-            case 8:
-                gerar_pdf_sifilis_adquirida(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                            path_pdf_gerado, nome_arquivo)
-            case 9:
-                gerar_pdf_meningite(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                    path_pdf_gerado, nome_arquivo)
-            case 11:
-                gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                              path_pdf_gerado,
-                              nome_arquivo)
-            case 12:
-                gerar_pdf_acid_mat_bio(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                       path_pdf_gerado, nome_arquivo)
-            case 13:
-                gerar_pdf_coqueluche(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                     path_pdf_gerado, nome_arquivo)
-            case 14:
-                gerar_pdf_acid_animal_peconhento(ficha_notificacao, ficha_especifica, path_pdf_modelo,
-                                                 path_pdf_ficha_base,
-                                                 path_pdf_gerado, nome_arquivo)
-            case 15:
-                gerar_pdf_dengue_chik(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                      path_pdf_gerado, nome_arquivo)
-            case 16:
-                gerar_pdf_chagas_aguda(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                       path_pdf_gerado, nome_arquivo)
-            case 17:
-                gerar_pdf_intox_exog(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                     path_pdf_gerado, nome_arquivo)
-            case 18:
-                gerar_pdf_hepatites_virais(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                           path_pdf_gerado, nome_arquivo)
-            case 19:
-                gerar_pdf_paralisia_flacida(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
-                                            path_pdf_gerado, nome_arquivo)
-            case 20:
-                gerar_pdf_sind_neuroinvasiva(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+        if tipo_ficha == 2:
+            gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 3:
+            gerar_pdf_vio_autoprov(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 4:
+            gerar_pdf_anti_rabica(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 6:
+            gerar_pdf_leptospirose(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 8:
+            gerar_pdf_sifilis_adquirida(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                        path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 9:
+            gerar_pdf_meningite(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 11:
+            gerar_pdf_hiv(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                          path_pdf_gerado,
+                          nome_arquivo)
+        elif tipo_ficha == 12:
+            gerar_pdf_acid_mat_bio(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 13:
+            gerar_pdf_coqueluche(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                 path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 14:
+            gerar_pdf_acid_animal_peconhento(ficha_notificacao, ficha_especifica, path_pdf_modelo,
+                                             path_pdf_ficha_base,
                                              path_pdf_gerado, nome_arquivo)
-            case 21:
-                gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+        elif tipo_ficha == 15:
+            gerar_pdf_dengue_chik(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 16:
+            gerar_pdf_chagas_aguda(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                   path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 17:
+            gerar_pdf_intox_exog(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                 path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 18:
+            gerar_pdf_hepatites_virais(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                       path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 19:
+            gerar_pdf_paralisia_flacida(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                        path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 20:
+            gerar_pdf_sind_neuroinvasiva(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
                                          path_pdf_gerado, nome_arquivo)
-            case 22:
-                gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo,
-                                                path_pdf_ficha_base,
-                                                path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 21:
+            gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
+                                     path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 22:
+            gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo,
+                                            path_pdf_ficha_base,
+                                            path_pdf_gerado, nome_arquivo)
 
     elif tipo_ficha == 1:
         generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
 
-    else:  # Fichas de Obito
-        pass
-        match tipo_ficha:
-            case 5:
-                gerar_pdf_obt_mulher_id_fertil(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
-            case 7:
-                gerar_pdf_obt_tuberculose(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
-            case 10:
-                gerar_pdf_obt_fetal_inf(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
+    # Fichas de Obito #
+    elif tipo_ficha == 5:
+        gerar_pdf_obt_mulher_id_fertil(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
+    elif tipo_ficha == 7:
+        gerar_pdf_obt_tuberculose(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
+    elif tipo_ficha == 10:
+        gerar_pdf_obt_fetal_inf(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
 
     print('passando para registro no banco')
 

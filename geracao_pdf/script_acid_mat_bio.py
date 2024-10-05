@@ -93,7 +93,7 @@ def gerar_pdf_acid_mat_bio(notificatoriaCSV: dict, dict_especifico: dict, modelo
     document.write_mini(dict_especifico['paciente_ft_conhecida'], (284, 377),pg=1) #paciente_fonte_conhecida
     document.write_mini(dict_especifico['teste_hbsag'], (329, 397),pg=1) #res_soro_hbsag
     document.write_mini(dict_especifico['teste_anti_hiv'], (329, 413),pg=1) #res_soro_anti_hiv
-    document.write_mini(dict_especifico['teste_anti_hbs'], (450, 397),pg=1) #res_soro_anti_hbc trocou o c por s
+    document.write_mini(dict_especifico['teste_anti_hbc'], (450, 397),pg=1) #res_soro_anti_hbc
     document.write_mini(dict_especifico['teste_anti_hcv'], (451, 412),pg=1) #res_soro_anti_hcv
     document.write_mini(dict_especifico['cond_sem_indicacao'], (65, 446),pg=1) #conduta_quimioprofilaxia
     document.write_mini(dict_especifico['cond_rec_quimio'], (65, 461),pg=1) #conduta_neg_quimioprofilaxia

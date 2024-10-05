@@ -137,5 +137,6 @@ def gerar_pdf_hiv(notificatoriaCSV: dict, dict_especifico: dict, modelo_pdf: str
     document.write_text(dict_especifico['nome_investigador'], (70, 440), 1)  #nome-investigador
     document.write_text(dict_especifico['funcao_investigador'], (380, 440), 1)  #func-investigador
     document.write_text(dict_especifico['assinatura_investigador'], (70, 470), 1)  #assign-investigador
+    document.write_box(dict_especifico['obs_adicionais'], rect=(60, 500, 565, 705), pg=1) #obs_adicionais
 
     document.save(nome_arquivo, path_pdf_gerado, notificatoriaCSV, modelo_pdf_base)

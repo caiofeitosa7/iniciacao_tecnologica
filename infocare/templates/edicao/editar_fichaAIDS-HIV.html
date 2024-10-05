@@ -1269,7 +1269,7 @@
                 <input type="number" class="form-control" id="numero-ficha2"
                     value="{% if ficha.numero_ficha2 %}{{ ficha.numero_ficha2 }}{% endif %}"
                     onchange="validarNumeroFicha(this.value, false)"
-                >
+                />
             </div>
         </div>
     </div>
@@ -1867,14 +1867,16 @@
                                 <label for="campo-uf-transfusao">UF</label>
                             </div>
                             <div class="container-input-dado">
-                                <input id="campo-uf-transfusao" class="input-dado form-control" maxlength="2"
-                                value="{{ ficha.uf_transfusao }}">
+                                <input id="campo-uf-transfusao" class="input-dado form-control"
+                                    maxlength="2" value="{{ ficha.uf_transfusao }}">
                             </div>
                         </div>
                         <div class="col-6 div-input">
                             <div class="info-elevada">
                                 <span class="numeracao">37</span>
-                                <label for="campo-municipio-transfusao">Município onde ocorreu a transfusão/acidente</label>
+                                <label for="campo-municipio-transfusao">
+                                    Município onde ocorreu a transfusão/acidente
+                                </label>
                             </div>
                             <div class="container-input-dado">
                                 <input id="campo-municipio-transfusao" class="input-dado form-control"
@@ -1887,7 +1889,7 @@
                             </div>
                             <div class="container-input-dado">
                                 <input id="campo-cod-ibge-transfusao" type="number" class="input-dado form-control"
-                                value="{{ ficha.cod_ibge_transfusao }}">
+                                    value="{{ ficha.cod_ibge_transfusao }}">
                             </div>
                         </div>
                     </div>
@@ -1895,7 +1897,9 @@
                         <div class="col-10 div-input">
                             <div class="info-elevada">
                                 <span class="numeracao">38</span>
-                                <label for="campo-instit-transf">Instituição onde ocorreu a transfusão/acidente</label>
+                                <label for="campo-instit-transf">
+                                    Instituição onde ocorreu a transfusão/acidente
+                                </label>
                             </div>
                             <div class="container-input-dado">
                                 <input id="campo-instit-transf" class="input-dado form-control"
@@ -1919,17 +1923,17 @@
                                     <span class="numeracao">39</span>
                                     <label for="transf-causa">
                                         Após investigação realizada conforme algoritmo do PN DST/AIDS, a transfusão/acidente
-                                         com material biológico foi considerada causa da infecção pelo HIV?
+                                        com material biológico foi considerada causa da infecção pelo HIV?
                                     </label>
                                 </div>
                                 <input id="transf-causa" type="number" class="input-dado-quadrado form-control" min="1" max="9"
-                                value="{% if ficha.causa_infeccao %}{{ ficha.causa_infeccao }}{% endif %}">
+                                    value="{% if ficha.causa_infeccao %}{{ ficha.causa_infeccao }}{% endif %}">
                             </div>
                             <div class="container-input-dado descricao-tipos-meia-altura">
                                <span>
                                 1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 2 - Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                9 - Ignorado
+                                3 - Não se aplica
                                </span>
                             </div>
                         </div> 
@@ -1971,28 +1975,28 @@
                  </div>
                         <div class="d-flex justify-content-evenly align-items-center mb-1">
                             <div class="linha-dados">
-                                    <div class="d-flex align-items-center col-6">
-                                        <input id="teste-triagem" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9" value="{% if ficha.test_triagem_hiv %}{{ ficha.test_triagem_hiv }}{% endif %}">
-                                        <span>
-                                            Teste de Triagem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </span>
-                                        <div class="container-input-dado div-input">
-                                            <input id="campo-dt-coleta-triag" type="date" class="input-dado form-control"
-                                            value="{% if ficha.dt_coleta_triagem %}{{ ficha.dt_coleta_triagem }}{% endif %}">
-                                        </div>
+                                <div class="d-flex align-items-center col-6">
+                                    <input id="teste-triagem" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9" value="{% if ficha.test_triagem_hiv %}{{ ficha.test_triagem_hiv }}{% endif %}">
+                                    <span>
+                                        Teste de Triagem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <div class="container-input-dado div-input">
+                                        <input id="campo-dt-coleta-triag" type="date" class="input-dado form-control"
+                                        value="{% if ficha.dt_coleta_triagem %}{{ ficha.dt_coleta_triagem }}{% endif %}">
                                     </div>
-                                    <div class="d-flex align-items-center col-6">
-                                        <input id="teste-conf" type="number" class="form-control input-dado-quadrado mx-1"
-                                            min="1" max="9" value="{% if ficha.test_confirmatorio %}{{ ficha.test_confirmatorio }}{% endif %}">
-                                        <span>
-                                            Teste Confirmatório&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </span>
-                                        <div class="container-input-dado div-input">
-                                            <input id="campo-dt-coleta-confirm" type="date" class="input-dado form-control"
-                                            value="{% if ficha.dt_coleta_confirm %}{{ ficha.dt_coleta_confirm }}{% endif %}">
-                                        </div>
+                                </div>
+                                <div class="d-flex align-items-center col-6">
+                                    <input id="teste-conf" type="number" class="form-control input-dado-quadrado mx-1"
+                                        min="1" max="9" value="{% if ficha.test_confirmatorio %}{{ ficha.test_confirmatorio }}{% endif %}">
+                                    <span>
+                                        Teste Confirmatório&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <div class="container-input-dado div-input">
+                                        <input id="campo-dt-coleta-confirm" type="date" class="input-dado form-control"
+                                        value="{% if ficha.dt_coleta_confirm %}{{ ficha.dt_coleta_confirm }}{% endif %}">
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <div class="linha-dados">
@@ -2479,10 +2483,16 @@
             <span>08/06/2006</span>
         </div>
     </div>
-   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="mt-5">
+        <div class="mt-2 textArea">
+            <span>Outras informações:</span>
+            <textarea id="outras-informacoes" class="form-control" rows="10">{{ ficha.obs_adicionais }}</textarea>
+        </div>
+    </div>
+   <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <div class="div-input">
         <span class="col-12">.</span>
-    </div>
+    </div> -->
 </div>
 
 {% block rodape_ficha %}
