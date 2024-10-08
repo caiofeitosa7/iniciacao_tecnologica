@@ -680,7 +680,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-municipio-us-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -694,8 +693,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ nome_usuario }}"
                             />
                         </div>
                     </div>
@@ -706,7 +705,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -718,8 +716,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ nome_usuario }}"
                             />
                         </div>
                     </div>
@@ -2370,7 +2368,9 @@
                 <div class="linha-dados">
                     <div class="col-9 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-municipio-us-investigador">Município/Unidade de Saúde</label>
+                            <label for="campo-municipio-us-investigador">
+                                Município/Unidade de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-municipio-us-investigador" class="input-dado form-control">
@@ -2378,7 +2378,9 @@
                     </div>
                     <div class="col-3 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-us-investigador">Cód. da Unid. de Saúde</label>
+                            <label for="campo-cod-us-investigador">
+                                Cód. da Unid. de Saúde
+                            </label>
                         </div>
                         <div class="container-input-dado">
                             <input id="campo-cod-us-investigador" type="number" class="input-dado form-control">
@@ -2391,7 +2393,8 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -2407,7 +2410,8 @@
                             <label for="campo-assinatura-investigador">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                 </div>

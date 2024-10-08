@@ -113,7 +113,10 @@ def abrir_formulario_view(request, codigo: int):
     html = models.get_html_tipo_ficha(codigo)
 
     if request.method == 'GET':
-        contexto = {'cod_formulario': codigo}
+        contexto = {
+            'cod_formulario': codigo,
+            'nome_usuario': request.session.get('nome_completo_usuario')
+        }
         return JsonResponse({
             'html': [render_to_string(html, contexto, request=request)]
         })

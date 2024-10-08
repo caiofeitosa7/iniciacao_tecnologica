@@ -569,7 +569,7 @@
                             </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-municipio-us-notificante" class="input-dado form-control" />
+                            <input id="campo-municipio-us-notificante" class="input-dado form-control"/>
                         </div>
                     </div>
                 </div>
@@ -579,7 +579,8 @@
                             <label for="campo-nome-notificante">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-notificante" class="input-dado form-control" />
+                            <input id="campo-nome-notificante" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -587,7 +588,7 @@
                             <label for="campo-funcao-notificante">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-notificante" class="input-dado form-control" />
+                            <input id="campo-funcao-notificante" class="input-dado form-control"/>
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -595,7 +596,8 @@
                             <label for="campo-assinatura-notificante">Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-notificante" class="input-dado form-control" />
+                            <input id="campo-assinatura-notificante" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                 </div>
@@ -1866,10 +1868,13 @@
                 <div class="linha-dados">
                     <div class="col-4 div-input">
                         <div class="info-elevada-sem-numeracao">
-                            <label for="campo-nome-investigador">Responsável pela investigação</label>
+                            <label for="campo-nome-investigador">
+                                Responsável pela investigação
+                            </label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -1877,7 +1882,7 @@
                             <label for="campo-funcao-investigador">Função</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-funcao-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-funcao-investigador" class="input-dado form-control">
                         </div>
                     </div>
                     <div class="col-4 div-input">
@@ -1885,7 +1890,7 @@
                             <label for="campo-telefone-investigador">Telefone</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-telefone-investigador" type="text" class="input-dado form-control">
+                            <input id="campo-telefone-investigador" class="input-dado form-control">
                         </div>
                     </div>
                 </div>

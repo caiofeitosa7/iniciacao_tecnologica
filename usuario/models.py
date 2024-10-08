@@ -162,8 +162,3 @@ def apagar_usuario(codigo: int):
     conexao, cursor = abrir_conexao()
     cursor.execute("DELETE FROM usuario WHERE codigo = %s", (codigo,))
     fechar_conexao(conexao)
-
-
-
-
-

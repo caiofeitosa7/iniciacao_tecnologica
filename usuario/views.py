@@ -22,7 +22,8 @@ def logar_usuario(request):
 
         for usuario_bd in models.listar_usuarios():
             if usuario == usuario_bd['usuario'] and senha == usuario_bd['senha']:
-                request.session['nome_usuario'] = usuario_bd['nome'].split(' ')[0].capitalize()
+                request.session['nome_usuario'] = usuario_bd['nome'].split(' ')[0]
+                request.session['nome_completo_usuario'] = usuario_bd['nome']
                 request.session['acesso_usuario'] = usuario_bd['tipo_acesso']
                 request.session['cod_usuario'] = usuario_bd['codigo']
                 logado = True
@@ -66,6 +67,7 @@ def registrar_usuario(request):
     if request.method == 'POST':
         dados = json.loads(request.body)
         dados['acesso'] = int(dados['acesso'])
+        dados['nome'] = dados['nome'].upper()
 
         if dados.get('codigo', False):
             models.atualizar_usuario(dados)

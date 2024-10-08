@@ -378,42 +378,42 @@ def set_ficha(campos: dict, cod_usuario):
     data_ficha = date.today() if not campos.get('campo-dt-notificacao') \
         else campos.get('campo-dt-notificacao')
 
-    # averiguar_campos(cursor, tipo_ficha, campos)
+    averiguar_campos(cursor, tipo_ficha, campos)
 
-    try:
-        with transaction.atomic():
-            cursor.execute(f"""
-                INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (
-                campos.pop('setor'),
-                campos.pop('prontuario'),
-                1,
-                tipo_ficha,
-                cod_usuario,
-                data_ficha
-            ))
+    # try:
+    with transaction.atomic():
+        cursor.execute(f"""
+            INSERT INTO ficha (setor, prontuario, cod_estado, cod_tipo_ficha, cod_usuario, data)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (
+            campos.pop('setor'),
+            campos.pop('prontuario'),
+            1,
+            tipo_ficha,
+            cod_usuario,
+            data_ficha
+        ))
 
-            cursor.execute("SELECT LAST_INSERT_ID()")
-            cod_ficha = int(cursor.fetchone()[0])
+        cursor.execute("SELECT LAST_INSERT_ID()")
+        cod_ficha = int(cursor.fetchone()[0])
 
-            # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
-            inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
+        # inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()))
+        inserir_valores_ficha(cursor, cod_ficha, tipo_ficha, list(campos.values()), list(campos.keys()))
 
-            print('Passou na insercao dos dados!')
+        print('Passou na insercao dos dados!')
 
-        if cod_ficha:
-            preencher_pdf(cod_ficha, tipo_ficha)
+    if cod_ficha:
+        preencher_pdf(cod_ficha, tipo_ficha)
 
-        return cod_ficha
+    return cod_ficha
 
-    except Exception as e:
-        conexao.rollback()
-        print(e)
-        return None
-
-    finally:
-        fechar_conexao(conexao)
+    # except Exception as e:
+    #     conexao.rollback()
+    #     print(e)
+    #     return None
+    #
+    # finally:
+    #     fechar_conexao(conexao)
 
 
 def alterar_ficha(campos: dict):

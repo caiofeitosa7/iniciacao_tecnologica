@@ -692,9 +692,8 @@
                         </div>
                         <div class="container-input-dado">
                             <input
-                                    id="campo-municipio-us-notificante"
-                                    type="text"
-                                    class="input-dado form-control"
+                                id="campo-municipio-us-notificante"
+                                class="input-dado form-control"
                             />
                         </div>
                     </div>
@@ -707,8 +706,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-nome-notificante"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ nome_usuario }}"
                             />
                         </div>
                     </div>
@@ -719,7 +718,6 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-funcao-notificante"
-                                    type="text"
                                     class="input-dado form-control"
                             />
                         </div>
@@ -731,8 +729,8 @@
                         <div class="container-input-dado">
                             <input
                                     id="campo-assinatura-notificante"
-                                    type="text"
                                     class="input-dado form-control"
+                                    value="{{ nome_usuario }}"
                             />
                         </div>
                     </div>
@@ -2273,7 +2271,8 @@
                             <label for="campo-nome-investigador">Nome</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-nome-investigador" class="input-dado form-control">
+                            <input id="campo-nome-investigador" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                     <div class="col-5 div-input">
@@ -2291,7 +2290,8 @@
                             <label for="campo-assinatura-investigador"><br>Assinatura</label>
                         </div>
                         <div class="container-input-dado">
-                            <input id="campo-assinatura-investigador" class="input-dado form-control">
+                            <input id="campo-assinatura-investigador" class="input-dado form-control"
+                                value="{{ nome_usuario }}"/>
                         </div>
                     </div>
                 </div>
