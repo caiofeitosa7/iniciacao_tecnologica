@@ -13,6 +13,7 @@ from geracao_pdf.script_aids_adulto import gerar_pdf_hiv
 from geracao_pdf.script_meningite import gerar_pdf_meningite
 from geracao_pdf.script_coqueluche import gerar_pdf_coqueluche
 from geracao_pdf.script_intox_exog import gerar_pdf_intox_exog
+from geracao_pdf.script_tuberculose import gerar_pdf_tuberculose
 from geracao_pdf.script_anti_rabica import gerar_pdf_anti_rabica
 from geracao_pdf.script_leptospirose import gerar_pdf_leptospirose
 from geracao_pdf.script_acid_mat_bio import gerar_pdf_acid_mat_bio
@@ -939,6 +940,10 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
             gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo,
                                             path_pdf_ficha_base,
                                             path_pdf_gerado, nome_arquivo)
+        elif tipo_ficha == 23:
+            gerar_pdf_tuberculose(ficha_notificacao, ficha_especifica, path_pdf_modelo,
+                                  path_pdf_ficha_base,
+                                  path_pdf_gerado, nome_arquivo)
 
     elif tipo_ficha == 1:
         generateFicha(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
