@@ -57,7 +57,7 @@ def gerar_pdf_tuberculose(notificatoriaCSV: dict, dict_especifico: dict, modelo_
     #####          DADOS COMPLEMENTARES       ####
     ##############################################
 
-    document.write_telefone(dict_especifico['num_prontuario'], (59, 488), space=2) #numero do prontuario
+    document.write_code(dict_especifico['num_prontuario'], (59, 488), space=2) #numero do prontuario
     document.write_mini(dict_especifico['tipo_entrada'], (547, 476 )) #tipo de entrada
     document.write_mini(dict_especifico['pop_priv_liberdade'], (177, 502)) #pop_priv_liberdade
     document.write_mini(dict_especifico['pop_situacao_rua'], (177, 514)) #pop_situacao_rua

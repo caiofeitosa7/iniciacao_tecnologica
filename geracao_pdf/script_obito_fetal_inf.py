@@ -642,7 +642,7 @@ def gerar_pdf_obt_fetal_inf(dict_especifico: dict, modelo_pdf: str, path_pdf_ger
     elif dict_especifico['ICAT'] == 'ICAT-anos':
         document.write_cross((476, 542), pg=2)  #anos
     #!campo 75.2 peso
-    document.write_code(dict_especifico['peso_crianca_admiss'] + '9999', (134, 555), pg=2, space=3)  #peso
+    document.write_code(dict_especifico['peso_crianca_admiss'], (134, 555), pg=2, space=3)  #peso
     #!campo 75.3 altura
     document.write_code(dict_especifico['ACA'], (390, 555), pg=2, space=3)  #altura
     #!campo 75.4 estado nutricional

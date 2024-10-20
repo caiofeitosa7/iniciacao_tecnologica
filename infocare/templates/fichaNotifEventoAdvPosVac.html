@@ -2,1205 +2,8 @@
     {% include 'topo_ficha.html' %}
 {% endblock %}
 
-<div class="ficha pb-5">
+<div id="ficha-evento-adverso-pos-vac" class="ficha pt-2">
     {% csrf_token %}
-    <div class="mt-2 container-cabecalho">
-        <div class="col-3 left-div negrito">
-            <label>República Federativa do Brasil</label>
-            <label>Ministério do Saúde</label>
-        </div>
-        <div class="col-6 center-div">
-            <label class="negrito">SINAN</label>
-            <label>SISTEMA DE INFORMAÇÃO DE AGRAVOS DE NOTIFICAÇÃO</label>
-            <label class="negrito">FICHA DE NOTIFICAÇÃO</label>
-        </div>
-        <div class="col-3 right-div">
-            <div class="input-group flex-nowrap">
-                <label class="input-group-text negrito" for="numero-ficha">N°</label>
-                <input type="number" class="form-control" id="numero-ficha"
-                    onblur="validarNumeroFicha(this.value, false)"
-                    oninput="atribuirValor(this.id)"
-                />
-            </div>
-        </div>
-    </div>
-    <section>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados Gerais</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">1</span>
-                                <label for="campo-tipo-notificacao">Tipo de Notificação</label>
-                            </div>
-                            <input id="campo-tipo-notificacao" class="input-dado-quadrado form-control"
-                                type="number" min="1" max="4"/>
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span class="mb-1">
-                                1 - Negativa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
-                                Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 -
-                                Surto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 - Inquérito Tracoma
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-9 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">2</span>
-                            <label for="campo-agravoDoenca">Agravo/doença</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-agravoDoenca" class="input-dado form-control negrito"
-                                value="EVENTOS ADVERSOS PÓS-VACINAÇÃO"/>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">3</span>
-                            <label for="campo-dt-notificacao">Data da Notificação</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-dt-notificacao" type="date" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-1 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">4</span>
-                            <label for="campo-uf-notificacao">UF</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-uf-notificacao" class="input-dado form-control"
-                                maxlength="2" oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                    <div class="col-9 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">5</span>
-                            <label for="campo-municipio-notificacao">Município de Notificação</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-municipio-notificacao" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-notificacao">Código (IBGE)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-cod-ibge-notificacao"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">6</span>
-                            <label for="campo-unidade-saude">
-                                Unidade de Saúde (ou outra fonte notificadora)
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-unidade-saude" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-unidade-saude">Código</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-codigo-unidade-saude"
-                                type="number"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">7</span>
-                            <label for="campo-dt-sintomas">
-                                Data dos Primeiros Sintomas
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-dt-sintomas"
-                                type="date"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Notificação Individual</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-9 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">8</span>
-                            <label for="campo-nome-paciente">Nome do Paciente</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-nome-paciente"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">9</span>
-                            <label for="campo-dt-nascimento">Data de Nascimento</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-dt-nascimento" type="date"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">10</span>
-                            <label for="campo-idade">(ou) Idade</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <div class="col-4">
-                                <input id="campo-idade" type="number"
-                                    class="input-dado form-control" 
-                                    maxlength="3" oninput="atribuirValor(this.id)"
-                                />
-                            </div>
-                            <div class="col-7 container-tipo-idade">
-                                <input
-                                        type="number"
-                                        id="campo-tipo-idade"
-                                        class="input-dado-quadrado form-control"
-                                        min="1"
-                                        max="4"
-                                        aria-label=""
-                                        oninput="atribuirValor(this.id)"
-                                />
-                                <ul class="letra-miuda">
-                                    <li>1 - Hora</li>
-                                    <li>2 - Dia</li>
-                                    <li>3 - Mês</li>
-                                    <li>4 - Ano</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2 div-input campo-sexo">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">11</span>
-                                <label for="campo-sexo">Sexo</label>
-                            </div>
-                            <input
-                                    id="campo-sexo"
-                                    class="input-dado-quadrado form-control"
-                                    maxlength="1"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                        <div class="container-input-dado letra-miuda">
-                            <ul>
-                                <li>M - Masculino</li>
-                                <li>F - Feminino</li>
-                                <li>I - Ignorado</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-4 div-input campo-gestante">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">12</span>
-                                <label for="campo-gestante">Gestante</label>
-                            </div>
-                            <input
-                                    id="campo-gestante"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="9"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
-                            1-1°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            2-2°Trimestre&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3-3°Trimestre<br/>
-                            4-Idade gestacional ignorada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            5-Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6-Não se aplica<br/>
-                            9-Ignorado
-                        </div>
-                    </div>
-                    <div class="col-3 div-input campo-raca">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">13</span>
-                                <label for="campo-raca">Raça/Cor</label>
-                            </div>
-                            <input
-                                    id="campo-raca"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="9"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura letra-miuda pt-2 px-2">
-                            1-Branca&nbsp;&nbsp;&nbsp;&nbsp;
-                            2-Preta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            3-Amarela<br/>
-                            4-Parda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            5-Indígena&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9-Ignorado
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-12 div-input campo-escolaridade">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">14</span>
-                                <label for="campo-escolaridade">Escolaridade</label>
-                            </div>
-                            <input
-                                    id="campo-escolaridade"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    maxlength="2"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                        <div class="container-input-dado letra-miuda descricao-tipos-meia-altura px-2">
-                            0-Analfabeto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1-1° a 4° série
-                            incompleta do EF (antigo primário ou 1° grau)
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2-4° série completa do EF (antigo
-                            primário ou 1° grau)<br/>
-                            3-5° à 8° série incomlpleta do EF (antigo ginásio ou 1° grau)
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-Ensino fundamental completo
-                            (antigo ginásio ou 1° grau) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5-Ensino
-                            médio incompleto (antigo colegial ou 2° grau)<br/>
-                            6-Ensino médio completo (antigo colegial ou 2° grau)
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7-Educação superior incompleta
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8-Educação superior completa
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9-Ignorado
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-Não se aplica
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-4 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">15</span>
-                            <label for="campo-numero-sus">Número do Cartão SUS</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-numero-sus" type="number" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                    <div class="col-8 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">16</span>
-                            <label for="campo-nome-mae">Nome da mãe</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input id="campo-nome-mae" class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Notificação de Surto</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-4 d-flex flex-column justify-content-between">
-                        <div class="div-input mb-3">
-                            <div class="info-elevada">
-                                <span class="numeracao">17</span>
-                                <label for="campo-dt-primeiro-sintoma">
-                                    Data dos 1° Sintomas do 1° Caso Suspeito
-                                </label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input
-                                    id="campo-dt-primeiro-sintoma"
-                                    class="input-dado form-control"
-                                    type="date"
-                                />
-                            </div>
-                        </div>
-                        <div class="div-input">
-                            <div class="info-elevada">
-                                <span class="numeracao">18</span>
-                                <label for="campo-numero-casos-suspeitos">
-                                    N° de Casos Suspeitos / Expostos
-                                </label>
-                            </div>
-                            <div class="container-input-dado">
-                                <input
-                                        id="campo-numero-casos-suspeitos"
-                                        type="number"
-                                        class="input-dado form-control"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-8 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">19</span>
-                                <label for="campo-local-inicial-ocorrencia">
-                                    Local inicial de Ocorrência do Surto
-                                </label>
-                            </div>
-                            <input
-                                    id="campo-local-inicial-ocorrencia"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    min="1"
-                                    max="11"
-                            />
-                        </div>
-                        <div class="container-input-dado flex-column">
-                            <div class="d-flex justify-content-evenly px-1">
-                                <ul class="px-2">
-                                    <li class="label-nowrap">1 - Residência</li>
-                                    <li>4 - Asilo</li>
-                                    <li>7 - Eventos</li>
-                                </ul>
-                                <ul class="px-2">
-                                    <li>2 - Hospital / Unidade de Saúde</li>
-                                    <li>5 - Outras Instituições (alojamento, trabalho)</li>
-                                    <li>8 - Casos Dispersos no Bairro</li>
-                                </ul>
-                                <ul class="px-2">
-                                    <li>3 - Creche / Escola</li>
-                                    <li>6 - Restaurante/ Padaria</li>
-                                    <li>9 - Casos Dispersos Pelo Município</li>
-                                </ul>
-                            </div>
-                            <div class="my-2">
-                                <ul class="d-flex align-items-center">
-                                    <li class="px-2">
-                                        10 - Casos Dispersos em ais de um Município
-                                    </li>
-                                    <li class="px-2 label-nowrap">11 - Outros</li>
-                                    <li class="px-2">Especificar</li>
-                                    <li>
-                                        <input
-                                                id="campo-local-especificar-ocorrencia"
-                                                class="input-dado form-control"
-                                                aria-label=""
-                                        />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Dados de Residência</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-1 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">20</span>
-                            <label for="campo-uf-residencia">UF</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-uf-residencia"
-                                    class="input-dado form-control"
-                                    maxlength="2"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">21</span>
-                            <label for="campo-municipio-residencia">
-                                Município de Residência
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-municipio-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-residencia">Código (IBGE)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-cod-ibge-residencia"
-                                type="number"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">22</span>
-                            <label for="campo-distrito-residencia">Distrito</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-distrito-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">23</span>
-                            <label for="campo-bairro-residencia">Bairro</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-bairro-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">24</span>
-                            <label for="campo-logradouro-residencia">
-                                Logradouro (rua, avenida, ...)
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-logradouro-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-codigo-residencia">Código</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-codigo-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                                    type="number"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-2 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">25</span>
-                            <label for="campo-numero-residencia">Número</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-numero-residencia"
-                                    type="number"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-7 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">26</span>
-                            <label for="campo-complemento-residencia">
-                                Complemento (apto, casa, ...)
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-complemento-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">27</span>
-                            <label for="campo-geo-campo1">Geo campo 1</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-geo-campo1"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">28</span>
-                            <label for="campo-geo-campo2">Geo campo 2</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-geo-campo2"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">29</span>
-                            <label for="campo-ponto-ref-residencia">
-                                Ponto de Referência
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-ponto-ref-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">30</span>
-                            <label for="campo-cep-residencia">CEP</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-cep-residencia"
-                                    class="input-dado form-control"
-                                    maxlength="9"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">31</span>
-                            <label for="campo-telefone-residencia">(DDD) Telefone</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-telefone-residencia"
-                                    class="input-dado form-control"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input campo-zona-residencia">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">32</span>
-                                <label for="campo-zona-residencia">Zona</label>
-                            </div>
-                            <input
-                                    id="campo-zona-residencia"
-                                    type="number"
-                                    class="input-dado-quadrado form-control"
-                                    maxlength="1"
-                                    oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos letra-miuda">
-                            1 - Urbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rural<br/>
-                            3 - Periurbana&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 - Ignorado
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">33</span>
-                            <label for="campo-pais-residencia">
-                                País (se residente fora do Brasil)
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="campo-pais-residencia"
-                                class="input-dado form-control"
-                                oninput="atribuirValor(this.id)"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Notificante</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-municipio-us-notificante">
-                                Município/Unidade de Saúde
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-municipio-us-notificante"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-nome-notificante">Nome</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-nome-notificante"
-                                    class="input-dado form-control"
-                                    value="{{ nome_usuario }}"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-funcao-notificante">Função</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-funcao-notificante"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-assinatura-notificante">Assinatura</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-assinatura-notificante"
-                                    class="input-dado form-control"
-                                    value="{{ nome_usuario }}"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <span class="col-3">Notificação</span>
-                    <span class="col-6 d-flex justify-content-center">Sinan NET</span>
-                    <div class="col-3 d-flex justify-content-evenly">
-                        <span>SVS</span>
-                        <span>17/07/2006</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="conteiner-dadosComplementares">
-        <div class="d-flex flex-column align-items-center my-5">
-            <span class="negrito">DADOS COMPLEMENTARES</span>
-            <span>(ANOTAR TODOS OS DADOS DISPONÍVEIS NO MOMENTO DA NOTIFICAÇÃO)</span>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Notificação Individual</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">01</span>
-                            <label class="mx-1" for="campo-dt-amostra-sorologia">
-                                Data da coleta da 1°<br/>amostra da sorologia
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-amostra-sorologia"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada d-flex align-items-start">
-                            <span class="numeracao">02</span>
-                            <label class="mx-1" for="campo-dt-outra-amostra">
-                                Data da coleta da 1°<br/>amostra de outra amostra
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-outra-amostra"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">03</span>
-                            <label for="campo-tipo-exame"> Especificar tipo de exame: </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-tipo-exame"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">04</span>
-                                <label for="campo-obito">Óbito ?</label>
-                            </div>
-                            <input
-                                    id="campo-obito"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span class="mb-1">
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
-                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-6 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">05</span>
-                                <label for="campo-caso-semelhante">
-                                    Contato com caso semelhante ?
-                                </label>
-                            </div>
-                            <input
-                                    id="campo-caso-semelhante"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                        <span class="mb-1">
-                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
-                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
-                        </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-4 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">06</span>
-                                <label for="campo-exantema"> Presença de exantema ? </label>
-                            </div>
-                            <input
-                                    id="campo-exantema"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                        <span class="mb-1">
-                            1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
-                            Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
-                        </span>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">07</span>
-                            <label for="campo-dt-inicio-exatema">
-                                Data do início do exatema
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-inicio-exatema"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-5 div-input">
-                        <div class="info-elevada-com-input">
-                            <div class="d-flex align-items-start">
-                                <span class="numeracao">08</span>
-                                <label class="mx-1 pb-2" for="campo-petequiaSufusao">
-                                    Presença de petéquias ou sufusões hemorrágicas?
-                                </label>
-                            </div>
-                            <input
-                                    id="campo-petequiaSufusao"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura">
-                            <span class="mb-1">
-                                1 - Sim&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 -
-                                Não&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9 - Ignorado
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">09</span>
-                                <label for="campo-liquor"> Foi realizado líquor ? </label>
-                            </div>
-                            <input
-                                id="campo-liquor"
-                                class="input-dado-quadrado form-control"
-                                type="number"
-                                min="1"
-                                max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
-                            <span class="mx-1">1 - Sim</span>
-                            <span class="mx-1">2 - Não</span>
-                            <span class="mx-1">9 - Ignorado</span>
-                        </div>
-                    </div>
-                    <div class="col-9 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">10</span>
-                            <label for="res-bacterioscopia"
-                            >Resultado da bacterioscopia:</label
-                            >
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                id="res-bacterioscopia"
-                                class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div class="d-flex align-items-start">
-                                <span class="numeracao">11</span>
-                                <label class="mx-1 pb-2" for="campo-tomou-vacina">
-                                    O paciente tomou vacina contra agravo notificado neste
-                                    impresso?
-                                </label>
-                            </div>
-                            <input
-                                    id="campo-tomou-vacina"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado descricao-tipos-meia-altura justify-content-evenly px-1">
-                            <span class="mx-1">1 - Sim</span>
-                            <span class="mx-1">2 - Não</span>
-                            <span class="mx-1">9 - Ignorado</span>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">12</span>
-                            <label for="campo-dt-ultima-dose-tomada">
-                                Data da última dose tomada
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-ultima-dose-tomada"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada-com-input">
-                            <div>
-                                <span class="numeracao">13</span>
-                                <label for="campo-hospitalizacao">
-                                    Ocorreu hospitalização ?
-                                </label>
-                            </div>
-                            <input
-                                    id="campo-hospitalizacao"
-                                    class="input-dado-quadrado form-control"
-                                    type="number"
-                                    min="1"
-                                    max="9"
-                            />
-                        </div>
-                        <div class="container-input-dado justify-content-evenly px-1">
-                            <span class="mx-1">1 - Sim</span>
-                            <span class="mx-1">2 - Não</span>
-                            <span class="mx-1">9 - Ignorado</span>
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">14</span>
-                            <label for="campo-dt-hospitalizacao">
-                                Data da hospitalização
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-dt-hospitalizacao"
-                                    type="date"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div class="linha-dados">
-                    <div class="col-1 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">15</span>
-                            <label for="campo-uf-hospital">UF</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-uf-hospital"
-                                    class="input-dado form-control"
-                                    maxlength="2"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-3 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">16</span>
-                            <label for="campo-municipio-hospital">
-                                Município do hospital
-                            </label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-municipio-hospital"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-ibge-hospital">Código (IBGE)</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-cod-ibge-hospital"
-                                    type="number"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-4 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">17</span>
-                            <label for="campo-nome-hospital">Nome do hospital</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-nome-hospital"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-2 div-input">
-                        <div class="info-elevada-sem-numeracao">
-                            <label for="campo-cod-hospital">Código</label>
-                        </div>
-                        <div class="container-input-dado">
-                            <input
-                                    id="campo-cod-hospital"
-                                    type="number"
-                                    class="input-dado form-control"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Notificação Surto</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">18</span>
-                            <span>Hipóteses diagnósticas no momento da notificação</span>
-                        </div>
-                        <div class="container-input-dado flex-column px-2">
-                            <div class="pt-2 pb-3 d-flex align-items-center">
-                                <label for="campo-hipotese-diagnostica1" class="label-nowrap">
-                                    1° Hipótese Diagnóstica - CID 10:
-                                </label>
-                                <input
-                                    id="campo-hipotese-diagnostica1"
-                                    class="input-dado form-control mx-2"
-                                />
-                            </div>
-                            <div class="pb-3 d-flex align-items-center">
-                                <label for="campo-hipotese-diagnostica2" class="label-nowrap">
-                                    2° Hipótese Diagnóstica - CID 10:
-                                </label>
-                                <input
-                                    id="campo-hipotese-diagnostica2"
-                                    class="input-dado form-control mx-2"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-dados">
-            <div class="titulo-bloco">
-                <span>Local prov. infecção</span>
-            </div>
-            <div class="conteudo-bloco">
-                <div class="linha-dados">
-                    <div class="col-12 div-input">
-                        <div class="info-elevada">
-                            <span class="numeracao">19</span>
-                            <span>Local provável de infecção (classificação provisória)</span>
-                        </div>
-                        <div class="container-input-dado px-2">
-                            <div class="col-5 d-flex flex-column px-1">
-                                <div class="pt-3 pb-4 d-flex align-items-center">
-                                    <label for="campo-pais-infeccao" class="label-nowrap">
-                                        País:
-                                    </label>
-                                    <input
-                                        id="campo-pais-infeccao"
-                                        class="input-dado form-control mx-2"
-                                    />
-                                </div>
-                                <div class="pb-3 d-flex align-items-center">
-                                    <label for="campo-distrito-infeccao" class="label-nowrap">
-                                        Distrito:
-                                    </label>
-                                    <input
-                                        id="campo-distrito-infeccao"
-                                        class="input-dado form-control mx-2"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-2 px-1">
-                                <div class="py-3 d-flex align-items-center">
-                                    <label for="campo-uf-infeccao" class="label-nowrap">
-                                        UF
-                                    </label>
-                                    <input
-                                            id="campo-uf-infeccao"
-                                            class="input-dado form-control mx-2"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-5 d-flex flex-column px-1">
-                                <div class="pt-3 pb-4 d-flex align-items-center">
-                                    <label for="campo-municipio-infeccao" class="label-nowrap">
-                                        Município:
-                                    </label>
-                                    <input
-                                            id="campo-municipio-infeccao"
-                                            class="input-dado form-control mx-2"
-                                    />
-                                </div>
-                                <div class="pb-3 d-flex align-items-center">
-                                    <label for="campo-bairro-infeccao" class="label-nowrap">
-                                        Bairro:
-                                    </label>
-                                    <input
-                                            id="campo-bairro-infeccao"
-                                            class="input-dado form-control mx-2"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="linha-dados footer-ficha mb-3">
-            <span class="col-9">Dados Complementares/ Notificação</span>
-            <div class="col-3 d-flex justify-content-evenly">
-                <span>SVS</span>
-                <span>17/07/2006</span>
-            </div>
-        </div>
-    </section>
-</div>
-<div class="d-flex flex-column align-items-center mt-3 pb-4 negrito">
-    <span>FICHA DE INVESTIGAÇÃO</span>
-    <span>EVENTOS ADVERSOS PÓS-VACINAÇÃO</span>
-</div>
-<div id="ficha-evento-adverso-pos-vac" class="ficha mt-5 pt-2">
     <!-- Cabeçalho -->
     <div class="flex-column container-cabecalho">                    
         <div class="d-flex flex-row align-items-center p-3">
@@ -1219,22 +22,22 @@
 
             <div class="col-6 right-div2 negrito">
                 <div class="d-flex justify-content-between">     
-                    <label class="col-5 col-form-label" for="numero-ficha2">
+                    <label class="col-5 col-form-label" for="numero-ficha">
                         Nº do formulário:
                     </label>
                     <div class="col-5 my-1">                                
-                        <input type="number" class="form-control" id="numero-ficha2"
+                        <input type="number" class="form-control" id="numero-ficha"
                             onblur="validarNumeroFicha(this.value, false)"/>
                     </div>                            
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <label class="col-5 col-form-label" for="campo-dt-notificacao2">
+                    <label class="col-5 col-form-label" for="campo-dt-notificacao">
                         Data da notificação:
                     </label>
                     <div class="col-5">
                         <input type="date" class="form-control"
-                            id="campo-dt-notificacao2"
+                            id="campo-dt-notificacao"
                         />
                     </div>
                 </div>
@@ -1251,12 +54,12 @@
                 </div>
                     
                 <div class="d-flex justify-content-between">
-                    <label class="col-5 col-form-label" for="campo-numero-sus2">
+                    <label class="col-5 col-form-label" for="campo-numero-sus">
                         Número do cartão do SUS:
                     </label>
                     <div class="col-5">
                         <input type="number" class="form-control linha"
-                            id="campo-numero-sus2"
+                            id="campo-numero-sus"
                         />
                     </div>                                        
                 </div>
@@ -1278,33 +81,33 @@
         
         <div class="linha-dados g-0">
             <div class="col-2 form-floating">
-                <label class="negrito" for="campo-pais-notificacao2">
+                <label class="negrito" for="campo-pais-notificacao">
                     País
                 </label>
-                <input class="form-control" id="campo-pais-notificacao2" value="Brasil">
+                <input class="form-control" id="campo-pais-notificacao" value="Brasil">
             </div>
 
             <div class="col-1 form-floating">
-                <label class="negrito" for="campo-uf-notificacao2">
+                <label class="negrito" for="campo-uf-notificacao">
                     UF
                 </label>
-                <input class="form-control" id="campo-uf-notificacao2">
+                <input class="form-control" id="campo-uf-notificacao">
             </div>
             
             <div class="col form-floating">
-                <label class="negrito" for="campo-municipio-notificacao2">
+                <label class="negrito" for="campo-municipio-notificacao">
                     Município
                 </label>
-                <input class="form-control" id="campo-municipio-notificacao2">
+                <input class="form-control" id="campo-municipio-notificacao">
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-unidade-saude2">
+                <label class="negrito" for="campo-unidade-saude">
                     Unidade de saúde
                 </label>
-                <input class="form-control" id="campo-unidade-saude2">
+                <input class="form-control" id="campo-unidade-saude">
             </div>
         </div>
     </section>                
@@ -1314,10 +117,10 @@
         <span class="titulo-section negrito">Dados pessoais</span>
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-nome-paciente2">
+                <label class="negrito" for="campo-nome-paciente">
                     Nome completo do paciente
                 </label>
-                <input class="form-control" id="campo-nome-paciente2">
+                <input class="form-control" id="campo-nome-paciente">
             </div>
             <div class="col-1 form-floating iniciais">
                 <label class="negrito" for="campo-iniciais-paciente">
@@ -1326,11 +129,11 @@
                 <input class="form-control" id="campo-iniciais-paciente">
             </div>
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-dt-nascimento2">
+                <label class="negrito" for="campo-dt-nascimento">
                     Data de nascimento
                 </label>
                 <input type="date" class="form-control"
-                    id="campo-dt-nascimento2"
+                    id="campo-dt-nascimento"
                 />
             </div>
         </div>
@@ -1339,14 +142,12 @@
             <div class="col-4 container-input-dado">
                 <div class="d-flex flex-column col-4 form-floating border-0 p-1">
                     <label class="negrito" for="campo-idade2">Idade</label>
-                    <input type="number" class="form-control linha"
-                        id="campo-idade2"
-                    />
+                    <input type="number" class="form-control linha" id="campo-idade"/>
                 </div>
 
                 <div class="d-flex flex-row align-items-center mx-2">
                     <input type="number" class="input-dado-quadrado form-control"
-                        id="tipo-idade2" min="1" max="3"
+                        id="tipo-idade" min="1" max="3"
                     />
 
                     <ul class="letra-miuda ms-2 me-3">
@@ -1358,12 +159,12 @@
             </div>
             
             <div class="flex-column col-2 container-input-dado-sem-floating align-items-start">
-                <label class="titulo-quadrado negrito" for="sexo2">
+                <label class="titulo-quadrado negrito" for="sexo">
                     Sexo
                 </label>
                 <div class="d-flex flex-row align-items-center p-2"> 
                     <input type="number" class="input-dado-quadrado form-control"
-                        id="sexo2" min="1" max="9"
+                        id="sexo" min="1" max="9"
                     />
                     <ul class="letra-miuda ms-2 me-3">
                         <li>1 - Masculino</li>
@@ -1374,13 +175,13 @@
             </div>
 
             <div class="flex-column col-6 container-input-dado align-items-start">
-                <label class="titulo-quadrado negrito" for="campo-raca2">
+                <label class="titulo-quadrado negrito" for="campo-raca">
                     Raça
                 </label>
                 
                 <div class="d-flex flex-row p-2">  
                     <input type="number" class="input-dado-quadrado form-control"
-                        id="campo-raca2" min="1" max="9"
+                        id="campo-raca" min="1" max="9"
                     />
 
                     <ul class="letra-miuda mx-4">
@@ -1405,22 +206,22 @@
             </div>
 
             <div class="col form-floating">
-                <label class="negrito" for="campo-nome-mae2">
+                <label class="negrito" for="campo-nome-mae">
                     Nome completo da mãe
                 </label>
-                <input class="form-control" id="campo-nome-mae2">
+                <input class="form-control" id="campo-nome-mae">
             </div>
         </div>
         
         <div class="linha-dados g-0">
             <div class="flex-column col-3 container-input-dado align-items-start">
-                <label class="titulo-quadrado negrito" for="campo-gestante2">
+                <label class="titulo-quadrado negrito" for="campo-gestante">
                     Gestante?
                 </label>                                    
                 
                 <div class="d-flex flex-row align-items-center p-2"> 
                     <input type="number" class="input-dado-quadrado form-control"
-                        id="campo-gestante2" min="1" max="9"
+                        id="campo-gestante" min="1" max="9"
                     />
                     
                     <ul class="letra-miuda mx-4">
@@ -1488,50 +289,50 @@
 
         <div class="linha-dados g-0">
             <div class="col-6 form-floating">
-                <label class="negrito" for="campo-logradouro-residencia2">
+                <label class="negrito" for="campo-logradouro-residencia">
                     Endereço (rua, praça, avenida, etc)
                 </label>
-                <input class="form-control" id="campo-logradouro-residencia2">
+                <input class="form-control" id="campo-logradouro-residencia">
             </div>
 
             <div class="col-1 form-floating">
-                <label class="negrito" for="campo-numero-residencia2">
+                <label class="negrito" for="campo-numero-residencia">
                     Número
                 </label>
-                <input type="number" class="form-control" id="campo-numero-residencia2">
+                <input type="number" class="form-control" id="campo-numero-residencia">
             </div>
 
             <div class="col-2 form-floating">
-                <label class="negrito" for="campo-complemento-residencia2">
+                <label class="negrito" for="campo-complemento-residencia">
                     Complemento
                 </label>
-                <input class="form-control" id="campo-complemento-residencia2">
+                <input class="form-control" id="campo-complemento-residencia">
             </div>
 
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-bairro-residencia2">
+                <label class="negrito" for="campo-bairro-residencia">
                     Bairro/Distrito
                 </label>
-                <input class="form-control" id="campo-bairro-residencia2">
+                <input class="form-control" id="campo-bairro-residencia">
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-ponto-ref-residencia2">
+                <label class="negrito" for="campo-ponto-ref-residencia">
                     Ponto de referência
                 </label>
-                <input class="form-control" id="campo-ponto-ref-residencia2">
+                <input class="form-control" id="campo-ponto-ref-residencia">
             </div>
             
             <div class="flex-column col-2 container-input-dado align-items-start">
-                <label class="titulo-quadrado negrito" for="campo-zona-residencia2">
+                <label class="titulo-quadrado negrito" for="campo-zona-residencia">
                     Zona
                 </label>                                        
                 
                 <div class="d-flex flex-row p-2"> 
                     <input type="number" class="input-dado-quadrado form-control"
-                        id="campo-zona-residencia2" min="1" max="9"
+                        id="campo-zona-residencia" min="1" max="9"
                     />
                     
                     <ul class="letra-miuda mx-2">
@@ -1543,31 +344,31 @@
             </div>                                     
             
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-cep-residencia2">CEP</label>
-                <input class="form-control" id="campo-cep-residencia2">
+                <label class="negrito" for="campo-cep-residencia">CEP</label>
+                <input class="form-control" id="campo-cep-residencia">
             </div>
             
             <div class="col-3 p-2">
-                <label class="negrito" for="campo-telefone-residencia2">Telefones</label>
-                <input class="form-control my-1 linha" id="campo-telefone-residencia2">
+                <label class="negrito" for="campo-telefone-residencia">Telefones</label>
+                <input class="form-control my-1 linha" id="campo-telefone-residencia">
                 <input class="form-control linha" id="campo-telefone2-residencia">                                                                                           
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-pais-residencia2">País</label>
-                <input class="form-control" id="campo-pais-residencia2">
+                <label class="negrito" for="campo-pais-residencia">País</label>
+                <input class="form-control" id="campo-pais-residencia">
             </div>
 
             <div class="col-1 form-floating">
-                <label class="negrito" for="campo-uf-residencia2">UF</label>
-                <input class="form-control" id="campo-uf-residencia2"/>
+                <label class="negrito" for="campo-uf-residencia">UF</label>
+                <input class="form-control" id="campo-uf-residencia"/>
             </div>
 
             <div class="col-8 form-floating">
-                <label class="negrito" for="campo-municipio-residencia2">Município</label>
-                <input class="form-control" id="campo-municipio-residencia2">
+                <label class="negrito" for="campo-municipio-residencia">Município</label>
+                <input class="form-control" id="campo-municipio-residencia">
             </div>                               
         </div>
     </section>             
@@ -3677,7 +2478,9 @@
             </div>
 
             <div class="col-3 p-2">
-                <label class="negrito" for="campo-dt-encerramento">Data de encerramento</label>                            
+                <label class="negrito" for="campo-dt-encerramento">
+                    Data de encerramento
+                </label>                            
             </div>
         </div>
 
@@ -3733,49 +2536,69 @@
 
     <!-- Responsável pelo preenchimento -->
     <section class="responsavel-preenchimento mb-3">
-        <span class="titulo-section negrito">Responsável pelo preenchimento</span>                                    
+        <span class="titulo-section negrito">
+            Responsável pelo preenchimento
+        </span>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-nome-responsavel">Nome</label>
-                <input class="form-control" id="campo-nome-responsavel">
+                <label class="negrito" for="campo-nome-responsavel">
+                    Nome
+                </label>
+                <input class="form-control" id="campo-nome-responsavel"
+                    value="{{ nome_usuario }}"/>
             </div>
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-funcao-responsavel">Função</label>
+                <label class="negrito" for="campo-funcao-responsavel">
+                    Função
+                </label>
                 <input class="form-control" id="campo-funcao-responsavel">
             </div>
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-telefone-responsavel">Telefone de contato</label>
+                <label class="negrito" for="campo-telefone-responsavel">
+                    Telefone de contato
+                </label>
                 <input class="form-control" id="campo-telefone-responsavel">
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-municipio-responsavel">Município</label>
+                <label class="negrito" for="campo-municipio-responsavel">
+                    Município
+                </label>
                 <input class="form-control" id="campo-municipio-responsavel">
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-us-responsavel">Unidade de Saúde</label>
+                <label class="negrito" for="campo-us-responsavel">
+                    Unidade de Saúde
+                </label>
                 <input class="form-control" id="campo-us-responsavel">
             </div>
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-telefone-us">Telefone</label>
+                <label class="negrito" for="campo-telefone-us">
+                    Telefone
+                </label>
                 <input class="form-control" id="campo-telefone-us">
             </div>
         </div>
 
         <div class="linha-dados g-0">
             <div class="col form-floating">
-                <label class="negrito" for="campo-ass-responsavel">Assinatura</label>
-                <input class="form-control" id="campo-ass-responsavel">
+                <label class="negrito" for="campo-ass-responsavel">
+                    Assinatura
+                </label>
+                <input class="form-control" id="campo-ass-responsavel"
+                    value="{{ nome_usuario }}"/>
             </div>
             <div class="col-3 form-floating">
-                <label class="negrito" for="campo-dt">Data</label>
-                <input type="date" class="form-control" id="campo-dt">
+                <label class="negrito" for="dt-preenchimento">
+                    Data
+                </label>
+                <input type="date" class="form-control" id="dt-preenchimento">
             </div>
         </div>                    
     </section>

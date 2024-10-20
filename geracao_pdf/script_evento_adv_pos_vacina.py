@@ -1,49 +1,54 @@
 from .pdfWritter import PDFWriter
 
 
-def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dict, modelo_pdf: str,
-                                    modelo_pdf_base: str, path_pdf_gerado: str, nome_arquivo: str):
+def gerar_pdf_evento_adv_pos_vacina(dict_especifico: dict, modelo_pdf: str, path_pdf_gerado: str, nome_arquivo: str):
     document = PDFWriter(modelo_pdf)
 
-    document.write_text(dict_especifico['numero_ficha2'], (438, 68))  # Número da ficha
-    document.write_date(dict_especifico['dt_notificacao2'], (439, 79), spacing=2, font_size=10)  # Data da notificação
+    ###################################################
+    # Cabeçalho Ficha
+    ###################################################
+    document.write_text(dict_especifico['numero_ficha'], (438, 68))  # Número da ficha
+    document.write_date(dict_especifico['dt_notificacao'], (439, 79), spacing=2, font_size=10)  # Data da notificação
     document.write_date(dict_especifico['dt_investigacao'], (438, 92), spacing=2, font_size=10)  # Data da investigação
-    document.write_text(dict_especifico['numero_sus2'], (438, 114), font_size=11)  # Número do SUS
+    document.write_text(dict_especifico['numero_sus'], (438, 114), font_size=11)  # Número do SUS
     document.write_text(dict_especifico['pais_notificacao'], (60, 197))  # País da notificação
-    document.write_text(dict_especifico['uf_notificacao2'], (180, 197))  # UF da notificação
-    document.write_text(dict_especifico['municipio_notificacao2'], (210, 197))  # Município da notificação
+    document.write_text(dict_especifico['uf_notificacao'], (180, 197))  # UF da notificação
+    document.write_text(dict_especifico['municipio_notificacao'], (210, 197))  # Município da notificação
     document.write_text(dict_especifico['us_notificacao'], (60, 218))  # Unidade de saúde da notificação
+
     ###################################################
     # Dados do paciente
     ###################################################
-    document.write_text(dict_especifico['nome_paciente2'], (60, 252))  # Nome do paciente
+    document.write_text(dict_especifico['nome_paciente'], (60, 252))  # Nome do paciente
     document.write_text(dict_especifico['iniciais_paciente'], (380, 252))  # Iniciais do paciente
-    document.write_date(dict_especifico['dt_nascimento2'], (452, 250), spacing=2, font_size=10)  # Data de nascimento
-    document.write_text(dict_especifico['idade2'], (62, 280))  # Idade
-    document.write_text(dict_especifico['tipo_idade2'], (100, 280))  # Tipo de idade
+    document.write_date(dict_especifico['dt_nascimento'], (452, 250), spacing=2, font_size=10)  # Data de nascimento
+    document.write_text(dict_especifico['idade'], (62, 280))  # Idade
+    document.write_text(dict_especifico['tipo_idade'], (100, 280))  # Tipo de idade
     document.write_text(dict_especifico['sexo_num'], (210, 280))  # Sexo
-    document.write_text(dict_especifico['raca2'], (317, 280))  # Raça
+    document.write_text(dict_especifico['raca'], (317, 280))  # Raça
     document.write_text(dict_especifico['ocupacao'], (60, 309))  # Ocupação
-    document.write_text(dict_especifico['nome_mae2'], (315, 309), font_size=9)  # Nome da mãe
-    document.write_text(dict_especifico['gestante2'], (61, 341))  # Gestante
+    document.write_text(dict_especifico['nome_mae'], (315, 309), font_size=9)  # Nome da mãe
+    document.write_text(dict_especifico['gestante'], (61, 341))  # Gestante
     document.write_text(dict_especifico['mes_vacina_gest'], (178, 338))  # Mês da vacinação
     document.write_text(dict_especifico['amamentando'], (282, 342))  # Amamentando
     document.write_text(dict_especifico['aleitamento'], (415, 342))  # Aleitamento
+
     ##############################################
     #####          DADOS DE RESIDENCIA        ####
     ##############################################
-    document.write_text(dict_especifico['logradouro_residencia2'], (60, 380), font_size=7)  # Logradouro
-    document.write_text(dict_especifico['numero_residencia2'], (317, 380))  # Número
-    document.write_text(dict_especifico['complemento_residencia2'], (370, 380), font_size=7)  # Complemento
-    document.write_text(dict_especifico['bairro_residencia2'], (440, 380), font_size=7)  # Bairro
-    document.write_text(dict_especifico['ponto_ref_residencia2'], (60, 410), font_size=9)  # Ponto de referência
-    document.write_text(dict_especifico['zona_residencia2'], (281, 406))  # Zona
-    document.write_cep(dict_especifico['cep_residencia2'], (348, 403), space=1, font_size=11)  # CEP
-    document.write_telefone(dict_especifico['telefone_residencia2'], (445, 397), space=1, font_size=10)  # Telefone
-    document.write_telefone(dict_especifico['telefone2_residencia2'], (445, 410), space=1, font_size=10)  # Telefone
-    document.write_text(dict_especifico['pais_residencia2'], (60, 432))  # País
-    document.write_text(dict_especifico['uf_residencia2'], (170, 433))  # UF
-    document.write_text(dict_especifico['municipio_residencia2'], (200, 433))  # Município
+    document.write_text(dict_especifico['logradouro_residencia'], (60, 380), font_size=7)  # Logradouro
+    document.write_text(dict_especifico['numero_residencia'], (317, 380))  # Número
+    document.write_text(dict_especifico['complemento_residencia'], (370, 380), font_size=7)  # Complemento
+    document.write_text(dict_especifico['bairro_residencia'], (440, 380), font_size=7)  # Bairro
+    document.write_text(dict_especifico['ponto_ref_residencia'], (60, 410), font_size=9)  # Ponto de referência
+    document.write_text(dict_especifico['zona_residencia'], (281, 406))  # Zona
+    document.write_cep(dict_especifico['cep_residencia'], (348, 403), space=1, font_size=11)  # CEP
+    document.write_telefone(dict_especifico['telefone_residencia'], (445, 397), space=1, font_size=10)  # Telefone
+    document.write_telefone(dict_especifico['telefone2_residencia'], (445, 410), space=1, font_size=10)  # Telefone
+    document.write_text(dict_especifico['pais_residencia'], (60, 432))  # País
+    document.write_text(dict_especifico['uf_residencia'], (170, 433))  # UF
+    document.write_text(dict_especifico['municipio_residencia'], (200, 433))  # Município
+
     ####################################################
     # Dados Vacinação
     ####################################################
@@ -135,6 +140,7 @@ def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dic
                    printbars=True)  # Data de validade da vacina8
     document.write_date(dict_especifico['vacinacao_dt_valid9'], (497, 603), font_size=9,
                    printbars=True)  # Data de validade da vacina9
+
     ###################################################
     # Dados de Unidade de saude
     ###################################################
@@ -144,6 +150,7 @@ def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dic
     document.write_text(dict_especifico['us_aplicacao'], (60, 667))  # Unidade de saúde de aplicação
     document.write_mini(dict_especifico['motivo_aplicacao'], (325, 662))  # Motivo da aplicação
     document.write_mini(dict_especifico['local_aplicacao'], (445, 662))  # Local de aplicação
+
     ###################################################
     # Dados de Doenças Preexistentes 
     ###################################################
@@ -194,6 +201,7 @@ def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dic
     document.write_mini(dict_especifico['conduta_eapv'], (60, 145), pg=1)  # Conduta no EAPV
     document.write_mini(dict_especifico['medicacao_eapv'], (325, 144), pg=1)  # Medicação no EAPV
     document.write_mini(dict_especifico['qual_medicacao_eapv'], (412, 137), pg=1)  # Qual medicação no EAPV
+
     ####################################################
     # Antecedentes epidemiologicos
     ####################################################
@@ -609,7 +617,7 @@ def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dic
     document.write_mini(dict_especifico['cult_liquor'], (441, 172), pg=2)  # cultura do liquor
     document.write_mini(dict_especifico['cult_liquor_espec'], (488, 170), pg=2)  # cultura do liquor especifica
     document.write_mini(dict_especifico['bacterioscopia2'], (441, 192), pg=2)  # bacterioscopia
-    document.write_mini(dict_especifico['bacterio_espec'], (488, 191), pg=2)  # bacterioscopia especifica
+    document.write_mini(dict_especifico['bacterio_espec'], (488, 191), pg=2)  # bacterioscopia especificação
     document.write_mini(dict_especifico['deteccao_viral'], (180, 220), pg=2)  # detecção viral
     document.write_mini(dict_especifico['dt_detec_viral'], (284, 218), pg=2, spacing=2)  # data da detecção viral
     document.write_mini(dict_especifico['detec_viral_coleta'], (390, 220), pg=2)  # detecção viral coleta
@@ -647,18 +655,18 @@ def gerar_pdf_evento_adv_pos_vacina(notificatoriaCSV: dict, dict_especifico: dic
     document.write_mini(dict_especifico['erro_programa'], (66, 596), pg=2, spacing=1)  # erro de programa
     document.write_mini(dict_especifico['erro_programa_espec'], (385, 602), pg=2)  # erro de programa dict_especifico
     document.write_mini(dict_especifico['evolucao_caso'], (63, 676), pg=2)  # evolução do caso
-    document.write_mini(dict_especifico['dt_obito'], (177, 646), pg=2, spacing=1)  # data do óbito
+    document.write_date(dict_especifico['dt_obito'], (174, 646), pg=2, spacing=3)  # data do óbito
     document.write_mini(dict_especifico['declara_obito'], (176, 672), pg=2)  # declaração de óbito
     document.write_mini(dict_especifico['declara_vivo'], (176, 699), pg=2)  # declaração de vivo
     document.write_mini(dict_especifico['conduta_vacinal'], (286, 676), pg=2)  # conduta vacinal
-    document.write_mini(dict_especifico['dt_encerramento'], (460, 672), pg=2, spacing=1)  # data de encerramento
-    document.write_mini(dict_especifico['nome_investigador'], (58, 740), pg=2)  # nome do investigador
-    document.write_mini(dict_especifico['funcao_investigador'], (315, 740), pg=2)  # função do investigador
-    document.write_mini(dict_especifico['telefone_investigador'], (430, 740), pg=2)  # telefone do investigador
-    document.write_mini(dict_especifico['municipio_us_investigador'], (58, 760), pg=2)  # município do investigador
-    document.write_mini(dict_especifico['unid_saude_investigador'], (58, 782), pg=2)  # unidade de saúde do investigador
-    document.write_mini(dict_especifico['telefone_us_investigador'], (430, 782), pg=2)  # telefone da unidade de saúde
-    document.write_mini(dict_especifico['assinatura_investigador'], (58, 802), pg=2)  # assinatura do investigador
-    document.write_date(dict_especifico['dt_preenchimento'], (431, 800), pg=2, spacing=2)  # data de preenchimento
+    document.write_date(dict_especifico['dt_encerramento'], (457, 672), pg=2, spacing=3)  # data de encerramento
+    document.write_text(dict_especifico['nome_notificante'], (58, 740), pg=2)  # nome do investigador
+    document.write_text(dict_especifico['funcao_investigador'], (315, 740), pg=2)  # função do investigador
+    document.write_text(dict_especifico['telefone_investigador'], (430, 740), pg=2)  # telefone do investigador
+    document.write_text(dict_especifico['municipio_us_investigador'], (58, 760), pg=2)  # município do investigador
+    document.write_text(dict_especifico['unid_saude_investigador'], (58, 782), pg=2)  # unidade de saúde do investigador
+    document.write_text(dict_especifico['telefone_us_investigador'], (430, 782), pg=2)  # telefone da unidade de saúde
+    document.write_text(dict_especifico['assinatura_investigador'], (58, 802), pg=2)  # assinatura do investigador
+    document.write_date(dict_especifico['dt_preenchimento'], (431, 800), pg=2, spacing=4)  # data de preenchimento
 
-    document.save(nome_arquivo, path_pdf_gerado, notificatoriaCSV, modelo_pdf_base)
+    document.save(nome_arquivo, path_pdf_gerado)

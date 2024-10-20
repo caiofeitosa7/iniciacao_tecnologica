@@ -89,6 +89,9 @@ class PDFWriter:
             font_size (int, opcional): O tamanho da fonte a ser usada. Padrão é 13.
         """
 
+        if code == "0":
+            code = ""
+
         code = (' ' * space).join(code)
         alvo = (' ' * space + '-' + ' ' * space)
         code = code.replace(alvo, ' - ')

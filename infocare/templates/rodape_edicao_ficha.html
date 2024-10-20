@@ -1,4 +1,19 @@
 <div class="rodape-ficha">
+
+    {% if visualizadores %}
+        <div id="anexos" class="mb-5">
+            <div class="d-flex justify-content-center py-4">
+                <span class="negrito">Quem viu esta ficha?</span>
+            </div>
+            <ul>
+                {% for visualizador in visualizadores %}
+                    <li>
+                        - {{ visualizador }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     
     {% if ficha.arquivos %}
         <div id="anexos" class="mb-5">

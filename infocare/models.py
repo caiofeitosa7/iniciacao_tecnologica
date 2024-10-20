@@ -881,7 +881,8 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
     print('indo gerar o pdf')
 
     if not ficha_de_obito and tipo_ficha != 1:  # Exclui ficha de notificacao geral e as fichas de obito
-        ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
+        if tipo_ficha != 22:
+            ficha_notificacao, ficha_especifica = separar_dicionario_ficha(ficha_completa)
 
         if tipo_ficha == 2:
             gerar_acid_trab_grave(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
@@ -937,9 +938,7 @@ def preencher_pdf(cod_ficha, tipo_ficha, arq_existe=False):
             gerar_pdf_leish_visceral(ficha_notificacao, ficha_especifica, path_pdf_modelo, path_pdf_ficha_base,
                                      path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 22:
-            gerar_pdf_evento_adv_pos_vacina(ficha_notificacao, ficha_especifica, path_pdf_modelo,
-                                            path_pdf_ficha_base,
-                                            path_pdf_gerado, nome_arquivo)
+            gerar_pdf_evento_adv_pos_vacina(ficha_completa, path_pdf_modelo, path_pdf_gerado, nome_arquivo)
         elif tipo_ficha == 23:
             gerar_pdf_tuberculose(ficha_notificacao, ficha_especifica, path_pdf_modelo,
                                   path_pdf_ficha_base,
@@ -1047,3 +1046,47 @@ def listar_fichas_download(dados):
     resultados = cursor.fetchall()
     fechar_conexao(conexao, False)
     return [res[0] for res in resultados] if resultados else list()
+
+
+def set_visualizacao_ficha(cod_ficha: int, cod_usuario: int):
+    inserir_registro_tabela('visualiza_ficha', {
+        'data_hora': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'cod_ficha': cod_ficha,
+        'cod_usuario': cod_usuario
+    })
+
+
+def get_visualizacoes_ficha(cod_ficha: int):
+    conexao, cursor = abrir_conexao()
+    cursor.execute("""
+        SELECT nome AS nome_usuario
+        FROM visualiza_ficha
+            INNER JOIN usuario
+                ON usuario.codigo = cod_usuario
+        WHERE cod_ficha = %s
+    """, (cod_ficha,))
+
+    resultados = cursor.fetchall()
+    fechar_conexao(conexao, False)
+
+    visualizadores = [res[0] for res in resultados] if resultados else list()
+    return list(set(visualizadores))
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

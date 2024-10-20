@@ -131,8 +131,11 @@ def visualizar_ficha_view(request, cod_ficha: int, cod_formulario: int):
         contexto = {
             'ficha': dados,
             'acesso_usuario': request.session.get('acesso_usuario'),
-            'status_ficha_aberta': request.session.get('status_ficha_aberta')
+            'status_ficha_aberta': request.session.get('status_ficha_aberta'),
+            'visualizadores': models.get_visualizacoes_ficha(cod_ficha)
         }
+
+        models.set_visualizacao_ficha(cod_ficha, request.session['cod_usuario'])
 
         return JsonResponse({
             'html': [render_to_string(arquivo_html, contexto)],
